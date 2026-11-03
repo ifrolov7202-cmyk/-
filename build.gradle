@@ -116,6 +116,12 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
+    // Curse Maven — для необязательной совместимости с Epic Fight
+    maven {
+        name = 'Curse Maven'
+        url = 'https://cursemaven.com'
+        content { includeGroup 'curse.maven' }
+    }
     // PlayerAnimator (анимации игрока)
     maven {
         name = "KosmX's maven"
@@ -141,6 +147,9 @@ dependencies {
 
     // Библиотека анимаций игрока
     implementation fg.deobf("dev.kosmx.player-anim:player-animation-lib-forge:${player_anim_version}")
+
+    // Epic Fight — только для компиляции совместимости, в jar не входит и не обязателен
+    compileOnly fg.deobf("curse.maven:epic-fight-mod-405076:${epicfight_file_id}")
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime

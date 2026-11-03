@@ -46,6 +46,9 @@ public final class ClientAnimations {
         Entity entity = mc.level.getEntity(entityId);
         if (!(entity instanceof AbstractClientPlayer player)) return;
 
+        // Epic Fight в боевом режиме рисует свою модель — тогда анимации берём у него
+        if (EpicFightCompat.tryPlay(player, name)) return;
+
         KeyframeAnimation anim = PlayerAnimationRegistry.getAnimation(new ResourceLocation(MartialArts.MODID, name));
         if (anim == null) return;
 
