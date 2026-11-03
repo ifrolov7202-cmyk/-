@@ -1,0 +1,69 @@
+{
+  "version": 3,
+  "name": "jab_left",
+  "author": "martialarts",
+  "emote": {
+    "beginTick": 0,
+    "endTick": 5,
+    "stopTick": 8,
+    "isLoop": false,
+    "returnTick": 0,
+    "nsfw": false,
+    "degrees": true,
+    "easeBeforeKeyframe": false,
+    "moves": [
+      {
+        "tick": 2,
+        "easing": "OUTQUAD",
+        "leftArm": {
+          "pitch": -92,
+          "yaw": 6,
+          "roll": 0,
+          "bend": 0
+        }
+      },
+      {
+        "tick": 2,
+        "easing": "OUTQUAD",
+        "rightArm": {
+          "pitch": -60,
+          "yaw": -25,
+          "bend": 80
+        }
+      },
+      {
+        "tick": 2,
+        "easing": "OUTQUAD",
+        "body": {
+          "yaw": -15
+        }
+      },
+      {
+        "tick": 5,
+        "easing": "LINEAR",
+        "leftArm": {
+          "pitch": -80,
+          "yaw": 6,
+          "roll": 0,
+          "bend": 20
+        }
+      },
+      {
+        "tick": 5,
+        "easing": "LINEAR",
+        "rightArm": {
+          "pitch": -60,
+          "yaw": -25,
+          "bend": 80
+        }
+      },
+      {
+        "tick": 5,
+        "easing": "LINEAR",
+        "body": {
+          "yaw": -10
+        }
+      }
+    ]
+  }
+}

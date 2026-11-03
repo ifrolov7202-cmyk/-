@@ -1,0 +1,165 @@
+{
+  "version": 3,
+  "name": "spin_kick",
+  "author": "martialarts",
+  "emote": {
+    "beginTick": 0,
+    "endTick": 14,
+    "stopTick": 18,
+    "isLoop": false,
+    "returnTick": 0,
+    "nsfw": false,
+    "degrees": true,
+    "easeBeforeKeyframe": false,
+    "moves": [
+      {
+        "tick": 0,
+        "easing": "LINEAR",
+        "body": {
+          "yaw": 0
+        }
+      },
+      {
+        "tick": 3,
+        "easing": "OUTQUAD",
+        "rightLeg": {
+          "pitch": -20,
+          "roll": 85,
+          "bend": 0
+        }
+      },
+      {
+        "tick": 3,
+        "easing": "OUTQUAD",
+        "leftLeg": {
+          "pitch": 0,
+          "roll": -6
+        }
+      },
+      {
+        "tick": 3,
+        "easing": "OUTQUAD",
+        "rightArm": {
+          "pitch": -10,
+          "roll": 60
+        }
+      },
+      {
+        "tick": 3,
+        "easing": "OUTQUAD",
+        "leftArm": {
+          "pitch": -10,
+          "roll": -60
+        }
+      },
+      {
+        "tick": 3,
+        "easing": "OUTQUAD",
+        "torso": {
+          "pitch": -6
+        }
+      },
+      {
+        "tick": 6,
+        "easing": "CONSTANT",
+        "body": {
+          "yaw": 180
+        }
+      },
+      {
+        "tick": 7,
+        "easing": "OUTQUAD",
+        "body": {
+          "yaw": -175
+        }
+      },
+      {
+        "tick": 11,
+        "easing": "INOUTSINE",
+        "rightLeg": {
+          "pitch": -20,
+          "roll": 80,
+          "bend": 0
+        }
+      },
+      {
+        "tick": 11,
+        "easing": "INOUTSINE",
+        "leftLeg": {
+          "pitch": 0,
+          "roll": -6
+        }
+      },
+      {
+        "tick": 11,
+        "easing": "INOUTSINE",
+        "rightArm": {
+          "pitch": -10,
+          "roll": 55
+        }
+      },
+      {
+        "tick": 11,
+        "easing": "INOUTSINE",
+        "leftArm": {
+          "pitch": -10,
+          "roll": -55
+        }
+      },
+      {
+        "tick": 11,
+        "easing": "INOUTSINE",
+        "torso": {
+          "pitch": -6
+        }
+      },
+      {
+        "tick": 13,
+        "easing": "LINEAR",
+        "body": {
+          "yaw": 0
+        }
+      },
+      {
+        "tick": 14,
+        "easing": "LINEAR",
+        "rightLeg": {
+          "pitch": 0,
+          "roll": 10,
+          "bend": 0
+        }
+      },
+      {
+        "tick": 14,
+        "easing": "LINEAR",
+        "leftLeg": {
+          "pitch": 0,
+          "roll": -4
+        }
+      },
+      {
+        "tick": 14,
+        "easing": "LINEAR",
+        "rightArm": {
+          "pitch": -20,
+          "roll": 20
+        }
+      },
+      {
+        "tick": 14,
+        "easing": "LINEAR",
+        "leftArm": {
+          "pitch": -20,
+          "roll": -20
+        }
+      },
+      {
+        "tick": 14,
+        "easing": "LINEAR",
+        "torso": {
+          "pitch": 0
+        }
+      }
+    ]
+  }
+}

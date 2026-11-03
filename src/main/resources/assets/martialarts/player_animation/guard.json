@@ -1,0 +1,103 @@
+{
+  "version": 3,
+  "name": "guard",
+  "author": "martialarts",
+  "emote": {
+    "beginTick": 0,
+    "endTick": 38,
+    "stopTick": 42,
+    "isLoop": false,
+    "returnTick": 0,
+    "nsfw": false,
+    "degrees": true,
+    "easeBeforeKeyframe": false,
+    "moves": [
+      {
+        "tick": 3,
+        "easing": "LINEAR",
+        "rightArm": {
+          "pitch": -110,
+          "yaw": -40,
+          "roll": 0,
+          "bend": 70
+        }
+      },
+      {
+        "tick": 3,
+        "easing": "LINEAR",
+        "leftArm": {
+          "pitch": -118,
+          "yaw": 40,
+          "roll": 0,
+          "bend": 70
+        }
+      },
+      {
+        "tick": 3,
+        "easing": "LINEAR",
+        "rightLeg": {
+          "pitch": 10,
+          "roll": 7
+        }
+      },
+      {
+        "tick": 3,
+        "easing": "LINEAR",
+        "leftLeg": {
+          "pitch": -10,
+          "roll": -7
+        }
+      },
+      {
+        "tick": 3,
+        "easing": "LINEAR",
+        "torso": {
+          "pitch": 8
+        }
+      },
+      {
+        "tick": 38,
+        "easing": "LINEAR",
+        "rightArm": {
+          "pitch": -110,
+          "yaw": -40,
+          "roll": 0,
+          "bend": 70
+        }
+      },
+      {
+        "tick": 38,
+        "easing": "LINEAR",
+        "leftArm": {
+          "pitch": -118,
+          "yaw": 40,
+          "roll": 0,
+          "bend": 70
+        }
+      },
+      {
+        "tick": 38,
+        "easing": "LINEAR",
+        "rightLeg": {
+          "pitch": 10,
+          "roll": 7
+        }
+      },
+      {
+        "tick": 38,
+        "easing": "LINEAR",
+        "leftLeg": {
+          "pitch": -10,
+          "roll": -7
+        }
+      },
+      {
+        "tick": 38,
+        "easing": "LINEAR",
+        "torso": {
+          "pitch": 8
+        }
+      }
+    ]
+  }
+}

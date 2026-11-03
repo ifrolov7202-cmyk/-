@@ -1,0 +1,107 @@
+{
+  "version": 3,
+  "name": "finisher_boxing",
+  "author": "martialarts",
+  "emote": {
+    "beginTick": 0,
+    "endTick": 9,
+    "stopTick": 13,
+    "isLoop": false,
+    "returnTick": 0,
+    "nsfw": false,
+    "degrees": true,
+    "easeBeforeKeyframe": false,
+    "moves": [
+      {
+        "tick": 2,
+        "easing": "OUTEXPO",
+        "rightArm": {
+          "pitch": 15,
+          "yaw": 0,
+          "roll": 12,
+          "bend": 90
+        }
+      },
+      {
+        "tick": 2,
+        "easing": "OUTEXPO",
+        "leftArm": {
+          "pitch": -70,
+          "yaw": 25,
+          "bend": 80
+        }
+      },
+      {
+        "tick": 2,
+        "easing": "OUTEXPO",
+        "body": {
+          "yaw": -20
+        }
+      },
+      {
+        "tick": 2,
+        "easing": "OUTEXPO",
+        "torso": {
+          "pitch": 12
+        }
+      },
+      {
+        "tick": 5,
+        "easing": "INOUTSINE",
+        "rightArm": {
+          "pitch": -160,
+          "yaw": -20,
+          "roll": 0,
+          "bend": 60
+        }
+      },
+      {
+        "tick": 5,
+        "easing": "INOUTSINE",
+        "body": {
+          "yaw": 20
+        }
+      },
+      {
+        "tick": 5,
+        "easing": "INOUTSINE",
+        "torso": {
+          "pitch": -10
+        }
+      },
+      {
+        "tick": 9,
+        "easing": "LINEAR",
+        "rightArm": {
+          "pitch": -150,
+          "yaw": -20,
+          "roll": 0,
+          "bend": 60
+        }
+      },
+      {
+        "tick": 9,
+        "easing": "LINEAR",
+        "leftArm": {
+          "pitch": -60,
+          "yaw": 25,
+          "bend": 80
+        }
+      },
+      {
+        "tick": 9,
+        "easing": "LINEAR",
+        "body": {
+          "yaw": 15
+        }
+      },
+      {
+        "tick": 9,
+        "easing": "LINEAR",
+        "torso": {
+          "pitch": -6
+        }
+      }
+    ]
+  }
+}

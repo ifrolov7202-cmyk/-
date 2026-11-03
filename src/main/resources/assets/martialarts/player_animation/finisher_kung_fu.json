@@ -1,0 +1,112 @@
+{
+  "version": 3,
+  "name": "finisher_kung_fu",
+  "author": "martialarts",
+  "emote": {
+    "beginTick": 0,
+    "endTick": 10,
+    "stopTick": 14,
+    "isLoop": false,
+    "returnTick": 0,
+    "nsfw": false,
+    "degrees": true,
+    "easeBeforeKeyframe": false,
+    "moves": [
+      {
+        "tick": 2,
+        "easing": "OUTQUAD",
+        "leftLeg": {
+          "pitch": -45,
+          "roll": -5,
+          "bend": 90
+        }
+      },
+      {
+        "tick": 2,
+        "easing": "OUTQUAD",
+        "rightLeg": {
+          "pitch": 0,
+          "roll": 4
+        }
+      },
+      {
+        "tick": 2,
+        "easing": "OUTQUAD",
+        "rightArm": {
+          "pitch": 10,
+          "roll": 20,
+          "bend": 60
+        }
+      },
+      {
+        "tick": 2,
+        "easing": "OUTQUAD",
+        "leftArm": {
+          "pitch": -30,
+          "roll": -70,
+          "bend": 0
+        }
+      },
+      {
+        "tick": 5,
+        "easing": "OUTEXPO",
+        "rightArm": {
+          "pitch": -120,
+          "yaw": -10,
+          "roll": 0,
+          "bend": 0
+        }
+      },
+      {
+        "tick": 5,
+        "easing": "OUTEXPO",
+        "body": {
+          "yaw": 20
+        }
+      },
+      {
+        "tick": 10,
+        "easing": "LINEAR",
+        "rightArm": {
+          "pitch": -115,
+          "yaw": -10,
+          "roll": 0,
+          "bend": 0
+        }
+      },
+      {
+        "tick": 10,
+        "easing": "LINEAR",
+        "leftArm": {
+          "pitch": -30,
+          "roll": -65,
+          "bend": 0
+        }
+      },
+      {
+        "tick": 10,
+        "easing": "LINEAR",
+        "leftLeg": {
+          "pitch": -40,
+          "roll": -5,
+          "bend": 80
+        }
+      },
+      {
+        "tick": 10,
+        "easing": "LINEAR",
+        "rightLeg": {
+          "pitch": 0,
+          "roll": 4
+        }
+      },
+      {
+        "tick": 10,
+        "easing": "LINEAR",
+        "body": {
+          "yaw": 15
+        }
+      }
+    ]
+  }
+}
