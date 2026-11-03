@@ -27,6 +27,11 @@ public class MartialData {
     public int flurryTicks = 0;
     public int flurryTarget = -1;
     public long lastTrainTick = 0;
+    public long dodgeUntil = 0;
+    public int leapTicks = 0;
+    public int leapTarget = -1;
+    public int tornadoTicks = 0;
+    public int passiveKey = Integer.MIN_VALUE;
     public boolean dirty = true;
 
     public float maxChi() {

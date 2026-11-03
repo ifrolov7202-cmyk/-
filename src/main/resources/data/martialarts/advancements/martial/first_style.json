@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "martialarts:boxing_scroll"
+    },
+    "title": {
+      "translate": "advancements.martialarts.first_style.title"
+    },
+    "description": {
+      "translate": "advancements.martialarts.first_style.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "parent": "martialarts:martial/root"
+}

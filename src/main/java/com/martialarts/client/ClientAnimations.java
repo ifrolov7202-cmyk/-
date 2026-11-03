@@ -29,7 +29,8 @@ public final class ClientAnimations {
     /** Анимации, в которых руки видно и от первого лица. */
     private static final Set<String> FIRST_PERSON_ARMS = Set.of(
             "power_strike", "guard", "parry", "flurry", "jab_right", "jab_left",
-            "finisher_boxing", "finisher_karate", "finisher_muay_thai", "finisher_kung_fu");
+            "finisher_boxing", "finisher_karate", "finisher_muay_thai", "finisher_kung_fu", "finisher_judo",
+            "sig_none", "sig_boxing", "sig_karate", "sig_kung_fu", "sig_judo");
 
     private ClientAnimations() {}
 

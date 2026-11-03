@@ -19,6 +19,18 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import com.martialarts.MartialConfig;
+import com.martialarts.registry.ModItems;
+import com.martialarts.skill.MartialAdvancements;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.entries.EmptyLootItem;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraftforge.event.LootTableLoadEvent;
+import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
@@ -35,8 +47,9 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = MartialArts.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class CombatEvents {
-    /** Окно идеального парирования после нажатия стойки (тики). */
+    /** Окно идеального парирования после нажатия стойки (тики). У дзюдо — длиннее. */
     private static final int PARRY_WINDOW = 8;
+    private static final int PARRY_WINDOW_JUDO = 12;
 
     private CombatEvents() {}
 
@@ -65,7 +78,10 @@ public final class CombatEvents {
 
     @SubscribeEvent
     public static void onLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        if (event.getEntity() instanceof ServerPlayer sp) ModNetwork.sync(sp);
+        if (event.getEntity() instanceof ServerPlayer sp) {
+            ModNetwork.sync(sp);
+            MartialCapability.get(sp).ifPresent(d -> MartialAdvancements.check(sp, d));
+        }
     }
 
     @SubscribeEvent
@@ -101,7 +117,7 @@ public final class CombatEvents {
         }
     }
 
-    /** Идеальное парирование: в первые 0.4 с стойки атака полностью отменяется. */
+    /** Уклонение (сразу после рывка) и идеальное парирование (начало стойки) отменяют атаку. */
     @SubscribeEvent
     public static void onLivingAttack(LivingAttackEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer p)) return;
@@ -111,7 +127,21 @@ public final class CombatEvents {
         MartialData d = MartialCapability.get(p).orElse(null);
         if (d == null) return;
         long now = p.level().getGameTime();
-        if (!d.isGuarding(now) || now - d.guardStart > PARRY_WINDOW) return;
+
+        // уклонение
+        if (now < d.dodgeUntil) {
+            event.setCanceled(true);
+            d.dodgeUntil = 0;
+            p.serverLevel().sendParticles(ParticleTypes.CLOUD, p.getX(), p.getY() + 1.0, p.getZ(), 10, 0.3, 0.5, 0.3, 0.05);
+            Skills.sound(p, SoundEvents.PLAYER_ATTACK_NODAMAGE, 1.0f, 1.5f);
+            Skills.actionBar(p, Component.translatable("msg.martialarts.dodge").withStyle(ChatFormatting.AQUA));
+            Skills.addXp(p, d, 2);
+            MartialAdvancements.award(p, "dodge");
+            return;
+        }
+
+        int window = d.style == MartialStyle.JUDO ? PARRY_WINDOW_JUDO : PARRY_WINDOW;
+        if (!d.isGuarding(now) || now - d.guardStart > window) return;
 
         event.setCanceled(true);
         d.guardEnd = now; // стойка завершается парированием
@@ -121,13 +151,54 @@ public final class CombatEvents {
         if (src.getEntity() instanceof LivingEntity attacker && attacker != p) {
             attacker.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 2), p);
             attacker.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 40, 1), p);
-            if (attacker.distanceToSqr(p) < 25) Skills.push(p, attacker, 1.0f, 0.2);
+            if (attacker.distanceToSqr(p) < 25) {
+                if (d.style == MartialStyle.JUDO) {
+                    // дзюдо: контрбросок
+                    Skills.hit(p, attacker, 2 + d.level * 0.2f);
+                    Skills.push(p, attacker, 2.0f, 0.5);
+                } else {
+                    Skills.push(p, attacker, 1.0f, 0.2);
+                }
+            }
         }
         p.serverLevel().sendParticles(ParticleTypes.CRIT, p.getX(), p.getY() + 1.2, p.getZ(), 15, 0.4, 0.4, 0.4, 0.4);
         Skills.sound(p, SoundEvents.SHIELD_BLOCK, 1.0f, 1.4f);
         Skills.actionBar(p, Component.translatable("msg.martialarts.parry").withStyle(ChatFormatting.GREEN));
         Skills.addXp(p, d, 4);
+        MartialAdvancements.award(p, "perfect_parry");
         d.dirty = true;
+    }
+
+    // ---------------------------------------------------------------- свитки в мире
+
+    private static final java.util.Set<String> SCROLL_CHESTS = java.util.Set.of(
+            "minecraft:chests/simple_dungeon", "minecraft:chests/abandoned_mineshaft",
+            "minecraft:chests/jungle_temple", "minecraft:chests/desert_pyramid",
+            "minecraft:chests/stronghold_corridor", "minecraft:chests/stronghold_library",
+            "minecraft:chests/village/village_weaponsmith", "minecraft:chests/village/village_temple",
+            "minecraft:chests/pillager_outpost", "minecraft:chests/woodland_mansion");
+
+    @SubscribeEvent
+    public static void onLootLoad(LootTableLoadEvent event) {
+        if (!SCROLL_CHESTS.contains(event.getName().toString())) return;
+        if (!MartialConfig.get(MartialConfig.SCROLLS_IN_LOOT, true)) return;
+        LootPool.Builder pool = LootPool.lootPool()
+                .name("martialarts_scrolls")
+                .setRolls(ConstantValue.exactly(1))
+                .add(EmptyLootItem.emptyItem().setWeight(64));
+        for (var scroll : ModItems.SCROLLS) {
+            pool.add(LootItem.lootTableItem(scroll.get()).setWeight(5));
+        }
+        event.getTable().addPool(pool.build());
+    }
+
+    @SubscribeEvent
+    public static void onWandererTrades(WandererTradesEvent event) {
+        for (var scroll : ModItems.SCROLLS) {
+            event.getRareTrades().add((trader, random) ->
+                    new MerchantOffer(new ItemStack(Items.EMERALD, 16), new ItemStack(Items.BOOK),
+                            new ItemStack(scroll.get()), 1, 10, 0.05f));
+        }
     }
 
     @SubscribeEvent

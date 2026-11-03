@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "martialarts:judo_scroll"
+    },
+    "title": {
+      "translate": "advancements.martialarts.all_styles.title"
+    },
+    "description": {
+      "translate": "advancements.martialarts.all_styles.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "parent": "martialarts:martial/first_style"
+}

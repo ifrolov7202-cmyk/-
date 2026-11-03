@@ -41,6 +41,7 @@ public final class MartialCommand {
                                         d.level = lvl;
                                         d.xp = 0;
                                         d.chi = d.maxChi();
+                                        com.martialarts.skill.MartialAdvancements.check(p, d);
                                         ModNetwork.sync(p);
                                     });
                                     p.sendSystemMessage(Component.translatable("msg.martialarts.level_set", lvl));

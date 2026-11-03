@@ -46,14 +46,16 @@ public final class ClientEvents {
             if (mc.player == null || mc.screen != null) {
                 return;
             }
+            float forward = mc.player.input.forwardImpulse;
+            float strafe = mc.player.input.leftImpulse;
             for (Skill skill : Skill.values()) {
                 KeyMapping key = KeyBindings.forSkill(skill);
                 while (key.consumeClick()) {
-                    ModNetwork.sendToServer(ActionPacket.skill(skill));
+                    ModNetwork.sendToServer(ActionPacket.skill(skill, forward, strafe));
                 }
             }
             while (KeyBindings.CYCLE_STYLE.consumeClick()) {
-                ModNetwork.sendToServer(new ActionPacket(ActionPacket.CYCLE_STYLE));
+                ModNetwork.sendToServer(ActionPacket.cycleStyle());
             }
         }
 

@@ -1,37 +1,48 @@
 package com.martialarts.skill;
 
+import com.martialarts.MartialConfig;
 import com.martialarts.data.MartialCapability;
 import com.martialarts.data.MartialData;
 import com.martialarts.data.MartialStyle;
 import com.martialarts.network.ModNetwork;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.decoration.ArmorStand;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
- * Вся серверная логика боевых искусств: техники, комбо, опыт, Ци.
+ * Вся серверная логика боевых искусств: техники, комбо, опыт, Ци, пассивные бонусы.
  */
 public final class Skills {
     /** Пока true — урон наносит техника (бонус удара рукой и комбо не считаются). Только серверный поток. */
     public static boolean skillDamage = false;
+
+    private static final UUID ATTACK_SPEED_ID = UUID.fromString("6f1c2a52-6a1e-4d0e-9b3a-5a2f0c7d1e01");
+    private static final UUID MOVE_SPEED_ID = UUID.fromString("6f1c2a52-6a1e-4d0e-9b3a-5a2f0c7d1e02");
 
     private Skills() {}
 
@@ -39,7 +50,7 @@ public final class Skills {
     //  Использование техник
     // =====================================================================
 
-    public static void tryUse(ServerPlayer p, Skill skill) {
+    public static void tryUse(ServerPlayer p, Skill skill, float forward, float strafe) {
         MartialData d = MartialCapability.get(p).orElse(null);
         if (d == null) return;
         long now = p.level().getGameTime();
@@ -49,7 +60,7 @@ public final class Skills {
                     .withStyle(ChatFormatting.RED));
             return;
         }
-        if (d.cooldownEnd[skill.ordinal()] > now || d.flurryTicks > 0) return;
+        if (d.cooldownEnd[skill.ordinal()] > now || d.flurryTicks > 0 || d.leapTicks > 0 || d.tornadoTicks > 0) return;
         if (skill.needsEmptyHand && !p.getMainHandItem().isEmpty()) {
             actionBar(p, Component.translatable("msg.martialarts.empty_hand").withStyle(ChatFormatting.RED));
             return;
@@ -61,26 +72,32 @@ public final class Skills {
         }
 
         boolean used = switch (skill) {
-            case DASH -> dash(p, d);
+            case DASH -> dash(p, d, now, forward, strafe);
             case POWER_STRIKE -> powerStrike(p, d);
             case GUARD -> guard(p, d, now);
             case SPIN_KICK -> spinKick(p, d);
             case FLURRY -> flurry(p, d);
+            case SIGNATURE -> signature(p, d);
         };
 
         if (used) {
             d.chi -= cost;
             d.cooldownEnd[skill.ordinal()] = now + skill.cooldown;
             d.dirty = true;
+            if (skill == Skill.SIGNATURE) MartialAdvancements.award(p, "signature");
             ModNetwork.sync(p);
         }
     }
 
-    /** Рывок: резкое перемещение в сторону взгляда. */
-    private static boolean dash(ServerPlayer p, MartialData d) {
+    /** Рывок / уклонение: в сторону нажатых клавиш движения (без них — вперёд). Короткая неуязвимость. */
+    private static boolean dash(ServerPlayer p, MartialData d, long now, float forward, float strafe) {
         if (p.isPassenger() || p.isFallFlying()) return false;
-        Vec3 look = p.getLookAngle();
-        Vec3 dir = new Vec3(look.x, 0, look.z);
+        if (Math.abs(forward) < 0.1f && Math.abs(strafe) < 0.1f) forward = 1;
+
+        double yaw = Math.toRadians(p.getYRot());
+        double sin = Math.sin(yaw);
+        double cos = Math.cos(yaw);
+        Vec3 dir = new Vec3(strafe * cos - forward * sin, 0, forward * cos + strafe * sin);
         if (dir.lengthSqr() < 1.0E-4) return false;
         dir = dir.normalize();
 
@@ -89,7 +106,13 @@ public final class Skills {
         p.setDeltaMovement(dir.x * power, y, dir.z * power);
         p.hurtMarked = true;
         p.fallDistance = 0;
-        ModNetwork.animate(p, "dash");
+        d.dodgeUntil = now + 6;
+
+        String anim;
+        if (forward > 0.1f && Math.abs(strafe) < 0.5f) anim = "dash";
+        else if (forward < -0.1f && Math.abs(strafe) < 0.5f) anim = "dodge_back";
+        else anim = strafe > 0 ? "dodge_left" : "dodge_right";
+        ModNetwork.animate(p, anim);
 
         ServerLevel lvl = p.serverLevel();
         lvl.sendParticles(ParticleTypes.CLOUD, p.getX(), p.getY() + 0.2, p.getZ(), 12, 0.3, 0.1, 0.3, 0.05);
@@ -122,7 +145,7 @@ public final class Skills {
         return true;
     }
 
-    /** Стойка: 2 секунды защиты. Первые 0.4 секунды — окно идеального парирования. */
+    /** Стойка: 2 секунды защиты. В начале — окно идеального парирования. */
     private static boolean guard(ServerPlayer p, MartialData d, long now) {
         d.guardStart = now;
         d.guardEnd = now + 40;
@@ -135,13 +158,16 @@ public final class Skills {
 
     /** Вихревой удар ногой: урон и отбрасывание всем вокруг. */
     private static boolean spinKick(ServerPlayer p, MartialData d) {
-        double r = d.style == MartialStyle.KUNG_FU ? 4.5 : 3.0;
+        double r = switch (d.style) {
+            case KUNG_FU -> 4.5;
+            case TAEKWONDO -> 3.5;
+            default -> 3.0;
+        };
         float dmg = 4 + d.level * 0.4f;
         if (d.style == MartialStyle.MUAY_THAI) dmg *= 1.3f;
+        if (d.style == MartialStyle.TAEKWONDO) dmg *= 1.4f;
 
-        List<LivingEntity> targets = p.level().getEntitiesOfClass(LivingEntity.class,
-                p.getBoundingBox().inflate(r, 1.0, r),
-                e -> isValidTarget(p, e) && e.distanceToSqr(p) <= r * r);
+        List<LivingEntity> targets = around(p, r);
         for (LivingEntity t : targets) {
             hit(p, t, dmg);
             push(p, t, 1.2f, 0.25);
@@ -149,13 +175,7 @@ public final class Skills {
 
         p.swing(InteractionHand.MAIN_HAND, true);
         ModNetwork.animate(p, "spin_kick");
-        ServerLevel lvl = p.serverLevel();
-        for (int i = 0; i < 16; i++) {
-            double a = Math.PI * 2 * i / 16.0;
-            lvl.sendParticles(ParticleTypes.SWEEP_ATTACK,
-                    p.getX() + Math.cos(a) * r * 0.7, p.getY() + 0.8, p.getZ() + Math.sin(a) * r * 0.7,
-                    1, 0, 0, 0, 0);
-        }
+        ring(p, r, ParticleTypes.SWEEP_ATTACK, 0.8);
         sound(p, SoundEvents.PLAYER_ATTACK_SWEEP, 1.0f, 0.7f);
         if (!targets.isEmpty()) addXp(p, d, 2 + targets.size());
         return true;
@@ -174,6 +194,197 @@ public final class Skills {
         actionBar(p, Component.translatable("msg.martialarts.flurry").withStyle(ChatFormatting.GOLD));
         return true;
     }
+
+    // =====================================================================
+    //  Особые техники (клавиша H, 15 уровень) — своя у каждого стиля
+    // =====================================================================
+
+    private static boolean signature(ServerPlayer p, MartialData d) {
+        boolean ok = switch (d.style) {
+            case NONE -> chiWave(p, d, 6.0, 6 + d.level * 0.4f, 1.6f, "sig_none");
+            case KARATE -> chiWave(p, d, 7.5, 7 + d.level * 0.55f, 2.6f, "sig_karate");
+            case BOXING -> uppercut(p, d);
+            case MUAY_THAI -> flyingKnee(p, d);
+            case KUNG_FU -> chiPalm(p, d);
+            case TAEKWONDO -> tornadoKick(p, d);
+            case JUDO -> ippon(p, d);
+        };
+        if (ok) {
+            actionBar(p, Component.translatable("msg.martialarts.sig_used",
+                    Component.translatable("sig.martialarts." + d.style.key())).withStyle(ChatFormatting.LIGHT_PURPLE));
+            addXp(p, d, 6);
+        }
+        return ok;
+    }
+
+    /** Волна Ци / Киай: удар по конусу перед игроком. */
+    private static boolean chiWave(ServerPlayer p, MartialData d, double range, float dmg, float knock, String anim) {
+        Vec3 look = horizontalLook(p);
+        List<LivingEntity> targets = around(p, range);
+        int hits = 0;
+        for (LivingEntity t : targets) {
+            Vec3 to = new Vec3(t.getX() - p.getX(), 0, t.getZ() - p.getZ());
+            if (to.lengthSqr() < 1.0E-4 || to.normalize().dot(look) > 0.45) {
+                hit(p, t, dmg);
+                push(p, t, knock, 0.3);
+                hits++;
+            }
+        }
+        ModNetwork.animate(p, anim);
+        ServerLevel lvl = p.serverLevel();
+        for (int i = 1; i <= (int) range; i++) {
+            Vec3 c = p.position().add(look.scale(i)).add(0, 1.0, 0);
+            double spread = 0.25 * i;
+            lvl.sendParticles(ParticleTypes.POOF, c.x, c.y, c.z, 4 + i, spread, 0.3, spread, 0.02);
+            lvl.sendParticles(ParticleTypes.SONIC_BOOM, c.x, c.y, c.z, 1, 0, 0, 0, 0);
+        }
+        sound(p, SoundEvents.WARDEN_SONIC_BOOM, 0.6f, 1.6f);
+        sound(p, SoundEvents.PLAYER_ATTACK_KNOCKBACK, 1.0f, 0.5f);
+        return true;
+    }
+
+    /** Бокс: сокрушающий апперкот — подбрасывает врага высоко в воздух. */
+    private static boolean uppercut(ServerPlayer p, MartialData d) {
+        LivingEntity t = findTarget(p, 3.5);
+        if (t == null) return noTarget(p);
+        p.swing(InteractionHand.MAIN_HAND, true);
+        ModNetwork.animate(p, "sig_boxing");
+        hit(p, t, 10 + d.level * 0.6f);
+        t.setDeltaMovement(t.getDeltaMovement().x * 0.2, 1.15, t.getDeltaMovement().z * 0.2);
+        t.hurtMarked = true;
+        t.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 80, 1), p);
+        ServerLevel lvl = p.serverLevel();
+        lvl.sendParticles(ParticleTypes.EXPLOSION, t.getX(), t.getY() + 0.5, t.getZ(), 2, 0.2, 0.2, 0.2, 0);
+        lvl.sendParticles(ParticleTypes.CRIT, t.getX(), t.getY() + 0.5, t.getZ(), 30, 0.3, 0.8, 0.3, 0.5);
+        sound(p, SoundEvents.PLAYER_ATTACK_CRIT, 1.0f, 0.5f);
+        sound(p, SoundEvents.GENERIC_EXPLODE, 0.4f, 1.6f);
+        return true;
+    }
+
+    /** Муай-тай: летящее колено — прыжок к цели (до 10 блоков) и удар при подлёте. */
+    private static boolean flyingKnee(ServerPlayer p, MartialData d) {
+        LivingEntity t = findTarget(p, 10.0);
+        if (t == null) return noTarget(p);
+        Vec3 to = t.position().subtract(p.position());
+        Vec3 flat = new Vec3(to.x, 0, to.z);
+        double dist = flat.length();
+        Vec3 dir = dist < 1.0E-3 ? horizontalLook(p) : flat.scale(1 / dist);
+        double speed = Math.min(1.9, 0.5 + dist * 0.22);
+        p.setDeltaMovement(dir.x * speed, 0.5, dir.z * speed);
+        p.hurtMarked = true;
+        p.fallDistance = 0;
+        d.leapTicks = 16;
+        d.leapTarget = t.getId();
+        ModNetwork.animate(p, "sig_muay_thai");
+        sound(p, SoundEvents.PHANTOM_FLAP, 1.0f, 0.8f);
+        return true;
+    }
+
+    private static void tickLeap(ServerPlayer p, MartialData d) {
+        if (d.leapTicks <= 0) return;
+        d.leapTicks--;
+        p.fallDistance = 0;
+        Entity e = p.level().getEntity(d.leapTarget);
+        if (!(e instanceof LivingEntity t) || !t.isAlive()) {
+            d.leapTicks = 0;
+            return;
+        }
+        if (p.distanceToSqr(t) <= 2.6 * 2.6) {
+            d.leapTicks = 0;
+            hit(p, t, 9 + d.level * 0.5f);
+            push(p, t, 2.0f, 0.45);
+            p.setDeltaMovement(p.getDeltaMovement().multiply(0.2, 1.0, 0.2));
+            p.hurtMarked = true;
+            ServerLevel lvl = p.serverLevel();
+            lvl.sendParticles(ParticleTypes.EXPLOSION, t.getX(), t.getY() + 1.0, t.getZ(), 1, 0, 0, 0, 0);
+            lvl.sendParticles(ParticleTypes.CRIT, t.getX(), t.getY() + 1.0, t.getZ(), 25, 0.4, 0.4, 0.4, 0.5);
+            sound(p, SoundEvents.PLAYER_ATTACK_CRIT, 1.0f, 0.6f);
+            sound(p, SoundEvents.PLAYER_ATTACK_KNOCKBACK, 1.0f, 0.7f);
+        }
+    }
+
+    /** Кунг-фу: ладонь Ци — луч энергии на 16 блоков, пробивает до 5 врагов. */
+    private static boolean chiPalm(ServerPlayer p, MartialData d) {
+        Vec3 eye = p.getEyePosition();
+        Vec3 look = p.getViewVector(1.0f);
+        Vec3 end = eye.add(look.scale(16));
+        Vec3 blockHit = p.level().clip(new ClipContext(eye, end, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, p)).getLocation();
+        double len = eye.distanceTo(blockHit);
+
+        AABB box = new AABB(eye, blockHit).inflate(1.2);
+        List<LivingEntity> list = p.level().getEntitiesOfClass(LivingEntity.class, box, e -> isValidTarget(p, e));
+        list.sort((a, b) -> Double.compare(a.distanceToSqr(p), b.distanceToSqr(p)));
+        int hits = 0;
+        float dmg = 8 + d.level * 0.5f;
+        for (LivingEntity t : list) {
+            Vec3 c = t.position().add(0, t.getBbHeight() * 0.5, 0);
+            Vec3 rel = c.subtract(eye);
+            double along = rel.dot(look);
+            if (along < 0 || along > len + 0.5) continue;
+            double off = rel.subtract(look.scale(along)).length();
+            if (off > 1.0 + t.getBbWidth() * 0.5) continue;
+            hit(p, t, dmg);
+            push(p, t, 1.4f, 0.2);
+            if (++hits >= 5) break;
+        }
+        ModNetwork.animate(p, "sig_kung_fu");
+        ServerLevel lvl = p.serverLevel();
+        for (double s = 0.8; s < len; s += 0.4) {
+            Vec3 c = eye.add(look.scale(s)).add(0, -0.2, 0);
+            lvl.sendParticles(ParticleTypes.END_ROD, c.x, c.y, c.z, 1, 0.03, 0.03, 0.03, 0.0);
+            if (((int) (s * 2.5)) % 3 == 0) lvl.sendParticles(ParticleTypes.GLOW, c.x, c.y, c.z, 1, 0.1, 0.1, 0.1, 0);
+        }
+        sound(p, SoundEvents.BEACON_POWER_SELECT, 1.0f, 1.8f);
+        sound(p, SoundEvents.PLAYER_ATTACK_KNOCKBACK, 1.0f, 1.2f);
+        return true;
+    }
+
+    /** Тхэквондо: торнадо-кик — прыжок с вращением, 6 ударов по всем вокруг. */
+    private static boolean tornadoKick(ServerPlayer p, MartialData d) {
+        p.setDeltaMovement(p.getDeltaMovement().x, 0.55, p.getDeltaMovement().z);
+        p.hurtMarked = true;
+        p.fallDistance = 0;
+        d.tornadoTicks = 12;
+        ModNetwork.animate(p, "sig_taekwondo");
+        sound(p, SoundEvents.PLAYER_ATTACK_SWEEP, 1.0f, 1.3f);
+        return true;
+    }
+
+    private static void tickTornado(ServerPlayer p, MartialData d) {
+        if (d.tornadoTicks <= 0) return;
+        d.tornadoTicks--;
+        p.fallDistance = 0;
+        if (d.tornadoTicks % 2 != 0) return;
+        double r = 3.5;
+        for (LivingEntity t : around(p, r)) {
+            hit(p, t, 2.5f + d.level * 0.15f);
+            push(p, t, d.tornadoTicks == 0 ? 1.8f : 0.5f, 0.15);
+        }
+        ring(p, r * 0.8, ParticleTypes.SWEEP_ATTACK, 0.9);
+        sound(p, SoundEvents.PLAYER_ATTACK_SWEEP, 0.7f, 1.0f + p.getRandom().nextFloat() * 0.5f);
+    }
+
+    /** Дзюдо: иппон — бросок через плечо, враг летит за спину и оглушён. */
+    private static boolean ippon(ServerPlayer p, MartialData d) {
+        LivingEntity t = findTarget(p, 3.5);
+        if (t == null) return noTarget(p);
+        ModNetwork.animate(p, "sig_judo");
+        hit(p, t, 8 + d.level * 0.5f);
+        Vec3 back = horizontalLook(p).scale(-1.1);
+        t.setDeltaMovement(back.x, 0.75, back.z);
+        t.hurtMarked = true;
+        t.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 80, 3), p);
+        t.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 80, 1), p);
+        ServerLevel lvl = p.serverLevel();
+        lvl.sendParticles(ParticleTypes.CRIT, t.getX(), t.getY() + 1.0, t.getZ(), 20, 0.4, 0.4, 0.4, 0.3);
+        sound(p, SoundEvents.PLAYER_ATTACK_KNOCKBACK, 1.0f, 0.6f);
+        sound(p, SoundEvents.GENERIC_BIG_FALL, 1.0f, 0.8f);
+        return true;
+    }
+
+    // =====================================================================
+    //  Шквал ударов (тик)
+    // =====================================================================
 
     private static void tickFlurry(ServerPlayer p, MartialData d) {
         if (d.flurryTicks <= 0) return;
@@ -215,7 +426,7 @@ public final class Skills {
     public static float onUnarmedHit(ServerPlayer p, MartialData d, LivingEntity target, float amount) {
         float strength = d.lastAttackStrength;
         float bonus = (d.style.unarmedBonus + (d.level - 1) * 0.3f) * strength * strength;
-        amount += bonus;
+        amount += bonus * damageMult();
 
         // комбо считается только для полностью заряженных ударов
         if (strength < 0.9f) return amount;
@@ -227,7 +438,7 @@ public final class Skills {
 
         int xp = 1;
         if (d.combo % 3 == 0) {
-            amount += comboFinisher(p, d, target);
+            amount += comboFinisher(p, d, target) * damageMult();
             xp += 2;
         } else {
             ModNetwork.animate(p, d.combo % 3 == 1 ? "jab_right" : "jab_left");
@@ -251,6 +462,16 @@ public final class Skills {
                 extra = 2 + d.level * 0.15f;
                 t.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 10, 3), p);
             }
+            case TAEKWONDO -> {
+                extra = 3 + d.level * 0.25f;
+                t.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 80, 0), p);
+                t.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 30, 0), p);
+            }
+            case JUDO -> {
+                extra = 2 + d.level * 0.2f;
+                t.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 2), p);
+                t.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 6, 2), p);
+            }
             default -> { }
         }
 
@@ -265,7 +486,7 @@ public final class Skills {
     }
 
     // =====================================================================
-    //  Тик игрока, опыт, смена стиля
+    //  Тик игрока, пассивные бонусы, опыт, смена стиля
     // =====================================================================
 
     public static void tick(ServerPlayer p, MartialData d) {
@@ -274,7 +495,7 @@ public final class Skills {
         if (d.chi > max) d.chi = max;
 
         if (d.chi < max && !d.isGuarding(now) && d.flurryTicks <= 0) {
-            float regen = 0.25f;
+            float regen = 0.25f * (float) MartialConfig.get(MartialConfig.CHI_REGEN_MULTIPLIER, 1.0);
             if (d.style == MartialStyle.BOXING) regen *= 1.75f;
             // медитация: присесть и стоять на месте — Ци восстанавливается втрое быстрее
             if (p.isCrouching() && p.getDeltaMovement().horizontalDistanceSqr() < 0.001) {
@@ -299,16 +520,49 @@ public final class Skills {
         }
 
         tickFlurry(p, d);
+        tickLeap(p, d);
+        tickTornado(p, d);
+        if (p.tickCount % 10 == 0) updatePassives(p, d);
 
         if (d.dirty) ModNetwork.sync(p);
     }
 
+    /** Мастерство с пустой рукой: быстрее удары и бег. Бокс — ещё быстрее руки, кунг-фу — ноги. */
+    private static void updatePassives(ServerPlayer p, MartialData d) {
+        boolean on = MartialConfig.get(MartialConfig.PASSIVE_BONUSES, true) && p.getMainHandItem().isEmpty();
+        int key = on ? d.level * 16 + d.style.id : -1;
+        if (key == d.passiveKey) return;
+        d.passiveKey = key;
+
+        double attack = 0;
+        double move = 0;
+        if (on) {
+            attack = d.level * 0.05 + (d.style == MartialStyle.BOXING ? 0.5 : 0);
+            move = d.level * 0.005 + (d.style == MartialStyle.KUNG_FU ? 0.05 : 0);
+        }
+        setModifier(p, Attributes.ATTACK_SPEED, ATTACK_SPEED_ID, "martialarts_attack_speed",
+                attack, AttributeModifier.Operation.ADDITION);
+        setModifier(p, Attributes.MOVEMENT_SPEED, MOVE_SPEED_ID, "martialarts_move_speed",
+                move, AttributeModifier.Operation.MULTIPLY_BASE);
+    }
+
+    private static void setModifier(ServerPlayer p, Attribute attribute, UUID id, String name,
+                                    double amount, AttributeModifier.Operation op) {
+        AttributeInstance inst = p.getAttribute(attribute);
+        if (inst == null) return;
+        if (inst.getModifier(id) != null) inst.removeModifier(id);
+        if (amount != 0) inst.addTransientModifier(new AttributeModifier(id, name, amount, op));
+    }
+
     public static void addXp(ServerPlayer p, MartialData d, int amount) {
         if (amount <= 0 || d.level >= MartialData.MAX_LEVEL) return;
+        amount = Math.max(1, (int) Math.round(amount * MartialConfig.get(MartialConfig.XP_MULTIPLIER, 1.0)));
         d.xp += amount;
+        boolean leveled = false;
         while (d.level < MartialData.MAX_LEVEL && d.xp >= d.xpForNext()) {
             d.xp -= d.xpForNext();
             d.level++;
+            leveled = true;
             d.chi = d.maxChi();
             p.sendSystemMessage(Component.translatable("msg.martialarts.level_up", d.level).withStyle(ChatFormatting.GOLD));
             for (Skill s : Skill.values()) {
@@ -320,6 +574,7 @@ public final class Skills {
             sound(p, SoundEvents.PLAYER_LEVELUP, 0.8f, 1.3f);
         }
         if (d.level >= MartialData.MAX_LEVEL) d.xp = 0;
+        if (leveled) MartialAdvancements.check(p, d);
         d.dirty = true;
     }
 
@@ -349,11 +604,15 @@ public final class Skills {
     //  Вспомогательное
     // =====================================================================
 
+    private static float damageMult() {
+        return (float) MartialConfig.get(MartialConfig.DAMAGE_MULTIPLIER, 1.0);
+    }
+
     public static boolean hit(ServerPlayer p, LivingEntity t, float dmg) {
         skillDamage = true;
         try {
             t.invulnerableTime = 0;
-            return t.hurt(p.damageSources().playerAttack(p), dmg);
+            return t.hurt(p.damageSources().playerAttack(p), dmg * damageMult());
         } finally {
             skillDamage = false;
         }
@@ -370,6 +629,34 @@ public final class Skills {
         if (e instanceof TamableAnimal pet && pet.isOwnedBy(p)) return false;
         if (e instanceof ArmorStand stand && stand.isMarker()) return false;
         return !e.isAlliedTo(p);
+    }
+
+    /** Цели вокруг игрока (для техник по площади; игроков — только если разрешено в конфиге). */
+    private static List<LivingEntity> around(ServerPlayer p, double r) {
+        boolean hitPlayers = MartialConfig.get(MartialConfig.SKILLS_HIT_PLAYERS, true);
+        return p.level().getEntitiesOfClass(LivingEntity.class,
+                p.getBoundingBox().inflate(r, 1.0, r),
+                e -> isValidTarget(p, e) && e.distanceToSqr(p) <= r * r && (hitPlayers || !(e instanceof Player)));
+    }
+
+    private static Vec3 horizontalLook(ServerPlayer p) {
+        Vec3 look = p.getLookAngle();
+        Vec3 flat = new Vec3(look.x, 0, look.z);
+        return flat.lengthSqr() < 1.0E-4 ? new Vec3(0, 0, 1) : flat.normalize();
+    }
+
+    private static void ring(ServerPlayer p, double r, net.minecraft.core.particles.SimpleParticleType type, double y) {
+        ServerLevel lvl = p.serverLevel();
+        for (int i = 0; i < 16; i++) {
+            double a = Math.PI * 2 * i / 16.0;
+            lvl.sendParticles(type, p.getX() + Math.cos(a) * r * 0.7, p.getY() + y, p.getZ() + Math.sin(a) * r * 0.7,
+                    1, 0, 0, 0, 0);
+        }
+    }
+
+    private static boolean noTarget(ServerPlayer p) {
+        actionBar(p, Component.translatable("msg.martialarts.no_target").withStyle(ChatFormatting.GRAY));
+        return false;
     }
 
     /** Ищет живую цель, на которую смотрит игрок, в пределах range блоков. */

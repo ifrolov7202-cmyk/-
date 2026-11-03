@@ -1,0 +1,95 @@
+{
+  "version": 3,
+  "name": "dodge_back",
+  "author": "martialarts",
+  "emote": {
+    "beginTick": 0,
+    "endTick": 7,
+    "stopTick": 11,
+    "isLoop": false,
+    "returnTick": 0,
+    "nsfw": false,
+    "degrees": true,
+    "easeBeforeKeyframe": false,
+    "moves": [
+      {
+        "tick": 1,
+        "easing": "OUTQUAD",
+        "torso": {
+          "pitch": -14
+        }
+      },
+      {
+        "tick": 1,
+        "easing": "OUTQUAD",
+        "rightArm": {
+          "pitch": -80,
+          "yaw": -30,
+          "bend": 90
+        }
+      },
+      {
+        "tick": 1,
+        "easing": "OUTQUAD",
+        "leftArm": {
+          "pitch": -85,
+          "yaw": 30,
+          "bend": 90
+        }
+      },
+      {
+        "tick": 1,
+        "easing": "OUTQUAD",
+        "rightLeg": {
+          "pitch": 30
+        }
+      },
+      {
+        "tick": 1,
+        "easing": "OUTQUAD",
+        "leftLeg": {
+          "pitch": -15
+        }
+      },
+      {
+        "tick": 7,
+        "easing": "LINEAR",
+        "torso": {
+          "pitch": -8
+        }
+      },
+      {
+        "tick": 7,
+        "easing": "LINEAR",
+        "rightArm": {
+          "pitch": -75,
+          "yaw": -30,
+          "bend": 80
+        }
+      },
+      {
+        "tick": 7,
+        "easing": "LINEAR",
+        "leftArm": {
+          "pitch": -80,
+          "yaw": 30,
+          "bend": 80
+        }
+      },
+      {
+        "tick": 7,
+        "easing": "LINEAR",
+        "rightLeg": {
+          "pitch": 20
+        }
+      },
+      {
+        "tick": 7,
+        "easing": "LINEAR",
+        "leftLeg": {
+          "pitch": -10
+        }
+      }
+    ]
+  }
+}

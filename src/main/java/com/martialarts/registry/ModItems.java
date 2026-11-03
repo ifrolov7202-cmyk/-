@@ -10,6 +10,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.List;
+
 public final class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MartialArts.MODID);
 
@@ -17,6 +19,12 @@ public final class ModItems {
     public static final RegistryObject<Item> KARATE_SCROLL = scroll("karate_scroll", MartialStyle.KARATE);
     public static final RegistryObject<Item> MUAY_THAI_SCROLL = scroll("muay_thai_scroll", MartialStyle.MUAY_THAI);
     public static final RegistryObject<Item> KUNG_FU_SCROLL = scroll("kung_fu_scroll", MartialStyle.KUNG_FU);
+    public static final RegistryObject<Item> TAEKWONDO_SCROLL = scroll("taekwondo_scroll", MartialStyle.TAEKWONDO);
+    public static final RegistryObject<Item> JUDO_SCROLL = scroll("judo_scroll", MartialStyle.JUDO);
+
+    /** Все свитки стилей (для лута и торговца). */
+    public static final List<RegistryObject<Item>> SCROLLS = List.of(
+            BOXING_SCROLL, KARATE_SCROLL, MUAY_THAI_SCROLL, KUNG_FU_SCROLL, TAEKWONDO_SCROLL, JUDO_SCROLL);
 
     public static final RegistryObject<Item> TRAINING_BAG = ITEMS.register("training_bag",
             () -> new BlockItem(ModBlocks.TRAINING_BAG.get(), new Item.Properties()));

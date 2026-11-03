@@ -46,6 +46,7 @@ public class StyleScrollItem extends Item {
                             .withStyle(ChatFormatting.GOLD));
                     Skills.sound(sp, SoundEvents.PLAYER_LEVELUP, 0.7f, 0.8f);
                     Skills.addXp(sp, d, 10);
+                    com.martialarts.skill.MartialAdvancements.check(sp, d);
                 } else {
                     d.style = style;
                     Skills.actionBar(sp, Component.translatable("msg.martialarts.style_selected", style.displayName()));
@@ -61,6 +62,8 @@ public class StyleScrollItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
         tooltip.add(Component.translatable("tooltip.martialarts." + style.key()).withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("tooltip.martialarts.signature",
+                Component.translatable("sig.martialarts." + style.key())).withStyle(ChatFormatting.LIGHT_PURPLE));
         tooltip.add(Component.translatable("tooltip.martialarts.scroll_use").withStyle(ChatFormatting.DARK_GRAY));
     }
 

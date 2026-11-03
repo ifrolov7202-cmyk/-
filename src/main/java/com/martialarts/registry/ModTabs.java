@@ -15,10 +15,7 @@ public final class ModTabs {
             .title(Component.translatable("itemGroup.martialarts"))
             .icon(() -> new ItemStack(ModItems.KARATE_SCROLL.get()))
             .displayItems((params, output) -> {
-                output.accept(ModItems.BOXING_SCROLL.get());
-                output.accept(ModItems.KARATE_SCROLL.get());
-                output.accept(ModItems.MUAY_THAI_SCROLL.get());
-                output.accept(ModItems.KUNG_FU_SCROLL.get());
+                for (var scroll : ModItems.SCROLLS) output.accept(scroll.get());
                 output.accept(ModItems.TRAINING_BAG.get());
             })
             .build());

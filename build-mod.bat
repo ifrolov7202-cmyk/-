@@ -46,11 +46,11 @@ if errorlevel 1 (
   goto fail
 )
 
-copy /y "%WORK%\build\libs\martialarts-1.0.0.jar" "%SRC%martialarts-1.0.0.jar" >nul
+copy /y "%WORK%\build\libs\martialarts-*.jar" "%SRC%" >nul
 echo.
 echo ============================================
 echo   ГОТОВО! Файл мода:
-echo   %SRC%martialarts-1.0.0.jar
+echo   %SRC% (martialarts-*.jar)
 echo   Положите его в .minecraft\mods вместе с PlayerAnimator.
 echo ============================================
 pause

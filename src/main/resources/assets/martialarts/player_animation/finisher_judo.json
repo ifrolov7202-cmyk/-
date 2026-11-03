@@ -1,0 +1,163 @@
+{
+  "version": 3,
+  "name": "finisher_judo",
+  "author": "martialarts",
+  "emote": {
+    "beginTick": 0,
+    "endTick": 11,
+    "stopTick": 15,
+    "isLoop": false,
+    "returnTick": 0,
+    "nsfw": false,
+    "degrees": true,
+    "easeBeforeKeyframe": false,
+    "moves": [
+      {
+        "tick": 2,
+        "easing": "OUTQUAD",
+        "rightArm": {
+          "pitch": -95,
+          "yaw": -15,
+          "bend": 40
+        }
+      },
+      {
+        "tick": 2,
+        "easing": "OUTQUAD",
+        "leftArm": {
+          "pitch": -95,
+          "yaw": 15,
+          "bend": 40
+        }
+      },
+      {
+        "tick": 5,
+        "easing": "INOUTSINE",
+        "body": {
+          "yaw": 70
+        }
+      },
+      {
+        "tick": 5,
+        "easing": "INOUTSINE",
+        "torso": {
+          "pitch": 25
+        }
+      },
+      {
+        "tick": 5,
+        "easing": "INOUTSINE",
+        "rightArm": {
+          "pitch": -70,
+          "yaw": -40,
+          "bend": 90
+        }
+      },
+      {
+        "tick": 5,
+        "easing": "INOUTSINE",
+        "leftArm": {
+          "pitch": -110,
+          "yaw": 35,
+          "bend": 60
+        }
+      },
+      {
+        "tick": 5,
+        "easing": "INOUTSINE",
+        "rightLeg": {
+          "pitch": -10,
+          "roll": 10
+        }
+      },
+      {
+        "tick": 5,
+        "easing": "INOUTSINE",
+        "leftLeg": {
+          "pitch": 15,
+          "roll": -6
+        }
+      },
+      {
+        "tick": 8,
+        "easing": "OUTQUAD",
+        "body": {
+          "yaw": 90
+        }
+      },
+      {
+        "tick": 8,
+        "easing": "OUTQUAD",
+        "torso": {
+          "pitch": 35
+        }
+      },
+      {
+        "tick": 8,
+        "easing": "OUTQUAD",
+        "rightArm": {
+          "pitch": -20,
+          "yaw": -30,
+          "bend": 60
+        }
+      },
+      {
+        "tick": 8,
+        "easing": "OUTQUAD",
+        "leftArm": {
+          "pitch": -40,
+          "yaw": 20,
+          "bend": 40
+        }
+      },
+      {
+        "tick": 11,
+        "easing": "LINEAR",
+        "body": {
+          "yaw": 60
+        }
+      },
+      {
+        "tick": 11,
+        "easing": "LINEAR",
+        "torso": {
+          "pitch": 18
+        }
+      },
+      {
+        "tick": 11,
+        "easing": "LINEAR",
+        "rightArm": {
+          "pitch": -30,
+          "yaw": -20,
+          "bend": 50
+        }
+      },
+      {
+        "tick": 11,
+        "easing": "LINEAR",
+        "leftArm": {
+          "pitch": -45,
+          "yaw": 20,
+          "bend": 40
+        }
+      },
+      {
+        "tick": 11,
+        "easing": "LINEAR",
+        "rightLeg": {
+          "pitch": -8,
+          "roll": 8
+        }
+      },
+      {
+        "tick": 11,
+        "easing": "LINEAR",
+        "leftLeg": {
+          "pitch": 10,
+          "roll": -6
+        }
+      }
+    ]
+  }
+}

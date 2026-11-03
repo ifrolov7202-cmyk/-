@@ -14,10 +14,11 @@ public final class KeyBindings {
     public static final KeyMapping GUARD = key("guard", GLFW.GLFW_KEY_G);
     public static final KeyMapping SPIN_KICK = key("spin_kick", GLFW.GLFW_KEY_Z);
     public static final KeyMapping FLURRY = key("flurry", GLFW.GLFW_KEY_B);
+    public static final KeyMapping SIGNATURE = key("signature", GLFW.GLFW_KEY_H);
     public static final KeyMapping CYCLE_STYLE = key("cycle_style", GLFW.GLFW_KEY_K);
 
     /** Клавиши техник в порядке Skill.values(). */
-    public static final KeyMapping[] SKILL_KEYS = {DASH, POWER_STRIKE, GUARD, SPIN_KICK, FLURRY};
+    public static final KeyMapping[] SKILL_KEYS = {DASH, POWER_STRIKE, GUARD, SPIN_KICK, FLURRY, SIGNATURE};
 
     private static KeyMapping key(String name, int code) {
         return new KeyMapping("key.martialarts." + name, KeyConflictContext.IN_GAME,

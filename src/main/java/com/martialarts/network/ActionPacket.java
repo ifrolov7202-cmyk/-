@@ -10,26 +10,39 @@ import java.util.function.Supplier;
 
 /**
  * Клиент -> сервер: игрок нажал клавишу техники или смены стиля.
+ * forward/strafe — направление движения (W/S и A/D) для уклонения.
  */
 public class ActionPacket {
     public static final int CYCLE_STYLE = 100;
 
     private final int action;
+    private final float forward;
+    private final float strafe;
 
-    public ActionPacket(int action) {
+    public ActionPacket(int action, float forward, float strafe) {
         this.action = action;
+        this.forward = forward;
+        this.strafe = strafe;
     }
 
     public ActionPacket(FriendlyByteBuf buf) {
         this.action = buf.readVarInt();
+        this.forward = buf.readFloat();
+        this.strafe = buf.readFloat();
     }
 
-    public static ActionPacket skill(Skill skill) {
-        return new ActionPacket(skill.ordinal());
+    public static ActionPacket skill(Skill skill, float forward, float strafe) {
+        return new ActionPacket(skill.ordinal(), forward, strafe);
+    }
+
+    public static ActionPacket cycleStyle() {
+        return new ActionPacket(CYCLE_STYLE, 0, 0);
     }
 
     public void encode(FriendlyByteBuf buf) {
         buf.writeVarInt(action);
+        buf.writeFloat(forward);
+        buf.writeFloat(strafe);
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
@@ -42,7 +55,9 @@ public class ActionPacket {
         }
         Skill skill = Skill.byIndex(action);
         if (skill != null) {
-            Skills.tryUse(player, skill);
+            float f = Float.isFinite(forward) ? Math.max(-1, Math.min(1, forward)) : 0;
+            float s = Float.isFinite(strafe) ? Math.max(-1, Math.min(1, strafe)) : 0;
+            Skills.tryUse(player, skill, f, s);
         }
     }
 }

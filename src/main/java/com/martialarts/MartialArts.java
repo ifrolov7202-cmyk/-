@@ -6,7 +6,9 @@ import com.martialarts.registry.ModBlocks;
 import com.martialarts.registry.ModItems;
 import com.martialarts.registry.ModTabs;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
@@ -26,6 +28,8 @@ public class MartialArts {
 
         modBus.addListener(MartialCapability::register);
         modBus.addListener(this::commonSetup);
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, MartialConfig.SPEC);
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {

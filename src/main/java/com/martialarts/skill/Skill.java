@@ -11,7 +11,8 @@ public enum Skill {
     POWER_STRIKE("power_strike",  25,  60,               2,       true),
     GUARD       ("guard",         10,  30,               3,       true),
     SPIN_KICK   ("spin_kick",     35,  100,              5,       true),
-    FLURRY      ("flurry",        60,  300,              10,      true);
+    FLURRY      ("flurry",        60,  300,              10,      true),
+    SIGNATURE   ("signature",     50,  240,              15,      true);
 
     public final String id;
     public final int chiCost;
