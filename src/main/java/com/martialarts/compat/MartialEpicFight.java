@@ -13,7 +13,15 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import com.martialarts.MartialArts;
+import com.mojang.logging.LogUtils;
+import net.minecraft.world.item.ItemStack;
+import yesman.epicfight.api.forgeevent.SkillBuildEvent;
+import yesman.epicfight.gameasset.Animations;
+import yesman.epicfight.skill.SkillBuilder;
+import yesman.epicfight.skill.weaponinnate.WeaponInnateSkill;
 import yesman.epicfight.world.capabilities.EpicFightCapabilities;
+import yesman.epicfight.world.capabilities.item.CapabilityItem;
 import yesman.epicfight.world.capabilities.entitypatch.player.PlayerPatch;
 import yesman.epicfight.world.capabilities.entitypatch.player.ServerPlayerPatch;
 import yesman.epicfight.world.entity.eventlistener.PlayerEventListener;
@@ -26,7 +34,43 @@ import java.util.UUID;
 public final class MartialEpicFight {
     private static final UUID DODGE_LISTENER = UUID.fromString("6f1c2a52-6a1e-4d0e-9b3a-5a2f0c7d1e10");
 
+    /** Врождённый навык голых рук (регистрируется Epic Fight). */
+    public static yesman.epicfight.skill.Skill TECHNIQUE;
+
     private MartialEpicFight() {}
+
+    public static void onSkillBuild(SkillBuildEvent event) {
+        SkillBuildEvent.ModRegistryWorker registry = event.createRegistryWorker(MartialArts.MODID);
+        SkillBuilder<WeaponInnateSkill> builder = WeaponInnateSkill.createWeaponInnateBuilder();
+        builder.setResource(yesman.epicfight.skill.Skill.Resource.NONE);
+        TECHNIQUE = registry.build("martial_technique", MartialTechniqueSkill::new, builder);
+    }
+
+    /**
+     * В Epic Fight у пустой руки нет врождённого навыка. Подменяем «пустую» способность предмета
+     * точной копией (те же кулаки, те же связки), которая отдаёт наш навык — так техники
+     * вызываются стандартной клавишей врождённого навыка Epic Fight.
+     */
+    public static void installBareHandSkill() {
+        if (TECHNIQUE == null || Animations.FIST_AUTO1 == null) {
+            LogUtils.getLogger().warn("[martialarts] Epic Fight not ready, bare-hand technique not installed");
+            return;
+        }
+        if (CapabilityItem.EMPTY instanceof BareHandCapability) return;
+        CapabilityItem.EMPTY = CapabilityItem.builder().constructor(BareHandCapability::new).build();
+    }
+
+    /** Пустая рука Epic Fight + наш врождённый навык. */
+    public static class BareHandCapability extends CapabilityItem {
+        public BareHandCapability(CapabilityItem.Builder builder) {
+            super(builder);
+        }
+
+        @Override
+        public yesman.epicfight.skill.Skill getInnateSkill(PlayerPatch<?> playerpatch, ItemStack itemstack) {
+            return TECHNIQUE;
+        }
+    }
 
     /** Включён ли у игрока боевой режим Epic Fight (переключается клавишей Epic Fight, по умолчанию R). */
     public static boolean isBattleMode(Player player) {

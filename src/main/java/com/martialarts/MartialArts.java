@@ -1,5 +1,6 @@
 package com.martialarts;
 
+import com.martialarts.compat.MartialEpicFight;
 import com.martialarts.data.MartialCapability;
 import com.martialarts.network.ModNetwork;
 import com.martialarts.registry.ModBlocks;
@@ -28,11 +29,14 @@ public class MartialArts {
 
         modBus.addListener(MartialCapability::register);
         modBus.addListener(this::commonSetup);
+        // Epic Fight: врождённый навык голых рук
+        modBus.addListener(MartialEpicFight::onSkillBuild);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, MartialConfig.SPEC);
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(ModNetwork::register);
+        event.enqueueWork(MartialEpicFight::installBareHandSkill);
     }
 }

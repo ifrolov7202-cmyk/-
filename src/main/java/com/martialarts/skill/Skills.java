@@ -526,7 +526,7 @@ public final class Skills {
             for (Skill s : Skill.values()) {
                 if (s.requiredLevel == d.level) {
                     p.sendSystemMessage(Component.translatable("msg.martialarts.unlocked",
-                            s.displayName(), Component.keybind("key.martialarts." + s.id)).withStyle(ChatFormatting.AQUA));
+                            s.displayName(), Component.translatable("hint.martialarts." + s.id)).withStyle(ChatFormatting.AQUA));
                 }
             }
             sound(p, SoundEvents.PLAYER_LEVELUP, 0.8f, 1.3f);
