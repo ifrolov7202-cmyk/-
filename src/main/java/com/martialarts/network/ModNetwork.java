@@ -10,7 +10,7 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public final class ModNetwork {
-    private static final String VERSION = "3";
+    private static final String VERSION = "4";
 
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(MartialArts.MODID, "main"),
@@ -19,12 +19,6 @@ public final class ModNetwork {
     private ModNetwork() {}
 
     public static void register() {
-        CHANNEL.messageBuilder(ActionPacket.class, 0, NetworkDirection.PLAY_TO_SERVER)
-                .encoder(ActionPacket::encode)
-                .decoder(ActionPacket::new)
-                .consumerMainThread(ActionPacket::handle)
-                .add();
-
         CHANNEL.messageBuilder(SyncPacket.class, 1, NetworkDirection.PLAY_TO_CLIENT)
                 .encoder(SyncPacket::encode)
                 .decoder(SyncPacket::new)
@@ -42,10 +36,6 @@ public final class ModNetwork {
     public static void animate(ServerPlayer player, String animation) {
         CHANNEL.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> player),
                 new AnimPacket(player.getId(), animation));
-    }
-
-    public static void sendToServer(ActionPacket packet) {
-        CHANNEL.sendToServer(packet);
     }
 
     public static void sync(ServerPlayer player) {

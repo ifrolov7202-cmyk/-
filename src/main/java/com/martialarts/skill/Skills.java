@@ -4,6 +4,7 @@ import com.martialarts.MartialConfig;
 import com.martialarts.data.MartialCapability;
 import com.martialarts.data.MartialData;
 import com.martialarts.data.MartialStyle;
+import com.martialarts.item.HandWrapsItem;
 import com.martialarts.network.ModNetwork;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
@@ -50,31 +51,30 @@ public final class Skills {
     //  Использование техник
     // =====================================================================
 
-    public static void tryUse(ServerPlayer p, Skill skill, float forward, float strafe) {
+    public static boolean tryUse(ServerPlayer p, Skill skill) {
         MartialData d = MartialCapability.get(p).orElse(null);
-        if (d == null) return;
+        if (d == null) return false;
         long now = p.level().getGameTime();
 
         if (d.level < skill.requiredLevel) {
             actionBar(p, Component.translatable("msg.martialarts.need_level", skill.displayName(), skill.requiredLevel)
                     .withStyle(ChatFormatting.RED));
-            return;
+            return false;
         }
-        if (d.cooldownEnd[skill.ordinal()] > now || d.flurryTicks > 0 || d.leapTicks > 0 || d.tornadoTicks > 0) return;
-        if (skill.needsEmptyHand && !p.getMainHandItem().isEmpty()) {
+        if (d.cooldownEnd[skill.ordinal()] > now || d.flurryTicks > 0 || d.leapTicks > 0 || d.tornadoTicks > 0) return false;
+        if (!HandWrapsItem.isFighting(p)) {
             actionBar(p, Component.translatable("msg.martialarts.empty_hand").withStyle(ChatFormatting.RED));
-            return;
+            return false;
         }
         float cost = p.getAbilities().instabuild ? 0 : skill.chiCost;
         if (d.chi < cost) {
             actionBar(p, Component.translatable("msg.martialarts.no_chi").withStyle(ChatFormatting.AQUA));
-            return;
+            return false;
         }
+        d.style = HandWrapsItem.activeStyle(p, d);
 
         boolean used = switch (skill) {
-            case DASH -> dash(p, d, now, forward, strafe);
             case POWER_STRIKE -> powerStrike(p, d);
-            case GUARD -> guard(p, d, now);
             case SPIN_KICK -> spinKick(p, d);
             case FLURRY -> flurry(p, d);
             case SIGNATURE -> signature(p, d);
@@ -87,37 +87,7 @@ public final class Skills {
             if (skill == Skill.SIGNATURE) MartialAdvancements.award(p, "signature");
             ModNetwork.sync(p);
         }
-    }
-
-    /** Рывок / уклонение: в сторону нажатых клавиш движения (без них — вперёд). Короткая неуязвимость. */
-    private static boolean dash(ServerPlayer p, MartialData d, long now, float forward, float strafe) {
-        if (p.isPassenger() || p.isFallFlying()) return false;
-        if (Math.abs(forward) < 0.1f && Math.abs(strafe) < 0.1f) forward = 1;
-
-        double yaw = Math.toRadians(p.getYRot());
-        double sin = Math.sin(yaw);
-        double cos = Math.cos(yaw);
-        Vec3 dir = new Vec3(strafe * cos - forward * sin, 0, forward * cos + strafe * sin);
-        if (dir.lengthSqr() < 1.0E-4) return false;
-        dir = dir.normalize();
-
-        double power = d.style == MartialStyle.KUNG_FU ? 2.2 : 1.5;
-        double y = p.onGround() ? 0.25 : Math.max(p.getDeltaMovement().y, 0.1);
-        p.setDeltaMovement(dir.x * power, y, dir.z * power);
-        p.hurtMarked = true;
-        p.fallDistance = 0;
-        d.dodgeUntil = now + 6;
-
-        String anim;
-        if (forward > 0.1f && Math.abs(strafe) < 0.5f) anim = "dash";
-        else if (forward < -0.1f && Math.abs(strafe) < 0.5f) anim = "dodge_back";
-        else anim = strafe > 0 ? "dodge_left" : "dodge_right";
-        ModNetwork.animate(p, anim);
-
-        ServerLevel lvl = p.serverLevel();
-        lvl.sendParticles(ParticleTypes.CLOUD, p.getX(), p.getY() + 0.2, p.getZ(), 12, 0.3, 0.1, 0.3, 0.05);
-        sound(p, SoundEvents.PHANTOM_FLAP, 0.8f, 1.4f);
-        return true;
+        return used;
     }
 
     /** Сокрушительный удар: сильный удар по цели перед игроком с отбрасыванием. */
@@ -142,17 +112,6 @@ public final class Skills {
         sound(p, SoundEvents.PLAYER_ATTACK_KNOCKBACK, 1.0f, 0.8f);
         sound(p, SoundEvents.PLAYER_ATTACK_STRONG, 1.0f, 0.6f);
         addXp(p, d, 3);
-        return true;
-    }
-
-    /** Стойка: 2 секунды защиты. В начале — окно идеального парирования. */
-    private static boolean guard(ServerPlayer p, MartialData d, long now) {
-        d.guardStart = now;
-        d.guardEnd = now + 40;
-        ModNetwork.animate(p, "guard");
-        sound(p, SoundEvents.ARMOR_EQUIP_GENERIC, 1.0f, 1.2f);
-        p.serverLevel().sendParticles(ParticleTypes.ENCHANTED_HIT, p.getX(), p.getY() + 1.0, p.getZ(), 15, 0.4, 0.5, 0.4, 0.1);
-        actionBar(p, Component.translatable("msg.martialarts.guard").withStyle(ChatFormatting.YELLOW));
         return true;
     }
 
@@ -491,6 +450,12 @@ public final class Skills {
 
     public static void tick(ServerPlayer p, MartialData d) {
         long now = p.level().getGameTime();
+        MartialStyle current = HandWrapsItem.activeStyle(p, d);
+        if (current != d.style) {
+            d.style = current;
+            d.passiveKey = Integer.MIN_VALUE;
+            d.dirty = true;
+        }
         float max = d.maxChi();
         if (d.chi > max) d.chi = max;
 
@@ -527,9 +492,9 @@ public final class Skills {
         if (d.dirty) ModNetwork.sync(p);
     }
 
-    /** Мастерство с пустой рукой: быстрее удары и бег. Бокс — ещё быстрее руки, кунг-фу — ноги. */
+    /** Мастерство в бинтах или с пустой рукой: быстрее удары и бег. Бокс — ещё быстрее руки, кунг-фу — ноги. */
     private static void updatePassives(ServerPlayer p, MartialData d) {
-        boolean on = MartialConfig.get(MartialConfig.PASSIVE_BONUSES, true) && p.getMainHandItem().isEmpty();
+        boolean on = MartialConfig.get(MartialConfig.PASSIVE_BONUSES, true) && HandWrapsItem.isFighting(p);
         int key = on ? d.level * 16 + d.style.id : -1;
         if (key == d.passiveKey) return;
         d.passiveKey = key;
@@ -568,7 +533,7 @@ public final class Skills {
             for (Skill s : Skill.values()) {
                 if (s.requiredLevel == d.level) {
                     p.sendSystemMessage(Component.translatable("msg.martialarts.unlocked",
-                            s.displayName(), Component.keybind("key.martialarts." + s.id)).withStyle(ChatFormatting.AQUA));
+                            s.displayName(), Component.translatable("hint.martialarts." + s.id)).withStyle(ChatFormatting.AQUA));
                 }
             }
             sound(p, SoundEvents.PLAYER_LEVELUP, 0.8f, 1.3f);
@@ -576,28 +541,6 @@ public final class Skills {
         if (d.level >= MartialData.MAX_LEVEL) d.xp = 0;
         if (leveled) MartialAdvancements.check(p, d);
         d.dirty = true;
-    }
-
-    public static void cycleStyle(ServerPlayer p) {
-        MartialCapability.get(p).ifPresent(d -> {
-            MartialStyle[] all = MartialStyle.values();
-            if (d.learnedMask == 0) {
-                actionBar(p, Component.translatable("msg.martialarts.no_styles").withStyle(ChatFormatting.GRAY));
-                return;
-            }
-            int idx = d.style.ordinal();
-            for (int i = 1; i <= all.length; i++) {
-                MartialStyle s = all[(idx + i) % all.length];
-                if (d.isLearned(s)) {
-                    d.style = s;
-                    break;
-                }
-            }
-            actionBar(p, Component.translatable("msg.martialarts.style_selected", d.style.displayName()));
-            sound(p, SoundEvents.ARMOR_EQUIP_LEATHER, 1.0f, 1.0f);
-            d.dirty = true;
-            ModNetwork.sync(p);
-        });
     }
 
     // =====================================================================

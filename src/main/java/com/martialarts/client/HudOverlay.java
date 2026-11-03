@@ -45,27 +45,27 @@ public final class HudOverlay {
         g.fill(x - 1, y - 1, x + BAR_W + 1, y + 3, 0xAA000000);
         g.fill(x, y, x + (int) (BAR_W * xpPart), y + 2, 0xFFFFCC33);
 
-        // техники: [клавиша] + статус
+        // техники (клавиша врождённого навыка Epic Fight): просто / Shift / бег
         y += 6;
         int cx = x;
-        for (Skill skill : Skill.values()) {
-            String keyName = KeyBindings.forSkill(skill).getTranslatedKeyMessage().getString();
-            if (keyName.length() > 3) keyName = keyName.substring(0, 3);
-            String text;
+        Skill[] shown = {Skill.SIGNATURE, Skill.FLURRY, Skill.SPIN_KICK, Skill.POWER_STRIKE};
+        String[] labels = {"hud.martialarts.tag.signature", "hud.martialarts.tag.flurry",
+                "hud.martialarts.tag.spin_kick", "hud.martialarts.tag.power_strike"};
+        for (int i = 0; i < shown.length; i++) {
+            Skill skill = shown[i];
+            String text = Component.translatable(labels[i]).getString();
             int color;
             if (ClientData.level < skill.requiredLevel) {
-                text = keyName + ":" + skill.requiredLevel;
+                text = text + " " + skill.requiredLevel;
                 color = 0x555555;
             } else {
                 long left = ClientData.cooldownEnd[skill.ordinal()] - now;
                 if (left > 0) {
-                    text = keyName + ":" + String.format("%.1f", left / 20.0);
+                    text = text + " " + String.format("%.1f", left / 20.0);
                     color = 0xFF5555;
                 } else if (ClientData.chi < skill.chiCost && !mc.player.getAbilities().instabuild) {
-                    text = keyName;
                     color = 0x5588AA;
                 } else {
-                    text = keyName;
                     color = 0x55FF55;
                 }
             }
@@ -77,10 +77,6 @@ public final class HudOverlay {
 
         // комбо и стойка — под панелью
         y += 15;
-        if (now < ClientData.guardEnd) {
-            g.drawString(font, Component.translatable("hud.martialarts.guard"), x, y, 0xFFFF55, true);
-            y += 11;
-        }
         if (ClientData.combo >= 2) {
             g.drawString(font, Component.translatable("hud.martialarts.combo", ClientData.combo), x, y, 0xFFAA00, true);
         }

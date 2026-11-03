@@ -24,7 +24,7 @@ public class TrainingBagBlock extends Block {
     @Override
     @SuppressWarnings("deprecation")
     public void attack(BlockState state, Level level, BlockPos pos, Player player) {
-        if (!level.isClientSide && player instanceof ServerPlayer sp && sp.getMainHandItem().isEmpty()) {
+        if (!level.isClientSide && player instanceof ServerPlayer sp && com.martialarts.item.HandWrapsItem.isFighting(sp)) {
             MartialCapability.get(sp).ifPresent(d -> {
                 long now = level.getGameTime();
                 if (now - d.lastTrainTick < 10) return;
@@ -43,7 +43,7 @@ public class TrainingBagBlock extends Block {
     @Override
     @SuppressWarnings("deprecation")
     public float getDestroyProgress(BlockState state, Player player, BlockGetter getter, BlockPos pos) {
-        if (player.getMainHandItem().isEmpty()) return 0.0f;
+        if (com.martialarts.item.HandWrapsItem.isFighting(player)) return 0.0f;
         return super.getDestroyProgress(state, player, getter, pos);
     }
 }

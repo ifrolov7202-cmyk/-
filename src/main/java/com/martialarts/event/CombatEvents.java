@@ -22,6 +22,8 @@ import net.minecraft.world.entity.player.Player;
 import com.martialarts.MartialConfig;
 import com.martialarts.registry.ModItems;
 import com.martialarts.skill.MartialAdvancements;
+import com.martialarts.compat.MartialEpicFight;
+import com.martialarts.item.HandWrapsItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
@@ -47,9 +49,6 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = MartialArts.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class CombatEvents {
-    /** Окно идеального парирования после нажатия стойки (тики). У дзюдо — длиннее. */
-    private static final int PARRY_WINDOW = 8;
-    private static final int PARRY_WINDOW_JUDO = 12;
 
     private CombatEvents() {}
 
@@ -81,12 +80,16 @@ public final class CombatEvents {
         if (event.getEntity() instanceof ServerPlayer sp) {
             ModNetwork.sync(sp);
             MartialCapability.get(sp).ifPresent(d -> MartialAdvancements.check(sp, d));
+            MartialEpicFight.attachListeners(sp);
         }
     }
 
     @SubscribeEvent
     public static void onRespawn(PlayerEvent.PlayerRespawnEvent event) {
-        if (event.getEntity() instanceof ServerPlayer sp) ModNetwork.sync(sp);
+        if (event.getEntity() instanceof ServerPlayer sp) {
+            ModNetwork.sync(sp);
+            MartialEpicFight.attachListeners(sp);
+        }
     }
 
     @SubscribeEvent
@@ -115,58 +118,6 @@ public final class CombatEvents {
         if (event.getEntity() instanceof ServerPlayer sp) {
             MartialCapability.get(sp).ifPresent(d -> d.lastAttackStrength = sp.getAttackStrengthScale(0.5f));
         }
-    }
-
-    /** Уклонение (сразу после рывка) и идеальное парирование (начало стойки) отменяют атаку. */
-    @SubscribeEvent
-    public static void onLivingAttack(LivingAttackEvent event) {
-        if (!(event.getEntity() instanceof ServerPlayer p)) return;
-        DamageSource src = event.getSource();
-        if (src.getEntity() == null && src.getDirectEntity() == null) return;
-
-        MartialData d = MartialCapability.get(p).orElse(null);
-        if (d == null) return;
-        long now = p.level().getGameTime();
-
-        // уклонение
-        if (now < d.dodgeUntil) {
-            event.setCanceled(true);
-            d.dodgeUntil = 0;
-            p.serverLevel().sendParticles(ParticleTypes.CLOUD, p.getX(), p.getY() + 1.0, p.getZ(), 10, 0.3, 0.5, 0.3, 0.05);
-            Skills.sound(p, SoundEvents.PLAYER_ATTACK_NODAMAGE, 1.0f, 1.5f);
-            Skills.actionBar(p, Component.translatable("msg.martialarts.dodge").withStyle(ChatFormatting.AQUA));
-            Skills.addXp(p, d, 2);
-            MartialAdvancements.award(p, "dodge");
-            return;
-        }
-
-        int window = d.style == MartialStyle.JUDO ? PARRY_WINDOW_JUDO : PARRY_WINDOW;
-        if (!d.isGuarding(now) || now - d.guardStart > window) return;
-
-        event.setCanceled(true);
-        d.guardEnd = now; // стойка завершается парированием
-        ModNetwork.animate(p, "parry");
-        d.chi = Math.min(d.maxChi(), d.chi + 10);
-
-        if (src.getEntity() instanceof LivingEntity attacker && attacker != p) {
-            attacker.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 2), p);
-            attacker.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 40, 1), p);
-            if (attacker.distanceToSqr(p) < 25) {
-                if (d.style == MartialStyle.JUDO) {
-                    // дзюдо: контрбросок
-                    Skills.hit(p, attacker, 2 + d.level * 0.2f);
-                    Skills.push(p, attacker, 2.0f, 0.5);
-                } else {
-                    Skills.push(p, attacker, 1.0f, 0.2);
-                }
-            }
-        }
-        p.serverLevel().sendParticles(ParticleTypes.CRIT, p.getX(), p.getY() + 1.2, p.getZ(), 15, 0.4, 0.4, 0.4, 0.4);
-        Skills.sound(p, SoundEvents.SHIELD_BLOCK, 1.0f, 1.4f);
-        Skills.actionBar(p, Component.translatable("msg.martialarts.parry").withStyle(ChatFormatting.GREEN));
-        Skills.addXp(p, d, 4);
-        MartialAdvancements.award(p, "perfect_parry");
-        d.dirty = true;
     }
 
     // ---------------------------------------------------------------- свитки в мире
@@ -211,53 +162,32 @@ public final class CombatEvents {
                 && src.is(DamageTypes.PLAYER_ATTACK)
                 && src.getEntity() instanceof ServerPlayer attacker
                 && src.getDirectEntity() == attacker
-                && attacker.getMainHandItem().isEmpty()) {
+                && HandWrapsItem.isFighting(attacker)) {
             MartialCapability.get(attacker).ifPresent(d ->
                     event.setAmount(Skills.onUnarmedHit(attacker, d, victim, event.getAmount())));
         }
 
-        // 2) защита в стойке
-        if (victim instanceof ServerPlayer p && (src.getEntity() != null || src.getDirectEntity() != null)) {
-            MartialCapability.get(p).ifPresent(d -> {
-                long now = p.level().getGameTime();
-                if (!d.isGuarding(now)) return;
-                float original = event.getAmount();
-                event.setAmount(original * 0.4f);
-                d.chi -= original * 1.5f;
-                if (d.chi <= 0) {
-                    d.chi = 0;
-                    d.guardEnd = now;
-                    ModNetwork.animate(p, "guard_broken");
-                    Skills.sound(p, SoundEvents.SHIELD_BREAK, 1.0f, 1.0f);
-                    Skills.actionBar(p, Component.translatable("msg.martialarts.guard_broken").withStyle(ChatFormatting.RED));
-                } else {
-                    Skills.sound(p, SoundEvents.SHIELD_BLOCK, 0.7f, 0.9f);
-                    Skills.addXp(p, d, 1);
-                }
-                d.dirty = true;
-            });
-        }
     }
 
     /** Опыт мастерства за победу голыми руками. */
     @SubscribeEvent
     public static void onLivingDeath(LivingDeathEvent event) {
         if (event.getSource().getEntity() instanceof ServerPlayer p
-                && p.getMainHandItem().isEmpty()
+                && HandWrapsItem.isFighting(p)
                 && event.getEntity() != p) {
             int xp = Math.max(2, (int) (event.getEntity().getMaxHealth() / 4));
             MartialCapability.get(p).ifPresent(d -> Skills.addXp(p, d, xp));
         }
     }
 
-    /** Муай-тай и стойка уменьшают отбрасывание. */
+    /** Муай-тай и дзюдо уменьшают отбрасывание. */
     @SubscribeEvent
     public static void onKnockBack(LivingKnockBackEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer p)) return;
         MartialCapability.get(p).ifPresent(d -> {
             float k = 1.0f;
             if (d.style == MartialStyle.MUAY_THAI) k *= 0.6f;
-            if (d.isGuarding(p.level().getGameTime())) k *= 0.3f;
+            if (d.style == MartialStyle.JUDO) k *= 0.75f;
             event.setStrength(event.getStrength() * k);
         });
     }

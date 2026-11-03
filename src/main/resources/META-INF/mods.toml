@@ -23,18 +23,11 @@ description='''${mod_description}'''
     ordering="NONE"
     side="BOTH"
 
-# анимации игрока — нужна только на клиенте
-[[dependencies.${mod_id}]]
-    modId="playeranimator"
-    mandatory=true
-    versionRange="[1.0,)"
-    ordering="NONE"
-    side="CLIENT"
 
-# Epic Fight — необязателен; если установлен, техники используют его анимации
+# Epic Fight — обязателен: мод его аддон
 [[dependencies.${mod_id}]]
     modId="epicfight"
-    mandatory=false
-    versionRange="[20.0,)"
+    mandatory=true
+    versionRange="[20.14,)"
     ordering="NONE"
     side="BOTH"

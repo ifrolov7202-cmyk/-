@@ -40,7 +40,6 @@ public class StyleScrollItem extends Item {
             MartialCapability.get(sp).ifPresent(d -> {
                 if (!d.isLearned(style)) {
                     d.learn(style);
-                    d.style = style;
                     if (!sp.getAbilities().instabuild) stack.shrink(1);
                     sp.sendSystemMessage(Component.translatable("msg.martialarts.learned", style.displayName())
                             .withStyle(ChatFormatting.GOLD));
@@ -48,9 +47,7 @@ public class StyleScrollItem extends Item {
                     Skills.addXp(sp, d, 10);
                     com.martialarts.skill.MartialAdvancements.check(sp, d);
                 } else {
-                    d.style = style;
-                    Skills.actionBar(sp, Component.translatable("msg.martialarts.style_selected", style.displayName()));
-                    Skills.sound(sp, SoundEvents.ARMOR_EQUIP_LEATHER, 1.0f, 1.0f);
+                    Skills.actionBar(sp, Component.translatable("msg.martialarts.already_learned", style.displayName()));
                 }
                 d.dirty = true;
                 ModNetwork.sync(sp);
@@ -65,6 +62,7 @@ public class StyleScrollItem extends Item {
         tooltip.add(Component.translatable("tooltip.martialarts.signature",
                 Component.translatable("sig.martialarts." + style.key())).withStyle(ChatFormatting.LIGHT_PURPLE));
         tooltip.add(Component.translatable("tooltip.martialarts.scroll_use").withStyle(ChatFormatting.DARK_GRAY));
+        tooltip.add(Component.translatable("tooltip.martialarts.scroll_wraps").withStyle(ChatFormatting.DARK_AQUA));
     }
 
     @Override

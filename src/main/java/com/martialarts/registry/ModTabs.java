@@ -13,8 +13,9 @@ public final class ModTabs {
 
     public static final RegistryObject<CreativeModeTab> MAIN = TABS.register("main", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.martialarts"))
-            .icon(() -> new ItemStack(ModItems.KARATE_SCROLL.get()))
+            .icon(() -> new ItemStack(ModItems.KARATE_WRAPS.get()))
             .displayItems((params, output) -> {
+                for (var wraps : ModItems.WRAPS) output.accept(wraps.get());
                 for (var scroll : ModItems.SCROLLS) output.accept(scroll.get());
                 output.accept(ModItems.TRAINING_BAG.get());
             })
