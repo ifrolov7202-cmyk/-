@@ -1,6 +1,5 @@
 package com.martialarts;
 
-import com.martialarts.compat.MartialEpicFight;
 import com.martialarts.data.MartialCapability;
 import com.martialarts.network.ModNetwork;
 import com.martialarts.registry.ModBlocks;
@@ -29,9 +28,6 @@ public class MartialArts {
 
         modBus.addListener(MartialCapability::register);
         modBus.addListener(this::commonSetup);
-        // Epic Fight: врождённый навык бинтов и тип оружия «бинты»
-        modBus.addListener(MartialEpicFight::onSkillBuild);
-        modBus.addListener(MartialEpicFight::onWeaponPresets);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, MartialConfig.SPEC);
     }

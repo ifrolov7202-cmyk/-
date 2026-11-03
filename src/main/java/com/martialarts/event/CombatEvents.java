@@ -23,7 +23,7 @@ import com.martialarts.MartialConfig;
 import com.martialarts.registry.ModItems;
 import com.martialarts.skill.MartialAdvancements;
 import com.martialarts.compat.MartialEpicFight;
-import com.martialarts.item.HandWrapsItem;
+import com.martialarts.skill.Fighting;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
@@ -162,7 +162,7 @@ public final class CombatEvents {
                 && src.is(DamageTypes.PLAYER_ATTACK)
                 && src.getEntity() instanceof ServerPlayer attacker
                 && src.getDirectEntity() == attacker
-                && HandWrapsItem.isFighting(attacker)) {
+                && Fighting.bareHanded(attacker)) {
             MartialCapability.get(attacker).ifPresent(d ->
                     event.setAmount(Skills.onUnarmedHit(attacker, d, victim, event.getAmount())));
         }
@@ -173,7 +173,7 @@ public final class CombatEvents {
     @SubscribeEvent
     public static void onLivingDeath(LivingDeathEvent event) {
         if (event.getSource().getEntity() instanceof ServerPlayer p
-                && HandWrapsItem.isFighting(p)
+                && Fighting.bareHanded(p)
                 && event.getEntity() != p) {
             int xp = Math.max(2, (int) (event.getEntity().getMaxHealth() / 4));
             MartialCapability.get(p).ifPresent(d -> Skills.addXp(p, d, xp));

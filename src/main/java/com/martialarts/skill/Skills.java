@@ -4,7 +4,6 @@ import com.martialarts.MartialConfig;
 import com.martialarts.data.MartialCapability;
 import com.martialarts.data.MartialData;
 import com.martialarts.data.MartialStyle;
-import com.martialarts.item.HandWrapsItem;
 import com.martialarts.network.ModNetwork;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
@@ -62,7 +61,7 @@ public final class Skills {
             return false;
         }
         if (d.cooldownEnd[skill.ordinal()] > now || d.flurryTicks > 0 || d.leapTicks > 0 || d.tornadoTicks > 0) return false;
-        if (!HandWrapsItem.isFighting(p)) {
+        if (!Fighting.bareHanded(p)) {
             actionBar(p, Component.translatable("msg.martialarts.empty_hand").withStyle(ChatFormatting.RED));
             return false;
         }
@@ -71,7 +70,6 @@ public final class Skills {
             actionBar(p, Component.translatable("msg.martialarts.no_chi").withStyle(ChatFormatting.AQUA));
             return false;
         }
-        d.style = HandWrapsItem.activeStyle(p, d);
 
         boolean used = switch (skill) {
             case POWER_STRIKE -> powerStrike(p, d);
@@ -450,12 +448,7 @@ public final class Skills {
 
     public static void tick(ServerPlayer p, MartialData d) {
         long now = p.level().getGameTime();
-        MartialStyle current = HandWrapsItem.activeStyle(p, d);
-        if (current != d.style) {
-            d.style = current;
-            d.passiveKey = Integer.MIN_VALUE;
-            d.dirty = true;
-        }
+
         float max = d.maxChi();
         if (d.chi > max) d.chi = max;
 
@@ -492,9 +485,9 @@ public final class Skills {
         if (d.dirty) ModNetwork.sync(p);
     }
 
-    /** Мастерство в бинтах или с пустой рукой: быстрее удары и бег. Бокс — ещё быстрее руки, кунг-фу — ноги. */
+    /** Мастерство с пустой рукой: быстрее удары и бег. Бокс — ещё быстрее руки, кунг-фу — ноги. */
     private static void updatePassives(ServerPlayer p, MartialData d) {
-        boolean on = MartialConfig.get(MartialConfig.PASSIVE_BONUSES, true) && HandWrapsItem.isFighting(p);
+        boolean on = MartialConfig.get(MartialConfig.PASSIVE_BONUSES, true) && Fighting.bareHanded(p);
         int key = on ? d.level * 16 + d.style.id : -1;
         if (key == d.passiveKey) return;
         d.passiveKey = key;
@@ -533,7 +526,7 @@ public final class Skills {
             for (Skill s : Skill.values()) {
                 if (s.requiredLevel == d.level) {
                     p.sendSystemMessage(Component.translatable("msg.martialarts.unlocked",
-                            s.displayName(), Component.translatable("hint.martialarts." + s.id)).withStyle(ChatFormatting.AQUA));
+                            s.displayName(), Component.keybind("key.martialarts." + s.id)).withStyle(ChatFormatting.AQUA));
                 }
             }
             sound(p, SoundEvents.PLAYER_LEVELUP, 0.8f, 1.3f);
@@ -541,6 +534,29 @@ public final class Skills {
         if (d.level >= MartialData.MAX_LEVEL) d.xp = 0;
         if (leveled) MartialAdvancements.check(p, d);
         d.dirty = true;
+    }
+
+    public static void cycleStyle(ServerPlayer p) {
+        MartialCapability.get(p).ifPresent(d -> {
+            MartialStyle[] all = MartialStyle.values();
+            if (d.learnedMask == 0) {
+                actionBar(p, Component.translatable("msg.martialarts.no_styles").withStyle(ChatFormatting.GRAY));
+                return;
+            }
+            int idx = d.style.ordinal();
+            for (int i = 1; i <= all.length; i++) {
+                MartialStyle s = all[(idx + i) % all.length];
+                if (d.isLearned(s)) {
+                    d.style = s;
+                    break;
+                }
+            }
+            d.passiveKey = Integer.MIN_VALUE;
+            actionBar(p, Component.translatable("msg.martialarts.style_selected", d.style.displayName()));
+            sound(p, SoundEvents.ARMOR_EQUIP_LEATHER, 1.0f, 1.0f);
+            d.dirty = true;
+            ModNetwork.sync(p);
+        });
     }
 
     // =====================================================================
