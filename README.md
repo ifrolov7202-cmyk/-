@@ -58,4 +58,4 @@
 ## Сборка
 
 Мод собирается автоматически на GitHub (Actions) при каждом изменении; готовый jar — в ветке `builds`.
-Вручную: Java 17, `gradlew build` → `build/libs/martialarts-3.0.0.jar` (на Windows — `build-mod.bat`).
+Вручную: Java 17, `gradlew build` → `build/libs/martialarts.jar` (на Windows — `build-mod.bat`).
