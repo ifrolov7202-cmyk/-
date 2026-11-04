@@ -18,7 +18,21 @@ jobs:
           distribution: temurin
           java-version: 17
       - name: Build
-        run: chmod +x gradlew && ./gradlew build --no-daemon
+        run: |
+          chmod +x gradlew
+          set -o pipefail
+          ./gradlew build --no-daemon --stacktrace 2>&1 | tee build.log
+      - name: Publish build log on failure
+        if: failure()
+        run: |
+          mkdir logout && cp build.log logout/ || true
+          cd logout
+          git init -q -b buildlog
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add .
+          git commit -qm "Build log ${GITHUB_SHA::7}"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" buildlog
       - uses: actions/upload-artifact@v4
         with:
           name: martialarts-jar
