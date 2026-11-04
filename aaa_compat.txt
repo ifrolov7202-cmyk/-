@@ -1,0 +1,112 @@
+Nightfall references 8 classes, 16 members
+  class mod/chloeprime/aaaparticles/api/client/EffectDefinition
+  class mod/chloeprime/aaaparticles/api/client/EffectRegistry
+  class mod/chloeprime/aaaparticles/api/client/effekseer/ParticleEmitter
+  class mod/chloeprime/aaaparticles/api/client/effekseer/ParticleEmitter$PreDrawCallback
+  class mod/chloeprime/aaaparticles/api/client/effekseer/ParticleEmitter$Type
+  class mod/chloeprime/aaaparticles/api/common/AAALevel
+  class mod/chloeprime/aaaparticles/api/common/ParticleEmitterInfo
+  class mod/chloeprime/aaaparticles/client/render/EffekRenderer
+  member mod/chloeprime/aaaparticles/api/client/EffectDefinition.play:()Lmod/chloeprime/aaaparticles/api/client/effekseer/ParticleEmitter;
+  member mod/chloeprime/aaaparticles/api/client/EffectRegistry.load:(Lnet/minecraft/resources/ResourceLocation;)Ljava/util/concurrent/CompletableFuture;
+  member mod/chloeprime/aaaparticles/api/client/effekseer/ParticleEmitter$Type.WORLD:Lmod/chloeprime/aaaparticles/api/client/effekseer/ParticleEmitter$Type;
+  member mod/chloeprime/aaaparticles/api/client/effekseer/ParticleEmitter.addPreDrawCallback:(Lmod/chloeprime/aaaparticles/api/client/effekseer/ParticleEmitter$PreDrawCallback;)V
+  member mod/chloeprime/aaaparticles/api/client/effekseer/ParticleEmitter.exists:()Z
+  member mod/chloeprime/aaaparticles/api/client/effekseer/ParticleEmitter.setPosition:(FFF)V
+  member mod/chloeprime/aaaparticles/api/client/effekseer/ParticleEmitter.setScale:(FFF)V
+  member mod/chloeprime/aaaparticles/api/client/effekseer/ParticleEmitter.stop:()V
+  member mod/chloeprime/aaaparticles/api/common/AAALevel.addParticle:(Lnet/minecraft/world/level/Level;DLmod/chloeprime/aaaparticles/api/common/ParticleEmitterInfo;)V
+  member mod/chloeprime/aaaparticles/api/common/AAALevel.addParticle:(Lnet/minecraft/world/level/Level;ZLmod/chloeprime/aaaparticles/api/common/ParticleEmitterInfo;)V
+  member mod/chloeprime/aaaparticles/api/common/ParticleEmitterInfo.bindOnEntity:(Lnet/minecraft/world/entity/Entity;)Lmod/chloeprime/aaaparticles/api/common/ParticleEmitterInfo;
+  member mod/chloeprime/aaaparticles/api/common/ParticleEmitterInfo.create:(Lnet/minecraft/world/level/Level;Lnet/minecraft/resources/ResourceLocation;)Lmod/chloeprime/aaaparticles/api/common/ParticleEmitterInfo;
+  member mod/chloeprime/aaaparticles/api/common/ParticleEmitterInfo.parameter:(IF)Lmod/chloeprime/aaaparticles/api/common/ParticleEmitterInfo;
+  member mod/chloeprime/aaaparticles/api/common/ParticleEmitterInfo.position:(DDD)Lmod/chloeprime/aaaparticles/api/common/ParticleEmitterInfo;
+  member mod/chloeprime/aaaparticles/api/common/ParticleEmitterInfo.rotation:(FFF)Lmod/chloeprime/aaaparticles/api/common/ParticleEmitterInfo;
+  member mod/chloeprime/aaaparticles/api/common/ParticleEmitterInfo.scale:(F)Lmod/chloeprime/aaaparticles/api/common/ParticleEmitterInfo;
+
+== aaa_particles-1.20.1-1.0.7-forge.jar [aaa_particles 1.20.1-1.0.7]: missing classes 3, missing members 1
+   - class mod/chloeprime/aaaparticles/api/client/EffectDefinition
+   - class mod/chloeprime/aaaparticles/api/client/EffectRegistry
+   - class mod/chloeprime/aaaparticles/api/client/effekseer/ParticleEmitter$Type
+   - member mod/chloeprime/aaaparticles/api/common/ParticleEmitterInfo.parameter:(IF)Lmod/chloeprime/aaaparticles/api/common/ParticleEmitterInfo;
+
+== aaa_particles-1.20.1-1.0.8-forge.jar [aaa_particles 1.20.1-1.0.8]: missing classes 3, missing members 1
+   - class mod/chloeprime/aaaparticles/api/client/EffectDefinition
+   - class mod/chloeprime/aaaparticles/api/client/EffectRegistry
+   - class mod/chloeprime/aaaparticles/api/client/effekseer/ParticleEmitter$Type
+   - member mod/chloeprime/aaaparticles/api/common/ParticleEmitterInfo.parameter:(IF)Lmod/chloeprime/aaaparticles/api/common/ParticleEmitterInfo;
+
+== aaa_particles-1.20.1-1.2.0-forge.jar [aaa_particles 1.20.1-1.2.0]: missing classes 2, missing members 1
+   - class mod/chloeprime/aaaparticles/api/client/EffectDefinition
+   - class mod/chloeprime/aaaparticles/api/client/EffectRegistry
+   - member mod/chloeprime/aaaparticles/api/common/ParticleEmitterInfo.parameter:(IF)Lmod/chloeprime/aaaparticles/api/common/ParticleEmitterInfo;
+
+== aaa_particles-1.20.1-1.2.1-forge.jar [aaa_particles 1.20.1-1.2.1]: missing classes 2, missing members 1
+   - class mod/chloeprime/aaaparticles/api/client/EffectDefinition
+   - class mod/chloeprime/aaaparticles/api/client/EffectRegistry
+   - member mod/chloeprime/aaaparticles/api/common/ParticleEmitterInfo.parameter:(IF)Lmod/chloeprime/aaaparticles/api/common/ParticleEmitterInfo;
+
+== aaa_particles-1.20.1-1.2.2-forge.jar [aaa_particles 1.20.1-1.2.2]: missing classes 2, missing members 1
+   - class mod/chloeprime/aaaparticles/api/client/EffectDefinition
+   - class mod/chloeprime/aaaparticles/api/client/EffectRegistry
+   - member mod/chloeprime/aaaparticles/api/common/ParticleEmitterInfo.parameter:(IF)Lmod/chloeprime/aaaparticles/api/common/ParticleEmitterInfo;
+
+== aaa_particles-1.20.1-1.3.0b1-forge.jar [aaa_particles 1.20.1-1.3.0b1]: missing classes 2, missing members 0
+   - class mod/chloeprime/aaaparticles/api/client/EffectDefinition
+   - class mod/chloeprime/aaaparticles/api/client/EffectRegistry
+
+== aaa_particles-1.20.1-1.3.1-forge.jar [aaa_particles 1.20.1-1.3.1]: missing classes 2, missing members 0
+   - class mod/chloeprime/aaaparticles/api/client/EffectDefinition
+   - class mod/chloeprime/aaaparticles/api/client/EffectRegistry
+
+== aaa_particles-1.20.1-1.4.0-forge.jar [aaa_particles 1.20.1-1.4.0]: missing classes 2, missing members 0
+   - class mod/chloeprime/aaaparticles/api/client/EffectDefinition
+   - class mod/chloeprime/aaaparticles/api/client/EffectRegistry
+
+== aaa_particles-1.20.1-1.4.10-forge.jar [aaa_particles 1.20.1-1.4.10]: missing classes 2, missing members 0
+   - class mod/chloeprime/aaaparticles/api/client/EffectDefinition
+   - class mod/chloeprime/aaaparticles/api/client/EffectRegistry
+
+== aaa_particles-1.20.1-1.4.11-forge.jar [aaa_particles 1.20.1-1.4.11]: missing classes 2, missing members 0
+   - class mod/chloeprime/aaaparticles/api/client/EffectDefinition
+   - class mod/chloeprime/aaaparticles/api/client/EffectRegistry
+
+== aaa_particles-1.20.1-1.4.3-forge.jar [aaa_particles 1.20.1-1.4.3]: missing classes 2, missing members 0
+   - class mod/chloeprime/aaaparticles/api/client/EffectDefinition
+   - class mod/chloeprime/aaaparticles/api/client/EffectRegistry
+
+== aaa_particles-1.20.1-1.4.4-forge.jar [aaa_particles 1.20.1-1.4.4]: missing classes 2, missing members 0
+   - class mod/chloeprime/aaaparticles/api/client/EffectDefinition
+   - class mod/chloeprime/aaaparticles/api/client/EffectRegistry
+
+== aaa_particles-1.20.1-1.4.5-forge.jar [aaa_particles 1.20.1-1.4.5]: missing classes 2, missing members 0
+   - class mod/chloeprime/aaaparticles/api/client/EffectDefinition
+   - class mod/chloeprime/aaaparticles/api/client/EffectRegistry
+
+== aaa_particles-1.20.1-1.4.6-forge.jar [aaa_particles 1.20.1-1.4.6]: missing classes 2, missing members 0
+   - class mod/chloeprime/aaaparticles/api/client/EffectDefinition
+   - class mod/chloeprime/aaaparticles/api/client/EffectRegistry
+
+== aaa_particles-1.20.1-1.4.7-forge.jar [aaa_particles 1.20.1-1.4.7]: missing classes 2, missing members 0
+   - class mod/chloeprime/aaaparticles/api/client/EffectDefinition
+   - class mod/chloeprime/aaaparticles/api/client/EffectRegistry
+
+== aaa_particles-1.20.1-1.4.8-forge.jar [aaa_particles 1.20.1-1.4.8]: missing classes 2, missing members 0
+   - class mod/chloeprime/aaaparticles/api/client/EffectDefinition
+   - class mod/chloeprime/aaaparticles/api/client/EffectRegistry
+
+== aaa_particles-1.20.1-1.4.9-forge.jar [aaa_particles 1.20.1-1.4.9]: missing classes 2, missing members 0
+   - class mod/chloeprime/aaaparticles/api/client/EffectDefinition
+   - class mod/chloeprime/aaaparticles/api/client/EffectRegistry
+
+== aaa_particles-forge-1.20.1-2.0.0.jar [architectury 9.2.14]: missing classes 0, missing members 1
+   - member mod/chloeprime/aaaparticles/api/client/EffectRegistry.load:(Lnet/minecraft/resources/ResourceLocation;)Ljava/util/concurrent/CompletableFuture;
+
+== aaa_particles-forge-1.20.1-2.0.1.jar [architectury 9.2.14]: missing classes 0, missing members 1
+   - member mod/chloeprime/aaaparticles/api/client/EffectRegistry.load:(Lnet/minecraft/resources/ResourceLocation;)Ljava/util/concurrent/CompletableFuture;
+
+== aaa_particles-forge-1.20.1-2.1.0.jar [architectury 9.2.14]: missing classes 0, missing members 0
+
+== aaa_particles-forge-1.20.1-2.2.0.jar [architectury 9.2.14]: missing classes 0, missing members 0
+
+== aaa_particles-forge-1.20.1-2.2.3.jar [architectury 9.2.14]: missing classes 0, missing members 0
