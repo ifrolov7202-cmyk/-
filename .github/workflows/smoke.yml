@@ -1,0 +1,64 @@
+name: Smoke test server
+
+on:
+  workflow_dispatch:
+    inputs:
+      extra:
+        description: "Load Battle Arts and Weapons of Miracles too"
+        default: "true"
+
+permissions:
+  contents: write
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Resolve optional mod versions
+        run: |
+          EXTRA=""
+          if [ "${{ github.event.inputs.extra }}" = "true" ]; then
+            BAV=$(curl -fsSL "https://api.modrinth.com/v2/project/Dd6vT4jF/version" | python3 -c "import json,sys; d=json.load(sys.stdin); print(next((v['id'] for v in d if v['version_number'].startswith('20.14.16.10') and 'forge' in v['loaders']), ''))")
+            echo "Battle Arts version id: $BAV"
+            [ -n "$BAV" ] && EXTRA="$EXTRA -PbaVersion=$BAV"
+            EXTRA="$EXTRA -PwomVersion=2.0.171-mc1.20.1-forge"
+          fi
+          echo "EXTRA=-PsmokeMods=true $EXTRA" >> $GITHUB_ENV
+      - name: Run dedicated server
+        run: |
+          chmod +x gradlew
+          mkdir -p run out
+          echo "eula=true" > run/eula.txt
+          printf 'level-type=minecraft\\:flat\nonline-mode=false\nspawn-protection=0\nmax-tick-time=-1\nview-distance=4\n' > run/server.properties
+          ./gradlew runServer --no-daemon $EXTRA > out/server.log 2>&1 &
+          for i in $(seq 1 300); do
+            if grep -q 'Done (' run/logs/latest.log 2>/dev/null; then echo STARTED > out/result.txt; break; fi
+            if grep -q 'BUILD FAILED\|Crash report saved\|Failed to start the minecraft server\|Exception in server tick loop' out/server.log 2>/dev/null; then echo FAILED > out/result.txt; break; fi
+            sleep 5
+          done
+          [ -f out/result.txt ] || echo TIMEOUT > out/result.txt
+          sleep 15
+          pkill -f GradleWrapperMain || true
+          pkill -f java || true
+          sleep 5
+          cp run/logs/latest.log out/ 2>/dev/null || true
+          cp -r run/crash-reports out/ 2>/dev/null || true
+          cp run/config/ba_martialarts-common.toml out/ 2>/dev/null || true
+          grep -n "ba_martialarts\|ERROR\|Exception\|Mixin\|mixin" out/server.log | grep -v "DEBUG.*mixin.*Loaded\|TRACE" | head -400 > out/summary.txt || true
+          cat out/result.txt
+      - name: Publish logs to 'smoke' branch
+        if: always()
+        run: |
+          cd out
+          git init -q -b smoke
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add .
+          git commit -qm "Smoke ${GITHUB_SHA::7}"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" smoke
