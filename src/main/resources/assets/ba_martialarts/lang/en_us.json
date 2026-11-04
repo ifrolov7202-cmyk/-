@@ -49,5 +49,7 @@
   "advancements.ba_martialarts.unconscious_fighter.title": "Unconscious Fighter",
   "advancements.ba_martialarts.unconscious_fighter.description": "Ultra Instinct saved you on the brink of defeat",
   "advancements.ba_martialarts.untouchable.title": "Untouchable",
-  "advancements.ba_martialarts.untouchable.description": "Dodge 10 attacks during one Ultra Instinct"
+  "advancements.ba_martialarts.untouchable.description": "Dodge 10 attacks during one Ultra Instinct",
+  "msg.ba_martialarts.rush": "Rush ×%s",
+  "msg.ba_martialarts.rush_tired": "Out of breath: no stamina left"
 }

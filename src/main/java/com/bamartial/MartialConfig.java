@@ -10,6 +10,8 @@ public final class MartialConfig {
     public static final ForgeConfigSpec.DoubleValue DAMAGE_MULTIPLIER;
     public static final ForgeConfigSpec.BooleanValue AUTO_AIM;
     public static final ForgeConfigSpec.BooleanValue OTHER_MOD_ANIMATIONS;
+    public static final ForgeConfigSpec.BooleanValue RUSH_ENABLED;
+    public static final ForgeConfigSpec.DoubleValue RUSH_STAMINA;
     public static final ForgeConfigSpec.IntValue UI_DURATION;
     public static final ForgeConfigSpec.DoubleValue UI_DODGE_CHANCE;
     public static final ForgeConfigSpec.BooleanValue UI_AUTO_TRIGGER;
@@ -27,6 +29,10 @@ public final class MartialConfig {
                 .define("autoAim", true);
         OTHER_MOD_ANIMATIONS = b.comment("Брать анимации ударов из Weapons of Miracles и Epic Fight - Nightfall, если они установлены (нужен перезапуск) / Use Weapons of Miracles and Nightfall animations when installed (restart required)")
                 .define("otherModAnimations", true);
+        RUSH_ENABLED = b.comment("Зажатая атака голой рукой — серия быстрых ударов, пока кнопка зажата и есть выносливость / Holding attack bare-handed performs a rush of strikes while stamina lasts")
+                .define("holdAttackRush", true);
+        RUSH_STAMINA = b.comment("Выносливость Epic Fight за один удар серии / Epic Fight stamina per rush strike")
+                .defineInRange("rushStaminaPerStrike", 0.8, 0.0, 10.0);
         b.pop();
         b.push("ultra_instinct");
         UI_DURATION = b.comment("Длительность Ультра инстинкта, секунд / Ultra Instinct duration, seconds")

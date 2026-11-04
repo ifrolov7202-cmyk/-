@@ -53,6 +53,9 @@ public final class Techniques {
         long counterAt;
         StyleKind counterKind = StyleKind.BOXING;
         long judoCounterReady;
+        boolean rush;
+        int rushStrikes;
+        long rushNext;
     }
 
     private static final Map<UUID, State> STATES = new HashMap<>();
@@ -73,10 +76,91 @@ public final class Techniques {
         if (event.phase != TickEvent.Phase.END || event.side != LogicalSide.SERVER) return;
         if (!(event.player instanceof ServerPlayer p)) return;
         State s = STATES.get(p.getUUID());
-        if (s == null || s.counterTarget < 0 || p.level().getGameTime() < s.counterAt) return;
+        if (s == null) return;
+        if (s.rush) tickRush(p, s);
+        if (s.counterTarget < 0 || p.level().getGameTime() < s.counterAt) return;
         int id = s.counterTarget;
         s.counterTarget = -1;
         performCounter(p, s.counterKind, p.level().getEntity(id));
+    }
+
+    // =====================================================================
+    //  Серия ударов при зажатой атаке (ЛКМ): пока кнопка зажата и есть выносливость
+    // =====================================================================
+
+    /** Клиент сообщил: атака зажата / отпущена. */
+    public static void setRush(ServerPlayer p, boolean holding) {
+        State s = state(p);
+        if (holding) {
+            if (s.rush || !MartialConfig.get(MartialConfig.RUSH_ENABLED, true)) return;
+            s.rush = true;
+            s.rushStrikes = 0;
+            s.rushNext = p.level().getGameTime();
+        } else if (s.rush) {
+            endRush(p, s, true);
+        }
+    }
+
+    private static void tickRush(ServerPlayer p, State s) {
+        ServerPlayerPatch sp = EpicFightCapabilities.getEntityPatch(p, ServerPlayerPatch.class);
+        MartialBattleStyle style = MartialSkills.style(p);
+        if (sp == null || style == null || !sp.isEpicFightMode() || !p.isAlive() || !p.getMainHandItem().isEmpty()) {
+            s.rush = false;
+            return;
+        }
+        long now = p.level().getGameTime();
+        if (now < s.rushNext) return;
+        var state = sp.getEntityState();
+        // оглушён или сбит — ждём; занят другим приёмом — ждём, пока закончит
+        if (state.hurt() || state.knockDown() || (!state.canBasicAttack() && !inRush(sp))) {
+            s.rushNext = now + 1;
+            return;
+        }
+        float cost = (float) MartialConfig.get(MartialConfig.RUSH_STAMINA, 0.8);
+        if (sp.getStamina() < cost) {
+            endRush(p, s, false);
+            actionBar(p, Component.translatable("msg.ba_martialarts.rush_tired").withStyle(ChatFormatting.GRAY));
+            return;
+        }
+        AnimationManager.AnimationAccessor<? extends AttackAnimation> anim = MartialMoves.rush(style.getKind(), s.rushStrikes);
+        if (anim == null) {
+            s.rush = false;
+            return;
+        }
+        sp.playAnimationSynchronized(anim, 0.0F);
+        sp.setStamina(sp.getStamina() - cost);
+        sp.setStaminaRegenAwaitTicks(Math.max(sp.getStaminaRegenAwaitTicks(), 20));
+        s.rushStrikes++;
+        s.rushNext = now + MartialMoves.rushInterval(style.getKind());
+        actionBar(p, Component.translatable("msg.ba_martialarts.rush", s.rushStrikes).withStyle(ChatFormatting.GOLD));
+    }
+
+    /** Конец серии. Отпустил кнопку после 5+ ударов — завершающий удар стиля. */
+    private static void endRush(ServerPlayer p, State s, boolean released) {
+        s.rush = false;
+        int strikes = s.rushStrikes;
+        s.rushStrikes = 0;
+        if (!released || strikes < 5) return;
+        ServerPlayerPatch sp = EpicFightCapabilities.getEntityPatch(p, ServerPlayerPatch.class);
+        MartialBattleStyle style = MartialSkills.style(p);
+        if (sp == null || style == null || !sp.isEpicFightMode() || !p.getMainHandItem().isEmpty()) return;
+        var state = sp.getEntityState();
+        if (state.hurt() || state.knockDown()) return;
+        AnimationManager.AnimationAccessor<? extends AttackAnimation> finisher = MartialMoves.counter(style.getKind());
+        if (finisher == null || sp.getStamina() < 1.0F) return;
+        sp.playAnimationSynchronized(finisher, 0.0F);
+        sp.setStamina(sp.getStamina() - 1.0F);
+        sp.updateEntityState();
+    }
+
+    /** Сейчас идёт удар серии (следующий можно начинать сразу). */
+    private static boolean inRush(ServerPlayerPatch sp) {
+        try {
+            MartialMoves.Info info = MartialMoves.info(sp.getServerAnimator().animationPlayer.getRealAnimation());
+            return info != null && info.role() == MartialMoves.Role.BARRAGE;
+        } catch (Throwable t) {
+            return false;
+        }
     }
 
     // =====================================================================
@@ -162,6 +246,7 @@ public final class Techniques {
                 yield 0;
             }
             case FLURRY -> 0;
+            case BARRAGE -> 4;
         };
     }
 

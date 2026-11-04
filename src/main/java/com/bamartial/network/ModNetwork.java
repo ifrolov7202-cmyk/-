@@ -9,7 +9,7 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public final class ModNetwork {
-    private static final String VERSION = "3";
+    private static final String VERSION = "4";
 
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(BAMartial.MODID, "main"), () -> VERSION, VERSION::equals, VERSION::equals);
@@ -26,6 +26,11 @@ public final class ModNetwork {
                 .encoder(UltraInstinctPacket::encode)
                 .decoder(UltraInstinctPacket::new)
                 .consumerMainThread(UltraInstinctPacket::handle)
+                .add();
+        CHANNEL.messageBuilder(RushPacket.class, 2, NetworkDirection.PLAY_TO_SERVER)
+                .encoder(RushPacket::encode)
+                .decoder(RushPacket::new)
+                .consumerMainThread(RushPacket::handle)
                 .add();
     }
 

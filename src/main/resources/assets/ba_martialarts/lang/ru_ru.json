@@ -49,5 +49,7 @@
   "advancements.ba_martialarts.unconscious_fighter.title": "Боец без сознания",
   "advancements.ba_martialarts.unconscious_fighter.description": "Ультра инстинкт спас вас на грани поражения",
   "advancements.ba_martialarts.untouchable.title": "Неуловимый",
-  "advancements.ba_martialarts.untouchable.description": "Увернитесь от 10 атак за один Ультра инстинкт"
+  "advancements.ba_martialarts.untouchable.description": "Увернитесь от 10 атак за один Ультра инстинкт",
+  "msg.ba_martialarts.rush": "Серия ударов ×%s",
+  "msg.ba_martialarts.rush_tired": "Дыхание сбилось: кончилась выносливость"
 }

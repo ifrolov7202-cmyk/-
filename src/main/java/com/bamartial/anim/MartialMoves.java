@@ -24,6 +24,7 @@ import yesman.epicfight.api.animation.types.BasicAttackAnimation;
 import yesman.epicfight.api.animation.types.DashAttackAnimation;
 import yesman.epicfight.api.animation.types.DodgeAnimation;
 import yesman.epicfight.api.animation.types.StaticAnimation;
+import yesman.epicfight.api.asset.AssetAccessor;
 import yesman.epicfight.api.collider.Collider;
 import yesman.epicfight.api.utils.math.ValueModifier;
 import yesman.epicfight.gameasset.Armatures;
@@ -54,7 +55,7 @@ import java.util.function.Supplier;
 public final class MartialMoves {
     private static final Logger LOG = LogUtils.getLogger();
 
-    public enum Role { COMBO, FINISHER, DASH, AIR, ART, FLURRY }
+    public enum Role { COMBO, FINISHER, DASH, AIR, ART, FLURRY, BARRAGE }
 
     public record Info(Role role, StyleKind kind) {}
 
@@ -146,6 +147,8 @@ public final class MartialMoves {
     private static final Hit SPIN_FINAL = new Hit(2.2F, StunType.KNOCKDOWN, 10.0F, 0F, 6, EpicFightSounds.BLUNT_HIT_HARD, EpicFightSounds.WHOOSH_BIG, EpicFightParticles.AIR_BURST);
     private static final Hit THROW = new Hit(3.0F, StunType.KNOCKDOWN, 3.0F, 20F, 1, EpicFightSounds.BLUNT_HIT_HARD, EpicFightSounds.WHOOSH_BIG, EpicFightParticles.HIT_BLUNT);
     private static final Hit BARRAGE = new Hit(0.7F, StunType.HOLD, 2.0F, 0F, 2, EpicFightSounds.BLUNT_HIT, EpicFightSounds.WHOOSH_SMALL, EpicFightParticles.HIT_BLUNT);
+    /** Серия при зажатой атаке: слабые быстрые удары, держат врага в оглушении. */
+    private static final Hit RUSH = new Hit(0.6F, StunType.HOLD, 1.0F, 0F, 2, EpicFightSounds.BLUNT_HIT, EpicFightSounds.WHOOSH_SMALL, EpicFightParticles.HIT_BLUNT);
     private static final Hit BARRAGE_FINAL = new Hit(2.5F, StunType.KNOCKDOWN, 16.0F, 0F, 2, EpicFightSounds.BLUNT_HIT_HARD, EpicFightSounds.WHOOSH_BIG, EpicFightParticles.AIR_BURST);
 
     // =====================================================================
@@ -155,6 +158,7 @@ public final class MartialMoves {
     private static final Map<StyleKind, List<AnimationManager.AnimationAccessor<? extends AttackAnimation>>> COMBOS = new EnumMap<>(StyleKind.class);
     private static final Map<StyleKind, AnimationManager.AnimationAccessor<? extends AttackAnimation>> ARTS = new EnumMap<>(StyleKind.class);
     private static final Map<StyleKind, AnimationManager.AnimationAccessor<? extends AttackAnimation>> COUNTERS = new EnumMap<>(StyleKind.class);
+    private static final Map<StyleKind, List<AnimationManager.AnimationAccessor<? extends AttackAnimation>>> BARRAGES = new EnumMap<>(StyleKind.class);
     private static final Map<String, String> CHOSEN = new HashMap<>();
 
     public static AnimationManager.AnimationAccessor<AttackAnimation> FLURRY;
@@ -176,6 +180,7 @@ public final class MartialMoves {
         COMBOS.clear();
         ARTS.clear();
         COUNTERS.clear();
+        BARRAGES.clear();
 
         // ---------------- Бокс: джеб — кросс — хук — прямой ----------------
         combo(b, StyleKind.BOXING,
@@ -236,6 +241,20 @@ public final class MartialMoves {
                 dash(b, "judo/tackle", StyleKind.JUDO, WOM_SHOULDER, BA_LUNGE, EF_DASH),
                 air(b, "judo/air", StyleKind.JUDO, BA_HAMMER, EF_AIR));
         art(b, "art/ippon", StyleKind.JUDO, MartialColliders.HEAVY, THROW, THROW, 1.2F, WOM_SHOULDER, BA_HEAVY, EF_DASH);
+
+        // ---------------- Серия ударов при зажатой атаке ----------------
+        rush(b, "rush/boxing_left", StyleKind.BOXING, 1.6F, BA_JAB_L, EF_JAB_L);
+        rush(b, "rush/boxing_right", StyleKind.BOXING, 1.6F, BA_JAB_R, EF_JAB_R);
+        rush(b, "rush/karate_right", StyleKind.KARATE, 1.5F, BA_JAB_R, EF_JAB_R);
+        rush(b, "rush/karate_left", StyleKind.KARATE, 1.5F, BA_JAB_L, EF_JAB_L);
+        rush(b, "rush/muay_thai_left", StyleKind.MUAY_THAI, 1.5F, BA_JAB_L, EF_JAB_L);
+        rush(b, "rush/muay_thai_right", StyleKind.MUAY_THAI, 1.5F, BA_PUNCH_R, EF_JAB_R);
+        rush(b, "rush/kung_fu_right", StyleKind.KUNG_FU, 1.8F, BA_JAB_R, EF_JAB_R);
+        rush(b, "rush/kung_fu_left", StyleKind.KUNG_FU, 1.8F, BA_JAB_L, EF_JAB_L);
+        rush(b, "rush/taekwondo_kick_a", StyleKind.TAEKWONDO, 1.6F, WOM_KICK_1, BA_KICK, EF_KICK);
+        rush(b, "rush/taekwondo_kick_b", StyleKind.TAEKWONDO, 1.6F, WOM_KICK, BA_KICK, EF_KICK);
+        rush(b, "rush/judo_right", StyleKind.JUDO, 1.5F, BA_PUNCH_R, EF_JAB_R);
+        rush(b, "rush/judo_left", StyleKind.JUDO, 1.5F, BA_PUNCH_L, EF_JAB_L);
 
         // ---------------- Шквал ударов (все стили) ----------------
         FLURRY = b.nextAccessor("art/flurry_of_blows", acc -> {
@@ -322,6 +341,20 @@ public final class MartialMoves {
         });
         INFO.put(accessor.registryName(), new Info(Role.ART, kind));
         ARTS.put(kind, accessor);
+    }
+
+    /** Удар серии: хитбокс перед бойцом, высокая постоянная скорость (следующий удар прерывает предыдущий). */
+    private static void rush(AnimationManager.AnimationBuilder b, String id, StyleKind kind, float playSpeed, Clip... candidates) {
+        AnimationManager.AnimationAccessor<AttackAnimation> accessor = b.nextAccessor(id, acc -> {
+            Clip c = pick(id, candidates).withFixedSpeed(playSpeed);
+            AttackAnimation a = new AttackAnimation(c.convert, acc, Armatures.BIPED, phases(c, MartialColliders.BARRAGE, true));
+            hits(a, RUSH, RUSH);
+            speed(a, c);
+            a.setResourceLocation(c.namespace, c.path);
+            return a;
+        });
+        INFO.put(accessor.registryName(), new Info(Role.BARRAGE, kind));
+        BARRAGES.computeIfAbsent(kind, k -> new ArrayList<>()).add(accessor);
     }
 
     private static DodgeAnimation dodge(AnimationManager.AnimationAccessor<DodgeAnimation> acc, String id, Clip... candidates) {
@@ -460,12 +493,29 @@ public final class MartialMoves {
         return COUNTERS.get(kind);
     }
 
+    /** Удар серии при зажатой атаке (чередуются). */
+    public static AnimationManager.AnimationAccessor<? extends AttackAnimation> rush(StyleKind kind, int index) {
+        List<AnimationManager.AnimationAccessor<? extends AttackAnimation>> list = BARRAGES.get(kind);
+        if (list == null || list.isEmpty()) return null;
+        return list.get(Math.floorMod(index, list.size()));
+    }
+
+    /** Пауза между ударами серии, тиков. */
+    public static int rushInterval(StyleKind kind) {
+        return switch (kind) {
+            case KUNG_FU -> 3;
+            case TAEKWONDO -> 6;
+            case MUAY_THAI, JUDO -> 5;
+            default -> 4;
+        };
+    }
+
     public static boolean awakenAvailable() {
         return awakenAvailable && AWAKEN != null;
     }
 
     /** Что это за приём (по анимации из источника урона Epic Fight) или null. */
-    public static Info info(AnimationManager.AnimationAccessor<?> animation) {
+    public static Info info(AssetAccessor<?> animation) {
         if (animation == null) return null;
         return INFO.get(animation.registryName());
     }
