@@ -116,13 +116,7 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-    // Modrinth Maven — Battle Arts API
-    maven {
-        name = 'Modrinth'
-        url = 'https://api.modrinth.com/maven'
-        content { includeGroup 'maven.modrinth' }
-    }
-    // Curse Maven — Epic Fight
+    // Curse Maven — Epic Fight и Battle Arts API
     maven {
         name = 'Curse Maven'
         url = 'https://cursemaven.com'
@@ -149,7 +143,7 @@ dependencies {
     // Epic Fight — мод является его аддоном (в jar не входит, ставится отдельно)
     implementation fg.deobf("curse.maven:epic-fight-mod-405076:${epicfight_file_id}")
     // Battle Arts API — стили боя, боевые и взрывные искусства
-    implementation fg.deobf("maven.modrinth:battle-arts-api:${battle_arts_api_version}")
+    implementation fg.deobf("curse.maven:battle-arts-api-1091499:${battle_arts_api_file_id}")
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
