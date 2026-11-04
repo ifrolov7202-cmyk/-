@@ -14,33 +14,91 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
-      - name: Download and inspect jars
+      - name: Nightfall vs AAA Particles
         run: |
-          mkdir -p out jars
-          cd jars
-          dl() { curl -fsSL --retry 3 -o "$1.jar" "$2" || echo "FAILED $1 $2" >> ../out/failed.txt; }
-          dl wom171 "https://cdn.modrinth.com/data/oWx9p4ug/versions/nf0AyjKh/WeaponsOfMiracles-2.0.171-mc1.20.1-forge.jar"
-          dl wom "https://cursemaven.com/curse/maven/weapons-of-miracles-epicfight-918614/7477498/weapons-of-miracles-epicfight-918614-7477498.jar"
-          dl nightfall "https://cursemaven.com/curse/maven/epicfight-nightfall-1307848/7681377/epicfight-nightfall-1307848-7681377.jar"
-          for n in wom171 wom nightfall; do
-            d="x_$n"; mkdir -p "$d"; (cd "$d" && unzip -q -o "../$n.jar" || true)
-          done
-          # WoM 2.0.171: mods.toml + animations list
-          cat x_wom171/META-INF/mods.toml > ../out/wom171_mods.toml 2>/dev/null || true
-          find x_wom171 -path '*animmodels/animations*' -name '*.json' | sed 's#^x_wom171/##' | sort > ../out/wom171_animations.txt
-          javap -cp x_wom171 reascer.wom.gameasset.WOMAnimations > ../out/wom171_fields.txt 2>&1 || true
-          # bytecode of WOMAnimations (both versions) for kicks/punch/dodges
-          for n in wom171 wom; do
-            javap -c -p -constants -cp "x_$n" reascer.wom.gameasset.WOMAnimations > "../out/${n}_WOMAnimations_bytecode.txt" 2>&1 || true
-            javap -c -p -constants -cp "x_$n" reascer.wom.gameasset.colliders.WOMWeaponColliders > "../out/${n}_colliders_bytecode.txt" 2>&1 || true
-            javap -p -cp "x_$n" reascer.wom.animation.attacks.BasicMultipleAttackAnimation reascer.wom.animation.dodges.CancelableDodgeAnimation > "../out/${n}_types.txt" 2>&1 || true
-          done
-          # Nightfall: classes that mention dodge/step animation paths
-          grep -rla "perfect_dodge\|biped/dodge/step" x_nightfall --include=*.class | sed 's#^x_nightfall/##; s#\.class$##; s#/#.#g' > ../out/nightfall_dodge_classes.txt || true
+          mkdir -p out jars && cd jars
+          curl -fsSL -o nightfall.jar "https://cursemaven.com/curse/maven/epicfight-nightfall-1307848/7681377/epicfight-nightfall-1307848-7681377.jar"
+          mkdir -p x_nf && (cd x_nf && unzip -q -o ../nightfall.jar)
+          cat x_nf/META-INF/jarjar/metadata.json > ../out/nightfall_jarjar.json 2>/dev/null || true
+          # классы Nightfall, которые ссылаются на AAA Particles
+          grep -rla "aaaparticles" x_nf --include=*.class | sed 's#^x_nf/##; s#\.class$##; s#/#.#g' | sort > ../out/nf_classes_using_aaa.txt || true
+          wc -l ../out/nf_classes_using_aaa.txt
+          : > ../out/nf_aaa_refs.txt
           while read -r c; do
-            echo "=== $c"; javap -c -p -constants -cp x_nightfall "$c" 2>/dev/null
-          done < ../out/nightfall_dodge_classes.txt > ../out/nightfall_dodge_bytecode.txt || true
-          ls -la ../out
+            javap -v -p -cp x_nf "$c" 2>/dev/null | grep -o "[A-Za-z0-9_/$]*aaaparticles[A-Za-z0-9_/$]*\(\.[A-Za-z0-9_<>$\"]*:[^ ]*\)\?" >> ../out/nf_aaa_refs.txt || true
+          done < ../out/nf_classes_using_aaa.txt
+          sort -u ../out/nf_aaa_refs.txt -o ../out/nf_aaa_refs.txt
+          # как Nightfall проверяет наличие AAA Particles
+          grep -rla "aaa_particles\|aaaparticles" x_nf --include=*.class | head -50 | while read -r f; do strings "$f" | grep -i "aaa" | sed "s#^#$f: #"; done | sort -u > ../out/nf_aaa_strings.txt || true
+          grep -rl "aaa" x_nf/META-INF/*.toml x_nf/*.json 2>/dev/null > ../out/nf_meta_aaa.txt || true
+          # версии AAA Particles для 1.20.1 Forge
+          curl -fsSL "https://api.modrinth.com/v2/project/aaa-particles/version" -o ../out/aaa_versions.json
+          python3 - <<'EOF'
+          import json, urllib.request, os
+          d = json.load(open('../out/aaa_versions.json'))
+          rows = []
+          for v in d:
+              if '1.20.1' in v['game_versions'] and 'forge' in v['loaders']:
+                  f = next((f for f in v['files'] if f.get('primary')), v['files'][0])
+                  rows.append((v['version_number'], v['date_published'][:10], f['url'], f['filename'], [x.get('project_id') for x in v['dependencies'] if x['dependency_type']=='required']))
+          with open('../out/aaa_forge_versions.txt', 'w') as o:
+              for r in rows: o.write(f"{r[0]}\t{r[1]}\t{r[3]}\t{r[4]}\n")
+          os.makedirs('aaa', exist_ok=True)
+          for r in rows:
+              urllib.request.urlretrieve(r[2], 'aaa/' + r[3])
+          print(len(rows), 'forge versions downloaded')
+          EOF
+          ls aaa
+          # для каждой версии AAA Particles: есть ли все классы/члены, на которые ссылается Nightfall
+          python3 - <<'EOF'
+          import os, re, subprocess, zipfile
+          refs = [l.strip() for l in open('../out/nf_aaa_refs.txt') if l.strip()]
+          classes = sorted({r.split('.')[0] for r in refs})
+          members = sorted({r for r in refs if '.' in r})
+          out = open('../out/aaa_compat.txt', 'w')
+          out.write('Nightfall references %d classes, %d members\n' % (len(classes), len(members)))
+          for c in classes: out.write('  class ' + c + '\n')
+          for m in members: out.write('  member ' + m + '\n')
+          for jar in sorted(os.listdir('aaa')):
+              z = zipfile.ZipFile('aaa/' + jar)
+              names = set(z.namelist())
+              d = 'x_' + jar
+              os.makedirs(d, exist_ok=True)
+              z.extractall(d)
+              # jar-in-jar (forge версия иногда внутри)
+              inner = [n for n in names if n.startswith('META-INF/jarjar/') and n.endswith('.jar')]
+              for n in inner:
+                  zi = zipfile.ZipFile(os.path.join(d, n)); zi.extractall(d); names |= set(zi.namelist())
+              missing_c = [c for c in classes if c + '.class' not in names]
+              missing_m = []
+              cache = {}
+              for m in members:
+                  cls, rest = m.split('.', 1)
+                  name, desc = rest.split(':', 1)
+                  name = name.strip('"')
+                  if cls + '.class' not in names: continue
+                  if cls not in cache:
+                      cache[cls] = subprocess.run(['javap', '-p', '-s', os.path.join(d, cls + '.class')], capture_output=True, text=True).stdout
+                  txt = cache[cls]
+                  ok = False
+                  lines = txt.split('\n')
+                  for i, l in enumerate(lines):
+                      if 'descriptor: ' + desc in l and i > 0 and (name + '(' in lines[i-1] or (' ' + name + ';') in lines[i-1] or (name == '"<init>"' or name == '<init>')):
+                          ok = True; break
+                  if not ok: missing_m.append(m)
+              toml = ''
+              for n in ('META-INF/mods.toml',):
+                  p = os.path.join(d, n)
+                  if os.path.exists(p):
+                      t = open(p, encoding='utf-8', errors='replace').read()
+                      mv = re.search(r'modId\s*=\s*"([^"]+)"[\s\S]*?version\s*=\s*"([^"]+)"', t)
+                      toml = (mv.group(1) + ' ' + mv.group(2)) if mv else ''
+              out.write('\n== %s [%s]: missing classes %d, missing members %d\n' % (jar, toml, len(missing_c), len(missing_m)))
+              for c in missing_c[:15]: out.write('   - class ' + c + '\n')
+              for m in missing_m[:25]: out.write('   - member ' + m + '\n')
+          out.close()
+          EOF
+          cat ../out/aaa_compat.txt | head -150
       - name: Publish results to 'inspect' branch
         if: always()
         run: |
@@ -49,5 +107,5 @@ jobs:
           git config user.name "github-actions"
           git config user.email "github-actions@users.noreply.github.com"
           git add .
-          git commit -qm "Inspect results 2"
+          git commit -qm "Inspect Nightfall / AAA Particles"
           git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" inspect
