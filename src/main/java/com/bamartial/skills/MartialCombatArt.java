@@ -6,10 +6,12 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import yesman.epicfight.skill.SkillBuilder;
 import yesman.epicfight.skill.SkillContainer;
+import yesman.epicfight.world.capabilities.entitypatch.player.ServerPlayerPatch;
 import yesman.epicfight.world.capabilities.item.CapabilityItem;
 
 /**
- * Боевое искусство стиля (клавиша Battle Arts «Combat Art», по умолчанию Z). Тратит шкалу метра.
+ * Боевое искусство стиля (клавиша Battle Arts «Combat Art», по умолчанию Z) — атакующая анимация Epic Fight
+ * с собственным хитбоксом, оглушением и импактом. Тратит одно деление шкалы метра.
  */
 public class MartialCombatArt extends CombatArt {
     private final StyleKind kind;
@@ -48,10 +50,11 @@ public class MartialCombatArt extends CombatArt {
 
     @Override
     public void executeOnServer(SkillContainer container, FriendlyByteBuf args) {
-        ServerPlayer player = container.getServerExecutor().getOriginal();
+        ServerPlayerPatch patch = container.getServerExecutor();
+        ServerPlayer player = patch.getOriginal();
         boolean free = UltraInstinct.isActive(player);
-        if (Techniques.signature(player, kind)) {
-            float before = MartialSkills.meter(MartialSkills.styleContainer(player));
+        float before = MartialSkills.meter(MartialSkills.styleContainer(player));
+        if (Techniques.performArt(patch, kind)) {
             super.executeOnServer(container, args);
             if (free) refundMeter(player, before);
         }

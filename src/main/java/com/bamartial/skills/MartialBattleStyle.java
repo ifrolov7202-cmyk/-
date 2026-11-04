@@ -1,9 +1,13 @@
 package com.bamartial.skills;
 
+import com.bamartial.anim.MartialMoves;
 import net.forixaim.battle_arts_api.battle_arts_skills.BattleArtsSkillSlots;
 import net.forixaim.battle_arts_api.battle_arts_skills.CoreAPIDataKeys;
 import net.forixaim.battle_arts_api.battle_arts_skills.battle_style.BattleStyle;
 import net.minecraft.server.level.ServerPlayer;
+import yesman.epicfight.api.animation.AnimationManager;
+import yesman.epicfight.api.animation.LivingMotions;
+import yesman.epicfight.api.animation.types.StaticAnimation;
 import yesman.epicfight.api.utils.math.ValueModifier;
 import yesman.epicfight.network.EpicFightNetworkManager;
 import yesman.epicfight.network.server.SPChangeSkill;
@@ -18,10 +22,12 @@ import yesman.epicfight.world.entity.eventlistener.PlayerEventListener;
 import java.util.UUID;
 
 /**
- * Рукопашный стиль боя Battle Arts. Пока стиль надет:
- *  - удары голой рукой сильнее и копят шкалу метра Battle Arts;
- *  - каждый 3-й удар подряд — добивание стиля;
- *  - в слот боевого искусства (Z) ставится техника стиля, в слот взрывного (C) — «Шквал ударов».
+ * Рукопашный стиль боя Battle Arts. Пока стиль надет и руки пусты:
+ *  - обычная атака Epic Fight — собственная связка ударов стиля (4 удара, рывок, удар в прыжке);
+ *    4-й удар — добивающий, с долгим оглушением; удары копят шкалу метра Battle Arts;
+ *  - в слот боевого искусства (Z) ставится техника стиля, в слот взрывного (C) — «Шквал ударов»,
+ *    в слот абсолютного (V) — «Ультра инстинкт»;
+ *  - с Battle Arts — боевая стойка вместо обычной.
  */
 public class MartialBattleStyle extends BattleStyle {
     private static final UUID EVENT_UUID = UUID.fromString("0b6c8d2e-5a1f-4b7e-9c3d-2f8e1a6b7c01");
@@ -39,6 +45,11 @@ public class MartialBattleStyle extends BattleStyle {
 
     @Override
     public void onInitiate(SkillContainer container) {
+        // боевая стойка Battle Arts для голых рук (её применяет Battle Arts API)
+        if (this.unarmedLivingMotions.isEmpty()) {
+            AnimationManager.AnimationAccessor<? extends StaticAnimation> stance = MartialMoves.stance(kind);
+            if (stance != null) this.unarmedLivingMotions.put(LivingMotions.IDLE, stance);
+        }
         super.onInitiate(container);
         PlayerPatch<?> patch = container.getExecutor();
 
@@ -56,17 +67,21 @@ public class MartialBattleStyle extends BattleStyle {
                 event.attachValueModifier(ValueModifier.adder(kind.unarmedBonus));
             }
         });
-        // метр, комбо и добивания
+        // попадания приёмов: метр и особые эффекты техник
         listener.addEventListener(PlayerEventListener.EventType.DEAL_DAMAGE_EVENT_HURT, EVENT_UUID, event -> {
             ServerPlayer player = event.getPlayerPatch().getOriginal();
-            if (Techniques.inTechnique || !player.getMainHandItem().isEmpty()) return;
-            float meter = Techniques.onUnarmedHit(player, kind, event.getTarget(), event.getForgeEvent());
+            if (!player.getMainHandItem().isEmpty()) return;
+            float meter = Techniques.onHit(player, event.getTarget(), event.getDamageSource(), event.getForgeEvent());
             addMeter(container, meter);
         });
+        // Ультра инстинкт: уклонение шагом Epic Fight
+        listener.addEventListener(PlayerEventListener.EventType.TAKE_DAMAGE_EVENT_ATTACK, EVENT_UUID, event ->
+                UltraInstinct.tryDodge(event.getPlayerPatch(), event, kind));
         // дзюдо: контрбросок после уклонения
         listener.addEventListener(PlayerEventListener.EventType.DODGE_SUCCESS_EVENT, EVENT_UUID, event -> {
-            if (kind == StyleKind.JUDO) {
-                Techniques.judoCounter(event.getPlayerPatch().getOriginal(), event.getDamageSource().getEntity());
+            ServerPlayer player = event.getPlayerPatch().getOriginal();
+            if (kind == StyleKind.JUDO && !UltraInstinct.isActive(player) && player.getMainHandItem().isEmpty()) {
+                Techniques.judoCounter(player, event.getDamageSource().getEntity());
                 addMeter(container, 30);
             }
         });
@@ -78,6 +93,7 @@ public class MartialBattleStyle extends BattleStyle {
         PlayerEventListener listener = patch.getEventListener();
         listener.removeListener(PlayerEventListener.EventType.MODIFY_DAMAGE_EVENT, EVENT_UUID);
         listener.removeListener(PlayerEventListener.EventType.DEAL_DAMAGE_EVENT_HURT, EVENT_UUID);
+        listener.removeListener(PlayerEventListener.EventType.TAKE_DAMAGE_EVENT_ATTACK, EVENT_UUID);
         listener.removeListener(PlayerEventListener.EventType.DODGE_SUCCESS_EVENT, EVENT_UUID);
 
         if (patch instanceof ServerPlayerPatch server) {

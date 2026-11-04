@@ -6,11 +6,12 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import yesman.epicfight.skill.SkillBuilder;
 import yesman.epicfight.skill.SkillContainer;
+import yesman.epicfight.world.capabilities.entitypatch.player.ServerPlayerPatch;
 import yesman.epicfight.world.capabilities.item.CapabilityItem;
 
 /**
  * «Шквал ударов» — взрывное искусство всех рукопашных стилей (клавиша Battle Arts «Burst Art», по умолчанию C):
- * 10 ударов за секунду по одной цели.
+ * серия из 8 ударов кулаками, держащая врага в оглушении, последний удар сбивает с ног.
  */
 public class FlurryBurstArt extends BurstArt {
     public FlurryBurstArt(SkillBuilder<? extends BurstArt> builder) {
@@ -37,10 +38,11 @@ public class FlurryBurstArt extends BurstArt {
 
     @Override
     public void executeOnServer(SkillContainer container, FriendlyByteBuf args) {
-        ServerPlayer player = container.getServerExecutor().getOriginal();
+        ServerPlayerPatch patch = container.getServerExecutor();
+        ServerPlayer player = patch.getOriginal();
         boolean free = UltraInstinct.isActive(player);
-        if (Techniques.flurry(player)) {
-            float before = MartialSkills.meter(MartialSkills.styleContainer(player));
+        float before = MartialSkills.meter(MartialSkills.styleContainer(player));
+        if (Techniques.performFlurry(patch)) {
             super.executeOnServer(container, args);
             if (free) MartialCombatArt.refundMeter(player, before);
         }

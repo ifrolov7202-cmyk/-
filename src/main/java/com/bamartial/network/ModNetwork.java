@@ -9,7 +9,7 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public final class ModNetwork {
-    private static final String VERSION = "2";
+    private static final String VERSION = "3";
 
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(BAMartial.MODID, "main"), () -> VERSION, VERSION::equals, VERSION::equals);
@@ -35,8 +35,9 @@ public final class ModNetwork {
         CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new UltraInstinctPacket(ticks));
     }
 
-    /** Проиграть анимацию Epic Fight на игроке у всех, кто его видит (только визуально). */
-    public static void animate(ServerPlayer player, String animation) {
-        CHANNEL.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> player), new AnimPacket(player.getId(), animation));
+    /** Клиентский эффект на игроке у всех, кто его видит (остаточный образ и т.п.). */
+    public static void fx(ServerPlayer player, String effect) {
+        if (player.connection == null) return;
+        CHANNEL.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> player), new AnimPacket(player.getId(), effect));
     }
 }

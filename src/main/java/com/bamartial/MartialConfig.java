@@ -8,7 +8,8 @@ import net.minecraftforge.common.ForgeConfigSpec;
 public final class MartialConfig {
     public static final ForgeConfigSpec SPEC;
     public static final ForgeConfigSpec.DoubleValue DAMAGE_MULTIPLIER;
-    public static final ForgeConfigSpec.IntValue FINISHER_EVERY;
+    public static final ForgeConfigSpec.BooleanValue AUTO_AIM;
+    public static final ForgeConfigSpec.BooleanValue OTHER_MOD_ANIMATIONS;
     public static final ForgeConfigSpec.IntValue UI_DURATION;
     public static final ForgeConfigSpec.DoubleValue UI_DODGE_CHANCE;
     public static final ForgeConfigSpec.BooleanValue UI_AUTO_TRIGGER;
@@ -20,10 +21,12 @@ public final class MartialConfig {
     static {
         ForgeConfigSpec.Builder b = new ForgeConfigSpec.Builder();
         b.push("combat");
-        DAMAGE_MULTIPLIER = b.comment("Множитель урона техник и добиваний / Damage multiplier for techniques and finishers")
+        DAMAGE_MULTIPLIER = b.comment("Множитель урона приёмов стилей / Damage multiplier for style moves")
                 .defineInRange("damageMultiplier", 1.0, 0.1, 10.0);
-        FINISHER_EVERY = b.comment("Каждый какой удар подряд — добивание стиля / Every Nth consecutive hit is a style finisher")
-                .defineInRange("finisherEvery", 3, 2, 10);
+        AUTO_AIM = b.comment("Боевые искусства и контрудары сами доворачивают бойца к ближайшему врагу впереди / Arts and counters turn you towards the nearest enemy in front")
+                .define("autoAim", true);
+        OTHER_MOD_ANIMATIONS = b.comment("Брать анимации ударов из Weapons of Miracles и Epic Fight - Nightfall, если они установлены (нужен перезапуск) / Use Weapons of Miracles and Nightfall animations when installed (restart required)")
+                .define("otherModAnimations", true);
         b.pop();
         b.push("ultra_instinct");
         UI_DURATION = b.comment("Длительность Ультра инстинкта, секунд / Ultra Instinct duration, seconds")

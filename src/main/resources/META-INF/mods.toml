@@ -43,3 +43,25 @@ description='''${mod_description}'''
     versionRange="[20.14,)"
     ordering="AFTER"
     side="BOTH"
+
+# Необязательная поддержка: анимации ударов ногами и уклонений берутся из этих модов, если они установлены
+[[dependencies.${mod_id}]]
+    modId="wom"
+    mandatory=false
+    versionRange="[0,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="efn"
+    mandatory=false
+    versionRange="[0,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="invincible"
+    mandatory=false
+    versionRange="[0,)"
+    ordering="AFTER"
+    side="BOTH"

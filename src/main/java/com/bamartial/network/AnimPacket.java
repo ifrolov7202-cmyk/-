@@ -8,7 +8,7 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.function.Supplier;
 
 /**
- * Сервер -> клиенты: проиграть анимацию на игроке (видят он сам и все, кто рядом).
+ * Сервер -> клиенты: клиентский эффект Epic Fight на сущности (остаточный образ и т.п.).
  */
 public class AnimPacket {
     private final int entityId;
@@ -32,6 +32,6 @@ public class AnimPacket {
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         // клиентский класс загружается только на клиенте
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () ->
-                com.bamartial.client.ClientAnimations.play(entityId, animation));
+                com.bamartial.client.ClientFx.play(entityId, animation));
     }
 }

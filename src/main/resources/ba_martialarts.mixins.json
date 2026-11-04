@@ -1,0 +1,12 @@
+{
+  "required": false,
+  "minVersion": "0.8",
+  "package": "com.bamartial.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "CapabilityItemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}
