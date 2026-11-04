@@ -12,6 +12,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.forgespi.language.IModFileInfo;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 import yesman.epicfight.api.animation.AnimationManager;
@@ -34,6 +35,8 @@ import yesman.epicfight.skill.SkillContainer;
 import yesman.epicfight.world.capabilities.entitypatch.player.PlayerPatch;
 import yesman.epicfight.world.damagesource.StunType;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
@@ -397,28 +400,39 @@ public final class MartialMoves {
 
     private static Clip pickOptional(String id, Clip... candidates) {
         boolean otherMods = MartialConfig.get(MartialConfig.OTHER_MOD_ANIMATIONS, true);
-        ResourceManager rm = null;
-        try {
-            rm = AnimationManager.getAnimationResourceManager();
-        } catch (Throwable ignored) {
-        }
         for (Clip c : candidates) {
             if (!EF.equals(c.namespace)) {
                 if (!ModList.get().isLoaded(c.namespace)) continue;
                 if (!otherMods && !BA.equals(c.namespace)) continue;
             }
-            if (rm != null) {
-                try {
-                    if (rm.getResource(c.file()).isEmpty()) continue;
-                } catch (Throwable t) {
-                    continue;
-                }
-            }
+            if (!exists(c)) continue;
             CHOSEN.put(id, c.toString());
             LOG.debug("[ba_martialarts] {} <- {}", id, c);
             return c;
         }
         return null;
+    }
+
+    /**
+     * Есть ли файл кадров в jar-файле мода. Проверяем сам файл мода, а не ресурсы: на выделенном сервере
+     * Epic Fight читает анимации прямо из jar, и выбор должен совпадать на сервере и у клиентов.
+     */
+    private static boolean exists(Clip c) {
+        try {
+            IModFileInfo info = ModList.get().getModFileById(c.namespace);
+            if (info != null) {
+                String[] segments = ("assets/" + c.namespace + "/animmodels/animations/" + c.path + ".json").split("/");
+                Path path = info.getFile().findResource(segments);
+                return Files.exists(path);
+            }
+        } catch (Throwable ignored) {
+        }
+        try {
+            ResourceManager rm = AnimationManager.getAnimationResourceManager();
+            return rm == null || rm.getResource(c.file()).isPresent();
+        } catch (Throwable t) {
+            return EF.equals(c.namespace);
+        }
     }
 
     // =====================================================================
