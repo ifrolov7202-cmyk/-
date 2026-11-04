@@ -77,8 +77,6 @@ minecraft {
             // нужно для запуска Epic Fight (миксины) в среде разработки
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-            // наш миксин (в готовом jar подключается через MANIFEST)
-            args '--mixin.config=ba_martialarts.mixins.json'
 
             mods {
                 "${mod_id}" {

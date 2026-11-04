@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       extra:
-        description: "Load Battle Arts and Weapons of Miracles too"
+        description: "Also load Battle Arts and Weapons of Miracles"
         default: "true"
 
 permissions:
@@ -15,43 +15,74 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
-      - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
-      - name: Resolve optional mod versions
+      - name: Get built mod
         run: |
-          EXTRA=""
-          if [ "${{ github.event.inputs.extra }}" = "true" ]; then
-            BAV=$(curl -fsSL "https://api.modrinth.com/v2/project/Dd6vT4jF/version" | python3 -c "import json,sys; d=json.load(sys.stdin); print(next((v['id'] for v in d if v['version_number'].startswith('20.14.16.10') and 'forge' in v['loaders']), ''))")
-            echo "Battle Arts version id: $BAV"
-            [ -n "$BAV" ] && EXTRA="$EXTRA -PbaVersion=$BAV"
-            EXTRA="$EXTRA -PwomVersion=2.0.171-mc1.20.1-forge"
-          fi
-          echo "EXTRA=-PsmokeMods=true $EXTRA" >> $GITHUB_ENV
-      - name: Run dedicated server
+          git clone -q --depth 1 -b builds "https://github.com/${{ github.repository }}.git" built
+          ls -la built
+      - name: Install Forge server and mods
         run: |
-          chmod +x gradlew
-          mkdir -p run out
-          echo "eula=true" > run/eula.txt
-          printf 'level-type=minecraft\\:flat\nonline-mode=false\nspawn-protection=0\nmax-tick-time=-1\nview-distance=4\n' > run/server.properties
-          ./gradlew runServer --no-daemon $EXTRA > out/server.log 2>&1 &
-          for i in $(seq 1 300); do
-            if grep -q 'Done (' run/logs/latest.log 2>/dev/null; then echo STARTED > out/result.txt; break; fi
-            if grep -q 'BUILD FAILED\|Crash report saved\|Failed to start the minecraft server\|Exception in server tick loop' out/server.log 2>/dev/null; then echo FAILED > out/result.txt; break; fi
+          mkdir -p server/mods out
+          cd server
+          for FV in 47.4.28 47.4.10 47.4.0 47.3.0; do
+            if curl -fsSL -o installer.jar "https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-$FV/forge-1.20.1-$FV-installer.jar"; then echo "$FV" > ../out/forge_version.txt; break; fi
+          done
+          java -jar installer.jar --installServer > ../out/installer.log 2>&1 || (tail -50 ../out/installer.log; exit 1)
+          cp ../built/ba_martialarts.jar mods/
+          cat > dl.py <<'EOF'
+          import json, sys, urllib.request
+          def versions(project):
+              with urllib.request.urlopen(f"https://api.modrinth.com/v2/project/{project}/version") as r:
+                  return json.load(r)
+          def get(project, pred, name):
+              for v in versions(project):
+                  if 'forge' in v['loaders'] and '1.20.1' in v['game_versions'] and pred(v['version_number']):
+                      f = next((f for f in v['files'] if f.get('primary')), v['files'][0])
+                      urllib.request.urlretrieve(f['url'], 'mods/' + f['filename'])
+                      print(name, v['version_number'], f['filename'])
+                      return
+              print('NOT FOUND', name); sys.exit(1)
+          get('epic-fight', lambda n: n.startswith('20.14.16'), 'Epic Fight')
+          get('7baP43pD', lambda n: n.startswith('20.14.16'), 'Battle Arts API')
+          if sys.argv[1] == 'true':
+              get('Dd6vT4jF', lambda n: n.startswith('20.14.16.10'), 'Battle Arts')
+              get('weapons-of-miracles', lambda n: n.startswith('2.0.171'), 'Weapons of Miracles')
+          EOF
+          python3 dl.py "${{ github.event.inputs.extra }}" | tee ../out/mods.txt
+          ls -la mods
+          echo "eula=true" > eula.txt
+          printf 'level-type=minecraft\\:flat\nonline-mode=false\nspawn-protection=0\nmax-tick-time=-1\nview-distance=4\n' > server.properties
+      - name: Run server
+        run: |
+          cd server
+          FV=$(cat ../out/forge_version.txt)
+          mkfifo console
+          (tail -f console | java -Xmx3G @user_jvm_args.txt @libraries/net/minecraftforge/forge/1.20.1-$FV/unix_args.txt nogui > ../out/server.out 2>&1) &
+          sleep 2
+          for i in $(seq 1 240); do
+            if grep -q 'Done (' logs/latest.log 2>/dev/null; then echo STARTED > ../out/result.txt; break; fi
+            if grep -q 'Crash report saved\|Failed to start the minecraft server\|Exception in server tick loop' ../out/server.out logs/latest.log 2>/dev/null; then echo FAILED > ../out/result.txt; break; fi
             sleep 5
           done
-          [ -f out/result.txt ] || echo TIMEOUT > out/result.txt
-          sleep 15
-          pkill -f GradleWrapperMain || true
-          pkill -f java || true
-          sleep 5
-          cp run/logs/latest.log out/ 2>/dev/null || true
-          cp -r run/crash-reports out/ 2>/dev/null || true
-          cp run/config/ba_martialarts-common.toml out/ 2>/dev/null || true
-          grep -n "ba_martialarts\|ERROR\|Exception\|Mixin\|mixin" out/server.log | grep -v "DEBUG.*mixin.*Loaded\|TRACE" | head -400 > out/summary.txt || true
-          cat out/result.txt
+          [ -f ../out/result.txt ] || echo TIMEOUT > ../out/result.txt
+          if grep -q STARTED ../out/result.txt; then
+            sleep 5
+            echo "reload" > console
+            sleep 15
+            echo "stop" > console
+            sleep 20
+          fi
+          pkill -f unix_args.txt || true
+          pkill -f "tail -f console" || true
+          cp logs/latest.log ../out/ 2>/dev/null || true
+          cp logs/debug.log ../out/ 2>/dev/null || true
+          cp -r crash-reports ../out/ 2>/dev/null || true
+          cp config/ba_martialarts-common.toml ../out/ 2>/dev/null || true
+          grep -n "ba_martialarts\|bamartial\|ERROR\|Exception\|Caused by" ../out/debug.log 2>/dev/null | head -600 > ../out/summary.txt || true
+          cat ../out/result.txt
       - name: Publish logs to 'smoke' branch
         if: always()
         run: |
