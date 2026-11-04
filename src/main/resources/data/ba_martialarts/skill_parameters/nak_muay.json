@@ -1,0 +1,21 @@
+{
+  "xp_requirement": 40,
+  "jump_boost_power": 0.05,
+  "max_meter": 3,
+  "attribute_modifiers": [
+    {
+      "attribute": "minecraft:generic.knockback_resistance",
+      "name": "nak_muay",
+      "uuid": "1a1e7a40-0b0a-4c1e-9d10-000000000003",
+      "operation": "addition",
+      "amount": 0.3
+    },
+    {
+      "attribute": "minecraft:generic.max_health",
+      "name": "nak_muay",
+      "uuid": "1a1e7a40-0b0a-4c1e-9d10-000000000003",
+      "operation": "multiply_total",
+      "amount": 0.1
+    }
+  ]
+}

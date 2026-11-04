@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:book"
+    },
+    {
+      "item": "minecraft:white_wool"
+    },
+    {
+      "tag": "minecraft:planks"
+    }
+  ],
+  "result": {
+    "item": "epicfight:skillbook",
+    "count": 1,
+    "nbt": {
+      "skill": "ba_martialarts:karateka"
+    }
+  }
+}
