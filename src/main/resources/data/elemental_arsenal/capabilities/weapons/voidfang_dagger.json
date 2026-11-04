@@ -1,0 +1,10 @@
+{
+  "type": "elemental_arsenal:voidfang_dagger",
+  "attributes": {
+    "common": {
+      "armor_negation": 25.0,
+      "impact": 1.0,
+      "max_strikes": 1
+    }
+  }
+}

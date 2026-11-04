@@ -1,0 +1,10 @@
+{
+  "type": "elemental_arsenal:inferno_greatsword",
+  "attributes": {
+    "common": {
+      "armor_negation": 15.0,
+      "impact": 4.5,
+      "max_strikes": 5
+    }
+  }
+}

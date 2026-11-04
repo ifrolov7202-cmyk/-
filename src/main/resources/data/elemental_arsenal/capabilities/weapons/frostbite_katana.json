@@ -1,0 +1,10 @@
+{
+  "type": "elemental_arsenal:frostbite_katana",
+  "attributes": {
+    "common": {
+      "armor_negation": 20.0,
+      "impact": 1.5,
+      "max_strikes": 3
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "elemental_arsenal:item/frostbite_katana"
+  }
+}

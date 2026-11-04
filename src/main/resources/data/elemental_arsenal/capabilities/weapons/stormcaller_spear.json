@@ -1,0 +1,10 @@
+{
+  "type": "elemental_arsenal:stormcaller_spear",
+  "attributes": {
+    "common": {
+      "armor_negation": 12.0,
+      "impact": 2.5,
+      "max_strikes": 3
+    }
+  }
+}

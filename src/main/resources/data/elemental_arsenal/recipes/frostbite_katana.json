@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  I",
+    " N ",
+    "S  "
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:blue_ice"
+    },
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "elemental_arsenal:frostbite_katana"
+  }
+}
