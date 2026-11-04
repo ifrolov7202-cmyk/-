@@ -22,6 +22,7 @@ jobs:
           chmod +x gradlew
           set -o pipefail
           ./gradlew build --no-daemon --stacktrace 2>&1 | tee build.log
+          cd infinite-stamina && chmod +x gradlew && ./gradlew build --no-daemon --stacktrace 2>&1 | tee -a ../build.log
       - name: Publish build log on failure
         if: failure()
         run: |
@@ -36,10 +37,12 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: martialarts-jar
-          path: build/libs/*.jar
+          path: |
+            build/libs/*.jar
+            infinite-stamina/build/libs/*.jar
       - name: Publish jar to 'builds' branch
         run: |
-          mkdir out && cp build/libs/*.jar out/
+          mkdir out && cp build/libs/*.jar out/ && cp infinite-stamina/build/libs/*.jar out/
           cd out
           git init -q -b builds
           git config user.name "github-actions"
