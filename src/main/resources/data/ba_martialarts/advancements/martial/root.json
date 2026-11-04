@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "ba_martialarts:training_bag"
+    },
+    "title": {
+      "translate": "advancements.ba_martialarts.root.title"
+    },
+    "description": {
+      "translate": "advancements.ba_martialarts.root.description"
+    },
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false,
+    "background": "minecraft:textures/block/red_wool.png"
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:tick"
+    }
+  }
+}

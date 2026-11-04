@@ -9,7 +9,7 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public final class ModNetwork {
-    private static final String VERSION = "1";
+    private static final String VERSION = "2";
 
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(BAMartial.MODID, "main"), () -> VERSION, VERSION::equals, VERSION::equals);
@@ -22,6 +22,17 @@ public final class ModNetwork {
                 .decoder(AnimPacket::new)
                 .consumerMainThread(AnimPacket::handle)
                 .add();
+        CHANNEL.messageBuilder(UltraInstinctPacket.class, 1, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(UltraInstinctPacket::encode)
+                .decoder(UltraInstinctPacket::new)
+                .consumerMainThread(UltraInstinctPacket::handle)
+                .add();
+    }
+
+    /** Сообщить игроку, сколько тиков осталось Ультра инстинкта (для экранного эффекта). */
+    public static void syncUltraInstinct(ServerPlayer player, int ticks) {
+        if (player.connection == null) return;
+        CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new UltraInstinctPacket(ticks));
     }
 
     /** Проиграть анимацию Epic Fight на игроке у всех, кто его видит (только визуально). */

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "ba_martialarts:block/training_bag_top",
+    "side": "ba_martialarts:block/training_bag_side"
+  }
+}

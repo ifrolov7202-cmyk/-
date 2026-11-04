@@ -1,6 +1,9 @@
 package com.bamartial;
 
 import com.bamartial.network.ModNetwork;
+import com.bamartial.registry.ModRegistry;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.config.ModConfig;
 import com.bamartial.skills.MartialSkills;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -18,7 +21,9 @@ public class BAMartial {
 
     public BAMartial() {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+        ModRegistry.register(modBus);
         modBus.addListener(MartialSkills::onSkillBuild);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, MartialConfig.SPEC);
         modBus.addListener(this::commonSetup);
     }
 

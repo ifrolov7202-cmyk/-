@@ -45,6 +45,8 @@ public class MartialBattleStyle extends BattleStyle {
         if (patch instanceof ServerPlayerPatch server) {
             changeSkill(server, BattleArtsSkillSlots.COMBAT_ART, MartialSkills.COMBAT_ARTS.get(kind));
             changeSkill(server, BattleArtsSkillSlots.BURST_ART, MartialSkills.FLURRY);
+            changeSkill(server, BattleArtsSkillSlots.ULTIMATE_ART, MartialSkills.ULTRA_INSTINCT);
+            MartialAdvancements.award(server.getOriginal(), "learn_style");
         }
 
         PlayerEventListener listener = patch.getEventListener();
@@ -81,14 +83,18 @@ public class MartialBattleStyle extends BattleStyle {
         if (patch instanceof ServerPlayerPatch server) {
             changeSkill(server, BattleArtsSkillSlots.COMBAT_ART, null);
             changeSkill(server, BattleArtsSkillSlots.BURST_ART, null);
+            changeSkill(server, BattleArtsSkillSlots.ULTIMATE_ART, null);
+            UltraInstinct.forceEnd(server.getOriginal(), false);
         }
         super.onRemoved(container);
     }
 
-    private void addMeter(SkillContainer container, float amount) {
-        if (amount <= 0 || container.getExecutor().isLogicalClient()) return;
+    /** Добавить метр Battle Arts в контейнер нашего стиля (только сервер). */
+    public static void addMeter(SkillContainer container, float amount) {
+        if (container == null || amount <= 0 || container.getExecutor().isLogicalClient()) return;
+        if (!(container.getSkill() instanceof MartialBattleStyle style)) return;
         if (!container.getDataManager().hasData(CoreAPIDataKeys.METER_FILL.get())) return;
-        float max = this.getMaxMeter() * 100f;
+        float max = Math.max(1, style.getMaxMeter()) * 100f;
         container.getDataManager().setDataSyncF(CoreAPIDataKeys.METER_FILL.get(), v -> Math.min(max, v + amount));
     }
 

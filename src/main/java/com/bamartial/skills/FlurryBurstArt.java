@@ -20,9 +20,14 @@ public class FlurryBurstArt extends BurstArt {
 
     @Override
     public boolean canExecute(SkillContainer container) {
-        return container.getExecutor().getOriginal().getMainHandItem().isEmpty()
-                && container.getExecutor().getSkill(BattleArtsSkillSlots.BATTLE_STYLE).getSkill() instanceof MartialBattleStyle
-                && super.canExecute(container);
+        boolean base = container.getExecutor().getOriginal().getMainHandItem().isEmpty()
+                && container.getExecutor().getSkill(BattleArtsSkillSlots.BATTLE_STYLE).getSkill() instanceof MartialBattleStyle;
+        if (!base) return false;
+        if (!container.getExecutor().isLogicalClient()
+                && container.getExecutor().getOriginal() instanceof ServerPlayer sp && Techniques.freeArtReady(sp)) {
+            return true;
+        }
+        return super.canExecute(container);
     }
 
     @Override
@@ -33,8 +38,11 @@ public class FlurryBurstArt extends BurstArt {
     @Override
     public void executeOnServer(SkillContainer container, FriendlyByteBuf args) {
         ServerPlayer player = container.getServerExecutor().getOriginal();
+        boolean free = UltraInstinct.isActive(player);
         if (Techniques.flurry(player)) {
+            float before = MartialSkills.meter(MartialSkills.styleContainer(player));
             super.executeOnServer(container, args);
+            if (free) MartialCombatArt.refundMeter(player, before);
         }
     }
 }

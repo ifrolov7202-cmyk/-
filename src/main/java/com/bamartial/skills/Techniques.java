@@ -1,5 +1,6 @@
 package com.bamartial.skills;
 
+import com.bamartial.MartialConfig;
 import com.bamartial.network.ModNetwork;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
@@ -50,6 +51,8 @@ public final class Techniques {
         int leapTicks;
         int leapTarget = -1;
         int tornadoTicks;
+        long nextFreeArt;
+        long lastBagHit;
     }
 
     private static final Map<UUID, State> STATES = new HashMap<>();
@@ -86,7 +89,8 @@ public final class Techniques {
         long now = p.level().getGameTime();
         s.combo = (now - s.lastHit <= 30) ? s.combo + 1 : 1;
         s.lastHit = now;
-        if (s.combo % 3 != 0) return 12;
+        int every = MartialConfig.get(MartialConfig.FINISHER_EVERY, 3);
+        if (s.combo % every != 0) return 12;
 
         float extra;
         switch (kind) {
@@ -110,13 +114,45 @@ public final class Techniques {
                 push(p, target, 1.2f, 0.4);
             }
         }
-        hurt.setAmount(hurt.getAmount() + extra);
+        hurt.setAmount(hurt.getAmount() + extra * damageMult());
         ServerLevel lvl = p.serverLevel();
         lvl.sendParticles(ParticleTypes.CRIT, target.getX(), target.getY() + target.getBbHeight() * 0.6, target.getZ(),
                 12, 0.3, 0.3, 0.3, 0.3);
         sound(p, SoundEvents.PLAYER_ATTACK_CRIT, 1.0f, 1.0f);
         actionBar(p, Component.translatable("msg.ba_martialarts.finisher." + kind.styleId, s.combo).withStyle(ChatFormatting.GOLD));
         return 30;
+    }
+
+    /** Контрудар Ультра инстинкта: удар стиля по атакующему сразу после уклонения. */
+    public static void counter(ServerPlayer p, StyleKind kind, LivingEntity enemy) {
+        hit(p, enemy, 6);
+        switch (kind) {
+            case MUAY_THAI -> enemy.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 1), p);
+            case KUNG_FU -> enemy.addEffect(new MobEffectInstance(MobEffects.LEVITATION, 8, 2), p);
+            case TAEKWONDO -> enemy.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 60, 0), p);
+            case JUDO -> push(p, enemy, 1.2f, 0.5);
+            default -> { }
+        }
+        push(p, enemy, 1.0f, 0.15);
+        p.serverLevel().sendParticles(ParticleTypes.CRIT, enemy.getX(), enemy.getY() + enemy.getBbHeight() * 0.6, enemy.getZ(),
+                10, 0.3, 0.3, 0.3, 0.3);
+        sound(p, SoundEvents.PLAYER_ATTACK_CRIT, 1.0f, 1.3f);
+        ModNetwork.animate(p, "ui_counter");
+    }
+
+    /** Удар по тренировочной груше: метр и счётчик комбо (не чаще, чем раз в 8 тиков). */
+    public static boolean bagHit(ServerPlayer p) {
+        State s = state(p);
+        long now = p.level().getGameTime();
+        if (now - s.lastBagHit < 8) return false;
+        s.lastBagHit = now;
+        s.combo = (now - s.lastHit <= 30) ? s.combo + 1 : 1;
+        s.lastHit = now;
+        int every = MartialConfig.get(MartialConfig.FINISHER_EVERY, 3);
+        if (s.combo % every == 0) {
+            actionBar(p, Component.translatable("msg.ba_martialarts.bag_combo", s.combo).withStyle(ChatFormatting.GOLD));
+        }
+        return true;
     }
 
     public static void judoCounter(ServerPlayer p, Entity attacker) {
@@ -132,9 +168,19 @@ public final class Techniques {
     //  Боевые искусства стилей
     // =====================================================================
 
+    /** Можно ли сейчас применить искусство бесплатно (в Ультра инстинкте, с короткой паузой). */
+    public static boolean freeArtReady(ServerPlayer p) {
+        return UltraInstinct.isActive(p) && p.level().getGameTime() >= state(p).nextFreeArt;
+    }
+
+    private static void markFreeArt(ServerPlayer p) {
+        if (UltraInstinct.isActive(p)) state(p).nextFreeArt = p.level().getGameTime() + 30;
+    }
+
     public static boolean signature(ServerPlayer p, StyleKind kind) {
         State s = state(p);
         if (s.flurryTicks > 0 || s.leapTicks > 0 || s.tornadoTicks > 0) return false;
+        if (UltraInstinct.isActive(p) && p.level().getGameTime() < s.nextFreeArt) return false;
         boolean ok = switch (kind) {
             case BOXING -> uppercut(p);
             case KARATE -> kiai(p);
@@ -144,6 +190,8 @@ public final class Techniques {
             case JUDO -> ippon(p);
         };
         if (ok) {
+            markFreeArt(p);
+            MartialAdvancements.award(p, "combat_art");
             ModNetwork.animate(p, kind.animation);
             actionBar(p, Component.translatable("skill.ba_martialarts." + kind.artId).append("!")
                     .withStyle(ChatFormatting.LIGHT_PURPLE));
@@ -307,10 +355,13 @@ public final class Techniques {
     public static boolean flurry(ServerPlayer p) {
         State s = state(p);
         if (s.flurryTicks > 0 || s.leapTicks > 0 || s.tornadoTicks > 0) return false;
+        if (UltraInstinct.isActive(p) && p.level().getGameTime() < s.nextFreeArt) return false;
         LivingEntity t = findTarget(p, 3.5);
         if (t == null) return noTarget(p);
         s.flurryTicks = 20;
         s.flurryTarget = t.getId();
+        markFreeArt(p);
+        MartialAdvancements.award(p, "flurry");
         ModNetwork.animate(p, "flurry");
         actionBar(p, Component.translatable("skill.ba_martialarts.flurry_of_blows").append("!").withStyle(ChatFormatting.GOLD));
         return true;
@@ -349,10 +400,14 @@ public final class Techniques {
         inTechnique = true;
         try {
             t.invulnerableTime = 0;
-            t.hurt(p.damageSources().playerAttack(p), dmg);
+            t.hurt(p.damageSources().playerAttack(p), dmg * damageMult());
         } finally {
             inTechnique = false;
         }
+    }
+
+    private static float damageMult() {
+        return (float) MartialConfig.get(MartialConfig.DAMAGE_MULTIPLIER, 1.0);
     }
 
     public static void push(ServerPlayer p, LivingEntity t, float strength, double up) {

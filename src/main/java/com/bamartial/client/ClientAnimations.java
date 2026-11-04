@@ -32,6 +32,7 @@ public final class ClientAnimations {
                 case "flurry" -> Animations.RELENTLESS_COMBO;
                 case "sig_taekwondo", "sig_muay_thai" -> Animations.FIST_AIR_SLASH;
                 case "sig_boxing", "sig_judo" -> Animations.FIST_AUTO3;
+                case "ui_counter" -> Animations.FIST_AUTO2;
                 default -> null;
             };
             if (anim != null) patch.getClientAnimator().playAnimation(anim, 0.0F);

@@ -22,10 +22,23 @@ public class MartialCombatArt extends CombatArt {
 
     @Override
     public boolean canExecute(SkillContainer container) {
-        return container.getExecutor().getOriginal().getMainHandItem().isEmpty()
+        boolean base = container.getExecutor().getOriginal().getMainHandItem().isEmpty()
                 && container.getExecutor().getSkill(BattleArtsSkillSlots.BATTLE_STYLE).getSkill() instanceof MartialBattleStyle style
-                && style.getKind() == kind
-                && super.canExecute(container);
+                && style.getKind() == kind;
+        if (!base) return false;
+        // в Ультра инстинкте — без затрат метра
+        if (!container.getExecutor().isLogicalClient()
+                && container.getExecutor().getOriginal() instanceof ServerPlayer sp && Techniques.freeArtReady(sp)) {
+            return true;
+        }
+        return super.canExecute(container);
+    }
+
+    /** Вернуть потраченный метр (искусства в Ультра инстинкте бесплатны). */
+    static void refundMeter(ServerPlayer player, float before) {
+        var styleContainer = MartialSkills.styleContainer(player);
+        float spent = before - MartialSkills.meter(styleContainer);
+        if (spent > 0) MartialBattleStyle.addMeter(styleContainer, spent);
     }
 
     @Override
@@ -36,8 +49,11 @@ public class MartialCombatArt extends CombatArt {
     @Override
     public void executeOnServer(SkillContainer container, FriendlyByteBuf args) {
         ServerPlayer player = container.getServerExecutor().getOriginal();
+        boolean free = UltraInstinct.isActive(player);
         if (Techniques.signature(player, kind)) {
+            float before = MartialSkills.meter(MartialSkills.styleContainer(player));
             super.executeOnServer(container, args);
+            if (free) refundMeter(player, before);
         }
     }
 }
