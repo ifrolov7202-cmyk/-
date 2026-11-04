@@ -1,0 +1,41 @@
+name: Nightfall AAA ranges
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  ranges:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read aaa_particles range from Nightfall versions
+        run: |
+          mkdir -p out
+          for pair in 3.1:7681377 3.2.6:8003764 3.3.0:8030047 3.3.4:8163633 3.3.9-fix1:8338586 3.4.0:8366962 3.4.1:8693642 3.4.2:9015395; do
+            v=${pair%%:*}; id=${pair##*:}
+            if curl -fsSL -o nf.jar "https://cursemaven.com/curse/maven/epicfight-nightfall-1307848/$id/epicfight-nightfall-1307848-$id.jar"; then
+              unzip -p nf.jar META-INF/mods.toml > mods.toml
+              range=$(python3 -c "
+          import re
+          t=open('mods.toml',encoding='utf-8',errors='replace').read()
+          m=re.search(r'modId\s*=\s*\"aaa_particles\"[^\[]*?mandatory\s*=\s*(\w+)[^\[]*?versionRange\s*=\s*\"([^\"]*)\"', t)
+          print(('mandatory=%s range=%s' % (m.group(1), m.group(2))) if m else 'no aaa_particles dependency')
+          ")
+              uses=$(unzip -l nf.jar | grep -c "effeks/.*\.efkefc" || true)
+              echo "$v ($id): $range; efkefc files: $uses" | tee -a out/ranges.txt
+            else
+              echo "$v ($id): download failed" | tee -a out/ranges.txt
+            fi
+          done
+      - name: Publish
+        if: always()
+        run: |
+          cd out
+          git init -q -b inspect-ranges
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add .
+          git commit -qm "Nightfall AAA ranges"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" inspect-ranges
