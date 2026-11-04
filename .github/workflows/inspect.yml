@@ -2,6 +2,10 @@ name: Inspect compat mods
 
 on:
   workflow_dispatch:
+    inputs:
+      nf_id:
+        description: "CurseForge file id of EpicFight Nightfall"
+        default: "9015395"
 
 permissions:
   contents: write
@@ -15,11 +19,17 @@ jobs:
           distribution: temurin
           java-version: 17
       - name: Nightfall vs AAA Particles
+        env:
+          NF_ID: ${{ github.event.inputs.nf_id }}
         run: |
           mkdir -p out jars && cd jars
-          curl -fsSL -o nightfall.jar "https://cursemaven.com/curse/maven/epicfight-nightfall-1307848/7681377/epicfight-nightfall-1307848-7681377.jar"
+          NF_ID=${NF_ID:-9015395}
+          curl -fsSL -o nightfall.jar "https://cursemaven.com/curse/maven/epicfight-nightfall-1307848/$NF_ID/epicfight-nightfall-1307848-$NF_ID.jar" || { echo "download failed $NF_ID" > ../out/failed.txt; exit 1; }
           mkdir -p x_nf && (cd x_nf && unzip -q -o ../nightfall.jar)
           cat x_nf/META-INF/jarjar/metadata.json > ../out/nightfall_jarjar.json 2>/dev/null || true
+          cat x_nf/META-INF/mods.toml > ../out/nightfall_mods.toml 2>/dev/null || true
+          cat x_nf/META-INF/MANIFEST.MF > ../out/nightfall_manifest.txt 2>/dev/null || true
+          ls x_nf/META-INF/jarjar/ > ../out/nightfall_jarjar_files.txt 2>/dev/null || true
           # классы Nightfall, которые ссылаются на AAA Particles
           grep -rla "aaaparticles" x_nf --include=*.class | sed 's#^x_nf/##; s#\.class$##; s#/#.#g' | sort > ../out/nf_classes_using_aaa.txt || true
           wc -l ../out/nf_classes_using_aaa.txt
@@ -53,7 +63,8 @@ jobs:
           python3 - <<'EOF'
           import os, re, subprocess, zipfile
           refs = [l.strip() for l in open('../out/nf_aaa_refs.txt') if l.strip()]
-          classes = sorted({r.split('.')[0] for r in refs})
+          import re as _re
+          classes = sorted({_re.sub(r'^[A-Z\[]*L(?=mod/)', '', r.split('.')[0]) for r in refs if 'mod/chloeprime' in r.split('.')[0]})
           members = sorted({r for r in refs if '.' in r})
           out = open('../out/aaa_compat.txt', 'w')
           out.write('Nightfall references %d classes, %d members\n' % (len(classes), len(members)))
