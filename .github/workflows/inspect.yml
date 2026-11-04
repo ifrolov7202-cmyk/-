@@ -1,0 +1,74 @@
+name: Inspect compat mods
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Download and inspect jars
+        run: |
+          set -x
+          mkdir -p out jars
+          cd jars
+          dl() { curl -fsSL --retry 3 -o "$1.jar" "$2" || echo "FAILED $1 $2" >> ../out/failed.txt; }
+          dl wom "https://cursemaven.com/curse/maven/weapons-of-miracles-epicfight-918614/7477498/weapons-of-miracles-epicfight-918614-7477498.jar"
+          dl nightfall "https://cursemaven.com/curse/maven/epicfight-nightfall-1307848/7681377/epicfight-nightfall-1307848-7681377.jar"
+          dl invincible_curse "https://cursemaven.com/curse/maven/epic-fight-invincible-1184379/7261552/epic-fight-invincible-1184379-7261552.jar"
+          dl invincible "https://api.modrinth.com/maven/maven/modrinth/epic-fight-invincible-lib/20.14.8.2-mc1.20.1-forge/epic-fight-invincible-lib-20.14.8.2-mc1.20.1-forge.jar"
+          for slug in weapons-of-miracles wom epicfight-nightfall nightfall epic-fight-invincible-lib invincible; do
+            curl -fsSL "https://api.modrinth.com/v2/project/$slug/version?loaders=%5B%22forge%22%5D&game_versions=%5B%221.20.1%22%5D" -o "../out/modrinth_$slug.json" || true
+          done
+          curl -fsSL "https://api.modrinth.com/v2/search?query=nightfall&facets=%5B%5B%22versions:1.20.1%22%5D%5D" -o ../out/modrinth_search_nightfall.json || true
+          curl -fsSL "https://api.modrinth.com/v2/search?query=weapons%20of%20miracles&facets=%5B%5B%22versions:1.20.1%22%5D%5D" -o ../out/modrinth_search_wom.json || true
+          ls -la
+          for j in *.jar; do
+            n="${j%.jar}"
+            d="x_$n"
+            mkdir -p "$d" && (cd "$d" && unzip -q -o "../$j" || true)
+            unzip -l "$j" > "../out/${n}_files.txt" || true
+            cat "$d/META-INF/mods.toml" > "../out/${n}_mods.toml" 2>/dev/null || true
+            cat "$d/META-INF/MANIFEST.MF" > "../out/${n}_manifest.txt" 2>/dev/null || true
+            find "$d" -path '*animmodels/animations*' -name '*.json' | sed "s#^$d/##" | sort > "../out/${n}_animations.txt" || true
+            find "$d" -name '*.class' | sed "s#^$d/##; s#\.class\$##; s#/#.#g" | sort > "../out/${n}_classes.txt" || true
+            : > "../out/${n}_anim_fields.txt"
+            grep -i 'animation\|anims\|moveset\|skills\|colliders\|combo' "../out/${n}_classes.txt" | grep -v '\$' | while read -r c; do
+              echo "=== $c" >> "../out/${n}_anim_fields.txt"
+              javap -cp "$d" "$c" 2>/dev/null | grep -v '^Picked' >> "../out/${n}_anim_fields.txt" || true
+            done
+            find "$d" -path '*data*' -name '*.json' | sed "s#^$d/##" | sort > "../out/${n}_data_json.txt" || true
+          done
+          for n in invincible invincible_curse; do
+            d="x_$n"
+            [ -d "$d" ] || continue
+            find "$d" -name '*.json' | head -40 | while read -r f; do echo "=== $f"; head -c 3000 "$f"; echo; done > "../out/${n}_json_samples.txt" || true
+            grep -l 'Event\|API\|Registry' -r "$d" --include=*.class | sed "s#^$d/##; s#\.class\$##; s#/#.#g" | grep -v '\$' | head -80 | while read -r c; do
+              echo "=== $c"; javap -cp "$d" "$c" 2>/dev/null | grep -v '^Picked'
+            done > "../out/${n}_api.txt" || true
+          done
+          d=x_wom
+          if [ -d "$d" ]; then
+            find "$d" -name '*.json' -path '*data*' | head -60 | while read -r f; do echo "=== $f"; head -c 2000 "$f"; echo; done > ../out/wom_data_samples.txt || true
+          fi
+          d=x_nightfall
+          if [ -d "$d" ]; then
+            find "$d" -name '*.json' -path '*data*' | head -60 | while read -r f; do echo "=== $f"; head -c 2000 "$f"; echo; done > ../out/nightfall_data_samples.txt || true
+          fi
+      - name: Publish results to 'inspect' branch
+        if: always()
+        run: |
+          cd out
+          git init -q -b inspect
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add .
+          git commit -qm "Inspect results"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" inspect
