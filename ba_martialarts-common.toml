@@ -1,0 +1,37 @@
+
+[combat]
+	#Множитель урона приёмов стилей / Damage multiplier for style moves
+	#Range: 0.1 ~ 10.0
+	damageMultiplier = 1.0
+	#Боевые искусства и контрудары сами доворачивают бойца к ближайшему врагу впереди / Arts and counters turn you towards the nearest enemy in front
+	autoAim = true
+	#Брать анимации ударов из Weapons of Miracles и Epic Fight - Nightfall, если они установлены (нужен перезапуск) / Use Weapons of Miracles and Nightfall animations when installed (restart required)
+	otherModAnimations = true
+	#Зажатая атака голой рукой — серия быстрых ударов, пока кнопка зажата и есть выносливость / Holding attack bare-handed performs a rush of strikes while stamina lasts
+	holdAttackRush = true
+	#Выносливость Epic Fight за один удар серии / Epic Fight stamina per rush strike
+	#Range: 0.0 ~ 10.0
+	rushStaminaPerStrike = 0.8
+
+[ultra_instinct]
+	#Длительность Ультра инстинкта, секунд / Ultra Instinct duration, seconds
+	#Range: 3 ~ 120
+	durationSeconds = 15
+	#Шанс автоуклонения от атаки / Auto-dodge chance
+	#Range: 0.0 ~ 1.0
+	dodgeChance = 0.75
+	#Включается сам на грани поражения при полной шкале / Triggers by itself near death with a full meter
+	autoTrigger = true
+	#Порог здоровья для авто-включения (доля от максимума) / Health threshold for auto trigger
+	#Range: 0.05 ~ 0.9
+	autoTriggerHealth = 0.2
+	#Перезарядка авто-включения, секунд / Auto trigger cooldown, seconds
+	#Range: 0 ~ 3600
+	autoTriggerCooldownSeconds = 300
+
+[world]
+	#Книги стилей в сундуках / Style books in chests
+	booksInLoot = true
+	#Книги стилей у странствующего торговца / Style books at the wandering trader
+	booksAtTrader = true
+

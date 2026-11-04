@@ -1,0 +1,266 @@
+2026-11-04 03:48:04,430 main WARN Advanced terminal features are not available in this environment
+[03:48:04] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeserver, --fml.forgeVersion, 47.4.28, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, nogui]
+[03:48:04] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.21 by Eclipse Adoptium; OS Linux arch amd64 version 7.0.0-1017-azure
+[03:48:04] [main/WARN] [ne.mi.fm.lo.FMLConfig/CORE]: Configuration file /home/runner/work/-/-/server/config/fml.toml is not correct. Correcting
+[03:48:04] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowSkipGLVersions] was corrected from null to []
+[03:48:04] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowLogHelpMessage] was corrected from null to true
+[03:48:04] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowSquir] was corrected from null to false
+[03:48:04] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowShowCPU] was corrected from null to false
+[03:48:04] [main/INFO] [ne.mi.fm.lo.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgeserver
+[03:48:04] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/home/runner/work/-/-/server/libraries/org/spongepowered/mixin/0.8.5/mixin-0.8.5.jar%2365!/ Service=ModLauncher Env=SERVER
+[03:48:04] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /home/runner/work/-/-/server/libraries/net/minecraftforge/fmlcore/1.20.1-47.4.28/fmlcore-1.20.1-47.4.28.jar is missing mods.toml file
+[03:48:04] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /home/runner/work/-/-/server/libraries/net/minecraftforge/javafmllanguage/1.20.1-47.4.28/javafmllanguage-1.20.1-47.4.28.jar is missing mods.toml file
+[03:48:04] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /home/runner/work/-/-/server/libraries/net/minecraftforge/lowcodelanguage/1.20.1-47.4.28/lowcodelanguage-1.20.1-47.4.28.jar is missing mods.toml file
+[03:48:04] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /home/runner/work/-/-/server/libraries/net/minecraftforge/mclanguage/1.20.1-47.4.28/mclanguage-1.20.1-47.4.28.jar is missing mods.toml file
+[03:48:04] [main/INFO] [ne.mi.fm.lo.mo.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[03:48:06] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[03:48:06] [main/INFO] [cp.mo.mo.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeserver' with arguments [nogui]
+[03:48:06] [main/WARN] [mixin/]: Reference map 'battlearts_api.refmap.json' for battlearts_api.mixins.json could not be read. If this is a development environment you can ignore this message
+[03:48:08] [main/WARN] [mixin/]: @Final field f_31427_:[I in mixins.epicfight.json:common.MixinWitherBoss should be final
+[03:48:08] [main/WARN] [mixin/]: @Final field f_31428_:[I in mixins.epicfight.json:common.MixinWitherBoss should be final
+[03:48:09] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.LivingEntity from class yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch
+[03:48:09] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.LivingEntity from class yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch
+[03:48:09] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.LivingEntity from class yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch
+[03:48:09] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.LivingEntity from class yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch
+[03:48:10] [modloading-worker-0/INFO] [ne.mi.co.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.28, for MC 1.20.1 with MCP 20230612.114412
+[03:48:10] [modloading-worker-0/INFO] [ne.mi.co.MinecraftForge/FORGE]: MinecraftForge v47.4.28 Initialized
+[03:48:10] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+[03:48:10] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+[03:48:10] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+[03:48:10] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+[03:48:10] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+[03:48:10] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+[03:48:10] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+[03:48:10] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+[03:48:10] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+[03:48:10] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file /home/runner/work/-/-/server/config/wom-client.toml is not correct. Correcting
+[03:48:10] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ingame was corrected from null to its default, SimpleCommentedConfig:{}. 
+[03:48:10] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ingame.boosted_mob_over_distance was corrected from null to its default, true. 
+[03:48:10] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ingame.mob_drop_emerald_over_health was corrected from null to its default, true. 
+[03:48:10] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ingame.mob_more_xp_over_health was corrected from null to its default, true. 
+[03:48:10] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ingame.skeleton_melee was corrected from null to its default, true. 
+[03:48:10] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ingame.skeleton_mele_percentage was corrected from null to its default, 50. 
+[03:48:10] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file /home/runner/work/-/-/server/config/wom.toml is not correct. Correcting
+[03:48:10] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule was corrected from null to its default, SimpleCommentedConfig:{}. 
+[03:48:10] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.spawnStrongerMobs was corrected from null to its default, false. 
+[03:48:10] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.strongerMobsDropEmeralds was corrected from null to its default, false. 
+[03:48:10] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.strongerMobsMoreEXP was corrected from null to its default, false. 
+[03:48:10] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.skeletonMoreMelee was corrected from null to its default, 50. 
+[03:48:10] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.player.Player from class yesman.epicfight.world.capabilities.entitypatch.player.PlayerPatch
+[03:48:10] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.TamableAnimal from class reascer.wom.world.entity.mob.EnderHand
+[03:48:10] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.TamableAnimal from class reascer.wom.world.entity.mob.TargetingHelper
+[03:48:10] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.boss.wither.WitherBoss from class yesman.epicfight.world.capabilities.entitypatch.boss.WitherPatch
+[03:48:10] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.boss.wither.WitherBoss from class yesman.epicfight.world.capabilities.entitypatch.boss.WitherPatch
+[03:48:10] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.boss.wither.WitherBoss from class yesman.epicfight.world.capabilities.entitypatch.boss.WitherPatch
+[03:48:10] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.boss.wither.WitherBoss from class yesman.epicfight.world.capabilities.entitypatch.boss.WitherPatch
+[03:48:10] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.boss.wither.WitherBoss from class yesman.epicfight.world.capabilities.entitypatch.boss.WitherPatch
+[03:48:10] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.boss.wither.WitherBoss from class yesman.epicfight.world.capabilities.entitypatch.boss.WitherPatch
+[03:48:10] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.boss.wither.WitherBoss from class yesman.epicfight.world.capabilities.entitypatch.boss.WitherPatch
+[03:48:10] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.boss.wither.WitherBoss from class yesman.epicfight.world.capabilities.entitypatch.boss.WitherPatch
+[03:48:10] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.boss.wither.WitherBoss from class yesman.epicfight.world.capabilities.entitypatch.boss.WitherPatch
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file /home/runner/work/-/-/server/config/battlearts_api-common.toml is not correct. Correcting
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key allowSoundOverrides was corrected from null to its default, false. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key superMeterPositionX was corrected from null to its default, -200.0. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key superMeterPositionY was corrected from null to its default, 0.0. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key superMeterScaleY was corrected from null to its default, 1.0. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key superMeterScaleX was corrected from null to its default, 1.0. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file /home/runner/work/-/-/server/config/epicfight-common.toml is not correct. Correcting
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key loot was corrected from null to its default, SimpleCommentedConfig:{}. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key loot.skill_book_mob_drop_chance_modifier was corrected from null to its default, 0. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key loot.skill_book_chest_drop_chance_modifier was corrected from null to its default, 0. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule was corrected from null to its default, SimpleCommentedConfig:{}. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.globalStun was corrected from null to its default, true. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.keepSkills was corrected from null to its default, true. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.hasFallAnimation was corrected from null to its default, true. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.disapleEntityUI was corrected from null to its default, false. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.canSwitchPlayerMode was corrected from null to its default, true. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.stiffComboAttacks was corrected from null to its default, true. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.noMobsInBossfight was corrected from null to its default, true. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.initialMode was corrected from null to its default, 1. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.weightPenalty was corrected from null to its default, 100. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.epicDrop was corrected from null to its default, false. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.skillReplaceCooldown was corrected from null to its default, 6000. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.allow_vanilla_melee was corrected from null to its default, true. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file /home/runner/work/-/-/server/config/ba_martialarts-common.toml is not correct. Correcting
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key combat was corrected from null to its default, SimpleCommentedConfig:{}. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key combat.damageMultiplier was corrected from null to its default, 1.0. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key combat.autoAim was corrected from null to its default, true. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key combat.otherModAnimations was corrected from null to its default, true. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key combat.holdAttackRush was corrected from null to its default, true. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key combat.rushStaminaPerStrike was corrected from null to its default, 0.8. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ultra_instinct was corrected from null to its default, SimpleCommentedConfig:{}. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ultra_instinct.durationSeconds was corrected from null to its default, 15. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ultra_instinct.dodgeChance was corrected from null to its default, 0.75. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ultra_instinct.autoTrigger was corrected from null to its default, true. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ultra_instinct.autoTriggerHealth was corrected from null to its default, 0.2. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ultra_instinct.autoTriggerCooldownSeconds was corrected from null to its default, 300. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world was corrected from null to its default, SimpleCommentedConfig:{}. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world.booksInLoot was corrected from null to its default, true. 
+[03:48:10] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world.booksAtTrader was corrected from null to its default, true. 
+[03:48:11] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+[03:48:11] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Found status: UP_TO_DATE Current: 47.4.28 Target: null
+[03:48:11] [main/INFO] [epicfight/]: Data keys [epicfight:combo_counter, epicfight:basic_attack_active] for epicfight:basic_attack
+[03:48:11] [main/INFO] [epicfight/]: Data keys [epicfight:penalty, epicfight:penalty_restore_counter] for epicfight:guard
+[03:48:11] [main/INFO] [epicfight/]: Data keys [epicfight:parry_motion_counter, epicfight:penalty, epicfight:last_active, epicfight:penalty_restore_counter] for epicfight:parrying
+[03:48:11] [main/INFO] [epicfight/]: Data keys [epicfight:penalty, epicfight:penalty_restore_counter] for epicfight:impact_guard
+[03:48:11] [main/INFO] [epicfight/]: Data keys [epicfight:stacks, epicfight:resisting_damage_type, epicfight:tick_record] for epicfight:adaptive_skin
+[03:48:11] [main/INFO] [epicfight/]: Data keys [epicfight:tick_record] for epicfight:adrenaline_fiend
+[03:48:11] [main/INFO] [epicfight/]: Data keys [epicfight:stacks, epicfight:entity_id] for epicfight:bonebreaker
+[03:48:11] [main/INFO] [epicfight/]: Data keys [epicfight:entity_id, epicfight:tick_record] for epicfight:vengeance
+[03:48:11] [main/INFO] [epicfight/]: Data keys [epicfight:fall_distance, epicfight:slam_protect_next_fall] for epicfight:meteor_slam
+[03:48:11] [main/INFO] [epicfight/]: Data keys [epicfight:stacks] for epicfight:revelation
+[03:48:11] [main/INFO] [epicfight/]: Data keys [epicfight:slam_protect_next_fall] for epicfight:demolition_leap
+[03:48:11] [main/INFO] [epicfight/]: Data keys [epicfight:jump_count, epicfight:jump_key_pressed_last_tick, epicfight:slam_protect_next_fall] for epicfight:phantom_ascent
+[03:48:11] [main/INFO] [epicfight/]: Data keys [epicfight:last_hit_count] for epicfight:grasping_spire
+[03:48:11] [main/INFO] [epicfight/]: Data keys [epicfight:sheath] for epicfight:battojutsu_passive
+[03:48:11] [main/INFO] [epicfight/]: Data keys [epicfight:sheath] for epicfight:battojutsu
+[03:48:11] [main/INFO] [epicfight/]: Data keys [epicfight:combo_counter] for epicfight:blade_rush
+[03:48:11] [main/INFO] [epicfight/]: Data keys [epicfight:thrown_trident_entity_id] for epicfight:everlasting_allegiance
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:target_id] for wom:ender_obscuris
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:timer_refresh, wom:timer, wom:dodge] for wom:dodge_master
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:timer_refresh, wom:timer, wom:dodge, wom:active, wom:registered_position, wom:registered_health, wom:cooldown] for wom:time_travel
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:cooldown] for wom:punishment_kick
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:consumprion_value, epicfight:penalty, wom:holding_rmb, wom:parrying, wom:last_active, epicfight:penalty_restore_counter] for wom:counter_attack
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:timer_refresh, wom:consumprion_value, wom:timer, epicfight:penalty, wom:charge, wom:holding_stance, wom:cooldown, wom:vengence_duration, epicfight:penalty_restore_counter] for wom:vengeful_parry
+[03:48:11] [main/INFO] [epicfight/]: Data keys [epicfight:penalty, wom:holding_rmb, wom:charge, wom:cooldown, wom:parrying, epicfight:penalty_restore_counter] for wom:perfect_bulwark
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:cycle, wom:charge] for wom:soul_protection
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:cycle, wom:charge] for wom:shulker_cloak
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:timer, epicfight:penalty, wom:holding_rmb, wom:active, epicfight:penalty_restore_counter] for wom:buster_parade
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:timer_refresh, wom:timer, wom:duree, wom:active] for wom:pain_anticipation
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:timer_refresh, wom:timer, wom:duree, wom:active] for wom:latent_retribution
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:rate, wom:power] for wom:critical_knowledge
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:recovery_rate, wom:max_shield, wom:cooldown] for wom:heart_shield
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:step, wom:melody_index, wom:saved_elapsed_time] for wom:dancing_blade
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:timer_refresh, wom:timer, wom:duree, wom:stage, wom:cycle, wom:active] for wom:meditation
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:cooldown] for wom:dopamine
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:last_active] for wom:manipulator
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:timer, wom:rate, wom:stack, wom:power] for wom:lethal_focus
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:timer_refresh, wom:timer, wom:jump_key_up, wom:angle, wom:wall_running, wom:wall_glide] for wom:spider_techniques
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:consumprion_value, wom:mermaid_movement, wom:crawling, wom:diving, wom:water_dashing, wom:jump_key_up, wom:cooldown] for wom:aqua_maneuvre
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:verso, wom:consumprion_value, wom:timer, wom:stage, wom:active, wom:buffing, wom:wall_running, wom:wall_glide] for wom:natural_sprinter
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:timer] for wom:lunatic_vivacity
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:consumprion_value, wom:timer, wom:holding_rmb, wom:registered_health] for wom:voodoo_magic
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:target_distance, wom:target_id] for wom:back_and_forth
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:combo, wom:cooldown] for wom:shooting_style
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:timer, wom:active] for wom:proximity_exploiter
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:timer, wom:stack] for wom:all_eyes_on_you
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:timer, wom:stack] for wom:all_eyes_on_me
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:timer, wom:cooldown] for wom:avatar_of_might
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:active, wom:stack, wom:attacks] for wom:agony_plunge
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:charging_time, wom:timer_refresh, wom:timer, wom:holding_rmb, wom:active, wom:movespeed, wom:saved_charge, wom:charged, wom:charged_attack, wom:charging] for wom:torment_passive
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:timer_refresh, wom:timer, wom:active] for wom:true_berserk
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:stack] for wom:herrscher_passive
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:verso, wom:timer_refresh, wom:timer, wom:buffed, wom:buffing, wom:expiation, wom:strenght, wom:redemptioon] for wom:plunder_perdition
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:sheath] for wom:satsujin_passive
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:timer_refresh, wom:timer, wom:damage, wom:timedslash, wom:stack, wom:cooldown, wom:second_draw, wom:frequency, wom:holding_rmb, wom:active, wom:charge, wom:holding_stance, wom:saved_charge, wom:attacks, wom:charging] for wom:sakura_state
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:using_item, wom:reload_cooldown, wom:nofalldamage, wom:holding_rmb, wom:combo, wom:shoot, wom:zoom_cooldown, wom:cooldown, wom:zoom] for wom:ender_blast
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:using_item, wom:side, wom:reload_cooldown, wom:nofalldamage, wom:holding_rmb, wom:combo, wom:shoot, wom:zoom_cooldown, wom:cooldown, wom:zoom] for wom:ender_fusion
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:charging_time, wom:guard_point_result, wom:holding_rmb, wom:combo, wom:guard_point, wom:holding_stance, wom:charged, wom:cooldown, wom:parrying, wom:gesetz_sprengkopf] for wom:regierung
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:timer_refresh, wom:timer, wom:echo, wom:crescent, wom:lunar_eclipse_stack] for wom:lunar_eclipse
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:verso, wom:idle] for wom:lunar_echo_passive
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:witheraftereffect, wom:darkness_target, wom:darkness_portal_angle, wom:darkness_target_reaped, wom:serius_focus_cooldown, wom:darkness_portal_timer, wom:ascending, wom:shoot_cooldown, wom:darkness_activate_portal, wom:timer_refresh, wom:timer, wom:serius_focus, wom:shoot, wom:blackhole_timer, wom:zoom_cooldown, wom:darkness_target_vec, wom:blackhole, wom:darkness_portal_vec, wom:blackhole_active, wom:blackhole_vec, wom:witherccatharsis, wom:holding_rmb, wom:active, wom:zoom, wom:darkness_target_hited] for wom:demonic_ascension
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:particle, wom:withercurse, wom:basic_attack, wom:catharsis, wom:idle, wom:lapse, wom:blink] for wom:demon_mark_passive
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:timer_refresh, wom:timer, wom:heating_speed, wom:solar_infernio, wom:timed_attack, wom:solar_crematorio, wom:solar_obscuridad_ta_timer, wom:particle, wom:cycle, wom:solar_obscuridad, wom:holding_rmb, wom:charge, wom:heat_level, wom:stored_heat_level, wom:charging] for wom:solar_arcano
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:timer_refresh, wom:timer, wom:heating_speed, wom:solar_infernio, wom:timed_attack, wom:solar_crematorio, wom:solar_obscuridad_ta_timer, wom:particle, wom:cycle, wom:solar_obscuridad, wom:charge, wom:heat_level, wom:stored_heat_level, wom:charging] for wom:solar_passive
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:serius_focus, wom:serius_focus_cooldown] for wom:rechargement
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:bullet_loaded, wom:shell_delay, wom:bullet_loaded_old, wom:cycle, wom:active, wom:shell_anim, wom:charge, wom:shell_number, wom:bullet_overloaded, wom:super_reload, wom:charged] for wom:napoleon_passive
+[03:48:11] [main/INFO] [epicfight/]: Data keys [wom:timer, wom:stack] for wom:unbreakable
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battle_arts:arrogance_stack, battle_arts:prev_anim] for battle_arts:arrogance
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battle_arts:distorted] for battle_arts:voice_of_distortion
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battle_arts:instinct_window, battle_arts:instinct_gauge] for battle_arts:draconic_instinct
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for battle_arts:iron_lotus
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battle_arts:pulling, battle_arts:heavy_draw, battle_arts:pull_level, battle_arts:charging] for battle_arts:power_draw
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for battle_arts:squire
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for battle_arts:recruit
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for battle_arts:journeyman
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for battle_arts:tranquility_unleash
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for battle_arts:mug
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for battle_arts:sky_striker
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for battle_arts:power_geyser
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for battle_arts:thief
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for battle_arts:lancer
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill, battle_arts:batto_sheath] for battle_arts:ronin
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battle_arts:counter_window, battlearts_api:meter_fill] for battle_arts:duelist
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for battle_arts:mercenary
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:flurry_of_blows
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:ultra_instinct
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:crushing_uppercut
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:boxer
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:kiai
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:karateka
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:flying_knee
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:nak_muay
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:chi_palm
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:kung_fu_master
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:tornado_kick
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:taekwondoin
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:ippon
+[03:48:11] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:judoka
+[03:48:11] [main/INFO] [mojang/YggdrasilAuthenticationService]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[03:48:11] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/home/runner/work/-/-/server/libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar%23111!/assets/.mcassetsroot' uses unexpected schema
+[03:48:11] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/home/runner/work/-/-/server/libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar%23111!/data/.mcassetsroot' uses unexpected schema
+[03:48:12] [main/ERROR] [minecraft/DedicatedServerProperties]: No key layers in MapLike[{}]
+[03:48:13] [main/INFO] [minecraft/RecipeManager]: Loaded 7 recipes
+[03:48:13] [main/INFO] [minecraft/AdvancementList]: Loaded 1279 advancements
+[03:48:16] [main/WARN] [epicfight/]: Skill battlearts_api:mana_charge doesn't exist in the registry.
+[03:48:16] [main/WARN] [epicfight/]: Skill battlearts_api:traveler doesn't exist in the registry.
+[03:48:16] [main/INFO] [epicfight/]: Registering Conditionals
+[03:48:16] [main/INFO] [epicfight/]: Registering Movesets
+[03:48:16] [main/WARN] [epicfight/]: Item Capability Exception: No item named epicacg:elucidator
+[03:48:16] [main/WARN] [epicfight/]: Item Capability Exception: No item named epicacg:dark_repulsor
+[03:48:16] [main/WARN] [epicfight/]: Item Capability Exception: No item named epicacg:lambent_light
+[03:48:16] [Server thread/INFO] [minecraft/DedicatedServer]: Starting minecraft server version 1.20.1
+[03:48:16] [Server thread/INFO] [minecraft/DedicatedServer]: Loading properties
+[03:48:16] [Server thread/INFO] [minecraft/DedicatedServer]: Default game type: SURVIVAL
+[03:48:16] [Server thread/INFO] [minecraft/MinecraftServer]: Generating keypair
+[03:48:16] [Server thread/INFO] [minecraft/DedicatedServer]: Starting Minecraft server on *:25565
+[03:48:16] [Server thread/INFO] [minecraft/ServerConnectionListener]: Using epoll channel type
+[03:48:16] [Server thread/WARN] [minecraft/DedicatedServer]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[03:48:16] [Server thread/WARN] [minecraft/DedicatedServer]: The server will make no attempt to authenticate usernames. Beware.
+[03:48:16] [Server thread/WARN] [minecraft/DedicatedServer]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[03:48:16] [Server thread/WARN] [minecraft/DedicatedServer]: To change this, set "online-mode" to "true" in the server.properties file.
+[03:48:16] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file ./world/serverconfig/epicfight-server.toml is not correct. Correcting
+[03:48:16] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key allow_custom_animations was corrected from null to its default, false. 
+[03:48:16] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file ./world/serverconfig/forge-server.toml is not correct. Correcting
+[03:48:16] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server was corrected from null to its default, SimpleCommentedConfig:{}. 
+[03:48:16] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.removeErroringBlockEntities was corrected from null to its default, false. 
+[03:48:16] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.removeErroringEntities was corrected from null to its default, false. 
+[03:48:16] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.fullBoundingBoxLadders was corrected from null to its default, false. 
+[03:48:16] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.zombieBaseSummonChance was corrected from null to its default, 0.1. 
+[03:48:16] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.zombieBabyChance was corrected from null to its default, 0.05. 
+[03:48:16] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.permissionHandler was corrected from null to its default, forge:default_handler. 
+[03:48:16] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.advertiseDedicatedServerToLan was corrected from null to its default, true. 
+[03:48:16] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.useItemWithDurationZero was corrected from null to its default, false. 
+[03:48:16] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file ./world/serverconfig/battle_arts-server.toml is not correct. Correcting
+[03:48:16] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ultra_instinct was corrected from null to its default, false. 
+[03:48:16] [Server thread/INFO] [minecraft/DedicatedServer]: Preparing level "world"
+[03:48:17] [Server thread/INFO] [minecraft/MinecraftServer]: Preparing start region for dimension minecraft:overworld
+[03:48:17] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[03:48:17] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 3%
+[03:48:18] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 32%
+[03:48:18] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 77%
+[03:48:18] [Server thread/INFO] [minecraft/LoggerChunkProgressListener]: Time elapsed: 1644 ms
+[03:48:18] [Server thread/INFO] [minecraft/DedicatedServer]: Done (2.147s)! For help, type "help"
+[03:48:18] [Server thread/INFO] [ne.mi.se.pe.PermissionAPI/]: Successfully initialized permission handler forge:default_handler
+[03:48:24] [Server thread/INFO] [minecraft/MinecraftServer]: Reloading!
+[03:48:25] [Server thread/INFO] [minecraft/RecipeManager]: Loaded 7 recipes
+[03:48:25] [Server thread/INFO] [minecraft/AdvancementList]: Loaded 1279 advancements
+[03:48:27] [Server thread/WARN] [epicfight/]: Skill battlearts_api:mana_charge doesn't exist in the registry.
+[03:48:27] [Server thread/WARN] [epicfight/]: Skill battlearts_api:traveler doesn't exist in the registry.
+[03:48:27] [Server thread/INFO] [epicfight/]: Registering Conditionals
+[03:48:27] [Server thread/INFO] [epicfight/]: Registering Movesets
+[03:48:27] [Server thread/WARN] [epicfight/]: Item Capability Exception: No item named epicacg:elucidator
+[03:48:27] [Server thread/WARN] [epicfight/]: Item Capability Exception: No item named epicacg:dark_repulsor
+[03:48:27] [Server thread/WARN] [epicfight/]: Item Capability Exception: No item named epicacg:lambent_light
+[03:48:28] [Server thread/WARN] [minecraft/MinecraftServer]: Can't keep up! Is the server overloaded? Running 3232ms or 64 ticks behind
+[03:48:39] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping the server
+[03:48:39] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+[03:48:39] [Server thread/INFO] [minecraft/MinecraftServer]: Saving players
+[03:48:39] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
+[03:48:40] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[03:48:41] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[03:48:41] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[03:48:41] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[03:48:41] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[03:48:41] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[03:48:41] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved

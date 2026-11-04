@@ -1,0 +1,185 @@
+69:[04Nov2026 03:48:04.787] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Considering mod file candidate /home/runner/work/-/-/server/mods/ba_martialarts.jar
+70:[04Nov2026 03:48:04.814] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFileInfo/LOADING]: Found valid mod file ba_martialarts.jar with {ba_martialarts} mods - versions {1.0.0}
+96:[04Nov2026 03:48:04.926] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.AbstractJarFileDependencyLocator/]: Failed to load resource META-INF/jarjar/metadata.json from ba_martialarts.jar, it does not contain dependency information.
+127:[04Nov2026 03:48:04.968] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Considering mod file candidate /home/runner/work/-/-/server/mods/ba_martialarts.jar
+128:[04Nov2026 03:48:04.969] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFileInfo/LOADING]: Found valid mod file ba_martialarts.jar with {ba_martialarts} mods - versions {1.0.0}
+129:[04Nov2026 03:48:04.969] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFile/LOADING]: Loading mod file /home/runner/work/-/-/server/mods/ba_martialarts.jar with languages [LanguageSpec[languageName=javafml, acceptedVersions=[47,)]]
+228:[04Nov2026 03:48:06.026] [main/DEBUG] [mixin/]: Adding mixin platform agents for container SecureJarResource(ba_martialarts)
+229:[04Nov2026 03:48:06.026] [main/DEBUG] [mixin/]: Instancing new MixinPlatformAgentMinecraftForge for SecureJarResource(ba_martialarts)
+230:[04Nov2026 03:48:06.026] [main/DEBUG] [mixin/]: MixinPlatformAgentMinecraftForge rejected container SecureJarResource(ba_martialarts)
+231:[04Nov2026 03:48:06.026] [main/DEBUG] [mixin/]: Instancing new MixinPlatformAgentDefault for SecureJarResource(ba_martialarts)
+232:[04Nov2026 03:48:06.026] [main/DEBUG] [mixin/]: MixinPlatformAgentDefault accepted container SecureJarResource(ba_martialarts)
+233:[04Nov2026 03:48:06.026] [main/DEBUG] [mixin/]: Processing prepare() for PlatformAgent[MixinPlatformAgentDefault:SecureJarResource(ba_martialarts)]
+234:[04Nov2026 03:48:06.026] [main/DEBUG] [mixin/]: Registering mixin config: ba_martialarts.mixins.json
+243:[04Nov2026 03:48:06.030] [main/DEBUG] [mixin/]: Processing inject() for PlatformAgent[MixinPlatformAgentDefault:SecureJarResource(ba_martialarts)]
+251:[04Nov2026 03:48:06.052] [main/DEBUG] [mixin/]: Selecting config ba_martialarts.mixins.json
+255:[04Nov2026 03:48:06.204] [main/DEBUG] [mixin/]: Preparing ba_martialarts.mixins.json (1)
+354:java.lang.UnsupportedOperationException: Reflective setAccessible(true) disabled
+385:java.lang.IllegalAccessException: class io.netty.util.internal.PlatformDependent0$7 (in module io.netty.common) cannot access class jdk.internal.misc.Unsafe (in module java.base) because module java.base does not export jdk.internal.misc to module io.netty.common
+386:	at jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[?:?]
+439:[04Nov2026 03:48:10.309] [main/DEBUG] [net.minecraftforge.fml.javafmlmod.FMLModContainer/LOADING]: Creating FMLModContainer instance for com.bamartial.BAMartial
+464:[04Nov2026 03:48:10.377] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+466:[04Nov2026 03:48:10.378] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+468:[04Nov2026 03:48:10.378] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+470:[04Nov2026 03:48:10.378] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+472:[04Nov2026 03:48:10.379] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+474:[04Nov2026 03:48:10.380] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+476:[04Nov2026 03:48:10.380] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+478:[04Nov2026 03:48:10.381] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+480:[04Nov2026 03:48:10.381] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+506:[04Nov2026 03:48:10.406] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.config.ConfigTracker/CONFIG]: Config file ba_martialarts-common.toml for ba_martialarts tracking
+507:[04Nov2026 03:48:10.406] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Attempting to inject @EventBusSubscriber classes into the eventbus for ba_martialarts
+510:[04Nov2026 03:48:10.407] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing com.bamartial.skills.UltraInstinct to FORGE
+513:[04Nov2026 03:48:10.417] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing com.bamartial.skills.Techniques to FORGE
+525:[04Nov2026 03:48:10.434] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing com.bamartial.anim.MartialMoves to MOD
+541:[04Nov2026 03:48:10.453] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing com.bamartial.LootEvents to FORGE
+553:[04Nov2026 03:48:10.497] [modloading-worker-0/DEBUG] [mixin/]: Mixing CapabilityItemMixin from ba_martialarts.mixins.json into yesman.epicfight.world.capabilities.item.CapabilityItem
+641:[04Nov2026 03:48:10.918] [main/DEBUG] [net.minecraftforge.fml.config.ConfigFileTypeHandler/CONFIG]: Built TOML config for /home/runner/work/-/-/server/config/ba_martialarts-common.toml
+642:[04Nov2026 03:48:10.919] [main/DEBUG] [net.minecraftforge.fml.config.ConfigFileTypeHandler/CONFIG]: Loaded TOML config file /home/runner/work/-/-/server/config/ba_martialarts-common.toml
+643:[04Nov2026 03:48:10.919] [main/DEBUG] [net.minecraftforge.fml.config.ConfigFileTypeHandler/CONFIG]: Watching TOML config file /home/runner/work/-/-/server/config/ba_martialarts-common.toml for changes
+645:[04Nov2026 03:48:10.919] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file /home/runner/work/-/-/server/config/ba_martialarts-common.toml is not correct. Correcting
+673:[04Nov2026 03:48:10.921] [Thread-1/DEBUG] [net.minecraftforge.fml.config.ConfigFileTypeHandler/CONFIG]: Config file ba_martialarts-common.toml changed, sending notifies
+674:[04Nov2026 03:48:10.922] [Thread-1/DEBUG] [net.minecraftforge.fml.config.ConfigFileTypeHandler/CONFIG]: Config file ba_martialarts-common.toml changed, sending notifies
+675:[04Nov2026 03:48:10.922] [Thread-1/DEBUG] [net.minecraftforge.fml.config.ConfigFileTypeHandler/CONFIG]: Config file ba_martialarts-common.toml changed, sending notifies
+676:[04Nov2026 03:48:10.924] [Thread-1/DEBUG] [net.minecraftforge.fml.config.ConfigFileTypeHandler/CONFIG]: Config file ba_martialarts-common.toml changed, sending notifies
+888:[04Nov2026 03:48:11.684] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:flurry_of_blows
+889:[04Nov2026 03:48:11.684] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:ultra_instinct
+890:[04Nov2026 03:48:11.684] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:crushing_uppercut
+891:[04Nov2026 03:48:11.684] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:boxer
+892:[04Nov2026 03:48:11.684] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:kiai
+893:[04Nov2026 03:48:11.684] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:karateka
+894:[04Nov2026 03:48:11.684] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:flying_knee
+895:[04Nov2026 03:48:11.684] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:nak_muay
+896:[04Nov2026 03:48:11.684] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:chi_palm
+897:[04Nov2026 03:48:11.685] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:kung_fu_master
+898:[04Nov2026 03:48:11.685] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:tornado_kick
+899:[04Nov2026 03:48:11.685] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:taekwondoin
+900:[04Nov2026 03:48:11.685] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:ippon
+901:[04Nov2026 03:48:11.685] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:judoka
+910:[04Nov2026 03:48:11.823] [main/DEBUG] [net.minecraftforge.server.ServerLifecycleHooks/CORE]: Generating PackInfo named mod:ba_martialarts for mod file /home/runner/work/-/-/server/mods/ba_martialarts.jar
+911:[04Nov2026 03:48:12.251] [main/ERROR] [net.minecraft.server.dedicated.DedicatedServerProperties/]: No key layers in MapLike[{}]
+916:[04Nov2026 03:48:13.172] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] boxing/jab <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+917:[04Nov2026 03:48:13.191] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] boxing/cross <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+918:[04Nov2026 03:48:13.191] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] boxing/hook <- battle_arts:battle_style/novice/journeyman/auto2
+919:[04Nov2026 03:48:13.192] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] boxing/power_straight <- wom:biped/skill/strong_punch
+920:[04Nov2026 03:48:13.192] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] boxing/dash <- battle_arts:battle_style/unique/iron_lotus/fist/dash_attack
+921:[04Nov2026 03:48:13.192] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] boxing/air <- battle_arts:battle_style/novice/journeyman/sledgehammer
+922:[04Nov2026 03:48:13.192] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/crushing_uppercut <- battle_arts:battle_style/novice/journeyman/dash
+923:[04Nov2026 03:48:13.192] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] karate/oi_zuki <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+924:[04Nov2026 03:48:13.193] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] karate/kizami_zuki <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+925:[04Nov2026 03:48:13.193] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] karate/mae_geri <- wom:biped/skill/kick_1
+926:[04Nov2026 03:48:13.193] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] karate/gyaku_zuki <- battle_arts:battle_style/novice/journeyman/auto1
+927:[04Nov2026 03:48:13.193] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] karate/dash <- battle_arts:battle_style/unique/iron_lotus/fist/dash_attack
+928:[04Nov2026 03:48:13.193] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] karate/air <- battle_arts:battle_style/unique/iron_lotus/fist/axe_dive
+929:[04Nov2026 03:48:13.193] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/kiai <- wom:biped/skill/strong_punch
+930:[04Nov2026 03:48:13.193] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] muay_thai/jab <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+931:[04Nov2026 03:48:13.193] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] muay_thai/cross <- battle_arts:battle_style/novice/journeyman/auto1
+932:[04Nov2026 03:48:13.193] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] muay_thai/teep <- wom:biped/skill/kick_2
+933:[04Nov2026 03:48:13.193] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] muay_thai/roundhouse <- wom:biped/skill/kick_3
+934:[04Nov2026 03:48:13.193] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] muay_thai/dash <- battle_arts:battle_style/unique/iron_lotus/fist/dash_attack
+935:[04Nov2026 03:48:13.194] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] muay_thai/air <- battle_arts:battle_style/unique/iron_lotus/fist/axe_dive
+936:[04Nov2026 03:48:13.194] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/flying_knee <- battle_arts:battle_style/unique/iron_lotus/fist/dash_attack
+937:[04Nov2026 03:48:13.194] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] kung_fu/palm_right <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+938:[04Nov2026 03:48:13.194] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] kung_fu/palm_left <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+939:[04Nov2026 03:48:13.194] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] kung_fu/crane_kick <- battle_arts:battle_style/unique/iron_lotus/fist/auto3
+940:[04Nov2026 03:48:13.194] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] kung_fu/twin_palms <- epicfight:biped/skill/revelation_twohand
+941:[04Nov2026 03:48:13.194] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] kung_fu/dash <- battle_arts:battle_style/unique/iron_lotus/fist/dash_attack
+942:[04Nov2026 03:48:13.194] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] kung_fu/air <- battle_arts:battle_style/unique/iron_lotus/fist/axe_dive
+943:[04Nov2026 03:48:13.194] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/chi_palm <- epicfight:biped/skill/revelation_twohand
+944:[04Nov2026 03:48:13.194] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] taekwondo/ap_chagi <- wom:biped/skill/kick_1
+945:[04Nov2026 03:48:13.194] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] taekwondo/double_kick <- wom:biped/skill/kick_2
+946:[04Nov2026 03:48:13.194] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] taekwondo/dollyo_chagi <- wom:biped/skill/kick
+947:[04Nov2026 03:48:13.194] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] taekwondo/dwi_chagi <- wom:biped/skill/kick_3
+948:[04Nov2026 03:48:13.194] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] taekwondo/dash <- battle_arts:battle_style/unique/iron_lotus/fist/dash_attack
+949:[04Nov2026 03:48:13.194] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] taekwondo/naeryeo_chagi <- battle_arts:battle_style/unique/iron_lotus/fist/axe_dive
+950:[04Nov2026 03:48:13.194] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/tornado_kick <- epicfight:biped/skill/phantom_ascent_forward
+951:[04Nov2026 03:48:13.194] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] judo/push_right <- battle_arts:battle_style/novice/journeyman/auto1
+952:[04Nov2026 03:48:13.195] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] judo/push_left <- battle_arts:battle_style/novice/journeyman/auto2
+953:[04Nov2026 03:48:13.195] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] judo/grip_strike <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+954:[04Nov2026 03:48:13.195] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] judo/hip_check <- battle_arts:battle_style/novice/journeyman/dash
+955:[04Nov2026 03:48:13.195] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] judo/tackle <- wom:biped/skill/ravanger_charge
+956:[04Nov2026 03:48:13.195] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] judo/air <- battle_arts:battle_style/novice/journeyman/sledgehammer
+957:[04Nov2026 03:48:13.195] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/ippon <- wom:biped/skill/ravanger_charge
+958:[04Nov2026 03:48:13.195] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/boxing_left <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+959:[04Nov2026 03:48:13.195] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/boxing_right <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+960:[04Nov2026 03:48:13.195] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/karate_right <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+961:[04Nov2026 03:48:13.195] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/karate_left <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+962:[04Nov2026 03:48:13.195] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/muay_thai_left <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+963:[04Nov2026 03:48:13.195] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/muay_thai_right <- battle_arts:battle_style/novice/journeyman/auto1
+964:[04Nov2026 03:48:13.195] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/kung_fu_right <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+965:[04Nov2026 03:48:13.195] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/kung_fu_left <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+966:[04Nov2026 03:48:13.195] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/taekwondo_kick_a <- wom:biped/skill/kick_1
+967:[04Nov2026 03:48:13.195] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/taekwondo_kick_b <- wom:biped/skill/kick
+968:[04Nov2026 03:48:13.195] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/judo_right <- battle_arts:battle_style/novice/journeyman/auto1
+969:[04Nov2026 03:48:13.195] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/judo_left <- battle_arts:battle_style/novice/journeyman/auto2
+970:[04Nov2026 03:48:13.195] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/flurry_of_blows <- epicfight:biped/skill/relentless_combo
+971:[04Nov2026 03:48:13.196] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] ultra_instinct/dodge_left <- wom:biped/skill/shadow_step_left
+972:[04Nov2026 03:48:13.199] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] ultra_instinct/dodge_right <- wom:biped/skill/shadow_step_right
+973:[04Nov2026 03:48:13.199] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] ultra_instinct/dodge_back <- wom:biped/skill/shadow_step_backward
+974:[04Nov2026 03:48:13.199] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] ultra_instinct/awaken <- wom:biped/skill/biped_avatar_of_might
+986:[04Nov2026 03:48:16.119] [main/WARN] [epicfight/]: Item Capability Exception: No item named epicacg:elucidator
+1034:[04Nov2026 03:48:16.129] [main/WARN] [epicfight/]: Item Capability Exception: No item named epicacg:dark_repulsor
+1063:[04Nov2026 03:48:16.137] [main/WARN] [epicfight/]: Item Capability Exception: No item named epicacg:lambent_light
+1254:[04Nov2026 03:48:24.942] [Server thread/DEBUG] [net.minecraftforge.server.ServerLifecycleHooks/CORE]: Generating PackInfo named mod:ba_martialarts for mod file /home/runner/work/-/-/server/mods/ba_martialarts.jar
+1258:[04Nov2026 03:48:25.280] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] boxing/jab <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+1259:[04Nov2026 03:48:25.286] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] boxing/cross <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+1260:[04Nov2026 03:48:25.286] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] boxing/hook <- battle_arts:battle_style/novice/journeyman/auto2
+1261:[04Nov2026 03:48:25.287] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] boxing/power_straight <- wom:biped/skill/strong_punch
+1262:[04Nov2026 03:48:25.287] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] boxing/dash <- battle_arts:battle_style/unique/iron_lotus/fist/dash_attack
+1263:[04Nov2026 03:48:25.287] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] boxing/air <- battle_arts:battle_style/novice/journeyman/sledgehammer
+1264:[04Nov2026 03:48:25.287] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/crushing_uppercut <- battle_arts:battle_style/novice/journeyman/dash
+1265:[04Nov2026 03:48:25.287] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] karate/oi_zuki <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+1266:[04Nov2026 03:48:25.287] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] karate/kizami_zuki <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+1267:[04Nov2026 03:48:25.287] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] karate/mae_geri <- wom:biped/skill/kick_1
+1268:[04Nov2026 03:48:25.287] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] karate/gyaku_zuki <- battle_arts:battle_style/novice/journeyman/auto1
+1269:[04Nov2026 03:48:25.287] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] karate/dash <- battle_arts:battle_style/unique/iron_lotus/fist/dash_attack
+1270:[04Nov2026 03:48:25.287] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] karate/air <- battle_arts:battle_style/unique/iron_lotus/fist/axe_dive
+1271:[04Nov2026 03:48:25.287] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/kiai <- wom:biped/skill/strong_punch
+1272:[04Nov2026 03:48:25.287] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] muay_thai/jab <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+1273:[04Nov2026 03:48:25.287] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] muay_thai/cross <- battle_arts:battle_style/novice/journeyman/auto1
+1274:[04Nov2026 03:48:25.287] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] muay_thai/teep <- wom:biped/skill/kick_2
+1275:[04Nov2026 03:48:25.287] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] muay_thai/roundhouse <- wom:biped/skill/kick_3
+1276:[04Nov2026 03:48:25.287] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] muay_thai/dash <- battle_arts:battle_style/unique/iron_lotus/fist/dash_attack
+1277:[04Nov2026 03:48:25.287] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] muay_thai/air <- battle_arts:battle_style/unique/iron_lotus/fist/axe_dive
+1278:[04Nov2026 03:48:25.288] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/flying_knee <- battle_arts:battle_style/unique/iron_lotus/fist/dash_attack
+1279:[04Nov2026 03:48:25.288] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] kung_fu/palm_right <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+1280:[04Nov2026 03:48:25.288] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] kung_fu/palm_left <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+1281:[04Nov2026 03:48:25.288] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] kung_fu/crane_kick <- battle_arts:battle_style/unique/iron_lotus/fist/auto3
+1282:[04Nov2026 03:48:25.288] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] kung_fu/twin_palms <- epicfight:biped/skill/revelation_twohand
+1283:[04Nov2026 03:48:25.288] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] kung_fu/dash <- battle_arts:battle_style/unique/iron_lotus/fist/dash_attack
+1284:[04Nov2026 03:48:25.288] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] kung_fu/air <- battle_arts:battle_style/unique/iron_lotus/fist/axe_dive
+1285:[04Nov2026 03:48:25.288] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/chi_palm <- epicfight:biped/skill/revelation_twohand
+1286:[04Nov2026 03:48:25.288] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] taekwondo/ap_chagi <- wom:biped/skill/kick_1
+1287:[04Nov2026 03:48:25.288] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] taekwondo/double_kick <- wom:biped/skill/kick_2
+1288:[04Nov2026 03:48:25.288] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] taekwondo/dollyo_chagi <- wom:biped/skill/kick
+1289:[04Nov2026 03:48:25.288] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] taekwondo/dwi_chagi <- wom:biped/skill/kick_3
+1290:[04Nov2026 03:48:25.288] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] taekwondo/dash <- battle_arts:battle_style/unique/iron_lotus/fist/dash_attack
+1291:[04Nov2026 03:48:25.288] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] taekwondo/naeryeo_chagi <- battle_arts:battle_style/unique/iron_lotus/fist/axe_dive
+1292:[04Nov2026 03:48:25.288] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/tornado_kick <- epicfight:biped/skill/phantom_ascent_forward
+1293:[04Nov2026 03:48:25.288] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] judo/push_right <- battle_arts:battle_style/novice/journeyman/auto1
+1294:[04Nov2026 03:48:25.288] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] judo/push_left <- battle_arts:battle_style/novice/journeyman/auto2
+1295:[04Nov2026 03:48:25.288] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] judo/grip_strike <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+1296:[04Nov2026 03:48:25.288] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] judo/hip_check <- battle_arts:battle_style/novice/journeyman/dash
+1297:[04Nov2026 03:48:25.289] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] judo/tackle <- wom:biped/skill/ravanger_charge
+1298:[04Nov2026 03:48:25.289] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] judo/air <- battle_arts:battle_style/novice/journeyman/sledgehammer
+1299:[04Nov2026 03:48:25.289] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/ippon <- wom:biped/skill/ravanger_charge
+1300:[04Nov2026 03:48:25.289] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/boxing_left <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+1301:[04Nov2026 03:48:25.289] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/boxing_right <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+1302:[04Nov2026 03:48:25.289] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/karate_right <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+1303:[04Nov2026 03:48:25.289] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/karate_left <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+1304:[04Nov2026 03:48:25.289] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/muay_thai_left <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+1305:[04Nov2026 03:48:25.289] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/muay_thai_right <- battle_arts:battle_style/novice/journeyman/auto1
+1306:[04Nov2026 03:48:25.289] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/kung_fu_right <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+1307:[04Nov2026 03:48:25.289] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/kung_fu_left <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+1308:[04Nov2026 03:48:25.289] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/taekwondo_kick_a <- wom:biped/skill/kick_1
+1309:[04Nov2026 03:48:25.289] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/taekwondo_kick_b <- wom:biped/skill/kick
+1310:[04Nov2026 03:48:25.289] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/judo_right <- battle_arts:battle_style/novice/journeyman/auto1
+1311:[04Nov2026 03:48:25.289] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/judo_left <- battle_arts:battle_style/novice/journeyman/auto2
+1312:[04Nov2026 03:48:25.289] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/flurry_of_blows <- epicfight:biped/skill/relentless_combo
+1313:[04Nov2026 03:48:25.289] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] ultra_instinct/dodge_left <- wom:biped/skill/shadow_step_left
+1314:[04Nov2026 03:48:25.289] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] ultra_instinct/dodge_right <- wom:biped/skill/shadow_step_right
+1315:[04Nov2026 03:48:25.290] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] ultra_instinct/dodge_back <- wom:biped/skill/shadow_step_backward
+1316:[04Nov2026 03:48:25.290] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] ultra_instinct/awaken <- wom:biped/skill/biped_avatar_of_might
+1328:[04Nov2026 03:48:27.950] [Server thread/WARN] [epicfight/]: Item Capability Exception: No item named epicacg:elucidator
+1376:[04Nov2026 03:48:27.952] [Server thread/WARN] [epicfight/]: Item Capability Exception: No item named epicacg:dark_repulsor
+1405:[04Nov2026 03:48:27.953] [Server thread/WARN] [epicfight/]: Item Capability Exception: No item named epicacg:lambent_light
