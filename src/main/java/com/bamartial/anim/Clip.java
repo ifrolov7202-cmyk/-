@@ -44,6 +44,8 @@ public final class Clip {
     /** Скорость: basis — относительно скорости атаки (как у обычных ударов), иначе фиксированная. */
     public float speed = 1.0F;
     public boolean basis = false;
+    /** Хитбокс перед бойцом, а не на руке/ноге (кадры, где сустав не доходит до цели в ударном окне). */
+    public boolean rootHit = false;
 
     private Clip(String namespace, String path, float convert) {
         this.namespace = namespace;
@@ -86,12 +88,18 @@ public final class Clip {
         return this;
     }
 
+    public Clip rootHitbox() {
+        this.rootHit = true;
+        return this;
+    }
+
     /** Тот же файл и окна, но с фиксированной скоростью (для боевых искусств). */
     public Clip withFixedSpeed(float s) {
         Clip c = new Clip(namespace, path, convert);
         c.wins.addAll(wins);
         c.speed = s;
         c.basis = false;
+        c.rootHit = rootHit;
         return c;
     }
 

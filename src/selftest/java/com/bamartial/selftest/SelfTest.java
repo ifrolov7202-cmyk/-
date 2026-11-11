@@ -6,6 +6,7 @@ import com.bamartial.skills.MartialBattleStyle;
 import com.bamartial.skills.MartialSkills;
 import com.bamartial.skills.StyleKind;
 import com.bamartial.skills.Techniques;
+import com.bamartial.skills.UltraInstinct;
 import com.mojang.authlib.GameProfile;
 import com.mojang.logging.LogUtils;
 import io.netty.buffer.Unpooled;
@@ -98,6 +99,8 @@ public final class SelfTest {
     private boolean wasRushing;
     private int casts;
     private final List<String> castAnims = new ArrayList<>();
+    private int attacks;
+    private int dodges;
 
     public SelfTest() {
         MinecraftForge.EVENT_BUS.register(this);
@@ -204,6 +207,8 @@ public final class SelfTest {
             steps.add(new Step(kind + " rest", 30, t -> { }));
         }
         steps.add(flurryStep());
+        steps.add(new Step("rest", 40, t -> { }));
+        steps.add(ultraStep());
         log("planned " + steps.size() + " steps");
     }
 
@@ -256,8 +261,8 @@ public final class SelfTest {
                 check(kind + ": 4 basic attacks", casts == 4, "casts=" + casts);
                 boolean ours = !castAnims.isEmpty() && castAnims.stream().allMatch(a -> a.startsWith("ba_martialarts:"));
                 check(kind + ": basic attacks use the style combo", ours, "anims=" + castAnims);
-                int comboHits = count(MartialMoves.Role.COMBO) + count(MartialMoves.Role.FINISHER);
-                check(kind + ": combo hits", comboHits >= 3, "hits=" + hits + " other=" + otherHits + " anims=" + hitAnims);
+                check(kind + ": every combo move connects", hitAnims.containsAll(castAnims),
+                        "hit=" + hitAnims + " cast=" + castAnims + " other=" + otherHits);
             }
         });
     }
@@ -270,6 +275,8 @@ public final class SelfTest {
                 resetTarget();
                 resetHits();
                 patch.setStamina(patch.getMaxStamina());
+                // обычное восстановление Epic Fight не должно мешать счёту (оно идёт только вне действия)
+                patch.setStaminaRegenAwaitTicks(200);
                 staminaStart = patch.getStamina();
                 Techniques.startRush(player);
                 check(kind + ": rush starts on hold", Techniques.isRushing(player), "");
@@ -279,10 +286,13 @@ public final class SelfTest {
                 float used = staminaStart - patch.getStamina();
                 int expected = (RUSH_TICKS - 1) / MartialMoves.rushInterval(kind) + 1;
                 float cost = rushCost();
+                Set<String> moves = new LinkedHashSet<>();
+                for (int i = 0; i < 4; i++) moves.add(name(MartialMoves.rush(kind, i)));
                 check(kind + ": rush keeps going while held", Techniques.isRushing(player), "");
                 check(kind + ": rush strike count", Math.abs(strikes - expected) <= 1, "strikes=" + strikes + " expected=" + expected);
                 check(kind + ": rush strikes connect", count(MartialMoves.Role.BARRAGE) >= strikes - 1,
                         "hits=" + count(MartialMoves.Role.BARRAGE) + " strikes=" + strikes + " other=" + otherHits + " anims=" + hitAnims);
+                check(kind + ": every rush move connects", hitAnims.containsAll(moves), "hit=" + hitAnims + " moves=" + moves);
                 check(kind + ": rush stamina per strike", Math.abs(used - strikes * cost) < 0.05F, "used=" + used + " strikes=" + strikes + " cost=" + cost);
                 resetHits();
                 Techniques.stopRush(player, true);
@@ -312,6 +322,7 @@ public final class SelfTest {
                 resetTarget();
                 resetHits();
                 patch.setStamina(cost * 3 + 0.1F);
+                patch.setStaminaRegenAwaitTicks(200);
                 staminaStart = patch.getStamina();
                 endedTick = -1;
                 wasRushing = true;
@@ -370,6 +381,45 @@ public final class SelfTest {
                 check("flurry of blows hits", count(MartialMoves.Role.FLURRY) >= 4, "hits=" + hits + " other=" + otherHits + " anims=" + hitAnims);
             }
         });
+    }
+
+    // ---------------- Ультра инстинкт (V): уклонение и контрудар ----------------
+    private Step ultraStep() {
+        return new Step("ultra instinct", 230, t -> {
+            if (t == 0) {
+                placePlayer();
+                resetTarget();
+                resetHits();
+                attacks = 0;
+                dodges = 0;
+                MartialBattleStyle.addMeter(MartialSkills.styleContainer(player), 10000.0F);
+                SkillContainer ultimate = patch.getSkill(BattleArtsSkillSlots.ULTIMATE_ART);
+                boolean cast = ultimate != null && ultimate.getSkill() != null && ultimate.requestCasting(patch, buf());
+                check("ultra instinct cast", cast && UltraInstinct.isActive(player),
+                        "skill=" + (ultimate == null ? null : ultimate.getSkill()) + " active=" + UltraInstinct.isActive(player));
+            }
+            if (t >= 40 && t <= 200 && t % 20 == 0) {
+                // кадавр «бьёт» игрока
+                player.setInvulnerable(false);
+                player.setHealth(player.getMaxHealth());
+                player.invulnerableTime = 0;
+                player.hurt(level.damageSources().mobAttack(target), 2.0F);
+                player.setInvulnerable(true);
+                attacks++;
+            }
+            if (t >= 41 && t <= 201 && t % 20 == 1 && isDodge(name(currentAnimation()))) dodges++;
+            if (t == 229) {
+                check("ultra instinct dodges attacks", dodges >= 1, "dodges=" + dodges + "/" + attacks);
+                check("ultra instinct counterattacks connect", count(MartialMoves.Role.FINISHER) >= 1,
+                        "hits=" + hits + " other=" + otherHits + " anims=" + hitAnims);
+                player.setHealth(player.getMaxHealth());
+            }
+        });
+    }
+
+    private static boolean isDodge(String anim) {
+        return anim.equals(name(MartialMoves.DODGE_LEFT)) || anim.equals(name(MartialMoves.DODGE_RIGHT))
+                || anim.equals(name(MartialMoves.DODGE_BACK));
     }
 
     // =====================================================================

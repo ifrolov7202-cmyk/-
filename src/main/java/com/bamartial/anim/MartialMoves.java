@@ -107,7 +107,8 @@ public final class MartialMoves {
     private static final Clip BA_FLAME_POSE = Clip.pose(BA, "battle_style/unique/iron_lotus/fist/flame_counter_pose");
 
     // Weapons of Miracles (удары ногами, сильный удар, теневые шаги)
-    private static final Clip WOM_PUNCH = Clip.of(WOM, "biped/skill/strong_punch", 0.3F, 0.1F, 0.1F, 0.15F, 0.35F, Clip.J.HAND_L).fixed(1.0F);
+    // в ударном окне strong_punch кисть ещё не у цели — хитбокс перед бойцом (проверено на сервере)
+    private static final Clip WOM_PUNCH = Clip.of(WOM, "biped/skill/strong_punch", 0.3F, 0.1F, 0.1F, 0.15F, 0.35F, Clip.J.HAND_L).fixed(1.0F).rootHitbox();
     private static final Clip WOM_KICK = Clip.of(WOM, "biped/skill/kick", 0.1F, 0.05F, 0.05F, 0.15F, 0.35F, Clip.J.LEG_R).fixed(1.0F);
     private static final Clip WOM_KICK_1 = Clip.of(WOM, "biped/skill/kick_1", 0.2F, 0.2F, 0.2F, 0.35F, 0.5F, Clip.J.LEG_R).basis(3.2F);
     private static final Clip WOM_KICK_2 = Clip.multi(WOM, "biped/skill/kick_2", 0.2F,
@@ -187,7 +188,7 @@ public final class MartialMoves {
                 hit(b, "boxing/jab", StyleKind.BOXING, Role.COMBO, JAB, BA_JAB_L, EF_JAB_L),
                 hit(b, "boxing/cross", StyleKind.BOXING, Role.COMBO, JAB, BA_JAB_R, EF_JAB_R),
                 hit(b, "boxing/hook", StyleKind.BOXING, Role.COMBO, JAB, BA_PUNCH_L, EF_HOOK),
-                hit(b, "boxing/power_straight", StyleKind.BOXING, Role.FINISHER, FINISH, WOM_PUNCH, BA_PUNCH_R, EF_JAB_R),
+                hit(b, "boxing/power_straight", StyleKind.BOXING, Role.FINISHER, FINISH, BA_PUNCH_R, WOM_PUNCH, EF_JAB_R),
                 dash(b, "boxing/dash", StyleKind.BOXING, BA_LUNGE, EF_DASH),
                 air(b, "boxing/air", StyleKind.BOXING, BA_HAMMER, EF_AIR));
         art(b, "art/crushing_uppercut", StyleKind.BOXING, MartialColliders.HEAVY, UPPERCUT, UPPERCUT, 1.25F, BA_UPPERCUT, EF_DASH);
@@ -243,18 +244,19 @@ public final class MartialMoves {
         art(b, "art/ippon", StyleKind.JUDO, MartialColliders.HEAVY, THROW, THROW, 1.2F, WOM_SHOULDER, BA_HEAVY, EF_DASH);
 
         // ---------------- Серия ударов при зажатой атаке ----------------
-        rush(b, "rush/boxing_left", StyleKind.BOXING, 1.6F, BA_JAB_L, EF_JAB_L);
-        rush(b, "rush/boxing_right", StyleKind.BOXING, 1.6F, BA_JAB_R, EF_JAB_R);
-        rush(b, "rush/karate_right", StyleKind.KARATE, 1.5F, BA_JAB_R, EF_JAB_R);
-        rush(b, "rush/karate_left", StyleKind.KARATE, 1.5F, BA_JAB_L, EF_JAB_L);
-        rush(b, "rush/muay_thai_left", StyleKind.MUAY_THAI, 1.5F, BA_JAB_L, EF_JAB_L);
-        rush(b, "rush/muay_thai_right", StyleKind.MUAY_THAI, 1.5F, BA_PUNCH_R, EF_JAB_R);
-        rush(b, "rush/kung_fu_right", StyleKind.KUNG_FU, 1.8F, BA_JAB_R, EF_JAB_R);
-        rush(b, "rush/kung_fu_left", StyleKind.KUNG_FU, 1.8F, BA_JAB_L, EF_JAB_L);
-        rush(b, "rush/taekwondo_kick_a", StyleKind.TAEKWONDO, 1.6F, WOM_KICK_1, BA_KICK, EF_KICK);
-        rush(b, "rush/taekwondo_kick_b", StyleKind.TAEKWONDO, 1.6F, WOM_KICK, BA_KICK, EF_KICK);
-        rush(b, "rush/judo_right", StyleKind.JUDO, 1.5F, BA_PUNCH_R, EF_JAB_R);
-        rush(b, "rush/judo_left", StyleKind.JUDO, 1.5F, BA_PUNCH_L, EF_JAB_L);
+        // руки — хитбокс перед бойцом; ноги — на самой ноге (у разворотных ударов корень поворачивается)
+        rush(b, "rush/boxing_left", StyleKind.BOXING, 1.6F, true, BA_JAB_L, EF_JAB_L);
+        rush(b, "rush/boxing_right", StyleKind.BOXING, 1.6F, true, BA_JAB_R, EF_JAB_R);
+        rush(b, "rush/karate_right", StyleKind.KARATE, 1.5F, true, BA_JAB_R, EF_JAB_R);
+        rush(b, "rush/karate_left", StyleKind.KARATE, 1.5F, true, BA_JAB_L, EF_JAB_L);
+        rush(b, "rush/muay_thai_left", StyleKind.MUAY_THAI, 1.5F, true, BA_JAB_L, EF_JAB_L);
+        rush(b, "rush/muay_thai_right", StyleKind.MUAY_THAI, 1.5F, true, BA_PUNCH_R, EF_JAB_R);
+        rush(b, "rush/kung_fu_right", StyleKind.KUNG_FU, 1.8F, true, BA_JAB_R, EF_JAB_R);
+        rush(b, "rush/kung_fu_left", StyleKind.KUNG_FU, 1.8F, true, BA_JAB_L, EF_JAB_L);
+        rush(b, "rush/taekwondo_kick_a", StyleKind.TAEKWONDO, 1.6F, false, WOM_KICK_1, BA_KICK, EF_KICK);
+        rush(b, "rush/taekwondo_kick_b", StyleKind.TAEKWONDO, 1.6F, false, WOM_KICK, BA_KICK, EF_KICK);
+        rush(b, "rush/judo_right", StyleKind.JUDO, 1.5F, true, BA_PUNCH_R, EF_JAB_R);
+        rush(b, "rush/judo_left", StyleKind.JUDO, 1.5F, true, BA_PUNCH_L, EF_JAB_L);
 
         // ---------------- Шквал ударов (все стили) ----------------
         FLURRY = b.nextAccessor("art/flurry_of_blows", acc -> {
@@ -343,11 +345,15 @@ public final class MartialMoves {
         ARTS.put(kind, accessor);
     }
 
-    /** Удар серии: хитбокс перед бойцом, высокая постоянная скорость (следующий удар прерывает предыдущий). */
-    private static void rush(AnimationManager.AnimationBuilder b, String id, StyleKind kind, float playSpeed, Clip... candidates) {
+    /**
+     * Удар серии: высокая постоянная скорость (следующий удар прерывает предыдущий).
+     * rootHitbox — хитбокс перед бойцом, иначе на суставе удара (рука/нога).
+     */
+    private static void rush(AnimationManager.AnimationBuilder b, String id, StyleKind kind, float playSpeed, boolean rootHitbox,
+            Clip... candidates) {
         AnimationManager.AnimationAccessor<AttackAnimation> accessor = b.nextAccessor(id, acc -> {
             Clip c = pick(id, candidates).withFixedSpeed(playSpeed);
-            AttackAnimation a = new AttackAnimation(c.convert, acc, Armatures.BIPED, phases(c, MartialColliders.BARRAGE, true));
+            AttackAnimation a = new AttackAnimation(c.convert, acc, Armatures.BIPED, phases(c, MartialColliders.BARRAGE, rootHitbox));
             hits(a, RUSH, RUSH);
             speed(a, c);
             a.setResourceLocation(c.namespace, c.path);
@@ -385,7 +391,7 @@ public final class MartialMoves {
         AttackAnimation.Phase[] out = new AttackAnimation.Phase[c.wins.size()];
         for (int i = 0; i < out.length; i++) {
             Clip.Win w = c.wins.get(i);
-            Clip.J joint = forceRoot ? Clip.J.ROOT : w.joint();
+            Clip.J joint = forceRoot || c.rootHit ? Clip.J.ROOT : w.joint();
             Collider collider = joint == Clip.J.ROOT ? rootCollider : (joint.isLeg() ? MartialColliders.KICK : MartialColliders.FIST);
             out[i] = new AttackAnimation.Phase(w.start(), w.antic(), w.preDelay(), w.contact(), w.recovery(), w.end(), joint.get(arm), collider);
         }
