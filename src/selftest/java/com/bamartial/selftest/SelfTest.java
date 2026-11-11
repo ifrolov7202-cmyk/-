@@ -101,6 +101,7 @@ public final class SelfTest {
     private final List<String> castAnims = new ArrayList<>();
     private int attacks;
     private int dodges;
+    private MartialMoves.Role castRole;
 
     public SelfTest() {
         MinecraftForge.EVENT_BUS.register(this);
@@ -198,6 +199,10 @@ public final class SelfTest {
             }));
             steps.add(comboStep(kind));
             steps.add(new Step(kind + " rest", 20, t -> { }));
+            steps.add(specialAttackStep(kind, true));
+            steps.add(new Step(kind + " rest", 20, t -> { }));
+            steps.add(specialAttackStep(kind, false));
+            steps.add(new Step(kind + " rest", 20, t -> { }));
             steps.add(rushStep(kind));
             steps.add(releaseStep(kind));
             steps.add(new Step(kind + " rest", 20, t -> { }));
@@ -249,6 +254,7 @@ public final class SelfTest {
                 resetHits();
                 casts = 0;
                 castAnims.clear();
+                patch.setStamina(patch.getMaxStamina());
             }
             if (casts < 4 && patch.getEntityState().canBasicAttack()) {
                 SkillContainer basic = patch.getSkill(SkillSlots.BASIC_ATTACK);
@@ -263,6 +269,46 @@ public final class SelfTest {
                 check(kind + ": basic attacks use the style combo", ours, "anims=" + castAnims);
                 check(kind + ": every combo move connects", hitAnims.containsAll(castAnims),
                         "hit=" + hitAnims + " cast=" + castAnims + " other=" + otherHits);
+            }
+        });
+    }
+
+    // ---------------- удар в рывке (бег + атака) и в прыжке ----------------
+    private Step specialAttackStep(StyleKind kind, boolean dash) {
+        MartialMoves.Role want = dash ? MartialMoves.Role.DASH : MartialMoves.Role.AIR;
+        String what = dash ? "dash attack" : "air attack";
+        return new Step(kind + " " + what, 70, t -> {
+            if (t == 0) {
+                placePlayer();
+                resetTarget();
+                resetHits();
+                casts = 0;
+                castAnims.clear();
+                castRole = null;
+                patch.setStamina(patch.getMaxStamina());
+            }
+            if (casts == 0 && patch.getEntityState().canBasicAttack()) {
+                // так клиент сообщает серверу о беге и о прыжке
+                if (dash) player.setSprinting(true);
+                else player.setOnGround(false);
+                boolean cast = patch.getSkill(SkillSlots.BASIC_ATTACK).requestCasting(patch, buf());
+                player.setSprinting(false);
+                player.setOnGround(true);
+                if (cast) {
+                    casts++;
+                    castAnims.add(name(currentAnimation()));
+                    MartialMoves.Info info = MartialMoves.info(currentAnimation());
+                    castRole = info == null ? null : info.role();
+                }
+            }
+            if (t == 69) {
+                check(kind + ": " + what + " plays the style move", casts == 1 && castRole == want, "anims=" + castAnims + " role=" + castRole);
+                if (dash) {
+                    check(kind + ": dash attack connects", count(want) >= 1, "hits=" + hits + " other=" + otherHits + " anims=" + hitAnims);
+                } else {
+                    // в прыжке игрок над целью и летит к ней — с места на земле попадание не показательно
+                    info(kind + ": air attack hits from a standstill: " + count(want) + " " + hitAnims);
+                }
             }
         });
     }
@@ -499,6 +545,12 @@ public final class SelfTest {
             failures.add(what + (detail.isEmpty() ? "" : " | " + detail));
             LOG.warn("[SELFTEST] {}", line);
         }
+    }
+
+    /** Сведения без проверки (в отчёт и лог). */
+    private void info(String line) {
+        report.add("info " + line);
+        log("info " + line);
     }
 
     private void fail(String what, Throwable t) {

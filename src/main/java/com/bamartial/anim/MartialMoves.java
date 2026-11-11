@@ -71,7 +71,9 @@ public final class MartialMoves {
     private static final Clip EF_JAB_L = Clip.of(EF, "biped/combat/fist_auto1", 0.08F, 0.05F, 0.05F, 0.15F, 0.15F, Clip.J.TOOL_L).basis(3.2F);
     private static final Clip EF_JAB_R = Clip.of(EF, "biped/combat/fist_auto2", 0.08F, 0.05F, 0.05F, 0.15F, 0.15F, Clip.J.TOOL_R).basis(3.2F);
     private static final Clip EF_HOOK = Clip.of(EF, "biped/combat/fist_auto3", 0.08F, 0.05F, 0.05F, 0.15F, 0.5F, Clip.J.TOOL_L).basis(3.2F);
-    private static final Clip EF_DASH = Clip.of(EF, "biped/combat/fist_dash", 0.06F, 0.05F, 0.15F, 0.3F, 0.7F, Clip.J.SHOULDER_R).fixed(1.0F);
+    // рывок плечом: на сервере Epic Fight не двигает игрока анимацией, плечо само до цели не достаёт —
+    // хитбокс перед бойцом (так рывок попадает и с места, например контрударом дзюдо)
+    private static final Clip EF_DASH = Clip.of(EF, "biped/combat/fist_dash", 0.06F, 0.05F, 0.15F, 0.3F, 0.7F, Clip.J.SHOULDER_R).fixed(1.0F).rootHitbox();
     private static final Clip EF_AIR = Clip.of(EF, "biped/combat/fist_airslash", 0.1F, 0.15F, 0.15F, 0.26F, 0.4F, Clip.J.TOOL_R).basis(4.0F);
     private static final Clip EF_KICK = Clip.of(EF, "biped/skill/revelation_normal", 0.05F, 0.0F, 0.05F, 0.1F, 0.35F, Clip.J.LEG_R).fixed(1.0F);
     private static final Clip EF_PALMS = Clip.of(EF, "biped/skill/revelation_twohand", 0.1F, 0.0F, 0.05F, 0.1F, 0.35F, Clip.J.ROOT).fixed(1.0F);
