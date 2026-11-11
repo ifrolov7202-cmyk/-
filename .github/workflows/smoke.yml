@@ -6,6 +6,9 @@ on:
       extra:
         description: "Also load Battle Arts and Weapons of Miracles"
         default: "true"
+      selftest:
+        description: "Run the in-server self-test (combos, hold-attack rush, arts)"
+        default: "true"
 
 permissions:
   contents: write
@@ -13,7 +16,7 @@ permissions:
 jobs:
   smoke:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 50
     steps:
       - uses: actions/setup-java@v4
         with:
@@ -21,17 +24,34 @@ jobs:
           java-version: 17
       - name: Get built mod
         run: |
+          mkdir -p out
           git clone -q --depth 1 -b builds "https://github.com/${{ github.repository }}.git" built
           ls -la built
+          BUILT=$(git -C built log -1 --format=%s)
+          echo "builds branch: $BUILT, this run: ${GITHUB_SHA::7}" | tee out/built_from.txt
+          case "$BUILT" in *"${GITHUB_SHA::7}"*) ;; *) echo "builds branch is not from this commit"; exit 1;; esac
+      - uses: actions/checkout@v4
+        if: github.event.inputs.selftest == 'true'
+        with:
+          path: src
+      - name: Build self-test mod
+        if: github.event.inputs.selftest == 'true'
+        run: |
+          cd src
+          chmod +x gradlew
+          set -o pipefail
+          ./gradlew -Pselftest selftestJar --no-daemon --stacktrace 2>&1 | tee ../out/selftest_build.log
+          ls -la build/selftest
       - name: Install Forge server and mods
         run: |
-          mkdir -p server/mods out
+          mkdir -p server/mods
           cd server
           for FV in 47.4.28 47.4.10 47.4.0 47.3.0; do
             if curl -fsSL -o installer.jar "https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.1-$FV/forge-1.20.1-$FV-installer.jar"; then echo "$FV" > ../out/forge_version.txt; break; fi
           done
           java -jar installer.jar --installServer > ../out/installer.log 2>&1 || (tail -50 ../out/installer.log; exit 1)
           cp ../built/ba_martialarts.jar mods/
+          if [ -f ../src/build/selftest/ba_martialarts_selftest.jar ]; then cp ../src/build/selftest/ba_martialarts_selftest.jar mods/; fi
           cat > dl.py <<'EOF'
           import json, sys, urllib.request
           def versions(project):
@@ -54,7 +74,7 @@ jobs:
           python3 dl.py "${{ github.event.inputs.extra }}" | tee ../out/mods.txt
           ls -la mods
           echo "eula=true" > eula.txt
-          printf 'level-type=minecraft\\:flat\nonline-mode=false\nspawn-protection=0\nmax-tick-time=-1\nview-distance=4\n' > server.properties
+          printf 'level-type=minecraft\\:flat\nonline-mode=false\nspawn-protection=0\nmax-tick-time=-1\nview-distance=4\nspawn-monsters=false\nspawn-animals=false\n' > server.properties
       - name: Run server
         run: |
           cd server
@@ -69,7 +89,15 @@ jobs:
           done
           [ -f ../out/result.txt ] || echo TIMEOUT > ../out/result.txt
           if grep -q STARTED ../out/result.txt; then
-            sleep 5
+            if [ -f mods/ba_martialarts_selftest.jar ]; then
+              for i in $(seq 1 120); do
+                if grep -q '\[SELFTEST\] DONE' logs/latest.log 2>/dev/null; then break; fi
+                if grep -q 'Crash report saved\|Exception in server tick loop' ../out/server.out logs/latest.log 2>/dev/null; then break; fi
+                sleep 5
+              done
+              grep -o '\[SELFTEST\] DONE.*' logs/latest.log >> ../out/result.txt || echo "SELFTEST NOT FINISHED" >> ../out/result.txt
+            fi
+            sleep 3
             echo "reload" > console
             sleep 15
             echo "stop" > console
@@ -81,8 +109,11 @@ jobs:
           cp logs/debug.log ../out/ 2>/dev/null || true
           cp -r crash-reports ../out/ 2>/dev/null || true
           cp config/ba_martialarts-common.toml ../out/ 2>/dev/null || true
-          grep -n "ba_martialarts\|bamartial\|ERROR\|Exception\|Caused by" ../out/debug.log 2>/dev/null | head -600 > ../out/summary.txt || true
+          cp selftest-report.txt ../out/ 2>/dev/null || true
+          grep -n "ba_martialarts\|bamartial\|SELFTEST\|ERROR\|Exception\|Caused by" ../out/debug.log 2>/dev/null | head -800 > ../out/summary.txt || true
           cat ../out/result.txt
+          grep -q STARTED ../out/result.txt
+          if [ -f mods/ba_martialarts_selftest.jar ]; then grep -q 'DONE PASS' ../out/result.txt; fi
       - name: Publish logs to 'smoke' branch
         if: always()
         run: |

@@ -8,25 +8,35 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.function.Supplier;
 
 /**
- * Клиент -> сервер: атака голой рукой зажата (начать серию ударов) или отпущена (закончить).
+ * Клиент -> сервер: атака голой рукой зажата (начать серию ударов), отпущена (закончить, после 5+ ударов —
+ * завершающим ударом) или серия прервана (меню, предмет в руке — без завершающего удара).
  */
 public class RushPacket {
-    private final boolean holding;
+    public static final byte RELEASE = 0;
+    public static final byte HOLD = 1;
+    public static final byte CANCEL = 2;
 
-    public RushPacket(boolean holding) {
-        this.holding = holding;
+    private final byte action;
+
+    public RushPacket(byte action) {
+        this.action = action;
     }
 
     public RushPacket(FriendlyByteBuf buf) {
-        this.holding = buf.readBoolean();
+        this.action = buf.readByte();
     }
 
     public void encode(FriendlyByteBuf buf) {
-        buf.writeBoolean(holding);
+        buf.writeByte(action);
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ServerPlayer player = ctx.get().getSender();
-        if (player != null) Techniques.setRush(player, holding);
+        if (player == null) return;
+        switch (action) {
+            case HOLD -> Techniques.startRush(player);
+            case RELEASE -> Techniques.stopRush(player, true);
+            default -> Techniques.stopRush(player, false);
+        }
     }
 }

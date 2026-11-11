@@ -25,6 +25,7 @@ import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 import yesman.epicfight.api.animation.AnimationManager;
 import yesman.epicfight.api.animation.types.AttackAnimation;
+import yesman.epicfight.api.animation.types.EntityState;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.particle.EpicFightParticles;
 import yesman.epicfight.world.capabilities.EpicFightCapabilities;
@@ -88,36 +89,66 @@ public final class Techniques {
     //  Серия ударов при зажатой атаке (ЛКМ): пока кнопка зажата и есть выносливость
     // =====================================================================
 
-    /** Клиент сообщил: атака зажата / отпущена. */
-    public static void setRush(ServerPlayer p, boolean holding) {
+    /** Сколько ударов серии нужно, чтобы отпускание кнопки закончилось завершающим ударом стиля. */
+    public static final int RUSH_FINISHER_STRIKES = 5;
+
+    /** Клиент сообщил: атака голой рукой зажата — начать серию. */
+    public static void startRush(ServerPlayer p) {
+        if (!MartialConfig.get(MartialConfig.RUSH_ENABLED, true) || rushPatch(p) == null) return;
         State s = state(p);
-        if (holding) {
-            if (s.rush || !MartialConfig.get(MartialConfig.RUSH_ENABLED, true)) return;
-            s.rush = true;
-            s.rushStrikes = 0;
-            s.rushNext = p.level().getGameTime();
-        } else if (s.rush) {
-            endRush(p, s, true);
-        }
+        if (s.rush) return;
+        s.rush = true;
+        s.rushStrikes = 0;
+        s.rushNext = p.level().getGameTime();
+    }
+
+    /**
+     * Клиент сообщил: кнопку отпустили ({@code released}) или серию прервали (меню, предмет в руке).
+     * Отпустил после {@link #RUSH_FINISHER_STRIKES}+ ударов — завершающий удар стиля.
+     */
+    public static void stopRush(ServerPlayer p, boolean released) {
+        State s = STATES.get(p.getUUID());
+        if (s != null && s.rush) endRush(p, s, released);
+    }
+
+    /** Идёт ли сейчас серия ударов. */
+    public static boolean isRushing(ServerPlayer p) {
+        State s = STATES.get(p.getUUID());
+        return s != null && s.rush;
+    }
+
+    /** Сколько ударов в текущей серии. */
+    public static int rushStrikes(ServerPlayer p) {
+        State s = STATES.get(p.getUUID());
+        return s == null ? 0 : s.rushStrikes;
+    }
+
+    /** Патч игрока, если серия сейчас возможна: рукопашный стиль, режим боя Epic Fight, пустая рука, не верхом. */
+    private static ServerPlayerPatch rushPatch(ServerPlayer p) {
+        if (!p.isAlive() || p.isSpectator() || p.isPassenger() || !p.getMainHandItem().isEmpty()) return null;
+        if (MartialSkills.style(p) == null) return null;
+        ServerPlayerPatch sp = EpicFightCapabilities.getEntityPatch(p, ServerPlayerPatch.class);
+        return sp != null && sp.isEpicFightMode() ? sp : null;
     }
 
     private static void tickRush(ServerPlayer p, State s) {
-        ServerPlayerPatch sp = EpicFightCapabilities.getEntityPatch(p, ServerPlayerPatch.class);
+        ServerPlayerPatch sp = rushPatch(p);
         MartialBattleStyle style = MartialSkills.style(p);
-        if (sp == null || style == null || !sp.isEpicFightMode() || !p.isAlive() || !p.getMainHandItem().isEmpty()) {
+        if (sp == null || style == null) {
             s.rush = false;
+            s.rushStrikes = 0;
             return;
         }
         long now = p.level().getGameTime();
         if (now < s.rushNext) return;
-        var state = sp.getEntityState();
-        // оглушён или сбит — ждём; занят другим приёмом — ждём, пока закончит
-        if (state.hurt() || state.knockDown() || (!state.canBasicAttack() && !inRush(sp))) {
+        EntityState state = sp.getEntityState();
+        // оглушён, сбит с ног, держит блок или другой навык, занят другим приёмом — ждём и продолжаем
+        if (state.hurt() || state.knockDown() || sp.isHoldingAny() || (!state.canBasicAttack() && !inRush(sp))) {
             s.rushNext = now + 1;
             return;
         }
         float cost = (float) MartialConfig.get(MartialConfig.RUSH_STAMINA, 0.8);
-        if (sp.getStamina() < cost) {
+        if (cost > 0 && sp.getStamina() < cost) {
             endRush(p, s, false);
             actionBar(p, Component.translatable("msg.ba_martialarts.rush_tired").withStyle(ChatFormatting.GRAY));
             return;
@@ -125,11 +156,16 @@ public final class Techniques {
         AnimationManager.AnimationAccessor<? extends AttackAnimation> anim = MartialMoves.rush(style.getKind(), s.rushStrikes);
         if (anim == null) {
             s.rush = false;
+            s.rushStrikes = 0;
             return;
         }
+        // каждый удар — туда, куда сейчас смотрит камера: серией можно вести цель
+        sp.setModelYRot(p.getYRot(), true);
         sp.playAnimationSynchronized(anim, 0.0F);
-        sp.setStamina(sp.getStamina() - cost);
-        sp.setStaminaRegenAwaitTicks(Math.max(sp.getStaminaRegenAwaitTicks(), 20));
+        if (cost > 0) {
+            sp.setStamina(sp.getStamina() - cost);
+            sp.setStaminaRegenAwaitTicks(Math.max(sp.getStaminaRegenAwaitTicks(), 20));
+        }
         s.rushStrikes++;
         s.rushNext = now + MartialMoves.rushInterval(style.getKind());
         actionBar(p, Component.translatable("msg.ba_martialarts.rush", s.rushStrikes).withStyle(ChatFormatting.GOLD));
@@ -140,16 +176,18 @@ public final class Techniques {
         s.rush = false;
         int strikes = s.rushStrikes;
         s.rushStrikes = 0;
-        if (!released || strikes < 5) return;
-        ServerPlayerPatch sp = EpicFightCapabilities.getEntityPatch(p, ServerPlayerPatch.class);
+        if (!released || strikes < RUSH_FINISHER_STRIKES) return;
+        ServerPlayerPatch sp = rushPatch(p);
         MartialBattleStyle style = MartialSkills.style(p);
-        if (sp == null || style == null || !sp.isEpicFightMode() || !p.getMainHandItem().isEmpty()) return;
-        var state = sp.getEntityState();
-        if (state.hurt() || state.knockDown()) return;
+        if (sp == null || style == null) return;
+        EntityState state = sp.getEntityState();
+        if (state.hurt() || state.knockDown() || sp.isHoldingAny()) return;
         AnimationManager.AnimationAccessor<? extends AttackAnimation> finisher = MartialMoves.counter(style.getKind());
         if (finisher == null || sp.getStamina() < 1.0F) return;
+        sp.setModelYRot(p.getYRot(), true);
         sp.playAnimationSynchronized(finisher, 0.0F);
         sp.setStamina(sp.getStamina() - 1.0F);
+        sp.setStaminaRegenAwaitTicks(Math.max(sp.getStaminaRegenAwaitTicks(), 20));
         sp.updateEntityState();
     }
 

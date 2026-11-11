@@ -175,6 +175,26 @@ if (project.hasProperty('smokeMods')) {
     }
 }
 
+// Проверочный мод для CI (src/selftest): гоняет приёмы на настоящем сервере. В выпускаемый jar не входит.
+// Сборка: ./gradlew -Pselftest selftestJar  ->  build/selftest/ba_martialarts_selftest.jar
+if (project.hasProperty('selftest')) {
+    sourceSets {
+        selftest {
+            compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+            runtimeClasspath += sourceSets.main.output + sourceSets.main.runtimeClasspath
+        }
+    }
+    tasks.register('selftestJar', Jar) {
+        from sourceSets.selftest.output
+        archiveFileName = 'ba_martialarts_selftest.jar'
+        destinationDirectory = layout.buildDirectory.dir('selftest')
+        finalizedBy 'reobfSelftestJar'
+    }
+    reobf {
+        selftestJar {}
+    }
+}
+
 // This block of code expands all declared replace properties in the specified resource targets.
 // A missing property will result in an error. Properties are expanded using ${} Groovy notation.
 // When "copyIdeResources" is enabled, this will also run before the game launches in IDE environments.

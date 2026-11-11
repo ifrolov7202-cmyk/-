@@ -1,0 +1,16 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[mods]]
+modId="ba_martialarts_selftest"
+version="1.0.0"
+displayName="Battle Arts: Martial Arts self-test (CI only)"
+description='''Runs automatic in-server checks of Battle Arts: Martial Arts. Not for players.'''
+
+[[dependencies.ba_martialarts_selftest]]
+    modId="ba_martialarts"
+    mandatory=true
+    versionRange="[0,)"
+    ordering="AFTER"
+    side="BOTH"
