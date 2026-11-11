@@ -261,7 +261,7 @@ public final class MartialMoves {
         // ---------------- Шквал ударов (все стили) ----------------
         FLURRY = b.nextAccessor("art/flurry_of_blows", acc -> {
             Clip c = pick("art/flurry_of_blows", EF_BARRAGE);
-            AttackAnimation a = new AttackAnimation(c.convert, acc, Armatures.BIPED, phases(c, MartialColliders.BARRAGE, true));
+            AttackAnimation a = new AttackAnimation(transition(c), acc, Armatures.BIPED, phases(c, MartialColliders.BARRAGE, true));
             hits(a, BARRAGE, BARRAGE_FINAL);
             speed(a, c);
             a.setResourceLocation(c.namespace, c.path);
@@ -291,7 +291,7 @@ public final class MartialMoves {
             StyleKind kind, Role role, Hit h, Clip... candidates) {
         AnimationManager.AnimationAccessor<BasicAttackAnimation> accessor = b.nextAccessor(id, acc -> {
             Clip c = pick(id, candidates);
-            BasicAttackAnimation a = new BasicAttackAnimation(c.convert, acc, Armatures.BIPED, phases(c, MartialColliders.STRIKE, false));
+            BasicAttackAnimation a = new BasicAttackAnimation(transition(c), acc, Armatures.BIPED, phases(c, MartialColliders.STRIKE, false));
             hits(a, h, h);
             speed(a, c);
             a.setResourceLocation(c.namespace, c.path);
@@ -306,7 +306,7 @@ public final class MartialMoves {
             StyleKind kind, Clip... candidates) {
         AnimationManager.AnimationAccessor<DashAttackAnimation> accessor = b.nextAccessor(id, acc -> {
             Clip c = pick(id, candidates);
-            DashAttackAnimation a = new DashAttackAnimation(c.convert, acc, Armatures.BIPED, phases(c, MartialColliders.LUNGE, false));
+            DashAttackAnimation a = new DashAttackAnimation(transition(c), acc, Armatures.BIPED, phases(c, MartialColliders.LUNGE, false));
             hits(a, DASH, DASH);
             speed(a, c);
             a.setResourceLocation(c.namespace, c.path);
@@ -320,7 +320,7 @@ public final class MartialMoves {
             StyleKind kind, Clip... candidates) {
         AnimationManager.AnimationAccessor<AirSlashAnimation> accessor = b.nextAccessor(id, acc -> {
             Clip c = pick(id, candidates);
-            AirSlashAnimation a = new AirSlashAnimation(c.convert, acc, Armatures.BIPED, phases(c, MartialColliders.DIVE, false));
+            AirSlashAnimation a = new AirSlashAnimation(transition(c), acc, Armatures.BIPED, phases(c, MartialColliders.DIVE, false));
             hits(a, AIR, AIR);
             speed(a, c);
             a.setResourceLocation(c.namespace, c.path);
@@ -335,7 +335,7 @@ public final class MartialMoves {
             Hit h, Hit last, float playSpeed, Clip... candidates) {
         AnimationManager.AnimationAccessor<AttackAnimation> accessor = b.nextAccessor(id, acc -> {
             Clip c = pick(id, candidates).withFixedSpeed(playSpeed);
-            AttackAnimation a = new AttackAnimation(c.convert, acc, Armatures.BIPED, phases(c, collider, true));
+            AttackAnimation a = new AttackAnimation(transition(c), acc, Armatures.BIPED, phases(c, collider, true));
             hits(a, h, last);
             speed(a, c);
             a.setResourceLocation(c.namespace, c.path);
@@ -353,7 +353,7 @@ public final class MartialMoves {
             Clip... candidates) {
         AnimationManager.AnimationAccessor<AttackAnimation> accessor = b.nextAccessor(id, acc -> {
             Clip c = pick(id, candidates).withFixedSpeed(playSpeed);
-            AttackAnimation a = new AttackAnimation(c.convert, acc, Armatures.BIPED, phases(c, MartialColliders.BARRAGE, rootHitbox));
+            AttackAnimation a = new AttackAnimation(transition(c), acc, Armatures.BIPED, phases(c, MartialColliders.BARRAGE, rootHitbox));
             hits(a, RUSH, RUSH);
             speed(a, c);
             a.setResourceLocation(c.namespace, c.path);
@@ -412,6 +412,20 @@ public final class MartialMoves {
         a.addProperty(AnimationProperty.AttackPhaseProperty.HIT_SOUND, h.hitSound().get(), phase);
         a.addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, h.swingSound().get(), phase);
         a.addProperty(AnimationProperty.AttackPhaseProperty.PARTICLE, h.particle(), phase);
+    }
+
+    /**
+     * Время перехода к приёму. У приёмов с постоянной скоростью — целое число тиков: Epic Fight считает
+     * состояние перехода по «сырой» скорости (длина клипа × скорость атаки) и не замечает начало удара,
+     * если ударное окно открывается внутри перехода, — тогда цель, задетая прошлым ударом, не получает урона
+     * (так не попадал второй удар ногой в серии тхэквондо). При целом числе тиков переход кончается ровно
+     * к началу кадров приёма, и окно всегда открывается уже в самом приёме.
+     */
+    private static float transition(Clip c) {
+        if (c.basis || c.speed <= 0) return c.convert;
+        float perTick = c.speed * 0.05F;
+        int ticks = Math.max(1, Math.round(c.convert / perTick));
+        return ticks * perTick - 1.0E-4F;
     }
 
     private static void speed(StaticAnimation a, Clip c) {
