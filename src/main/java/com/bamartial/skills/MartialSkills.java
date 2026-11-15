@@ -69,7 +69,7 @@ public final class MartialSkills {
             COMBAT_ARTS.put(kind, worker.build(kind.artId, b -> new MartialCombatArt(b, kind), art));
 
             BattleStyle.Builder<BattleStyle> style = BattleStyle.createBattleStyleBuilder();
-            style.setBattleStyleCategory(BattleStyleCategories.NOVICE);
+            style.setBattleStyleCategory(kind == StyleKind.MASTER ? BattleStyleCategories.MASTER : BattleStyleCategories.NOVICE);
             STYLES.put(kind, worker.build(kind.styleId, b -> new MartialBattleStyle(b, kind), style));
         }
     }

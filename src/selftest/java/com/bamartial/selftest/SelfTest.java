@@ -2,6 +2,7 @@ package com.bamartial.selftest;
 
 import com.bamartial.MartialConfig;
 import com.bamartial.anim.MartialMoves;
+import com.bamartial.registry.ModRegistry;
 import com.bamartial.skills.MartialBattleStyle;
 import com.bamartial.skills.MartialSkills;
 import com.bamartial.skills.StyleKind;
@@ -12,10 +13,12 @@ import com.mojang.logging.LogUtils;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.embedded.EmbeddedChannel;
 import net.forixaim.battle_arts_api.battle_arts_skills.BattleArtsSkillSlots;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.Connection;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.PacketFlow;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -24,6 +27,11 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Husk;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.TransientCraftingContainer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.MinecraftForge;
@@ -102,6 +110,7 @@ public final class SelfTest {
     private int attacks;
     private int dodges;
     private MartialMoves.Role castRole;
+    private String wantAnim = "";
 
     public SelfTest() {
         MinecraftForge.EVENT_BUS.register(this);
@@ -195,6 +204,7 @@ public final class SelfTest {
                     SkillContainer art = patch.getSkill(BattleArtsSkillSlots.COMBAT_ART);
                     check(kind + ": combat art slot filled", art != null && art.getSkill() == MartialSkills.COMBAT_ARTS.get(kind),
                             "skill=" + (art == null ? null : art.getSkill()));
+                    if (kind == StyleKind.MASTER) checkMasterBook();
                 }
             }));
             steps.add(comboStep(kind));
@@ -208,7 +218,20 @@ public final class SelfTest {
             steps.add(new Step(kind + " rest", 20, t -> { }));
             steps.add(tiredStep(kind));
             steps.add(new Step(kind + " rest", 30, t -> { }));
-            steps.add(artStep(kind));
+            if (kind == StyleKind.MASTER) {
+                // мастер: шесть техник по кругу, на бегу — летящее колено, присев — иппон, после уклонения — айкидо
+                for (int i = 0; i < 6; i++) {
+                    steps.add(masterArtStep("cycle " + (i + 1), false, false));
+                    steps.add(new Step(kind + " rest", 30, t -> { }));
+                }
+                steps.add(masterArtStep("sprinting", true, false));
+                steps.add(new Step(kind + " rest", 30, t -> { }));
+                steps.add(masterArtStep("sneaking", false, true));
+                steps.add(new Step(kind + " rest", 30, t -> { }));
+                steps.add(aikidoStep());
+            } else {
+                steps.add(artStep(kind));
+            }
             steps.add(new Step(kind + " rest", 30, t -> { }));
         }
         steps.add(flurryStep());
@@ -247,7 +270,9 @@ public final class SelfTest {
 
     // ---------------- связка Epic Fight (миксин getAutoAttackMotion) ----------------
     private Step comboStep(StyleKind kind) {
-        return new Step(kind + " combo", 140, t -> {
+        final int moves = Math.max(1, MartialMoves.comboLength(kind));
+        final int ticks = 35 * moves;
+        return new Step(kind + " combo", ticks, t -> {
             if (t == 0) {
                 placePlayer();
                 resetTarget();
@@ -256,15 +281,16 @@ public final class SelfTest {
                 castAnims.clear();
                 patch.setStamina(patch.getMaxStamina());
             }
-            if (casts < 4 && patch.getEntityState().canBasicAttack()) {
+            if (casts < moves && patch.getEntityState().canBasicAttack()) {
                 SkillContainer basic = patch.getSkill(SkillSlots.BASIC_ATTACK);
                 if (basic.requestCasting(patch, buf())) {
                     casts++;
                     castAnims.add(name(currentAnimation()));
                 }
             }
-            if (t == 139) {
-                check(kind + ": 4 basic attacks", casts == 4, "casts=" + casts);
+            if (t == ticks - 1) {
+                check(kind + ": " + moves + " basic attacks", casts == moves, "casts=" + casts);
+                check(kind + ": combo has " + moves + " different strikes", new LinkedHashSet<>(castAnims).size() == moves, "anims=" + castAnims);
                 boolean ours = !castAnims.isEmpty() && castAnims.stream().allMatch(a -> a.startsWith("ba_martialarts:"));
                 check(kind + ": basic attacks use the style combo", ours, "anims=" + castAnims);
                 check(kind + ": every combo move connects", hitAnims.containsAll(castAnims),
@@ -315,7 +341,11 @@ public final class SelfTest {
 
     // ---------------- серия при зажатой атаке ----------------
     private Step rushStep(StyleKind kind) {
-        return new Step(kind + " rush", RUSH_TICKS + 1, t -> {
+        // держим атаку не меньше полного круга ударов серии
+        int cycle = 0;
+        for (int i = 0; i < MartialMoves.rushCount(kind); i++) cycle += MartialMoves.rushMove(kind, i).interval();
+        final int rushTicks = Math.max(RUSH_TICKS, cycle + 8);
+        return new Step(kind + " rush", rushTicks + 1, t -> {
             if (t == 0) {
                 placePlayer();
                 resetTarget();
@@ -327,13 +357,16 @@ public final class SelfTest {
                 Techniques.startRush(player);
                 check(kind + ": rush starts on hold", Techniques.isRushing(player), "");
             }
-            if (t == RUSH_TICKS) {
+            if (t == rushTicks) {
                 int strikes = Techniques.rushStrikes(player);
                 float used = staminaStart - patch.getStamina();
-                int expected = (RUSH_TICKS - 1) / MartialMoves.rushInterval(kind) + 1;
+                // удары идут в тики 0, пауза первого, пауза первого + пауза второго...
+                int expected = 0;
+                for (int at = 0; at < rushTicks; expected++) at += MartialMoves.rushMove(kind, expected).interval();
                 float cost = rushCost();
                 Set<String> moves = new LinkedHashSet<>();
-                for (int i = 0; i < 4; i++) moves.add(name(MartialMoves.rush(kind, i)));
+                for (int i = 0; i < MartialMoves.rushCount(kind); i++) moves.add(name(MartialMoves.rushMove(kind, i).anim()));
+                check(kind + ": rush has moves", !moves.isEmpty(), "");
                 check(kind + ": rush keeps going while held", Techniques.isRushing(player), "");
                 check(kind + ": rush strike count", Math.abs(strikes - expected) <= 1, "strikes=" + strikes + " expected=" + expected);
                 check(kind + ": rush strikes connect", count(MartialMoves.Role.BARRAGE) >= strikes - 1,
@@ -405,6 +438,86 @@ public final class SelfTest {
                 check(kind + ": combat art hits", count(MartialMoves.Role.ART) >= 1, "hits=" + hits + " other=" + otherHits + " anims=" + hitAnims);
             }
         });
+    }
+
+    // ---------------- мастер: техника зависит от положения ----------------
+    private Step masterArtStep(String what, boolean sprinting, boolean sneaking) {
+        String label = "MASTER art (" + what + ")";
+        return new Step(label, 80, t -> {
+            if (t == 0) {
+                placePlayer();
+                resetTarget();
+                resetHits();
+                MartialBattleStyle.addMeter(MartialSkills.styleContainer(player), 10000.0F);
+                MartialMoves.Technique want;
+                if (sprinting) want = MartialMoves.technique(StyleKind.MUAY_THAI);
+                else if (sneaking) want = MartialMoves.technique(StyleKind.JUDO);
+                else want = MartialMoves.masterCycle().get(Techniques.masterArtIndex(player));
+                wantAnim = name(want.anim());
+                player.setSprinting(sprinting);
+                player.setShiftKeyDown(sneaking);
+                SkillContainer art = patch.getSkill(BattleArtsSkillSlots.COMBAT_ART);
+                boolean cast = art != null && art.getSkill() != null && art.requestCasting(patch, buf());
+                player.setSprinting(false);
+                player.setShiftKeyDown(false);
+                String anim = name(currentAnimation());
+                check(label + ": cast " + wantAnim, cast && anim.equals(wantAnim), "cast=" + cast + " anim=" + anim);
+            }
+            if (t == 79) {
+                check(label + ": " + wantAnim + " hits", hitAnims.contains(wantAnim) && count(MartialMoves.Role.ART) >= 1,
+                        "hits=" + hits + " other=" + otherHits + " anims=" + hitAnims);
+            }
+        });
+    }
+
+    // ---------------- мастер: бросок айкидо после уклонения ----------------
+    private Step aikidoStep() {
+        return new Step("MASTER aikido counter", 50, t -> {
+            if (t == 0) {
+                placePlayer();
+                resetTarget();
+                resetHits();
+                Techniques.dodgeCounter(player, target, StyleKind.MASTER);
+            }
+            if (t == 49) {
+                String want = name(MartialMoves.AIKIDO_COUNTER);
+                check("MASTER: aikido counter after a dodge connects", hitAnims.contains(want), "hits=" + hits + " anims=" + hitAnims + " want=" + want);
+            }
+        });
+    }
+
+    /** Книга мастера собирается из книг шести стилей, а надетый стиль даёт достижение. */
+    private void checkMasterBook() {
+        var recipe = server.getRecipeManager().byKey(new ResourceLocation("ba_martialarts", "martial_arts_master_book"));
+        check("MASTER: book recipe loaded", recipe.isPresent() && recipe.get() instanceof CraftingRecipe, "recipe=" + recipe);
+        if (recipe.isPresent() && recipe.get() instanceof CraftingRecipe crafting) {
+            AbstractContainerMenu menu = new AbstractContainerMenu(null, -1) {
+                @Override
+                public ItemStack quickMoveStack(Player p, int slot) {
+                    return ItemStack.EMPTY;
+                }
+
+                @Override
+                public boolean stillValid(Player p) {
+                    return true;
+                }
+            };
+            TransientCraftingContainer grid = new TransientCraftingContainer(menu, 3, 3);
+            int slot = 0;
+            for (StyleKind k : StyleKind.values()) {
+                if (k != StyleKind.MASTER) grid.setItem(slot++, ModRegistry.styleBook(k));
+            }
+            boolean matches = crafting.matches(grid, level);
+            ItemStack out = matches ? crafting.assemble(grid, level.registryAccess()) : ItemStack.EMPTY;
+            String skill = out.hasTag() ? out.getTag().getString("skill") : "";
+            check("MASTER: six style books craft the master book", matches && skill.equals("ba_martialarts:martial_arts_master"),
+                    "matches=" + matches + " out=" + out + " skill=" + skill);
+            // две одинаковые книги вместо шести разных — не рецепт
+            grid.setItem(0, ModRegistry.styleBook(StyleKind.JUDO));
+            check("MASTER: five different books are not enough", !crafting.matches(grid, level), "");
+        }
+        Advancement adv = server.getAdvancements().getAdvancement(new ResourceLocation("ba_martialarts", "martial/master"));
+        check("MASTER: advancement granted", adv != null && player.getAdvancements().getOrStartProgress(adv).isDone(), "adv=" + adv);
     }
 
     // ---------------- шквал ударов (C) ----------------

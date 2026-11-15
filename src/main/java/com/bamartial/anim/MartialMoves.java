@@ -59,6 +59,15 @@ public final class MartialMoves {
 
     public record Info(Role role, StyleKind kind) {}
 
+    /** Удар серии при зажатой атаке и пауза после него (тиков) до следующего удара. */
+    public record RushMove(AnimationManager.AnimationAccessor<? extends AttackAnimation> anim, int interval) {}
+
+    /**
+     * Боевое искусство: имя (ключ перевода), школа (от неё зависят подскок, дальность наведения и эффект попадания)
+     * и атакующая анимация.
+     */
+    public record Technique(String nameKey, StyleKind school, AnimationManager.AnimationAccessor<? extends AttackAnimation> anim) {}
+
     // =====================================================================
     //  Источники ключевых кадров
     // =====================================================================
@@ -152,6 +161,16 @@ public final class MartialMoves {
     private static final Hit BARRAGE = new Hit(0.7F, StunType.HOLD, 2.0F, 0F, 2, EpicFightSounds.BLUNT_HIT, EpicFightSounds.WHOOSH_SMALL, EpicFightParticles.HIT_BLUNT);
     /** Серия при зажатой атаке: слабые быстрые удары, держат врага в оглушении. */
     private static final Hit RUSH = new Hit(0.6F, StunType.HOLD, 1.0F, 0F, 2, EpicFightSounds.BLUNT_HIT, EpicFightSounds.WHOOSH_SMALL, EpicFightParticles.HIT_BLUNT);
+    /** Проход в ноги / толчок корпусом в связке мастера. */
+    private static final Hit SHOVE = new Hit(1.3F, StunType.LONG, 3.0F, 0F, 0, EpicFightSounds.BLUNT_HIT_HARD, EpicFightSounds.WHOOSH_BIG, EpicFightParticles.HIT_BLUNT);
+    /** 12-й удар связки мастера: бросок через бедро, сбивает с ног. */
+    private static final Hit GRAND_FINISH = new Hit(2.2F, StunType.KNOCKDOWN, 6.0F, 0F, 0, EpicFightSounds.BLUNT_HIT_HARD, EpicFightSounds.WHOOSH_BIG, EpicFightParticles.AIR_BURST);
+    /** Айкидо: бросок атакующего его же силой (контрприём мастера после уклонения). */
+    private static final Hit AIKIDO = new Hit(2.0F, StunType.KNOCKDOWN, 7.0F, 0F, 0, EpicFightSounds.BLUNT_HIT_HARD, EpicFightSounds.WHOOSH_BIG, EpicFightParticles.AIR_BURST);
+    /** Джит Кун До: дюймовый удар — одна цель, пробивает броню, далеко отбрасывает. */
+    private static final Hit ONE_INCH = new Hit(4.5F, StunType.LONG, 20.0F, 60F, 1, EpicFightSounds.BLUNT_HIT_HARD, EpicFightSounds.WHOOSH_BIG, EpicFightParticles.AIR_BURST);
+    /** Джиу-джитсу: болевой захват — цель обездвижена на 2,5 секунды (время оглушения HOLD = импакт × 0,25 с). */
+    private static final Hit ARMLOCK = new Hit(2.0F, StunType.HOLD, 10.0F, 0F, 1, EpicFightSounds.BLUNT_HIT, EpicFightSounds.WHOOSH, EpicFightParticles.HIT_BLUNT);
     private static final Hit BARRAGE_FINAL = new Hit(2.5F, StunType.KNOCKDOWN, 16.0F, 0F, 2, EpicFightSounds.BLUNT_HIT_HARD, EpicFightSounds.WHOOSH_BIG, EpicFightParticles.AIR_BURST);
 
     // =====================================================================
@@ -161,14 +180,21 @@ public final class MartialMoves {
     private static final Map<StyleKind, List<AnimationManager.AnimationAccessor<? extends AttackAnimation>>> COMBOS = new EnumMap<>(StyleKind.class);
     private static final Map<StyleKind, AnimationManager.AnimationAccessor<? extends AttackAnimation>> ARTS = new EnumMap<>(StyleKind.class);
     private static final Map<StyleKind, AnimationManager.AnimationAccessor<? extends AttackAnimation>> COUNTERS = new EnumMap<>(StyleKind.class);
-    private static final Map<StyleKind, List<AnimationManager.AnimationAccessor<? extends AttackAnimation>>> BARRAGES = new EnumMap<>(StyleKind.class);
+    private static final Map<StyleKind, List<RushMove>> BARRAGES = new EnumMap<>(StyleKind.class);
+    private static final Map<StyleKind, Integer> COMBO_LENGTH = new EnumMap<>(StyleKind.class);
+    /** Техники мастера, которые применяются стоя, по кругу. */
+    private static final List<Technique> MASTER_CYCLE = new ArrayList<>();
     private static final Map<String, String> CHOSEN = new HashMap<>();
+    /** Сколько ударов в самой длинной связке (связки короче повторяются до этой длины). */
+    private static final int COMBO_SLOTS = 12;
 
     public static AnimationManager.AnimationAccessor<AttackAnimation> FLURRY;
     public static AnimationManager.AnimationAccessor<DodgeAnimation> DODGE_LEFT;
     public static AnimationManager.AnimationAccessor<DodgeAnimation> DODGE_RIGHT;
     public static AnimationManager.AnimationAccessor<DodgeAnimation> DODGE_BACK;
     public static AnimationManager.AnimationAccessor<ActionAnimation> AWAKEN;
+    /** Айкидо: контрбросок мастера после уклонения. */
+    public static AnimationManager.AnimationAccessor<? extends AttackAnimation> AIKIDO_COUNTER;
     private static volatile boolean awakenAvailable = false;
 
     private MartialMoves() {}
@@ -184,10 +210,18 @@ public final class MartialMoves {
         ARTS.clear();
         COUNTERS.clear();
         BARRAGES.clear();
+        COMBO_LENGTH.clear();
+        MASTER_CYCLE.clear();
+
+        // удары шести школ, которые входят и в связку мастера
+        AnimationManager.AnimationAccessor<BasicAttackAnimation> boxingJab = hit(b, "boxing/jab", StyleKind.BOXING, Role.COMBO, JAB, BA_JAB_L, EF_JAB_L);
+        AnimationManager.AnimationAccessor<BasicAttackAnimation> karateGyakuZuki = hit(b, "karate/gyaku_zuki", StyleKind.KARATE, Role.FINISHER, FINISH, BA_PUNCH_R, WOM_PUNCH, EF_JAB_R);
+        AnimationManager.AnimationAccessor<BasicAttackAnimation> kungFuTwinPalms = hit(b, "kung_fu/twin_palms", StyleKind.KUNG_FU, Role.FINISHER, FINISH, EF_PALMS);
+        AnimationManager.AnimationAccessor<BasicAttackAnimation> taekwondoDollyoChagi = hit(b, "taekwondo/dollyo_chagi", StyleKind.TAEKWONDO, Role.COMBO, KICK, WOM_KICK, BA_KICK, EF_KICK);
 
         // ---------------- Бокс: джеб — кросс — хук — прямой ----------------
         combo(b, StyleKind.BOXING,
-                hit(b, "boxing/jab", StyleKind.BOXING, Role.COMBO, JAB, BA_JAB_L, EF_JAB_L),
+                boxingJab,
                 hit(b, "boxing/cross", StyleKind.BOXING, Role.COMBO, JAB, BA_JAB_R, EF_JAB_R),
                 hit(b, "boxing/hook", StyleKind.BOXING, Role.COMBO, JAB, BA_PUNCH_L, EF_HOOK),
                 hit(b, "boxing/power_straight", StyleKind.BOXING, Role.FINISHER, FINISH, BA_PUNCH_R, WOM_PUNCH, EF_JAB_R),
@@ -200,7 +234,7 @@ public final class MartialMoves {
                 hit(b, "karate/oi_zuki", StyleKind.KARATE, Role.COMBO, JAB, BA_JAB_R, EF_JAB_R),
                 hit(b, "karate/kizami_zuki", StyleKind.KARATE, Role.COMBO, JAB, BA_JAB_L, EF_JAB_L),
                 hit(b, "karate/mae_geri", StyleKind.KARATE, Role.COMBO, KICK, WOM_KICK_1, BA_KICK, EF_KICK),
-                hit(b, "karate/gyaku_zuki", StyleKind.KARATE, Role.FINISHER, FINISH, BA_PUNCH_R, WOM_PUNCH, EF_JAB_R),
+                karateGyakuZuki,
                 dash(b, "karate/dash", StyleKind.KARATE, BA_LUNGE, EF_DASH),
                 air(b, "karate/air", StyleKind.KARATE, BA_AXE_KICK, EF_AIR));
         art(b, "art/kiai", StyleKind.KARATE, MartialColliders.WAVE, KIAI, KIAI, 1.2F, WOM_PUNCH, BA_HEAVY, EF_PALMS);
@@ -220,7 +254,7 @@ public final class MartialMoves {
                 hit(b, "kung_fu/palm_right", StyleKind.KUNG_FU, Role.COMBO, JAB, BA_JAB_R, EF_JAB_R),
                 hit(b, "kung_fu/palm_left", StyleKind.KUNG_FU, Role.COMBO, JAB, BA_JAB_L, EF_JAB_L),
                 hit(b, "kung_fu/crane_kick", StyleKind.KUNG_FU, Role.COMBO, KICK, BA_KICK, WOM_KICK_1, EF_KICK),
-                hit(b, "kung_fu/twin_palms", StyleKind.KUNG_FU, Role.FINISHER, FINISH, EF_PALMS),
+                kungFuTwinPalms,
                 dash(b, "kung_fu/dash", StyleKind.KUNG_FU, BA_LUNGE, EF_DASH),
                 air(b, "kung_fu/air", StyleKind.KUNG_FU, BA_AXE_KICK, EF_AIR));
         art(b, "art/chi_palm", StyleKind.KUNG_FU, MartialColliders.WAVE, CHI, CHI, 1.0F, EF_PALMS);
@@ -229,7 +263,7 @@ public final class MartialMoves {
         combo(b, StyleKind.TAEKWONDO,
                 hit(b, "taekwondo/ap_chagi", StyleKind.TAEKWONDO, Role.COMBO, KICK, WOM_KICK_1, BA_KICK, EF_KICK),
                 hit(b, "taekwondo/double_kick", StyleKind.TAEKWONDO, Role.COMBO, KICK, WOM_KICK_2, BA_JAB_L, EF_JAB_L),
-                hit(b, "taekwondo/dollyo_chagi", StyleKind.TAEKWONDO, Role.COMBO, KICK, WOM_KICK, BA_KICK, EF_KICK),
+                taekwondoDollyoChagi,
                 hit(b, "taekwondo/dwi_chagi", StyleKind.TAEKWONDO, Role.FINISHER, FINISH, WOM_KICK_3, BA_KICK, EF_KICK),
                 dash(b, "taekwondo/dash", StyleKind.TAEKWONDO, BA_LUNGE, EF_DASH),
                 air(b, "taekwondo/naeryeo_chagi", StyleKind.TAEKWONDO, BA_AXE_KICK, EF_AIR));
@@ -247,18 +281,51 @@ public final class MartialMoves {
 
         // ---------------- Серия ударов при зажатой атаке ----------------
         // руки — хитбокс перед бойцом; ноги — на самой ноге (у разворотных ударов корень поворачивается)
-        rush(b, "rush/boxing_left", StyleKind.BOXING, 1.6F, true, BA_JAB_L, EF_JAB_L);
-        rush(b, "rush/boxing_right", StyleKind.BOXING, 1.6F, true, BA_JAB_R, EF_JAB_R);
-        rush(b, "rush/karate_right", StyleKind.KARATE, 1.5F, true, BA_JAB_R, EF_JAB_R);
-        rush(b, "rush/karate_left", StyleKind.KARATE, 1.5F, true, BA_JAB_L, EF_JAB_L);
-        rush(b, "rush/muay_thai_left", StyleKind.MUAY_THAI, 1.5F, true, BA_JAB_L, EF_JAB_L);
-        rush(b, "rush/muay_thai_right", StyleKind.MUAY_THAI, 1.5F, true, BA_PUNCH_R, EF_JAB_R);
-        rush(b, "rush/kung_fu_right", StyleKind.KUNG_FU, 1.8F, true, BA_JAB_R, EF_JAB_R);
-        rush(b, "rush/kung_fu_left", StyleKind.KUNG_FU, 1.8F, true, BA_JAB_L, EF_JAB_L);
-        rush(b, "rush/taekwondo_kick_a", StyleKind.TAEKWONDO, 1.6F, false, WOM_KICK_1, BA_KICK, EF_KICK);
-        rush(b, "rush/taekwondo_kick_b", StyleKind.TAEKWONDO, 1.6F, false, WOM_KICK, BA_KICK, EF_KICK);
-        rush(b, "rush/judo_right", StyleKind.JUDO, 1.5F, true, BA_PUNCH_R, EF_JAB_R);
-        rush(b, "rush/judo_left", StyleKind.JUDO, 1.5F, true, BA_PUNCH_L, EF_JAB_L);
+        // последнее число — пауза после удара до следующего, тиков
+        RushMove boxingLeft = rush(b, "rush/boxing_left", StyleKind.BOXING, 1.6F, true, 4, BA_JAB_L, EF_JAB_L);
+        RushMove boxingRight = rush(b, "rush/boxing_right", StyleKind.BOXING, 1.6F, true, 4, BA_JAB_R, EF_JAB_R);
+        RushMove karateRight = rush(b, "rush/karate_right", StyleKind.KARATE, 1.5F, true, 4, BA_JAB_R, EF_JAB_R);
+        RushMove karateLeft = rush(b, "rush/karate_left", StyleKind.KARATE, 1.5F, true, 4, BA_JAB_L, EF_JAB_L);
+        rush(b, "rush/muay_thai_left", StyleKind.MUAY_THAI, 1.5F, true, 5, BA_JAB_L, EF_JAB_L);
+        rush(b, "rush/muay_thai_right", StyleKind.MUAY_THAI, 1.5F, true, 5, BA_PUNCH_R, EF_JAB_R);
+        RushMove kungFuRight = rush(b, "rush/kung_fu_right", StyleKind.KUNG_FU, 1.8F, true, 3, BA_JAB_R, EF_JAB_R);
+        RushMove kungFuLeft = rush(b, "rush/kung_fu_left", StyleKind.KUNG_FU, 1.8F, true, 3, BA_JAB_L, EF_JAB_L);
+        RushMove taekwondoKickA = rush(b, "rush/taekwondo_kick_a", StyleKind.TAEKWONDO, 1.6F, false, 6, WOM_KICK_1, BA_KICK, EF_KICK);
+        RushMove taekwondoKickB = rush(b, "rush/taekwondo_kick_b", StyleKind.TAEKWONDO, 1.6F, false, 6, WOM_KICK, BA_KICK, EF_KICK);
+        rush(b, "rush/judo_right", StyleKind.JUDO, 1.5F, true, 5, BA_PUNCH_R, EF_JAB_R);
+        rush(b, "rush/judo_left", StyleKind.JUDO, 1.5F, true, 5, BA_PUNCH_L, EF_JAB_L);
+
+        // ---------------- Мастер боевых искусств: все школы в одном стиле ----------------
+        // связка из 12 ударов, каждый — из своей школы; 4-й и 8-й надолго оглушают, 12-й сбивает с ног
+        combo(b, StyleKind.MASTER,
+                boxingJab,
+                hit(b, "wing_chun/chain_punch", StyleKind.MASTER, Role.COMBO, JAB, BA_JAB_R, EF_JAB_R),
+                hit(b, "kickboxing/low_kick", StyleKind.MASTER, Role.COMBO, KICK, WOM_KICK_1, BA_KICK, EF_KICK),
+                karateGyakuZuki,
+                hit(b, "muay_thai/sok", StyleKind.MASTER, Role.COMBO, JAB, BA_PUNCH_L, EF_HOOK),
+                hit(b, "savate/chasse", StyleKind.MASTER, Role.COMBO, KICK, WOM_KICK, BA_KICK, EF_KICK),
+                hit(b, "krav_maga/palm_heel", StyleKind.MASTER, Role.COMBO, JAB, BA_PUNCH_R, EF_JAB_R),
+                kungFuTwinPalms,
+                taekwondoDollyoChagi,
+                hit(b, "capoeira/armada", StyleKind.MASTER, Role.COMBO, KICK, WOM_KICK_2, BA_KICK, EF_KICK),
+                hit(b, "sambo/takedown", StyleKind.MASTER, Role.COMBO, SHOVE, WOM_SHOULDER, BA_LUNGE, EF_DASH),
+                hit(b, "judo/o_goshi", StyleKind.MASTER, Role.FINISHER, GRAND_FINISH, BA_UPPERCUT, WOM_SHOULDER, EF_DASH),
+                dash(b, "sumo/tachiai", StyleKind.MASTER, WOM_SHOULDER, BA_LUNGE, EF_DASH),
+                air(b, "ninjutsu/drop_strike", StyleKind.MASTER, BA_AXE_KICK, EF_AIR));
+        // серия при зажатой атаке: руки бокса, цепочка кунг-фу, ноги тхэквондо, руки каратэ
+        BARRAGES.put(StyleKind.MASTER, List.of(boxingLeft, boxingRight, kungFuRight, kungFuLeft, taekwondoKickA,
+                karateRight, karateLeft, taekwondoKickB));
+        // айкидо: контрбросок после уклонения
+        AIKIDO_COUNTER = hit(b, "aikido/kokyu_nage", StyleKind.MASTER, Role.FINISHER, AIKIDO, EF_PALMS);
+        // боевое искусство мастера: на бегу — летящее колено, присев — иппон, стоя — техники по кругу
+        MASTER_CYCLE.add(technique(StyleKind.BOXING));
+        MASTER_CYCLE.add(technique(StyleKind.KARATE));
+        MASTER_CYCLE.add(technique(StyleKind.KUNG_FU));
+        MASTER_CYCLE.add(technique(StyleKind.TAEKWONDO));
+        MASTER_CYCLE.add(new Technique("technique.ba_martialarts.one_inch_punch", StyleKind.MASTER,
+                artAnim(b, "art/one_inch_punch", StyleKind.MASTER, MartialColliders.HEAVY, ONE_INCH, ONE_INCH, 1.0F, WOM_PUNCH, BA_PUNCH_R, EF_JAB_R)));
+        MASTER_CYCLE.add(new Technique("technique.ba_martialarts.armlock", StyleKind.MASTER,
+                artAnim(b, "art/armlock", StyleKind.MASTER, MartialColliders.HEAVY, ARMLOCK, ARMLOCK, 1.2F, BA_HEAVY, EF_HOOK)));
 
         // ---------------- Шквал ударов (все стили) ----------------
         FLURRY = b.nextAccessor("art/flurry_of_blows", acc -> {
@@ -300,7 +367,6 @@ public final class MartialMoves {
             return a;
         });
         INFO.put(accessor.registryName(), new Info(role, kind));
-        if (role == Role.FINISHER) COUNTERS.put(kind, accessor);
         return accessor;
     }
 
@@ -332,9 +398,15 @@ public final class MartialMoves {
         return accessor;
     }
 
-    /** Боевое искусство стиля: хитбокс техники фиксирован перед бойцом, скорость постоянная. */
+    /** Боевое искусство стиля (слот Z этого стиля). */
     private static void art(AnimationManager.AnimationBuilder b, String id, StyleKind kind, Collider collider,
             Hit h, Hit last, float playSpeed, Clip... candidates) {
+        ARTS.put(kind, artAnim(b, id, kind, collider, h, last, playSpeed, candidates));
+    }
+
+    /** Анимация боевого искусства: хитбокс техники фиксирован перед бойцом, скорость постоянная. */
+    private static AnimationManager.AnimationAccessor<AttackAnimation> artAnim(AnimationManager.AnimationBuilder b, String id,
+            StyleKind kind, Collider collider, Hit h, Hit last, float playSpeed, Clip... candidates) {
         AnimationManager.AnimationAccessor<AttackAnimation> accessor = b.nextAccessor(id, acc -> {
             Clip c = pick(id, candidates).withFixedSpeed(playSpeed);
             AttackAnimation a = new AttackAnimation(transition(c), acc, Armatures.BIPED, phases(c, collider, true));
@@ -344,15 +416,15 @@ public final class MartialMoves {
             return a;
         });
         INFO.put(accessor.registryName(), new Info(Role.ART, kind));
-        ARTS.put(kind, accessor);
+        return accessor;
     }
 
     /**
      * Удар серии: высокая постоянная скорость (следующий удар прерывает предыдущий).
      * rootHitbox — хитбокс перед бойцом, иначе на суставе удара (рука/нога).
      */
-    private static void rush(AnimationManager.AnimationBuilder b, String id, StyleKind kind, float playSpeed, boolean rootHitbox,
-            Clip... candidates) {
+    private static RushMove rush(AnimationManager.AnimationBuilder b, String id, StyleKind kind, float playSpeed, boolean rootHitbox,
+            int interval, Clip... candidates) {
         AnimationManager.AnimationAccessor<AttackAnimation> accessor = b.nextAccessor(id, acc -> {
             Clip c = pick(id, candidates).withFixedSpeed(playSpeed);
             AttackAnimation a = new AttackAnimation(transition(c), acc, Armatures.BIPED, phases(c, MartialColliders.BARRAGE, rootHitbox));
@@ -362,7 +434,9 @@ public final class MartialMoves {
             return a;
         });
         INFO.put(accessor.registryName(), new Info(Role.BARRAGE, kind));
-        BARRAGES.computeIfAbsent(kind, k -> new ArrayList<>()).add(accessor);
+        RushMove move = new RushMove(accessor, interval);
+        BARRAGES.computeIfAbsent(kind, k -> new ArrayList<>()).add(move);
+        return move;
     }
 
     private static DodgeAnimation dodge(AnimationManager.AnimationAccessor<DodgeAnimation> acc, String id, Clip... candidates) {
@@ -373,16 +447,20 @@ public final class MartialMoves {
     }
 
     /**
-     * Связка стиля для BasicAttack Epic Fight: [удары..., рывок, в прыжке]. Удары повторены трижды,
-     * чтобы счётчик комбо, оставшийся от другого оружия, никогда не выходил за пределы списка.
+     * Связка стиля для BasicAttack Epic Fight: [удары..., рывок, в прыжке]. Удары повторяются до 12 мест
+     * (связка мастера занимает их все): счётчик комбо, оставшийся от другого стиля или оружия, никогда
+     * не выходит за пределы списка. Последний удар связки — он же контрудар и завершение серии.
      */
     @SafeVarargs
     private static void combo(AnimationManager.AnimationBuilder b, StyleKind kind,
             AnimationManager.AnimationAccessor<? extends AttackAnimation>... moves) {
         List<AnimationManager.AnimationAccessor<? extends AttackAnimation>> hits = new ArrayList<>();
         for (int i = 0; i < moves.length - 2; i++) hits.add(moves[i]);
+        if (hits.isEmpty() || COMBO_SLOTS % hits.size() != 0) throw new IllegalArgumentException("combo of " + kind + ": " + hits.size() + " hits");
         List<AnimationManager.AnimationAccessor<? extends AttackAnimation>> list = new ArrayList<>();
-        for (int r = 0; r < 3; r++) list.addAll(hits);
+        while (list.size() < COMBO_SLOTS) list.addAll(hits);
+        COMBO_LENGTH.put(kind, hits.size());
+        COUNTERS.put(kind, hits.get(hits.size() - 1));
         list.add(moves[moves.length - 2]);
         list.add(moves[moves.length - 1]);
         COMBOS.put(kind, Collections.unmodifiableList(list));
@@ -515,21 +593,40 @@ public final class MartialMoves {
         return COUNTERS.get(kind);
     }
 
-    /** Удар серии при зажатой атаке (чередуются). */
-    public static AnimationManager.AnimationAccessor<? extends AttackAnimation> rush(StyleKind kind, int index) {
-        List<AnimationManager.AnimationAccessor<? extends AttackAnimation>> list = BARRAGES.get(kind);
+    /** Удар серии при зажатой атаке (чередуются) и пауза после него; null — серии нет. */
+    public static RushMove rushMove(StyleKind kind, int index) {
+        List<RushMove> list = BARRAGES.get(kind);
         if (list == null || list.isEmpty()) return null;
         return list.get(Math.floorMod(index, list.size()));
     }
 
-    /** Пауза между ударами серии, тиков. */
-    public static int rushInterval(StyleKind kind) {
-        return switch (kind) {
-            case KUNG_FU -> 3;
-            case TAEKWONDO -> 6;
-            case MUAY_THAI, JUDO -> 5;
-            default -> 4;
-        };
+    /** Сколько разных ударов в серии стиля. */
+    public static int rushCount(StyleKind kind) {
+        List<RushMove> list = BARRAGES.get(kind);
+        return list == null ? 0 : list.size();
+    }
+
+    /** Сколько разных ударов в связке стиля. */
+    public static int comboLength(StyleKind kind) {
+        return COMBO_LENGTH.getOrDefault(kind, 0);
+    }
+
+    /** Боевое искусство школы как техника (для мастера); null, если анимации нет. */
+    public static Technique technique(StyleKind school) {
+        AnimationManager.AnimationAccessor<? extends AttackAnimation> anim = ARTS.get(school);
+        return anim == null ? null : new Technique("skill.ba_martialarts." + school.artId, school, anim);
+    }
+
+    /** Техники мастера, которые применяются стоя, по кругу. */
+    public static List<Technique> masterCycle() {
+        return Collections.unmodifiableList(MASTER_CYCLE);
+    }
+
+    /** Ключ перевода названия удара («школа: удар») по его анимации. */
+    public static String moveKey(AssetAccessor<?> animation) {
+        if (animation == null || animation.registryName() == null) return null;
+        ResourceLocation id = animation.registryName();
+        return BAMartial.MODID.equals(id.getNamespace()) ? "move.ba_martialarts." + id.getPath().replace('/', '.') : null;
     }
 
     public static boolean awakenAvailable() {
@@ -546,7 +643,7 @@ public final class MartialMoves {
     public static AnimationManager.AnimationAccessor<? extends StaticAnimation> stance(StyleKind kind) {
         if (!ModList.get().isLoaded(BA)) return null;
         String path = switch (kind) {
-            case KUNG_FU, TAEKWONDO, KARATE -> "battle_style/unique/iron_lotus/fist/idle";
+            case KUNG_FU, TAEKWONDO, KARATE, MASTER -> "battle_style/unique/iron_lotus/fist/idle";
             default -> "battle_style/novice/journeyman/idle";
         };
         try {

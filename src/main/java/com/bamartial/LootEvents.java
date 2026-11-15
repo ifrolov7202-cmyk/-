@@ -46,6 +46,7 @@ public final class LootEvents {
                 .setRolls(ConstantValue.exactly(1))
                 .add(EmptyLootItem.emptyItem().setWeight(70));
         for (StyleKind kind : StyleKind.values()) {
+            if (kind.craftOnly()) continue;
             CompoundTag tag = new CompoundTag();
             tag.putString("skill", BAMartial.MODID + ":" + kind.styleId);
             pool.add(LootItem.lootTableItem(book).setWeight(5).apply(SetNbtFunction.setTag(tag)));
@@ -58,6 +59,7 @@ public final class LootEvents {
     public static void onWandererTrades(WandererTradesEvent event) {
         if (!MartialConfig.get(MartialConfig.BOOKS_AT_TRADER, true)) return;
         for (StyleKind kind : StyleKind.values()) {
+            if (kind.craftOnly()) continue;
             event.getRareTrades().add((trader, random) -> {
                 ItemStack book = ModRegistry.styleBook(kind);
                 return book.isEmpty() ? null : new MerchantOffer(new ItemStack(Items.EMERALD, 20), new ItemStack(Items.BOOK), book, 1, 15, 0.05f);

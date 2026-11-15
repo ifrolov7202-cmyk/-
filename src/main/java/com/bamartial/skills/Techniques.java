@@ -53,7 +53,11 @@ public final class Techniques {
         int counterTarget = -1;
         long counterAt;
         StyleKind counterKind = StyleKind.BOXING;
+        /** Контрудар — бросок айкидо (мастер после уклонения), а не завершающий удар стиля. */
+        boolean counterAikido;
         long judoCounterReady;
+        /** Какая техника мастера следующая в круге. */
+        int masterArt;
         boolean rush;
         int rushStrikes;
         long rushNext;
@@ -82,7 +86,7 @@ public final class Techniques {
         if (s.counterTarget < 0 || p.level().getGameTime() < s.counterAt) return;
         int id = s.counterTarget;
         s.counterTarget = -1;
-        performCounter(p, s.counterKind, p.level().getEntity(id));
+        performCounter(p, s.counterKind, s.counterAikido, p.level().getEntity(id));
     }
 
     // =====================================================================
@@ -153,21 +157,21 @@ public final class Techniques {
             actionBar(p, Component.translatable("msg.ba_martialarts.rush_tired").withStyle(ChatFormatting.GRAY));
             return;
         }
-        AnimationManager.AnimationAccessor<? extends AttackAnimation> anim = MartialMoves.rush(style.getKind(), s.rushStrikes);
-        if (anim == null) {
+        MartialMoves.RushMove move = MartialMoves.rushMove(style.getKind(), s.rushStrikes);
+        if (move == null) {
             s.rush = false;
             s.rushStrikes = 0;
             return;
         }
         // каждый удар — туда, куда сейчас смотрит камера: серией можно вести цель
         sp.setModelYRot(p.getYRot(), true);
-        sp.playAnimationSynchronized(anim, 0.0F);
+        sp.playAnimationSynchronized(move.anim(), 0.0F);
         if (cost > 0) {
             sp.setStamina(sp.getStamina() - cost);
             sp.setStaminaRegenAwaitTicks(Math.max(sp.getStaminaRegenAwaitTicks(), 20));
         }
         s.rushStrikes++;
-        s.rushNext = now + MartialMoves.rushInterval(style.getKind());
+        s.rushNext = now + Math.max(1, move.interval());
         actionBar(p, Component.translatable("msg.ba_martialarts.rush", s.rushStrikes).withStyle(ChatFormatting.GOLD));
     }
 
@@ -210,30 +214,63 @@ public final class Techniques {
         return UltraInstinct.isActive(p) && p.level().getGameTime() >= state(p).nextFreeArt;
     }
 
-    /** Боевое искусство стиля: атакующая анимация с собственным хитбоксом, оглушением и импактом. */
+    /**
+     * Боевое искусство стиля: атакующая анимация с собственным хитбоксом, оглушением и импактом.
+     * У мастера техника зависит от положения: на бегу — летящее колено, присев — иппон, стоя — техники по кругу.
+     */
     public static boolean performArt(ServerPlayerPatch sp, StyleKind kind) {
         ServerPlayer p = sp.getOriginal();
         State s = state(p);
         long now = p.level().getGameTime();
         if (UltraInstinct.isActive(p) && now < s.nextFreeArt) return false;
-        AnimationManager.AnimationAccessor<? extends AttackAnimation> anim = MartialMoves.art(kind);
-        if (anim == null) return false;
 
-        LivingEntity target = findTarget(p, artRange(kind));
+        MartialMoves.Technique technique;
+        MartialMoves.Technique next = null;
+        if (kind == StyleKind.MASTER) {
+            List<MartialMoves.Technique> cycle = MartialMoves.masterCycle();
+            if (p.isSprinting()) {
+                technique = MartialMoves.technique(StyleKind.MUAY_THAI);
+            } else if (p.isShiftKeyDown()) {
+                technique = MartialMoves.technique(StyleKind.JUDO);
+            } else if (cycle.isEmpty()) {
+                technique = null;
+            } else {
+                technique = cycle.get(Math.floorMod(s.masterArt, cycle.size()));
+                next = cycle.get(Math.floorMod(s.masterArt + 1, cycle.size()));
+            }
+        } else {
+            technique = MartialMoves.technique(kind);
+        }
+        if (technique == null || technique.anim() == null) return false;
+        StyleKind school = technique.school();
+
+        LivingEntity target = findTarget(p, artRange(school));
         if (target != null) face(sp, target);
-        switch (kind) {
+        switch (school) {
             // прыжок с переворотом — удары ногами в полёте
             case TAEKWONDO -> launch(p, 0.0, 0.62);
             // подскок в летящее колено
             case MUAY_THAI -> launch(p, 0.25, 0.34);
             default -> { }
         }
-        sp.playAnimationSynchronized(anim, 0.0F);
+        sp.playAnimationSynchronized(technique.anim(), 0.0F);
         sp.updateEntityState();
         if (UltraInstinct.isActive(p)) s.nextFreeArt = now + 30;
         MartialAdvancements.award(p, "combat_art");
-        actionBar(p, Component.translatable("skill.ba_martialarts." + kind.artId).append("!").withStyle(ChatFormatting.LIGHT_PURPLE));
+        if (next != null) {
+            s.masterArt = Math.floorMod(s.masterArt + 1, MartialMoves.masterCycle().size());
+            actionBar(p, Component.translatable("msg.ba_martialarts.master_art", Component.translatable(technique.nameKey()),
+                    Component.translatable(next.nameKey())).withStyle(ChatFormatting.LIGHT_PURPLE));
+        } else {
+            actionBar(p, Component.translatable(technique.nameKey()).append("!").withStyle(ChatFormatting.LIGHT_PURPLE));
+        }
         return true;
+    }
+
+    /** Какая техника мастера следующая в круге (номер в {@link MartialMoves#masterCycle()}). */
+    public static int masterArtIndex(ServerPlayer p) {
+        State s = STATES.get(p.getUUID());
+        return s == null ? 0 : s.masterArt;
     }
 
     /** Шквал ударов: серия из 8 ударов, последний сбивает с ног. */
@@ -275,6 +312,7 @@ public final class Techniques {
 
         double mult = MartialConfig.get(MartialConfig.DAMAGE_MULTIPLIER, 1.0);
         if (mult != 1.0 && hurt != null) hurt.setAmount((float) (hurt.getAmount() * mult));
+        showMoveName(p, source, info);
 
         return switch (info.role()) {
             case COMBO -> 12;
@@ -286,6 +324,23 @@ public final class Techniques {
             case FLURRY -> 0;
             case BARRAGE -> 4;
         };
+    }
+
+    /** Мастер: над панелью — из какой школы удар («Вин-чунь: цепной удар»). */
+    private static void showMoveName(ServerPlayer p, EpicFightDamageSource source, MartialMoves.Info info) {
+        switch (info.role()) {
+            case COMBO, FINISHER, DASH, AIR -> { }
+            default -> {
+                return;
+            }
+        }
+        if (!MartialConfig.get(MartialConfig.MOVE_NAMES, true)) return;
+        MartialBattleStyle style = MartialSkills.style(p);
+        if (style == null || style.getKind() != StyleKind.MASTER) return;
+        String key = MartialMoves.moveKey(source.getAnimation());
+        if (key == null) return;
+        ChatFormatting color = info.role() == MartialMoves.Role.COMBO ? ChatFormatting.WHITE : ChatFormatting.GOLD;
+        actionBar(p, Component.translatable(key).withStyle(color));
     }
 
     private static void artHit(ServerPlayer p, StyleKind kind, LivingEntity target) {
@@ -325,27 +380,35 @@ public final class Techniques {
         State s = state(p);
         s.counterTarget = attacker.getId();
         s.counterKind = kind == null ? StyleKind.BOXING : kind;
+        s.counterAikido = false;
         s.counterAt = p.level().getGameTime() + delayTicks;
     }
 
-    /** Дзюдо: после удачного уклонения Epic Fight — контрбросок (не чаще раза в 3 секунды). */
-    public static void judoCounter(ServerPlayer p, Entity attacker) {
+    /**
+     * После удачного уклонения Epic Fight (не чаще раза в 3 секунды): дзюдо — контрбросок,
+     * мастер — бросок айкидо, обращающий силу атакующего против него.
+     */
+    public static void dodgeCounter(ServerPlayer p, Entity attacker, StyleKind kind) {
         State s = state(p);
         long now = p.level().getGameTime();
         if (now < s.judoCounterReady) return;
         s.judoCounterReady = now + 60;
-        scheduleCounter(p, StyleKind.JUDO, attacker, 4);
-        actionBar(p, Component.translatable("msg.ba_martialarts.judo_counter").withStyle(ChatFormatting.LIGHT_PURPLE));
+        scheduleCounter(p, kind, attacker, 4);
+        boolean aikido = kind == StyleKind.MASTER;
+        s.counterAikido = aikido;
+        actionBar(p, Component.translatable(aikido ? "msg.ba_martialarts.aikido_counter" : "msg.ba_martialarts.judo_counter")
+                .withStyle(ChatFormatting.LIGHT_PURPLE));
     }
 
-    private static void performCounter(ServerPlayer p, StyleKind kind, Entity e) {
+    private static void performCounter(ServerPlayer p, StyleKind kind, boolean aikido, Entity e) {
         if (!(e instanceof LivingEntity t) || !t.isAlive() || !p.isAlive() || t.distanceToSqr(p) > 4.5 * 4.5) return;
         if (!p.getMainHandItem().isEmpty()) return;
         ServerPlayerPatch sp = EpicFightCapabilities.getEntityPatch(p, ServerPlayerPatch.class);
         if (sp == null || !sp.isEpicFightMode()) return;
         var state = sp.getEntityState();
         if (state.attacking() || state.hurt() || state.knockDown()) return;
-        AnimationManager.AnimationAccessor<? extends AttackAnimation> anim = MartialMoves.counter(kind);
+        AnimationManager.AnimationAccessor<? extends AttackAnimation> anim =
+                aikido && MartialMoves.AIKIDO_COUNTER != null ? MartialMoves.AIKIDO_COUNTER : MartialMoves.counter(kind);
         if (anim == null) return;
         face(sp, t);
         sp.playAnimationSynchronized(anim, 0.0F);

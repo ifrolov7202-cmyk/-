@@ -28,6 +28,7 @@ import java.util.UUID;
  *  - в слот боевого искусства (Z) ставится техника стиля, в слот взрывного (C) — «Шквал ударов»,
  *    в слот абсолютного (V) — «Ультра инстинкт»;
  *  - с Battle Arts — боевая стойка вместо обычной.
+ * «Мастер боевых искусств» объединяет все школы: связка из 12 ударов, а боевое искусство выбирает технику по ситуации.
  */
 public class MartialBattleStyle extends BattleStyle {
     private static final UUID EVENT_UUID = UUID.fromString("0b6c8d2e-5a1f-4b7e-9c3d-2f8e1a6b7c01");
@@ -58,6 +59,7 @@ public class MartialBattleStyle extends BattleStyle {
             changeSkill(server, BattleArtsSkillSlots.BURST_ART, MartialSkills.FLURRY);
             changeSkill(server, BattleArtsSkillSlots.ULTIMATE_ART, MartialSkills.ULTRA_INSTINCT);
             MartialAdvancements.award(server.getOriginal(), "learn_style");
+            if (kind == StyleKind.MASTER) MartialAdvancements.award(server.getOriginal(), "master");
         }
 
         PlayerEventListener listener = patch.getEventListener();
@@ -77,11 +79,12 @@ public class MartialBattleStyle extends BattleStyle {
         // Ультра инстинкт: уклонение шагом Epic Fight
         listener.addEventListener(PlayerEventListener.EventType.TAKE_DAMAGE_EVENT_ATTACK, EVENT_UUID, event ->
                 UltraInstinct.tryDodge(event.getPlayerPatch(), event, kind));
-        // дзюдо: контрбросок после уклонения
+        // дзюдо: контрбросок после уклонения; мастер: бросок айкидо
         listener.addEventListener(PlayerEventListener.EventType.DODGE_SUCCESS_EVENT, EVENT_UUID, event -> {
             ServerPlayer player = event.getPlayerPatch().getOriginal();
-            if (kind == StyleKind.JUDO && !UltraInstinct.isActive(player) && player.getMainHandItem().isEmpty()) {
-                Techniques.judoCounter(player, event.getDamageSource().getEntity());
+            if ((kind == StyleKind.JUDO || kind == StyleKind.MASTER) && !UltraInstinct.isActive(player)
+                    && player.getMainHandItem().isEmpty()) {
+                Techniques.dodgeCounter(player, event.getDamageSource().getEntity(), kind);
                 addMeter(container, 30);
             }
         });

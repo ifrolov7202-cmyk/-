@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "epicfight:skillbook",
+      "nbt": "{skill:\"ba_martialarts:martial_arts_master\"}"
+    },
+    "title": {
+      "translate": "advancements.ba_martialarts.master.title"
+    },
+    "description": {
+      "translate": "advancements.ba_martialarts.master.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "parent": "ba_martialarts:martial/learn_style"
+}

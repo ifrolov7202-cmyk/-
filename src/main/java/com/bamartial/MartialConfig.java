@@ -12,6 +12,7 @@ public final class MartialConfig {
     public static final ForgeConfigSpec.BooleanValue OTHER_MOD_ANIMATIONS;
     public static final ForgeConfigSpec.BooleanValue RUSH_ENABLED;
     public static final ForgeConfigSpec.DoubleValue RUSH_STAMINA;
+    public static final ForgeConfigSpec.BooleanValue MOVE_NAMES;
     public static final ForgeConfigSpec.IntValue UI_DURATION;
     public static final ForgeConfigSpec.DoubleValue UI_DODGE_CHANCE;
     public static final ForgeConfigSpec.BooleanValue UI_AUTO_TRIGGER;
@@ -33,6 +34,8 @@ public final class MartialConfig {
                 .define("holdAttackRush", true);
         RUSH_STAMINA = b.comment("Выносливость Epic Fight за один удар серии / Epic Fight stamina per rush strike")
                 .defineInRange("rushStaminaPerStrike", 0.8, 0.0, 10.0);
+        MOVE_NAMES = b.comment("Мастер боевых искусств: показывать над панелью школу и название каждого попавшего удара / Martial Arts Master: show the school and name of every strike that lands")
+                .define("showMoveNames", true);
         b.pop();
         b.push("ultra_instinct");
         UI_DURATION = b.comment("Длительность Ультра инстинкта, секунд / Ultra Instinct duration, seconds")
