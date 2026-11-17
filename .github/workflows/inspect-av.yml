@@ -69,10 +69,20 @@ jobs:
               urllib.request.urlretrieve(m['url'], m['file'])
               print(m['file'])
           EOF
+          # то, с чем собирается EpicFight: Annoying Villagers (curse maven)
+          for c in annoying-villagers-1717848:9036954 smart-npc-1709932:8964218 aaa-particles-979809:8082320 \
+                   epic-fight-mod-405076:8049910 combat-evolution-1377795:9015624 weapons-of-miracles-epicfight-918614:7517612 \
+                   epicfight-nightfall-1307848:8366962 epic-fight-invincible-1184379:7679941 epic-fight-avalon-1268823:7619938 \
+                   epicfight-awaken-1423319:8506984 epicfight-clash-blade-1408812:7973024; do
+            n=${c%%:*}; id=${c##*:}
+            curl -fsSL -o "cm_${n}.jar" "https://cursemaven.com/curse/maven/$n/$id/$n-$id.jar" && echo "ok $c" >> ../out/cursemaven.txt || echo "FAIL $c" >> ../out/cursemaven.txt
+          done
+          cat ../out/cursemaven.txt
           for j in *.jar; do
             d="x_${j%.jar}"; mkdir -p "$d"; (cd "$d" && unzip -q -o "../$j" 2>/dev/null)
             echo "=== $j" >> ../out/modstoml.txt
             cat "$d/META-INF/mods.toml" >> ../out/modstoml.txt 2>/dev/null
+            grep -h "^Implementation-Version\|^Specification-Version" "$d/META-INF/MANIFEST.MF" >> ../out/modstoml.txt 2>/dev/null || true
             ls "$d/META-INF/jarjar" >> ../out/modstoml.txt 2>/dev/null || true
           done
           # кулачные анимации Annoying Villagers и их длины
