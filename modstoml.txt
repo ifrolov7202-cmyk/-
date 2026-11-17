@@ -1,0 +1,501 @@
+=== EpicFight-AnnoyingVillagers-1.20.1-1.5.2.jar
+modLoader="javafml"
+loaderVersion="[47,)"
+license="Custom License"
+[[mods]]
+modId="epicfight_annoyingvillagers"
+version="1.5.2"
+displayName="Epic Fight Annoying Villagers"
+authors="pla_is_me"
+description='''Compatibility between Annoying Villagers and EpicFight mod.'''
+[[dependencies.epicfight_annoyingvillagers]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47.4.4,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.epicfight_annoyingvillagers]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.epicfight_annoyingvillagers]]
+    modId="epicfight"
+    mandatory=true
+    versionRange="[20.13, )"
+    ordering="AFTER"
+    side="BOTH"
+[[dependencies.epicfight_annoyingvillagers]]
+    modId="wom"
+    mandatory=true
+    versionRange="[0,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.epicfight_annoyingvillagers]]
+    modId="efn"
+    mandatory=true
+    versionRange="[0,)"
+    ordering="AFTER"
+    side="BOTH"
+[[dependencies.epicfight_annoyingvillagers]]
+    modId="epicfight_awaken"
+    mandatory=true
+    versionRange="[0,)"
+    ordering="AFTER"
+    side="BOTH"
+[[dependencies.epicfight_annoyingvillagers]]
+    modId="annoyingvillagers"
+    mandatory=true
+    versionRange="[0,)"
+    ordering="AFTER"
+    side="BOTH"
+Specification-Version: 1
+Implementation-Version: 1.5.2
+=== cm_aaa-particles-979809.jar
+modLoader = "javafml" #mandatory
+loaderVersion = "[47,)" #mandatory This is typically bumped every Minecraft version by Forge. See https://files.minecraftforge.net/ for a list of versions.
+license = "MIT" # Review your options at https://choosealicense.com/.
+issueTrackerURL="https://github.com/ChloePrime/AAAParticles/issues" #optional
+[[mods]] #mandatory
+modId = "aaa_particles" #mandatory
+version = "2.2.1-beta.2" #mandatory
+displayName = "AAA Particles" #mandatory
+#updateJSONURL="https://change.me.example.invalid/updates.json" #optional (see https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/)
+#displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional (displayed in the mod UI)
+logoFile = "aaa_particles.png" #optional (needs to be in the root of your mod jar (root of your 'resources' folder))
+credits = "" #optional
+authors = "ChloePrime" #optional
+description = '''Effekseer for Minecraft''' #mandatory (Supports multiline text)
+[[dependencies.aaa_particles]] #optional
+modId = "forge" #mandatory
+mandatory = true #mandatory
+versionRange = "[47.2.30,)" #mandatory
+ordering = "NONE" # The order that this dependency should load in relation to your mod, required to be either 'BEFORE' or 'AFTER' if the dependency is not mandatory
+side = "BOTH" # Side this dependency is applied on - 'BOTH', 'CLIENT' or 'SERVER'
+[[dependencies.aaa_particles]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.1, 1.21)"
+ordering = "NONE"
+side = "BOTH"
+Specification-Version: 2.2.1-beta.2
+Implementation-Version: 2.2.1-beta.2
+architectury-forge-9.2.14.jar
+metadata.json
+mixinextras-forge-0.4.1.jar
+=== cm_annoying-villagers-1717848.jar
+modLoader="javafml"
+loaderVersion="[47,)"
+license="GNU GENERAL PUBLIC LICENSE v3.0"
+[[mods]]
+modId="annoyingvillagers"
+version="1.0.0"
+displayName="Annoying Villagers"
+authors="pla_is_me"
+credits="See NOTICE.md for the full credit list."
+description='''Annoying Villagers Full features from the original series !!!.'''
+[[dependencies.annoyingvillagers]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47.4.4,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.annoyingvillagers]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,)"
+    ordering="NONE"
+    side="BOTH"
+Specification-Version: 1
+Implementation-Version: 1.0.0
+=== cm_combat-evolution-1377795.jar
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All Rights Reserved"
+
+[[mods]]
+modId="combat_evolution"
+version="2.3.0"
+displayName="Combat Evolution"
+authors="ShelMarow"
+description='''Lib for making EpicFight Mob AI'''
+
+[[dependencies.combat_evolution]]
+modId="forge"
+mandatory=true
+versionRange="[47,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.combat_evolution]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.21)"
+ordering="NONE"
+side="BOTH"
+
+Specification-Version: 1
+=== cm_epic-fight-avalon-1268823.jar
+# This is an example mods.toml file. It contains the data relating to the loading mods.
+# There are several mandatory fields (#mandatory), and many more that are optional (#optional).
+# The overall format is standard TOML format, v0.5.0.
+# Note that there are a couple of TOML lists in this file.
+# Find more information on toml format here:  https://github.com/toml-lang/toml
+# The name of the mod loader type to load - for regular FML @Mod mods it should be javafml
+modLoader="javafml" #mandatory
+# A version range to match for said mod loader - for regular FML @Mod it will be the forge version
+loaderVersion="[47,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+# The license for you mod. This is mandatory metadata and allows for easier comprehension of your redistributive properties.
+# Review your options at https://choosealicense.com/. All rights reserved is the default copyright stance, and is thus the default here.
+license="All Rights Reserved"
+# A URL to refer people to when problems occur with this mod
+#issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
+# If your mod is purely client-side and has no multiplayer functionality (be it dedicated servers or Open to LAN),
+# set this to true, and Forge will set the correct displayTest for you and skip loading your mod on dedicated servers.
+#clientSideOnly=true #optional - defaults to false if absent
+# A list of mods - how many allowed here is determined by the individual mod loader
+[[mods]] #mandatory
+# The modid of the mod
+modId="epic_fight_avalon" #mandatory
+# The version number of the mod
+version="20.12.6.4" #mandatory
+# A display name for the mod
+displayName="Epic fight - Avalon" #mandatory
+# A URL to query for updates for this mod. See the JSON update specification https://docs.minecraftforge.net/en/latest/misc/updatechecker/
+#updateJSONURL="https://change.me.example.invalid/updates.json" #optional
+# A URL for the "homepage" for this mod, displayed in the mod UI
+#displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
+# A file name (in the root of the mod JAR) containing a logo for display
+#logoFile="examplemod.png" #optional
+# A text field displayed in the mod UI
+#credits="" #optional
+# A text field displayed in the mod UI
+authors="Merlin204" #optional
+# Display Test controls the display for your mod in the server connection screen
+# MATCH_VERSION means that your mod will cause a red X if the versions on client and server differ. This is the default behaviour and should be what you choose if you have server and client elements to your mod.
+# IGNORE_SERVER_VERSION means that your mod will not cause a red X if it's present on the server but not on the client. This is what you should use if you're a server only mod.
+# IGNORE_ALL_VERSION means that your mod will not cause a red X if it's present on the client or the server. This is a special case and should only be used if your mod has no server component.
+# NONE means that no display test is set on your mod. You need to do this yourself, see IExtensionPoint.DisplayTest for more information. You can define any scheme you wish with this value.
+# IMPORTANT NOTE: this is NOT an instruction as to which environments (CLIENT or DEDICATED SERVER) your mod loads on. Your mod should load (and maybe do nothing!) whereever it finds itself.
+#displayTest="MATCH_VERSION" # if nothing is specified, MATCH_VERSION is the default when clientSideOnly=false, otherwise IGNORE_ALL_VERSION when clientSideOnly=true (#optional)
+
+# The description text for the mod (multi line!) (#mandatory)
+description='''merlin's lib'''
+# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
+[[dependencies.epic_fight_avalon]] #optional
+    # the modid of the dependency
+    modId="forge" #mandatory
+    # Does this dependency have to exist - if not, ordering below must be specified
+    mandatory=true #mandatory
+    # The version range of the dependency
+    versionRange="[47,)" #mandatory
+    # An ordering relationship for the dependency - BEFORE or AFTER required if the dependency is not mandatory
+    # BEFORE - This mod is loaded BEFORE the dependency
+    # AFTER - This mod is loaded AFTER the dependency
+    ordering="NONE"
+    # Side this dependency is applied on - BOTH, CLIENT, or SERVER
+    side="BOTH"
+# Here's another dependency
+[[dependencies.epic_fight_avalon]]
+    modId="minecraft"
+    mandatory=true
+    # This version range declares a minimum of the current minecraft version up to but not including the next major version
+    versionRange="[1.20.1,1.21)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.epic_fight_avalon]]
+modId="epicfight"
+mandatory=true
+versionRange="[20.12.8,)"
+ordering="AFTER"
+side="BOTH"
+Specification-Version: 1
+Implementation-Version: 20.12.6.4
+=== cm_epic-fight-invincible-1184379.jar
+# This is an example mods.toml file. It contains the data relating to the loading mods.
+# There are several mandatory fields (#mandatory), and many more that are optional (#optional).
+# The overall format is standard TOML format, v0.5.0.
+# Note that there are a couple of TOML lists in this file.
+# Find more information on toml format here:  https://github.com/toml-lang/toml
+# The name of the mod loader type to load - for regular FML @Mod mods it should be javafml
+modLoader="javafml" #mandatory
+# A version range to match for said mod loader - for regular FML @Mod it will be the forge version
+loaderVersion="[47,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+# The license for you mod. This is mandatory metadata and allows for easier comprehension of your redistributive properties.
+# Review your options at https://choosealicense.com/. All rights reserved is the default copyright stance, and is thus the default here.
+license="All Rights Reserved"
+# A URL to refer people to when problems occur with this mod
+#issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
+# A list of mods - how many allowed here is determined by the individual mod loader
+[[mods]] #mandatory
+# The modid of the mod
+modId="invincible" #mandatory
+# The version number of the mod
+version="20.14.8.2" #mandatory
+# A display name for the mod
+displayName="Epic Fight - Invincible" #mandatory
+# A URL to query for updates for this mod. See the JSON update specification https://docs.minecraftforge.net/en/latest/misc/updatechecker/
+#updateJSONURL="https://change.me.example.invalid/updates.json" #optional
+# A URL for the "homepage" for this mod, displayed in the mod UI
+#displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
+# A file name (in the root of the mod JAR) containing a logo for display
+logoFile="logo.png" #optional
+# A text field displayed in the mod UI
+#credits="" #optional
+# A text field displayed in the mod UI
+authors="P1nero" #optional
+# Display Test controls the display for your mod in the server connection screen
+# MATCH_VERSION means that your mod will cause a red X if the versions on client and server differ. This is the default behaviour and should be what you choose if you have server and client elements to your mod.
+# IGNORE_SERVER_VERSION means that your mod will not cause a red X if it's present on the server but not on the client. This is what you should use if you're a server only mod.
+# IGNORE_ALL_VERSION means that your mod will not cause a red X if it's present on the client or the server. This is a special case and should only be used if your mod has no server component.
+# NONE means that no display test is set on your mod. You need to do this yourself, see IExtensionPoint.DisplayTest for more information. You can define any scheme you wish with this value.
+# IMPORTANT NOTE: this is NOT an instruction as to which environments (CLIENT or DEDICATED SERVER) your mod loads on. Your mod should load (and maybe do nothing!) whereever it finds itself.
+#displayTest="MATCH_VERSION" # MATCH_VERSION is the default if nothing is specified (#optional)
+
+# The description text for the mod (multi line!) (#mandatory)
+description='''Make Epic Fight add-on developers easier to create complex combo weapon types. Add some useful commands'''
+# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
+[[dependencies.invincible]] #optional
+    # the modid of the dependency
+    modId="forge" #mandatory
+    # Does this dependency have to exist - if not, ordering below must be specified
+    mandatory=true #mandatory
+    # The version range of the dependency
+    versionRange="[47,)" #mandatory
+    # An ordering relationship for the dependency - BEFORE or AFTER required if the dependency is not mandatory
+    # BEFORE - This mod is loaded BEFORE the dependency
+    # AFTER - This mod is loaded AFTER the dependency
+    ordering="NONE"
+    # Side this dependency is applied on - BOTH, CLIENT, or SERVER
+    side="BOTH"
+# Here's another dependency
+[[dependencies.invincible]]
+    modId="minecraft"
+    mandatory=true
+    # This version range declares a minimum of the current minecraft version up to but not including the next major version
+    versionRange="[1.20.1,1.21)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.invincible]]
+    modId="epicfight"
+    mandatory=true
+    versionRange="[20.12.13,)"
+    ordering="NONE"
+    side="BOTH"
+
+# Features are specific properties of the game environment, that you may want to declare you require. This example declares
+# that your mod requires GL version 3.2 or higher. Other features will be added. They are side aware so declaring this won't
+# stop your mod loading on the server for example.
+#[features.invincible]
+#openGLVersion="[3.2,)"Specification-Version: 1
+Implementation-Version: 20.14.8.2-mc1.20.1-forge
+=== cm_epic-fight-mod-405076.jar
+modLoader="javafml" #mandatory
+loaderVersion="[47,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+license="GNU GENERAL PUBLIC LICENSE"
+issueTrackerURL="https://github.com/Yesssssman/epicfightmod/issues" #optional
+[[mods]] #mandatory
+modId="epicfight" #mandatory
+version="20.14.17" #mandatory
+displayName="Epic Fight" #mandatory
+displayURL="https://www.curseforge.com/minecraft/mc-mods/epic-fight-mod" #optional
+logoFile="epicfight_logo.png" #optional
+credits="METAL, SAGESSE, Nathan" #optional
+authors="Yesman(a.k.a maninthe_home)" #optional
+description='''Fight til u dead'''
+
+[[dependencies.epicfight]] #optional
+    modId="forge" #mandatory
+    mandatory=true #mandatory
+    versionRange="[47.4.0,)" #mandatory
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.epicfight]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20,1.21)"
+    ordering="NONE"
+    side="BOTH"
+=== cm_epicfight-awaken-1423319.jar
+modLoader="javafml" #mandatory
+loaderVersion="[47,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+license="All Rights Reserved"
+
+[[mods]] #mandatory
+modId="epicfight_awaken" #mandatory
+version="1.2.7.2-forge-1.20.1" #mandatory
+displayName="EpicFight Awaken" #mandatory
+authors="ShelMarow, MoGlasses" #optional
+description='''The unknow stories'''
+
+[[dependencies.epicfight_awaken]] #optional
+modId="forge" #mandatory
+mandatory=true #mandatory
+versionRange="[47,)" #mandatory
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.epicfight_awaken]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.21)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.epicfight_awaken]]
+modId="epicfight"
+mandatory=true
+versionRange="[20.14,)"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.epicfight_awaken]]
+modId="combat_evolution"
+mandatory=true
+versionRange="[2.0.7,)"
+ordering="AFTER"
+side="BOTH"
+Specification-Version: 1
+Implementation-Version: 1.2.7.2-forge-1.20.1
+=== cm_epicfight-clash-blade-1408812.jar
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All Rights Reserved"
+[[mods]]
+modId="efclash_blade"
+version="2.1"
+displayName="Epicfight Clash Blade"
+authors="pla_is_me"
+description='''Adding Clash Blade for Epicfight'''
+[[dependencies.efclash_blade]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.efclash_blade]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,1.21)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.efclash_blade]]
+    modId="epicfight"
+    mandatory=true
+    versionRange="[20.14, )"
+    ordering="NONE"
+    side="BOTH"Specification-Version: 1
+Implementation-Version: 2.1
+=== cm_epicfight-nightfall-1307848.jar
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All Rights Reserved"
+logoFile="logo.png"
+[[mods]]
+modId="efn"
+version="3.4.0"
+displayName="EpicFight Nightfall"
+authors="super_awesome_baby"
+description='''Very Cool Mod.'''
+[[dependencies.efn]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.21)"
+ordering="NONE"
+side="BOTH"
+logoFile="logo.png"
+[[dependencies.efn]]
+modId="invincible"
+mandatory=true
+versionRange="[20.14.7.3,)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.efn]]
+modId="epicfight"
+mandatory=true
+versionRange="[20.14.4,)"
+ordering="AFTER"
+side="BOTH"
+[[dependencies.efn]]
+modId="epic_fight_avalon"
+mandatory=true
+versionRange="[20.12.4,)"
+ordering="AFTER"
+side="BOTH"
+# AAA Particles
+[[dependencies.efn]]
+modId="aaa_particles"
+mandatory=false
+versionRange="[2.2,)"
+ordering="NONE"
+side="BOTH"
+Specification-Version: 1
+Implementation-Version: 3.4.0
+geckolib-388172-7025129.jar
+guhaos-vix-1531111-8258354.jar
+metadata.json
+mixinextras-forge-0.4.1.jar
+mixinsquared-forge-0.2.0-beta.6.jar
+=== cm_smart-npc-1709932.jar
+modLoader="javafml"
+loaderVersion="[47,)"
+license="GNU GENERAL PUBLIC LICENSE"
+[[mods]]
+modId="smart_npc"
+version="1.0.0"
+displayName="Smart NPC"
+authors="pla_is_me"
+description='''Adds Smart NPCs to make your world more enjoyable.'''
+[[dependencies.smart_npc]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47.4.4,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.smart_npc]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,)"
+    ordering="NONE"
+    side="BOTH"
+Specification-Version: 1
+Implementation-Version: 1.0.0
+=== cm_weapons-of-miracles-epicfight-918614.jar
+modLoader="javafml" #mandatory
+loaderVersion="[47,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+license="All RIGHT RESERVED"
+issueTrackerURL="https://github.com/Reascer/WeaponsOfMinecraft/issues" #optional
+[[mods]] #mandatory
+modId="wom" #mandatory
+version="2.0.15" #mandatory
+displayName="Weapons of miracle" #mandatory
+displayURL="https://www.curseforge.com/minecraft/mc-mods/weapons-of-miracles-epicfight" #optional
+logoFile="wom_logo.png" #optional
+credits="Special mention to Asan who started it all... Yesman, METAL, Ellet and all of you who support wom." #optional
+authors="Reascer" #optional
+description='''Weapons from another reality, waiting for you to find them and witness their powers !'''
+
+[[dependencies.wom]]
+    modId="forge" #mandatory
+    mandatory=true #mandatory
+    versionRange="[47,)" #mandatory
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.wom]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.wom]]
+    modId="epicfight"
+    mandatory=true
+    versionRange="[20.14.3,)"
+    ordering="AFTER"
+    side="BOTH"
+Specification-Version: 1
+Implementation-Version: 2.0.15-mc1.20.1-forge

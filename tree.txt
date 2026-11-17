@@ -1,0 +1,10 @@
+SEARCH annoying villagers [('epicfight-annoying-villagers', 'Oi7N0Tkn', 'EpicFight: Annoying Villagers', 252926), ('the-mrfudgemonkeyz-annoying-villagers-server', 'an4fOhuR', 'The Annoying Villagers Server Pack', 5562), ('annoying-villagers-remastered-tweaks', '6XHrWvhJ', 'Annoying Villagers Remastered Tweaks', 4060), ('annoying-villagers-trades', 'sro2GSuz', 'Annoying Villagers Trades', 448), ('annoying-villagers-custom-textures-and-sounds', 'K2a75PeS', 'Annoying Villagers Custom Textures and Sounds', 432), ('annoying-villagers-x-fresh-animations', 'KFqYvxIn', 'Annoying Villagers x Fresh Animations', 219), ('from-animation-to-mod', 'xxgpDYee', 'From Animation To Minecraft', 2428), ('villager-tether', 'DGwXphYA', 'Villager Tether', 478)]
+SEARCH epicfight annoying villagers [('epicfight-annoying-villagers', 'Oi7N0Tkn', 'EpicFight: Annoying Villagers', 252926)]
+SEARCH epicfight awaken []
+SEARCH player mobs [('player-mobs', 'n38qCKN4', 'Player Mobs', 167228), ('human-player-mobs', '95ZIXjMG', 'Human Player Mobs', 94954), ('interactive-player-mobs', 'KeY5Fc8p', 'Social Player Mobs', 21057), ('more-mobs', 'HJR6V0I2', 'More Mobs', 1027559), ('distant-friends', 'CDaJ8xGu', 'Distant Friends', 931907), ('mob-player-animator', 'zkK9lPaS', 'Mob Player Animator', 491539), ('the-skinwalker-hunt', 'pyz8tuYw', 'The Skinwalker Hunt', 24302), ('calm-mornings', 'gfvSVUz9', 'Calm Mornings', 15769)]
+SEARCH smart npc [('enhanced-skyrecipes', 'Q7VEfkvq', 'Enhanced SkyRecipes', 652796), ('ruins-of-growsseth', '476XCS3C', 'Ruins of Growsseth', 9251), ('orcinvasion', 't3fD7znK', 'Orc Invasion', 1121), ('minetranslator', 'qEl8Xl3P', 'MineTranslator', 834), ('hard-new', 'I29tKGei', 'HARD NEW', 134)]
+SEARCH wom tweaks []
+ROOT epicfight-annoying-villagers
+epicfight-annoying-villagers (epicfight-annoying-villagers) 1.5.2 EpicFight-AnnoyingVillagers-1.20.1-1.5.2.jar 2026-10-11
+ROOT annoying-villagers-herobrine-invasion
+PROJECT FAIL annoying-villagers-herobrine-invasion HTTP Error 404: Not Found
