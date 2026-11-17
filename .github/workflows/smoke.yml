@@ -12,6 +12,9 @@ on:
       av:
         description: "Load the player's combat mod set (.github/user-combat-mods.txt, by sha1) incl. EpicFight: Annoying Villagers"
         default: "false"
+      ef17:
+        description: "With av: Epic Fight 20.14.17 instead of the player's Epic Fight, without Battle Arts"
+        default: "false"
 
 permissions:
   contents: write
@@ -75,6 +78,9 @@ jobs:
               missing = []
               for line in open('../src/.github/user-combat-mods.txt'):
                   sha, name = line.strip().split(' ', 1)
+                  if sys.argv[3] == 'true' and (name.startswith('epic-fight-20') or name.startswith('BattleArts-')):
+                      print('skip (ef17)', name)
+                      continue
                   try:
                       with urllib.request.urlopen(f"https://api.modrinth.com/v2/version_file/{sha}?algorithm=sha1") as r:
                           v = json.load(r)
@@ -91,7 +97,11 @@ jobs:
               get('Dd6vT4jF', lambda n: n.startswith('20.14.16.10'), 'Battle Arts')
               get('weapons-of-miracles', lambda n: n.startswith('2.0.171'), 'Weapons of Miracles')
           EOF
-          python3 dl.py "${{ github.event.inputs.extra }}" "${{ github.event.inputs.av }}" | tee ../out/mods.txt
+          python3 dl.py "${{ github.event.inputs.extra }}" "${{ github.event.inputs.av }}" "${{ github.event.inputs.ef17 }}" | tee ../out/mods.txt
+          if [ "${{ github.event.inputs.ef17 }}" = "true" ]; then
+            curl -fsSL -o mods/epic-fight-20.14.17.jar "https://cursemaven.com/curse/maven/epic-fight-mod-405076/8049910/epic-fight-mod-405076-8049910.jar"
+            echo "curse epic-fight-mod-405076:8049910 (Epic Fight 20.14.17)" | tee -a ../out/mods.txt
+          fi
           if [ "${{ github.event.inputs.av }}" = "true" ]; then
             # чего нет на Modrinth — ближайшие версии с curse maven (с ними собран EpicFight: Annoying Villagers)
             fallback() {
