@@ -1,0 +1,101 @@
+name: Inspect Annoying Villagers
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Resolve Modrinth dependency tree
+        run: |
+          mkdir -p out jars
+          cat > resolve.py <<'EOF'
+          import json, sys, urllib.request, urllib.parse
+          def get(url):
+              with urllib.request.urlopen(url) as r:
+                  return json.load(r)
+          def search(q):
+              d = get("https://api.modrinth.com/v2/search?limit=8&query=" + urllib.parse.quote(q))
+              return [(h['slug'], h['project_id'], h['title'], h['downloads']) for h in d['hits']]
+          for q in ["annoying villagers", "epicfight annoying villagers", "epicfight awaken", "player mobs", "smart npc", "wom tweaks"]:
+              print("SEARCH", q, search(q))
+          seen = {}
+          out = []
+          def versions(pid):
+              return [v for v in get(f"https://api.modrinth.com/v2/project/{pid}/version")
+                      if 'forge' in v['loaders'] and '1.20.1' in v['game_versions']]
+          def resolve(pid, depth=0):
+              if pid in seen: return
+              try:
+                  proj = get(f"https://api.modrinth.com/v2/project/{pid}")
+              except Exception as e:
+                  print("  " * depth + "PROJECT FAIL", pid, e); return
+              vs = versions(pid)
+              seen[pid] = proj['slug']
+              if not vs:
+                  print("  " * depth + f"{proj['slug']} ({pid}): NO forge 1.20.1"); return
+              v = vs[0]
+              f = next((f for f in v['files'] if f.get('primary')), v['files'][0])
+              print("  " * depth + f"{proj['slug']} ({pid}) {v['version_number']} {f['filename']} {v['date_published'][:10]}")
+              out.append({'slug': proj['slug'], 'id': pid, 'version': v['version_number'], 'url': f['url'], 'file': f['filename'],
+                          'deps': [(d['project_id'], d['dependency_type']) for d in v['dependencies']]})
+              for d in v['dependencies']:
+                  if d['dependency_type'] == 'required' and d.get('project_id'):
+                      resolve(d['project_id'], depth + 1)
+                  elif d.get('project_id'):
+                      try: s = get(f"https://api.modrinth.com/v2/project/{d['project_id']}")['slug']
+                      except Exception: s = d['project_id']
+                      print("  " * (depth + 1) + f"({d['dependency_type']}) {s}")
+          for slug in sys.argv[1:]:
+              print("ROOT", slug)
+              resolve(slug)
+          json.dump(out, open('out/tree.json', 'w'), indent=1)
+          EOF
+          python3 resolve.py epicfight-annoying-villagers annoying-villagers-herobrine-invasion 2>&1 | tee out/tree.txt || true
+      - name: Download and inspect jars
+        run: |
+          cd jars
+          python3 - <<'EOF'
+          import json, urllib.request
+          for m in json.load(open('../out/tree.json')):
+              urllib.request.urlretrieve(m['url'], m['file'])
+              print(m['file'])
+          EOF
+          for j in *.jar; do
+            d="x_${j%.jar}"; mkdir -p "$d"; (cd "$d" && unzip -q -o "../$j" 2>/dev/null)
+            echo "=== $j" >> ../out/modstoml.txt
+            cat "$d/META-INF/mods.toml" >> ../out/modstoml.txt 2>/dev/null
+            ls "$d/META-INF/jarjar" >> ../out/modstoml.txt 2>/dev/null || true
+          done
+          # кулачные анимации Annoying Villagers и их длины
+          for f in $(find . -path "*epicfight_annoyingvillagers/animmodels/animations/biped/*" -name "*.json" | grep -v "/data/" | sort); do
+            python3 - "$f" >> ../out/anim_lengths.txt <<'EOF'
+          import json, sys
+          p = sys.argv[1]
+          try:
+              d = json.load(open(p))
+              ts = d['animation'][0]['time']
+              print(p.split('/animations/')[1], round(ts[-1], 3), len(ts))
+          except Exception as e:
+              print(p.split('/animations/')[1], 'ERR', e)
+          EOF
+          done
+          ls -la
+      - name: Publish
+        if: always()
+        run: |
+          cd out
+          git init -q -b inspect-av
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add .
+          git commit -qm "Inspect AV"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" inspect-av
