@@ -115,6 +115,7 @@ public final class SelfTest {
     private MartialMoves.Role castRole;
     private String wantAnim = "";
     private boolean burned;
+    private int blocked;
     private Vec3 castFrom;
 
     public SelfTest() {
@@ -171,6 +172,13 @@ public final class SelfTest {
         }
         stepTick++;
         if (current != null && stepTick >= current.ticks()) current = null;
+    }
+
+    /** Удары, которые цель отменила (уклонение, блок других модов). */
+    @SubscribeEvent(priority = net.minecraftforge.eventbus.api.EventPriority.LOWEST)
+    public void onAttacked(net.minecraftforge.event.entity.living.LivingAttackEvent event) {
+        if (target == null || player == null || event.getEntity() != target || event.getSource().getEntity() != player) return;
+        if (event.isCanceled()) blocked++;
     }
 
     @SubscribeEvent
@@ -727,6 +735,17 @@ public final class SelfTest {
     // =====================================================================
 
     private void placePlayer() {
+        // другие моды (стартовые предметы, подобранный дроп) могут положить что-то в руку — бьём голыми руками
+        if (!player.getMainHandItem().isEmpty()) {
+            info("main hand was not empty before " + (current == null ? "?" : current.name()) + ": " + player.getMainHandItem()
+                    + " " + player.getMainHandItem().getTag());
+            player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+        }
+        if (!player.isAlive() || patch == null || !patch.isEpicFightMode()) {
+            info("player state before " + (current == null ? "?" : current.name()) + ": alive=" + player.isAlive()
+                    + " epicFightMode=" + (patch != null && patch.isEpicFightMode()));
+            if (patch != null) patch.toEpicFightMode(true);
+        }
         player.moveTo(playerPos.x, playerPos.y, playerPos.z, 0.0F, 0.0F);
         player.setYHeadRot(0.0F);
         player.yBodyRot = 0.0F;
@@ -749,6 +768,7 @@ public final class SelfTest {
     }
 
     private void resetTarget() {
+        if (target != null && !target.isAlive()) info("target died before " + (current == null ? "?" : current.name()));
         if (target == null || !target.isAlive()) spawnTarget();
         LivingEntity living = target;
         living.setHealth(living.getMaxHealth());
@@ -765,6 +785,8 @@ public final class SelfTest {
     }
 
     private void resetHits() {
+        if (blocked > 0) info("target cancelled " + blocked + " hits before " + (current == null ? "?" : current.name()));
+        blocked = 0;
         burned = false;
         if (target != null) target.clearFire();
         hits.clear();
