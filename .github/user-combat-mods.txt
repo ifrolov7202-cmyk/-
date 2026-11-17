@@ -1,0 +1,12 @@
+f502711a7c799c2267b396e0c991dc3dde593c0b AnnoyingVillagers-1.20.1-1.0.7.jar
+164e7bf3096cc26b0654fd615e44c8ad7be44ec6 BattleArts-20.14.16.10.jar
+d40f23cb69db234c854c0c34294a81a39c9cc5c4 BattleartsApi-20.14.16.5.jar
+50b9c229e10b734742ec76a9f16294df3eb28815 CombatEvolution-2.3.6-Forge-1.20.1.jar
+b99cb2c78e94ef8f0071ea88e7002a42051068ae EpicFight Nightfall-3.4.2-all.jar
+796436d4d8e175162afbb1897e5095b4726c744a EpicFight-AnnoyingVillagers-1.20.1-1.5.2.jar
+25eaf24b3062a4491565936a5588cb22223a9ffe WeaponsOfMiracles-2.0.171-mc1.20.1-forge.jar
+cc77d1217cb53644240b8778a9e40b977f8a29cb aaa_particles-forge-1.20.1-2.2.3.jar
+6de0e03a6bd3ef362e268d80211b8cc63dbedd91 epic-fight-20.14.16-mc1.20.1-forge.jar
+1a8ba86606705c2c2ea4ca6bfd9f9add177cd7cd epic-fight-invincible-lib-20.14.8.2-mc1.20.1-forge.jar
+f83685fa026aa1bf779e48930c23ae64ccd7b138 epic_fight_avalon-20.12.6.5.jar
+f55c7124681fd86baebd9d1948b199aca95f3c88 epicfight_awaken-1.2.8-forge-1.20.1.jar

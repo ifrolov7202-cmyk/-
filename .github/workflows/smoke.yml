@@ -10,7 +10,7 @@ on:
         description: "Run the in-server self-test (combos, hold-attack rush, arts)"
         default: "true"
       av:
-        description: "Also load EpicFight: Annoying Villagers with its dependencies"
+        description: "Load the player's combat mod set (.github/user-combat-mods.txt, by sha1) incl. EpicFight: Annoying Villagers"
         default: "false"
 
 permissions:
@@ -70,27 +70,51 @@ jobs:
               print('NOT FOUND', name); sys.exit(1)
           if sys.argv[2] != 'true':
               get('epic-fight', lambda n: n.startswith('20.14.16'), 'Epic Fight')
+          if sys.argv[2] == 'true':
+              # ровно те файлы, что у игрока: ищем по sha1 на Modrinth
+              missing = []
+              for line in open('../src/.github/user-combat-mods.txt'):
+                  sha, name = line.strip().split(' ', 1)
+                  try:
+                      with urllib.request.urlopen(f"https://api.modrinth.com/v2/version_file/{sha}?algorithm=sha1") as r:
+                          v = json.load(r)
+                      f = next(f for f in v['files'] if f['hashes']['sha1'] == sha)
+                      urllib.request.urlretrieve(f['url'], 'mods/' + f['filename'])
+                      print('modrinth', name, '->', f['filename'])
+                  except Exception as e:
+                      print('NOT ON MODRINTH', name, e)
+                      missing.append(name)
+              open('../out/missing.txt', 'w').write(''.join(m + '\n' for m in missing))
           get('7baP43pD', lambda n: n.startswith('20.14.16'), 'Battle Arts API')
           av = sys.argv[2] == 'true'
-          if sys.argv[1] == 'true':
+          if sys.argv[1] == 'true' and not av:
               get('Dd6vT4jF', lambda n: n.startswith('20.14.16.10'), 'Battle Arts')
-              if not av:
-                  get('weapons-of-miracles', lambda n: n.startswith('2.0.171'), 'Weapons of Miracles')
-          if av:
-              get('epicfight-annoying-villagers', lambda n: True, 'EpicFight: Annoying Villagers')
+              get('weapons-of-miracles', lambda n: n.startswith('2.0.171'), 'Weapons of Miracles')
           EOF
           python3 dl.py "${{ github.event.inputs.extra }}" "${{ github.event.inputs.av }}" | tee ../out/mods.txt
           if [ "${{ github.event.inputs.av }}" = "true" ]; then
-            # то, с чем собран EpicFight: Annoying Villagers (curse maven)
-            # Epic Fight 20.14.17 — та версия, с которой собраны Annoying Villagers и его моды
-            for c in epic-fight-mod-405076:8049910 annoying-villagers-1717848:9036954 smart-npc-1709932:8964218 aaa-particles-979809:8082320 \
-                     combat-evolution-1377795:9015624 weapons-of-miracles-epicfight-918614:7517612 \
-                     epicfight-nightfall-1307848:8366962 epic-fight-invincible-1184379:7679941 epic-fight-avalon-1268823:7619938 \
-                     epicfight-awaken-1423319:8506984 epicfight-clash-blade-1408812:7973024; do
+            # чего нет на Modrinth — ближайшие версии с curse maven (с ними собран EpicFight: Annoying Villagers)
+            fallback() {
+              case "$1" in
+                AnnoyingVillagers*) echo annoying-villagers-1717848:9036954 ;;
+                CombatEvolution*) echo combat-evolution-1377795:9015624 ;;
+                epicfight_awaken*) echo epicfight-awaken-1423319:8506984 ;;
+                "EpicFight Nightfall"*) echo epicfight-nightfall-1307848:8366962 ;;
+                epic_fight_avalon*) echo epic-fight-avalon-1268823:7619938 ;;
+                epic-fight-invincible*) echo epic-fight-invincible-1184379:7679941 ;;
+                aaa_particles*) echo aaa-particles-979809:8082320 ;;
+                WeaponsOfMiracles*) echo weapons-of-miracles-epicfight-918614:7517612 ;;
+                *) echo "" ;;
+              esac
+            }
+            while IFS= read -r name; do
+              [ -z "$name" ] && continue
+              c=$(fallback "$name")
+              if [ -z "$c" ]; then echo "NO SOURCE for $name" | tee -a ../out/mods.txt; continue; fi
               n=${c%%:*}; id=${c##*:}
               curl -fsSL -o "mods/$n.jar" "https://cursemaven.com/curse/maven/$n/$id/$n-$id.jar"
-              echo "curse $c" | tee -a ../out/mods.txt
-            done
+              echo "curse $c (instead of $name)" | tee -a ../out/mods.txt
+            done < ../out/missing.txt
           fi
           ls -la mods
           echo "eula=true" > eula.txt

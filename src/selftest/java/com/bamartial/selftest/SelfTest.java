@@ -36,6 +36,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
@@ -116,6 +117,8 @@ public final class SelfTest {
     private String wantAnim = "";
     private boolean burned;
     private int blocked;
+    private int handNotes;
+    private int cleanNotes;
     private Vec3 castFrom;
 
     public SelfTest() {
@@ -149,6 +152,7 @@ public final class SelfTest {
             }
         }
         String name = current.name();
+        keepArenaClean();
         try {
             current.body().accept(stepTick);
         } catch (Throwable t) {
@@ -292,6 +296,7 @@ public final class SelfTest {
         server.getPlayerList().placeNewPlayer(connection, p);
         player = p;
         player.setInvulnerable(true);
+        level.getGameRules().getRule(net.minecraft.world.level.GameRules.RULE_DOMOBSPAWNING).set(false, server);
         patch = EpicFightCapabilities.getEntityPatch(player, ServerPlayerPatch.class);
         if (patch == null) throw new IllegalStateException("no Epic Fight patch on the test player");
         patch.toEpicFightMode(true);
@@ -733,6 +738,28 @@ public final class SelfTest {
     // =====================================================================
     //  Вспомогательное
     // =====================================================================
+
+    /**
+     * Чистая арена: другие моды (NPC Annoying Villagers и т.п.) спавнят существ, игрок подбирает их дроп в руку.
+     * Убираем чужих существ и предметы рядом, руку держим пустой.
+     */
+    private void keepArenaClean() {
+        if (player == null || level == null) return;
+        if (!player.getMainHandItem().isEmpty()) {
+            if (handNotes++ < 20) {
+                info("took " + player.getMainHandItem() + " out of the hand during " + (current == null ? "?" : current.name()));
+            }
+            player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+        }
+        if (stepTick % 10 != 0) return;
+        AABB area = player.getBoundingBox().inflate(48.0, 24.0, 48.0);
+        for (net.minecraft.world.entity.Entity e : level.getEntities((net.minecraft.world.entity.Entity) null, area,
+                e -> e != player && e != target && (e instanceof net.minecraft.world.entity.item.ItemEntity
+                        || (e instanceof LivingEntity && !(e instanceof net.minecraft.world.entity.player.Player))))) {
+            if (cleanNotes++ < 20) info("removed " + e.getType().getDescriptionId() + " near the arena during " + (current == null ? "?" : current.name()));
+            e.discard();
+        }
+    }
 
     private void placePlayer() {
         // другие моды (стартовые предметы, подобранный дроп) могут положить что-то в руку — бьём голыми руками
