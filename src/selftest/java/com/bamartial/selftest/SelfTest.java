@@ -8,6 +8,8 @@ import com.bamartial.skills.MartialSkills;
 import com.bamartial.skills.StyleKind;
 import com.bamartial.skills.Techniques;
 import com.bamartial.skills.UltraInstinct;
+import com.bamartial.skills.Herobrine;
+import net.forixaim.battle_arts_api.battle_arts_skills.CoreAPIDataKeys;
 import com.mojang.authlib.GameProfile;
 import com.mojang.logging.LogUtils;
 import io.netty.buffer.Unpooled;
@@ -31,6 +33,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.TransientCraftingContainer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
@@ -111,6 +114,8 @@ public final class SelfTest {
     private int dodges;
     private MartialMoves.Role castRole;
     private String wantAnim = "";
+    private boolean burned;
+    private Vec3 castFrom;
 
     public SelfTest() {
         MinecraftForge.EVENT_BUS.register(this);
@@ -155,6 +160,7 @@ public final class SelfTest {
         }
         try {
             // так сервер тикает настоящего игрока: после обработки пакетов, с позицией «на земле» от клиента
+            if (target != null && target.isOnFire()) burned = true;
             if (player != null && player.isAlive()) {
                 holdTarget();
                 player.setOnGround(true);
@@ -205,6 +211,19 @@ public final class SelfTest {
                     check(kind + ": combat art slot filled", art != null && art.getSkill() == MartialSkills.COMBAT_ARTS.get(kind),
                             "skill=" + (art == null ? null : art.getSkill()));
                     if (kind == StyleKind.MASTER) checkMasterBook();
+                    if (kind == StyleKind.HEROBRINE) {
+                        checkHerobrineBook();
+                        if (net.minecraftforge.fml.ModList.get().isLoaded(MartialMoves.EFAV)) {
+                            String src = MartialMoves.chosenSources().get("herobrine/left_strike");
+                            check("HEROBRINE: moves come from EpicFight: Annoying Villagers", src != null && src.startsWith(MartialMoves.EFAV + ":"), "src=" + src);
+                            check("HEROBRINE: Annoying Villagers stance and run", MartialMoves.stance(kind) != null && MartialMoves.run(kind) != null,
+                                    "stance=" + MartialMoves.stance(kind) + " run=" + MartialMoves.run(kind));
+                        } else {
+                            info("EpicFight: Annoying Villagers not installed, Herobrine uses fallback moves: " + MartialMoves.chosenSources().get("herobrine/left_strike"));
+                        }
+                    }
+                    check(kind + ": flight only for Herobrine", Herobrine.hasHerobrineFlight(player) == (kind == StyleKind.HEROBRINE),
+                            "mayfly=" + player.getAbilities().mayfly);
                 }
             }));
             steps.add(comboStep(kind));
@@ -218,7 +237,15 @@ public final class SelfTest {
             steps.add(new Step(kind + " rest", 20, t -> { }));
             steps.add(tiredStep(kind));
             steps.add(new Step(kind + " rest", 30, t -> { }));
-            if (kind == StyleKind.MASTER) {
+            if (kind == StyleKind.HEROBRINE) {
+                steps.add(herobrineArtStep("portal", false, false));
+                steps.add(new Step(kind + " rest", 30, t -> { }));
+                steps.add(herobrineArtStep("pillars", true, false));
+                steps.add(new Step(kind + " rest", 30, t -> { }));
+                steps.add(herobrineArtStep("lightning", false, true));
+                steps.add(new Step(kind + " rest", 30, t -> { }));
+                steps.add(herobrineImmunityStep());
+            } else if (kind == StyleKind.MASTER) {
                 // мастер: шесть техник по кругу, на бегу — летящее колено, присев — иппон, после уклонения — айкидо
                 for (int i = 0; i < 6; i++) {
                     steps.add(masterArtStep("cycle " + (i + 1), false, false));
@@ -237,6 +264,10 @@ public final class SelfTest {
         steps.add(flurryStep());
         steps.add(new Step("rest", 40, t -> { }));
         steps.add(ultraStep());
+        steps.add(new Step("ultra instinct (still on)", 120, t -> {
+            if (t == 119) check("ultra instinct has no time limit (on after 17 s)", UltraInstinct.isActive(player), "");
+        }));
+        steps.add(ultraToggleStep());
         log("planned " + steps.size() + " steps");
     }
 
@@ -295,6 +326,7 @@ public final class SelfTest {
                 check(kind + ": basic attacks use the style combo", ours, "anims=" + castAnims);
                 check(kind + ": every combo move connects", hitAnims.containsAll(castAnims),
                         "hit=" + hitAnims + " cast=" + castAnims + " other=" + otherHits);
+                if (kind == StyleKind.HEROBRINE) check("HEROBRINE: black fire sets the target ablaze", burned, "");
             }
         });
     }
@@ -505,7 +537,7 @@ public final class SelfTest {
             TransientCraftingContainer grid = new TransientCraftingContainer(menu, 3, 3);
             int slot = 0;
             for (StyleKind k : StyleKind.values()) {
-                if (k != StyleKind.MASTER) grid.setItem(slot++, ModRegistry.styleBook(k));
+                if (!k.craftOnly()) grid.setItem(slot++, ModRegistry.styleBook(k));
             }
             boolean matches = crafting.matches(grid, level);
             ItemStack out = matches ? crafting.assemble(grid, level.registryAccess()) : ItemStack.EMPTY;
@@ -530,6 +562,8 @@ public final class SelfTest {
                 resetHits();
             }
             if (t == 5) {
+                check("flight is taken away after leaving Herobrine", !player.getAbilities().mayfly && !Herobrine.hasHerobrineFlight(player),
+                        "mayfly=" + player.getAbilities().mayfly);
                 MartialBattleStyle.addMeter(MartialSkills.styleContainer(player), 10000.0F);
                 SkillContainer burst = patch.getSkill(BattleArtsSkillSlots.BURST_ART);
                 boolean cast = burst != null && burst.getSkill() != null && burst.requestCasting(patch, buf());
@@ -574,6 +608,113 @@ public final class SelfTest {
                 player.setHealth(player.getMaxHealth());
             }
         });
+    }
+
+    // ---------------- Ультра инстинкт: выход той же клавишей, бесплатно ----------------
+    private Step ultraToggleStep() {
+        return new Step("ultra instinct toggle", 40, t -> {
+            SkillContainer ultimate = patch.getSkill(BattleArtsSkillSlots.ULTIMATE_ART);
+            SkillContainer style = MartialSkills.styleContainer(player);
+            if (t == 0) {
+                // шкала пуста: выход всё равно работает
+                style.getDataManager().setDataSyncF(CoreAPIDataKeys.METER_FILL.get(), v -> 0.0F);
+                boolean cast = ultimate.requestCasting(patch, buf());
+                check("ultra instinct: the same key leaves it", cast && !UltraInstinct.isActive(player), "cast=" + cast + " active=" + UltraInstinct.isActive(player));
+                check("ultra instinct: leaving costs no meter", MartialSkills.meter(style) == 0.0F, "meter=" + MartialSkills.meter(style));
+            }
+            if (t == 20) {
+                // без шкалы снова включить нельзя
+                boolean cast = ultimate.requestCasting(patch, buf());
+                check("ultra instinct: needs a full meter to enter again", !cast && !UltraInstinct.isActive(player), "cast=" + cast);
+            }
+        });
+    }
+
+    // ---------------- Херобрин: силы ----------------
+    private Step herobrineArtStep(String what, boolean sprinting, boolean sneaking) {
+        String label = "HEROBRINE " + what;
+        return new Step(label, 80, t -> {
+            if (t == 0) {
+                placePlayer();
+                resetTarget();
+                resetHits();
+                castFrom = player.position();
+                MartialBattleStyle.addMeter(MartialSkills.styleContainer(player), 10000.0F);
+                MartialMoves.Technique want = sprinting ? MartialMoves.HEROBRINE_PILLARS
+                        : sneaking ? MartialMoves.HEROBRINE_LIGHTNING : MartialMoves.HEROBRINE_PORTAL;
+                wantAnim = name(want.anim());
+                player.setSprinting(sprinting);
+                player.setShiftKeyDown(sneaking);
+                SkillContainer art = patch.getSkill(BattleArtsSkillSlots.COMBAT_ART);
+                boolean cast = art != null && art.getSkill() != null && art.requestCasting(patch, buf());
+                player.setSprinting(false);
+                player.setShiftKeyDown(false);
+                String anim = name(currentAnimation());
+                check(label + ": cast " + wantAnim, cast && anim.equals(wantAnim), "cast=" + cast + " anim=" + anim);
+                if (!sprinting && !sneaking) {
+                    // шаг через портал: игрок оказался за спиной цели
+                    check(label + ": steps behind the target", player.getZ() > target.getZ() + 0.5,
+                            "from=" + castFrom + " now=" + player.position() + " target=" + target.position());
+                }
+            }
+            if (t == 8 && sprinting) check(label + ": obsidian pillars rise", Herobrine.liveEffects() > 0, "pillars=" + Herobrine.liveEffects());
+            if (t == 79) {
+                check(label + ": " + wantAnim + " hits", hitAnims.contains(wantAnim) && count(MartialMoves.Role.ART) >= 1,
+                        "hits=" + hits + " other=" + otherHits + " anims=" + hitAnims);
+                check(label + ": black fire", burned, "");
+                if (sprinting) check(label + ": pillars are gone afterwards", Herobrine.liveEffects() == 0, "pillars=" + Herobrine.liveEffects());
+            }
+        });
+    }
+
+    private Step herobrineImmunityStep() {
+        return new Step("HEROBRINE immunity", 10, t -> {
+            if (t != 0) return;
+            player.setInvulnerable(false);
+            player.setHealth(player.getMaxHealth());
+            player.invulnerableTime = 0;
+            boolean fire = player.hurt(level.damageSources().inFire(), 4.0F);
+            player.invulnerableTime = 0;
+            boolean lava = player.hurt(level.damageSources().lava(), 4.0F);
+            player.invulnerableTime = 0;
+            boolean bolt = player.hurt(level.damageSources().lightningBolt(), 5.0F);
+            boolean full = player.getHealth() >= player.getMaxHealth();
+            player.setInvulnerable(true);
+            check("HEROBRINE: immune to fire, lava and lightning", !fire && !lava && !bolt && full,
+                    "fire=" + fire + " lava=" + lava + " bolt=" + bolt + " health=" + player.getHealth());
+        });
+    }
+
+    /** Книга Херобрина собирается на «алтаре». */
+    private void checkHerobrineBook() {
+        var recipe = server.getRecipeManager().byKey(new ResourceLocation("ba_martialarts", "herobrine_book"));
+        check("HEROBRINE: book recipe loaded", recipe.isPresent() && recipe.get() instanceof CraftingRecipe, "recipe=" + recipe);
+        if (recipe.isPresent() && recipe.get() instanceof CraftingRecipe crafting) {
+            AbstractContainerMenu menu = new AbstractContainerMenu(null, -1) {
+                @Override
+                public ItemStack quickMoveStack(Player p, int slot) {
+                    return ItemStack.EMPTY;
+                }
+
+                @Override
+                public boolean stillValid(Player p) {
+                    return true;
+                }
+            };
+            TransientCraftingContainer grid = new TransientCraftingContainer(menu, 3, 3);
+            grid.setItem(0, new ItemStack(Items.BOOK));
+            grid.setItem(1, new ItemStack(Items.GOLD_BLOCK));
+            grid.setItem(2, new ItemStack(Items.NETHERRACK));
+            grid.setItem(3, new ItemStack(Items.REDSTONE_TORCH));
+            grid.setItem(4, new ItemStack(Items.MOSSY_COBBLESTONE));
+            grid.setItem(5, new ItemStack(Items.OBSIDIAN));
+            boolean matches = crafting.matches(grid, level);
+            ItemStack out = matches ? crafting.assemble(grid, level.registryAccess()) : ItemStack.EMPTY;
+            String skill = out.hasTag() ? out.getTag().getString("skill") : "";
+            check("HEROBRINE: shrine crafts the book", matches && skill.equals("ba_martialarts:herobrine"), "out=" + out + " skill=" + skill);
+        }
+        Advancement adv = server.getAdvancements().getAdvancement(new ResourceLocation("ba_martialarts", "martial/herobrine"));
+        check("HEROBRINE: advancement granted", adv != null && player.getAdvancements().getOrStartProgress(adv).isDone(), "adv=" + adv);
     }
 
     private static boolean isDodge(String anim) {
@@ -624,6 +765,8 @@ public final class SelfTest {
     }
 
     private void resetHits() {
+        burned = false;
+        if (target != null) target.clearFire();
         hits.clear();
         hitAnims.clear();
         otherHits = 0;

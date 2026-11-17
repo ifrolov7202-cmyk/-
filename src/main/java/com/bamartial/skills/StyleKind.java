@@ -12,7 +12,9 @@ public enum StyleKind {
     TAEKWONDO  ("taekwondoin",         "tornado_kick",        2.0f),
     JUDO       ("judoka",              "ippon",               2.5f),
     /** Все школы в одном стиле: связка из 12 ударов разных школ и все боевые искусства. */
-    MASTER     ("martial_arts_master", "way_of_the_master",   3.0f);
+    MASTER     ("martial_arts_master", "way_of_the_master",   3.0f),
+    /** Силы Херобрина (Annoying Villagers): чёрный огонь, порталы, обсидиановые столпы, молнии, полёт. */
+    HEROBRINE  ("herobrine",           "herobrine_power",     3.0f);
 
     public final String styleId;
     public final String artId;
@@ -26,6 +28,6 @@ public enum StyleKind {
 
     /** Книга стиля не попадается в сундуках и у торговца — только собирается из книг других стилей. */
     public boolean craftOnly() {
-        return this == MASTER;
+        return this == MASTER || this == HEROBRINE;
     }
 }

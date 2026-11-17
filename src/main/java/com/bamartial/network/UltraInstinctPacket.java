@@ -7,7 +7,7 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.function.Supplier;
 
 /**
- * Сервер -> игрок: сколько тиков осталось Ультра инстинкта (0 — выключен). Для экранного эффекта.
+ * Сервер -> игрок: сколько тиков осталось Ультра инстинкта (0 — выключен, -1 — без ограничения).
  */
 public class UltraInstinctPacket {
     private final int ticks;
@@ -17,11 +17,11 @@ public class UltraInstinctPacket {
     }
 
     public UltraInstinctPacket(FriendlyByteBuf buf) {
-        this.ticks = buf.readVarInt();
+        this.ticks = buf.readInt();
     }
 
     public void encode(FriendlyByteBuf buf) {
-        buf.writeVarInt(ticks);
+        buf.writeInt(ticks);
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {

@@ -29,7 +29,7 @@
   "itemGroup.ba_martialarts": "Martial Arts (Battle Arts)",
   "block.ba_martialarts.training_bag": "Training Bag",
   "skill.ba_martialarts.ultra_instinct": "Ultra Instinct",
-  "skill.ba_martialarts.ultra_instinct.tooltip": "The body fights on its own: 15 s of step dodges with afterimages and style counters, +40% damage, +25% speed, faster combos, free Combat Arts. Triggers by itself near defeat (once per 5 minutes). Afterwards your stamina is empty.",
+  "skill.ba_martialarts.ultra_instinct.tooltip": "The body fights on its own: step dodges with an afterimage and style counters, +40% damage, +25% speed, faster combos, combat arts without meter. Lasts until you leave with the same key (V); leaving is free. Triggers by itself near defeat (once per 5 minutes). Afterwards - empty stamina.",
   "msg.ba_martialarts.ui.title": "ULTRA INSTINCT",
   "msg.ba_martialarts.ui.auto": "Your body keeps fighting while unconscious...",
   "msg.ba_martialarts.ui.manual": "The mind goes silent. The body knows what to do.",
@@ -76,5 +76,17 @@
   "move.ba_martialarts.ninjutsu.drop_strike": "Ninjutsu: drop strike",
   "move.ba_martialarts.aikido.kokyu_nage": "Aikido: kokyu nage",
   "advancements.ba_martialarts.master.title": "Martial Arts Master",
-  "advancements.ba_martialarts.master.description": "Combine the books of all six styles into one and equip the master style"
+  "advancements.ba_martialarts.master.description": "Combine the books of all six styles into one and equip the master style",
+  "msg.ba_martialarts.ui.leave": "The mind is back. Ultra Instinct is off.",
+  "msg.ba_martialarts.ui.hud_unlimited": "ULTRA INSTINCT  ·  V — leave",
+  "skill.ba_martialarts.herobrine": "Herobrine",
+  "skill.ba_martialarts.herobrine.tooltip": "Herobrine's powers. Combo: left strike, rising fist, kick, whirlwind (moves from EpicFight: Annoying Villagers when installed); every hit sets the target ablaze with black fire. Flight - double jump (costs stamina). Immune to fire, lightning and falls. Combat art: Herobrine's Power. Book: book + gold block + netherrack + redstone torch + mossy cobblestone + obsidian.",
+  "skill.ba_martialarts.herobrine_power": "Herobrine's Power",
+  "skill.ba_martialarts.herobrine_power.tooltip": "Standing - step through a portal behind the enemy (up to 16 blocks) and strike. Sprinting - a line of obsidian pillars 11 blocks long that launches enemies. Sneaking - a storm: lightning strikes every enemy around. Works in flight too.",
+  "technique.ba_martialarts.herobrine_portal": "Herobrine's Portal",
+  "technique.ba_martialarts.herobrine_pillars": "Obsidian Pillars",
+  "technique.ba_martialarts.herobrine_lightning": "Herobrine's Storm",
+  "msg.ba_martialarts.herobrine.tired": "Not enough stamina to fly",
+  "advancements.ba_martialarts.herobrine.title": "He Is Here",
+  "advancements.ba_martialarts.herobrine.description": "Craft the book on Herobrine's shrine and equip his style"
 }

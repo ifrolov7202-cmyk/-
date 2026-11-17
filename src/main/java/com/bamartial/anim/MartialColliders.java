@@ -30,6 +30,10 @@ public final class MartialColliders {
     public static final Collider SPIN = reg("spin", new OBBCollider(2.0D, 0.9D, 2.0D, 0.0D, 1.0D, 0.0D));
     /** Серия кулаков в упор. */
     public static final Collider BARRAGE = reg("barrage", new OBBCollider(0.55D, 0.55D, 0.7D, 0.0D, 1.2D, -0.95D));
+    /** Херобрин: линия обсидиановых столпов, от 0,5 до ~11,5 блока вперёд. */
+    public static final Collider PILLAR_LINE = reg("pillar_line", new OBBCollider(1.2D, 1.6D, 5.5D, 0.0D, 1.0D, -6.0D));
+    /** Херобрин: гроза вокруг себя, ~7 блоков во все стороны. */
+    public static final Collider STORM = reg("storm", new OBBCollider(7.0D, 2.5D, 7.0D, 0.0D, 1.0D, 0.0D));
 
     private MartialColliders() {}
 

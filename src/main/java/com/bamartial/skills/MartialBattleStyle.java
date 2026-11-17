@@ -50,6 +50,9 @@ public class MartialBattleStyle extends BattleStyle {
         if (this.unarmedLivingMotions.isEmpty()) {
             AnimationManager.AnimationAccessor<? extends StaticAnimation> stance = MartialMoves.stance(kind);
             if (stance != null) this.unarmedLivingMotions.put(LivingMotions.IDLE, stance);
+            // Херобрин бегает своим бегом из Annoying Villagers
+            AnimationManager.AnimationAccessor<? extends StaticAnimation> run = MartialMoves.run(kind);
+            if (run != null) this.unarmedLivingMotions.put(LivingMotions.RUN, run);
         }
         super.onInitiate(container);
         PlayerPatch<?> patch = container.getExecutor();
@@ -60,6 +63,7 @@ public class MartialBattleStyle extends BattleStyle {
             changeSkill(server, BattleArtsSkillSlots.ULTIMATE_ART, MartialSkills.ULTRA_INSTINCT);
             MartialAdvancements.award(server.getOriginal(), "learn_style");
             if (kind == StyleKind.MASTER) MartialAdvancements.award(server.getOriginal(), "master");
+            if (kind == StyleKind.HEROBRINE) MartialAdvancements.award(server.getOriginal(), "herobrine");
         }
 
         PlayerEventListener listener = patch.getEventListener();
@@ -104,6 +108,7 @@ public class MartialBattleStyle extends BattleStyle {
             changeSkill(server, BattleArtsSkillSlots.BURST_ART, null);
             changeSkill(server, BattleArtsSkillSlots.ULTIMATE_ART, null);
             UltraInstinct.forceEnd(server.getOriginal(), false);
+            Herobrine.revokeFlight(server.getOriginal());
         }
         super.onRemoved(container);
     }

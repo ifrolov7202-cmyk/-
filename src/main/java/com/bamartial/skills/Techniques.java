@@ -238,11 +238,14 @@ public final class Techniques {
                 technique = cycle.get(Math.floorMod(s.masterArt, cycle.size()));
                 next = cycle.get(Math.floorMod(s.masterArt + 1, cycle.size()));
             }
+        } else if (kind == StyleKind.HEROBRINE) {
+            technique = Herobrine.choose(p);
         } else {
             technique = MartialMoves.technique(kind);
         }
         if (technique == null || technique.anim() == null) return false;
         StyleKind school = technique.school();
+        if (school == StyleKind.HEROBRINE) Herobrine.beforePower(sp, technique);
 
         LivingEntity target = findTarget(p, artRange(school));
         if (target != null) face(sp, target);
@@ -294,6 +297,7 @@ public final class Techniques {
         return switch (kind) {
             case KARATE, KUNG_FU -> 6.0;
             case MUAY_THAI -> 7.0;
+            case HEROBRINE -> 8.0;
             default -> 4.0;
         };
     }
@@ -313,6 +317,7 @@ public final class Techniques {
         double mult = MartialConfig.get(MartialConfig.DAMAGE_MULTIPLIER, 1.0);
         if (mult != 1.0 && hurt != null) hurt.setAmount((float) (hurt.getAmount() * mult));
         showMoveName(p, source, info);
+        if (info.kind() == StyleKind.HEROBRINE && target != null) Herobrine.onHit(p, target, source.getAnimation(), info.role());
 
         return switch (info.role()) {
             case COMBO -> 12;
@@ -438,7 +443,7 @@ public final class Techniques {
     // =====================================================================
 
     /** Довернуть бойца (и камеру) к цели — хитбокс приёма Epic Fight смотрит туда же. */
-    private static void face(ServerPlayerPatch sp, LivingEntity target) {
+    public static void face(ServerPlayerPatch sp, LivingEntity target) {
         if (!MartialConfig.get(MartialConfig.AUTO_AIM, true)) return;
         ServerPlayer p = sp.getOriginal();
         double dx = target.getX() - p.getX();
@@ -487,7 +492,7 @@ public final class Techniques {
         return best;
     }
 
-    private static Vec3 horizontalLook(ServerPlayer p) {
+    public static Vec3 horizontalLook(ServerPlayer p) {
         Vec3 look = p.getLookAngle();
         Vec3 flat = new Vec3(look.x, 0, look.z);
         return flat.lengthSqr() < 1.0E-4 ? new Vec3(0, 0, 1) : flat.normalize();

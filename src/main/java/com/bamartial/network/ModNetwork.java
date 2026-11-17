@@ -9,7 +9,7 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public final class ModNetwork {
-    private static final String VERSION = "6";
+    private static final String VERSION = "7";
 
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
             new ResourceLocation(BAMartial.MODID, "main"), () -> VERSION, VERSION::equals, VERSION::equals);
@@ -34,7 +34,7 @@ public final class ModNetwork {
                 .add();
     }
 
-    /** Сообщить игроку, сколько тиков осталось Ультра инстинкта (для экранного эффекта). */
+    /** Сообщить игроку, сколько тиков осталось Ультра инстинкта (0 — выключен, -1 — без ограничения). */
     public static void syncUltraInstinct(ServerPlayer player, int ticks) {
         if (player.connection == null) return;
         CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new UltraInstinctPacket(ticks));

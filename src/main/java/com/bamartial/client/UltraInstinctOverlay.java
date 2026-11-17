@@ -12,7 +12,8 @@ public final class UltraInstinctOverlay {
     public static final IGuiOverlay OVERLAY = (gui, g, partialTick, width, height) -> {
         Minecraft mc = Minecraft.getInstance();
         int ticks = ClientUltraInstinct.ticks;
-        if (ticks <= 0 || mc.player == null || mc.options.hideGui) return;
+        if (ticks == 0 || mc.player == null || mc.options.hideGui) return;
+        boolean unlimited = ticks < 0;
 
         float pulse = 0.5f + 0.5f * (float) Math.sin((mc.player.tickCount + partialTick) * 0.25);
         int edge = Math.max(24, height / 6);
@@ -28,6 +29,12 @@ public final class UltraInstinctOverlay {
         g.fill(width - 1, 0, width, height, white);
 
         Font font = mc.font;
+        if (unlimited) {
+            // без таймера: подсказка, как выйти
+            Component title = Component.translatable("msg.ba_martialarts.ui.hud_unlimited");
+            g.drawString(font, title, (width - font.width(title)) / 2, 8, 0xFFFFFF, true);
+            return;
+        }
         Component title = Component.translatable("msg.ba_martialarts.ui.hud", String.format("%.1f", ticks / 20.0));
         int tw = font.width(title);
         g.drawString(font, title, (width - tw) / 2, 8, 0xFFFFFF, true);

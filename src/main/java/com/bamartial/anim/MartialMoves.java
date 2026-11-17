@@ -75,10 +75,24 @@ public final class MartialMoves {
     private static final String BA = "battle_arts";
     private static final String WOM = "wom";
     private static final String EFN = "efn";
+    /** EpicFight: Annoying Villagers — кулачные приёмы и позы Херобрина. */
+    public static final String EFAV = "epicfight_annoyingvillagers";
 
     // Epic Fight (есть всегда)
     private static final Clip EF_JAB_L = Clip.of(EF, "biped/combat/fist_auto1", 0.08F, 0.05F, 0.05F, 0.15F, 0.15F, Clip.J.TOOL_L).basis(3.2F);
     private static final Clip EF_JAB_R = Clip.of(EF, "biped/combat/fist_auto2", 0.08F, 0.05F, 0.05F, 0.15F, 0.15F, Clip.J.TOOL_R).basis(3.2F);
+    // ---- EpicFight: Annoying Villagers (окна — как в самом моде; скорость — от скорости атаки, как у них) ----
+    private static final Clip AV_FIST_LEFT = Clip.of(EFAV, "biped/av_fist/fist_left", 0.15F, 0.25F, 0.45F, 0.85F, 1.1F, Clip.J.TOOL_L).basis(2.2F);
+    private static final Clip AV_FIST_UP = Clip.of(EFAV, "biped/av_fist/fist_up", 0.15F, 0.25F, 0.45F, 0.85F, 0.95F, Clip.J.TOOL_R).basis(2.2F);
+    // рывок: тело летит вперёд анимацией, а сервер игрока анимацией не двигает — хитбокс перед бойцом
+    private static final Clip AV_FIST_DASH = Clip.of(EFAV, "biped/av_fist/fist_dash", 0.15F, 0.25F, 0.45F, 0.7F, 0.95F, Clip.J.TOOL_R).basis(2.2F).rootHitbox();
+    private static final Clip AV_WHIRLWIND = Clip.of(EFAV, "biped/av_fist/whirlwind_kick", 0.2F, 0.29F, 0.45F, 0.85F, 1.8F, Clip.J.LEG_R).basis(2.5F);
+    // у Annoying Villagers окно удара ногой — мгновение (0,4 с); чуть шире, чтобы попадание не зависело от тика
+    private static final Clip AV_KICK = Clip.of(EFAV, "biped/kick/kick_1", 0.1F, 0.05F, 0.3F, 0.45F, 0.55F, Clip.J.LEG_R).basis(2.2F);
+    // позы Херобрина: рука вперёд (столпы), рука вверх (молния)
+    private static final Clip AV_POINT = Clip.of(EFAV, "biped/living/point_left_hand_toward", 0.1F, 0.0F, 0.1F, 0.4F, 0.417F, Clip.J.ROOT).fixed(1.0F);
+    private static final Clip AV_POINT_UP = Clip.of(EFAV, "biped/living/point_left_hand_up", 0.1F, 0.0F, 0.1F, 0.4F, 0.417F, Clip.J.ROOT).fixed(1.0F);
+
     private static final Clip EF_HOOK = Clip.of(EF, "biped/combat/fist_auto3", 0.08F, 0.05F, 0.05F, 0.15F, 0.5F, Clip.J.TOOL_L).basis(3.2F);
     // рывок плечом: на сервере Epic Fight не двигает игрока анимацией, плечо само до цели не достаёт —
     // хитбокс перед бойцом (так рывок попадает и с места, например контрударом дзюдо)
@@ -165,6 +179,17 @@ public final class MartialMoves {
     private static final Hit SHOVE = new Hit(1.3F, StunType.LONG, 3.0F, 0F, 0, EpicFightSounds.BLUNT_HIT_HARD, EpicFightSounds.WHOOSH_BIG, EpicFightParticles.HIT_BLUNT);
     /** 12-й удар связки мастера: бросок через бедро, сбивает с ног. */
     private static final Hit GRAND_FINISH = new Hit(2.2F, StunType.KNOCKDOWN, 6.0F, 0F, 0, EpicFightSounds.BLUNT_HIT_HARD, EpicFightSounds.WHOOSH_BIG, EpicFightParticles.AIR_BURST);
+    // ---- Херобрин ----
+    private static final Hit HB_PUNCH = new Hit(1.2F, StunType.SHORT, 2.5F, 0F, 0, EpicFightSounds.BLUNT_HIT_HARD, EpicFightSounds.WHOOSH, EpicFightParticles.HIT_BLUNT);
+    private static final Hit HB_KICK = new Hit(1.3F, StunType.LONG, 3.0F, 0F, 0, EpicFightSounds.BLUNT_HIT_HARD, EpicFightSounds.WHOOSH, EpicFightParticles.HIT_BLUNT);
+    private static final Hit HB_FINISH = new Hit(1.9F, StunType.KNOCKDOWN, 6.0F, 0F, 2, EpicFightSounds.BLUNT_HIT_HARD, EpicFightSounds.WHOOSH_BIG, EpicFightParticles.AIR_BURST);
+    /** Удар из портала за спиной цели. */
+    private static final Hit HB_PORTAL = new Hit(3.5F, StunType.KNOCKDOWN, 10.0F, 30F, 1, EpicFightSounds.BLUNT_HIT_HARD, EpicFightSounds.WHOOSH_BIG, EpicFightParticles.AIR_BURST);
+    /** Обсидиановые столпы из земли. */
+    private static final Hit HB_PILLARS = new Hit(3.0F, StunType.KNOCKDOWN, 8.0F, 20F, 8, EpicFightSounds.BLUNT_HIT_HARD, EpicFightSounds.WHOOSH_BIG, EpicFightParticles.HIT_BLUNT);
+    /** Гроза Херобрина. */
+    private static final Hit HB_LIGHTNING = new Hit(2.5F, StunType.LONG, 6.0F, 30F, 8, EpicFightSounds.BLUNT_HIT_HARD, EpicFightSounds.WHOOSH_BIG, EpicFightParticles.AIR_BURST);
+
     /** Айкидо: бросок атакующего его же силой (контрприём мастера после уклонения). */
     private static final Hit AIKIDO = new Hit(2.0F, StunType.KNOCKDOWN, 7.0F, 0F, 0, EpicFightSounds.BLUNT_HIT_HARD, EpicFightSounds.WHOOSH_BIG, EpicFightParticles.AIR_BURST);
     /** Джит Кун До: дюймовый удар — одна цель, пробивает броню, далеко отбрасывает. */
@@ -184,6 +209,10 @@ public final class MartialMoves {
     private static final Map<StyleKind, Integer> COMBO_LENGTH = new EnumMap<>(StyleKind.class);
     /** Техники мастера, которые применяются стоя, по кругу. */
     private static final List<Technique> MASTER_CYCLE = new ArrayList<>();
+    /** Силы Херобрина (боевое искусство Z): портал за спину, обсидиановые столпы, гроза. */
+    public static Technique HEROBRINE_PORTAL;
+    public static Technique HEROBRINE_PILLARS;
+    public static Technique HEROBRINE_LIGHTNING;
     private static final Map<String, String> CHOSEN = new HashMap<>();
     /** Сколько ударов в самой длинной связке (связки короче повторяются до этой длины). */
     private static final int COMBO_SLOTS = 12;
@@ -326,6 +355,25 @@ public final class MartialMoves {
                 artAnim(b, "art/one_inch_punch", StyleKind.MASTER, MartialColliders.HEAVY, ONE_INCH, ONE_INCH, 1.0F, WOM_PUNCH, BA_PUNCH_R, EF_JAB_R)));
         MASTER_CYCLE.add(new Technique("technique.ba_martialarts.armlock", StyleKind.MASTER,
                 artAnim(b, "art/armlock", StyleKind.MASTER, MartialColliders.HEAVY, ARMLOCK, ARMLOCK, 1.2F, BA_HEAVY, EF_HOOK)));
+
+        // ---------------- Херобрин (EpicFight: Annoying Villagers) ----------------
+        // кулаки и ноги Херобрина из Annoying Villagers; каждый удар поджигает чёрным огнём
+        combo(b, StyleKind.HEROBRINE,
+                hit(b, "herobrine/left_strike", StyleKind.HEROBRINE, Role.COMBO, HB_PUNCH, AV_FIST_LEFT, BA_JAB_L, EF_JAB_L),
+                hit(b, "herobrine/rising_fist", StyleKind.HEROBRINE, Role.COMBO, HB_PUNCH, AV_FIST_UP, BA_UPPERCUT, EF_HOOK),
+                hit(b, "herobrine/kick", StyleKind.HEROBRINE, Role.COMBO, HB_KICK, AV_KICK, WOM_KICK_1, BA_KICK, EF_KICK),
+                hit(b, "herobrine/whirlwind_kick", StyleKind.HEROBRINE, Role.FINISHER, HB_FINISH, AV_WHIRLWIND, WOM_KICK, BA_KICK, EF_KICK),
+                dash(b, "herobrine/dash", StyleKind.HEROBRINE, AV_FIST_DASH, BA_LUNGE, EF_DASH),
+                air(b, "herobrine/air", StyleKind.HEROBRINE, BA_AXE_KICK, EF_AIR));
+        rush(b, "rush/herobrine_left", StyleKind.HEROBRINE, 1.6F, true, 4, BA_JAB_L, EF_JAB_L);
+        rush(b, "rush/herobrine_right", StyleKind.HEROBRINE, 1.6F, true, 4, BA_JAB_R, EF_JAB_R);
+        HEROBRINE_PORTAL = new Technique("technique.ba_martialarts.herobrine_portal", StyleKind.HEROBRINE,
+                artAnim(b, "art/herobrine_portal", StyleKind.HEROBRINE, MartialColliders.HEAVY, HB_PORTAL, HB_PORTAL, 1.2F, AV_FIST_UP, BA_UPPERCUT, EF_HOOK));
+        HEROBRINE_PILLARS = new Technique("technique.ba_martialarts.herobrine_pillars", StyleKind.HEROBRINE,
+                artAnim(b, "art/herobrine_pillars", StyleKind.HEROBRINE, MartialColliders.PILLAR_LINE, HB_PILLARS, HB_PILLARS, 1.0F, AV_POINT, EF_PALMS));
+        HEROBRINE_LIGHTNING = new Technique("technique.ba_martialarts.herobrine_lightning", StyleKind.HEROBRINE,
+                artAnim(b, "art/herobrine_lightning", StyleKind.HEROBRINE, MartialColliders.STORM, HB_LIGHTNING, HB_LIGHTNING, 1.0F, AV_POINT_UP, EF_PALMS));
+        ARTS.put(StyleKind.HEROBRINE, HEROBRINE_PORTAL.anim());
 
         // ---------------- Шквал ударов (все стили) ----------------
         FLURRY = b.nextAccessor("art/flurry_of_blows", acc -> {
@@ -641,6 +689,11 @@ public final class MartialMoves {
 
     /** Боевая стойка Battle Arts для голых рук (если мод установлен). */
     public static AnimationManager.AnimationAccessor<? extends StaticAnimation> stance(StyleKind kind) {
+        if (kind == StyleKind.HEROBRINE) {
+            // стойка Херобрина из Annoying Villagers
+            AnimationManager.AnimationAccessor<? extends StaticAnimation> guard = otherModAnimation(EFAV, "biped/living/fist_guard");
+            if (guard != null) return guard;
+        }
         if (!ModList.get().isLoaded(BA)) return null;
         String path = switch (kind) {
             case KUNG_FU, TAEKWONDO, KARATE, MASTER -> "battle_style/unique/iron_lotus/fist/idle";
@@ -648,6 +701,21 @@ public final class MartialMoves {
         };
         try {
             return AnimationManager.byKey(new ResourceLocation(BA, path));
+        } catch (Throwable t) {
+            return null;
+        }
+    }
+
+    /** Бег стиля (у Херобрина — его бег из Annoying Villagers); null — обычный бег. */
+    public static AnimationManager.AnimationAccessor<? extends StaticAnimation> run(StyleKind kind) {
+        return kind == StyleKind.HEROBRINE ? otherModAnimation(EFAV, "biped/living/herobrine_run") : null;
+    }
+
+    /** Анимация, зарегистрированная другим модом, если он установлен и разрешён в конфиге. */
+    private static AnimationManager.AnimationAccessor<? extends StaticAnimation> otherModAnimation(String modId, String path) {
+        if (!ModList.get().isLoaded(modId) || !MartialConfig.get(MartialConfig.OTHER_MOD_ANIMATIONS, true)) return null;
+        try {
+            return AnimationManager.byKey(new ResourceLocation(modId, path));
         } catch (Throwable t) {
             return null;
         }

@@ -29,7 +29,7 @@
   "itemGroup.ba_martialarts": "Боевые искусства (Battle Arts)",
   "block.ba_martialarts.training_bag": "Тренировочная груша",
   "skill.ba_martialarts.ultra_instinct": "Ультра инстинкт",
-  "skill.ba_martialarts.ultra_instinct.tooltip": "Тело дерётся само: 15 с уклонений шагами с остаточным образом и контрударов стиля, +40% урона, +25% скорости, быстрее связки, боевые искусства без затрат метра. Включается само на грани поражения (раз в 5 минут). После — пустая выносливость.",
+  "skill.ba_martialarts.ultra_instinct.tooltip": "Тело дерётся само: уклонения шагами с остаточным образом и контрудары стиля, +40% урона, +25% скорости, быстрее связки, боевые искусства без затрат метра. Длится, пока не выйдете той же клавишей (V); выход бесплатный. Включается само на грани поражения (раз в 5 минут). После выхода — пустая выносливость.",
   "msg.ba_martialarts.ui.title": "УЛЬТРА ИНСТИНКТ",
   "msg.ba_martialarts.ui.auto": "Тело продолжает драться без сознания...",
   "msg.ba_martialarts.ui.manual": "Разум затих. Тело знает, что делать.",
@@ -76,5 +76,17 @@
   "move.ba_martialarts.ninjutsu.drop_strike": "Ниндзюцу: удар сверху",
   "move.ba_martialarts.aikido.kokyu_nage": "Айкидо: кокю-наге",
   "advancements.ba_martialarts.master.title": "Мастер боевых искусств",
-  "advancements.ba_martialarts.master.description": "Соберите книги всех шести стилей в одну и наденьте стиль мастера"
+  "advancements.ba_martialarts.master.description": "Соберите книги всех шести стилей в одну и наденьте стиль мастера",
+  "msg.ba_martialarts.ui.leave": "Разум вернулся. Ультра инстинкт выключен.",
+  "msg.ba_martialarts.ui.hud_unlimited": "УЛЬТРА ИНСТИНКТ  ·  V — выйти",
+  "skill.ba_martialarts.herobrine": "Херобрин",
+  "skill.ba_martialarts.herobrine.tooltip": "Силы Херобрина. Связка: удар левой, восходящий кулак, удар ногой, вихрь (приёмы из EpicFight: Annoying Villagers, если он установлен); каждый удар поджигает чёрным огнём. Полёт — двойной прыжок (тратит выносливость). Не горит, не боится молний и падения. Боевое искусство: Сила Херобрина. Книга: книга + блок золота + незерак + факел из красного камня + замшелый булыжник + обсидиан.",
+  "skill.ba_martialarts.herobrine_power": "Сила Херобрина",
+  "skill.ba_martialarts.herobrine_power.tooltip": "Стоя — шаг через портал за спину врага (до 16 блоков) и сокрушающий удар. На бегу — линия обсидиановых столпов на 11 блоков, подбрасывает врагов. Присев — гроза: молнии бьют всех врагов вокруг. Работает и в полёте.",
+  "technique.ba_martialarts.herobrine_portal": "Портал Херобрина",
+  "technique.ba_martialarts.herobrine_pillars": "Обсидиановые столпы",
+  "technique.ba_martialarts.herobrine_lightning": "Гроза Херобрина",
+  "msg.ba_martialarts.herobrine.tired": "Не хватает выносливости для полёта",
+  "advancements.ba_martialarts.herobrine.title": "Он здесь",
+  "advancements.ba_martialarts.herobrine.description": "Соберите книгу на алтаре Херобрина и наденьте его стиль"
 }

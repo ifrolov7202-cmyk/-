@@ -43,6 +43,15 @@ public class MartialCombatArt extends CombatArt {
         if (spent > 0) MartialBattleStyle.addMeter(styleContainer, spent);
     }
 
+    /** Херобрин применяет силы и в полёте. */
+    @Override
+    public boolean isExecutableState(yesman.epicfight.world.capabilities.entitypatch.player.PlayerPatch<?> executor) {
+        if (kind == StyleKind.HEROBRINE) {
+            return !executor.getOriginal().isSpectator() && executor.getEntityState().canUseSkill();
+        }
+        return super.isExecutableState(executor);
+    }
+
     @Override
     public boolean shouldDraw(SkillContainer container) {
         return container.getExecutor().getOriginal().getMainHandItem().isEmpty();

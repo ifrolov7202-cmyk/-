@@ -14,12 +14,16 @@ public final class MartialConfig {
     public static final ForgeConfigSpec.DoubleValue RUSH_STAMINA;
     public static final ForgeConfigSpec.BooleanValue MOVE_NAMES;
     public static final ForgeConfigSpec.IntValue UI_DURATION;
+    public static final ForgeConfigSpec.BooleanValue UI_EXHAUSTION;
     public static final ForgeConfigSpec.DoubleValue UI_DODGE_CHANCE;
     public static final ForgeConfigSpec.BooleanValue UI_AUTO_TRIGGER;
     public static final ForgeConfigSpec.DoubleValue UI_AUTO_HEALTH;
     public static final ForgeConfigSpec.IntValue UI_AUTO_COOLDOWN;
     public static final ForgeConfigSpec.BooleanValue BOOKS_IN_LOOT;
     public static final ForgeConfigSpec.BooleanValue BOOKS_AT_TRADER;
+    public static final ForgeConfigSpec.BooleanValue HEROBRINE_FLIGHT;
+    public static final ForgeConfigSpec.DoubleValue HEROBRINE_FLIGHT_STAMINA;
+    public static final ForgeConfigSpec.BooleanValue HEROBRINE_FIRE_IMMUNE;
 
     static {
         ForgeConfigSpec.Builder b = new ForgeConfigSpec.Builder();
@@ -38,8 +42,10 @@ public final class MartialConfig {
                 .define("showMoveNames", true);
         b.pop();
         b.push("ultra_instinct");
-        UI_DURATION = b.comment("Длительность Ультра инстинкта, секунд / Ultra Instinct duration, seconds")
-                .defineInRange("durationSeconds", 15, 3, 120);
+        UI_DURATION = b.comment("Длительность Ультра инстинкта, секунд; 0 — без ограничения, выход той же клавишей (V) / Ultra Instinct duration, seconds; 0 — no limit, leave with the same key (V)")
+                .defineInRange("durationSeconds", 0, 0, 3600);
+        UI_EXHAUSTION = b.comment("После выхода из Ультра инстинкта — истощение (пустая выносливость, бойец медленнее) / Exhaustion after leaving Ultra Instinct")
+                .define("exhaustion", true);
         UI_DODGE_CHANCE = b.comment("Шанс автоуклонения от атаки / Auto-dodge chance")
                 .defineInRange("dodgeChance", 0.75, 0.0, 1.0);
         UI_AUTO_TRIGGER = b.comment("Включается сам на грани поражения при полной шкале / Triggers by itself near death with a full meter")
@@ -48,6 +54,14 @@ public final class MartialConfig {
                 .defineInRange("autoTriggerHealth", 0.2, 0.05, 0.9);
         UI_AUTO_COOLDOWN = b.comment("Перезарядка авто-включения, секунд / Auto trigger cooldown, seconds")
                 .defineInRange("autoTriggerCooldownSeconds", 300, 0, 3600);
+        b.pop();
+        b.push("herobrine");
+        HEROBRINE_FLIGHT = b.comment("Херобрин летает (двойной прыжок, как в творческом режиме) / Herobrine can fly (double jump, as in creative)")
+                .define("flight", true);
+        HEROBRINE_FLIGHT_STAMINA = b.comment("Расход выносливости Epic Fight в полёте, в секунду / Epic Fight stamina spent per second of flight")
+                .defineInRange("flightStaminaPerSecond", 0.5, 0.0, 10.0);
+        HEROBRINE_FIRE_IMMUNE = b.comment("Херобрин не горит и не получает урона от огня и молний / Herobrine is immune to fire and lightning")
+                .define("fireImmune", true);
         b.pop();
         b.push("world");
         BOOKS_IN_LOOT = b.comment("Книги стилей в сундуках / Style books in chests").define("booksInLoot", true);

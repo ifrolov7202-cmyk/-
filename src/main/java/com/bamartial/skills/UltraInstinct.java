@@ -47,7 +47,8 @@ import java.util.UUID;
 /**
  * Ультра инстинкт (как в Лукизме): тело дерётся само.
  * <ul>
- *   <li>Включение: клавиша Ultimate Art (V) при полной шкале или само — на грани поражения (раз в 5 минут).</li>
+ *   <li>Включение: клавиша Ultimate Art (V) при полной шкале или само — на грани поражения (раз в 5 минут).
+ *       Длится, пока боец сам не выйдет той же клавишей (V); ограничение по времени — в конфиге.</li>
  *   <li>Пока активен: уклонения настоящими шагами Epic Fight (с остаточным образом) и контрудар стиля по атакующему,
  *       +40% урона, +25% скорости, быстрее связки, искусства без затрат метра, не отбрасывает.</li>
  *   <li>После: «тело на пределе» — выносливость Epic Fight пуста и не восстанавливается 10 с, бойец медленнее.</li>
@@ -62,7 +63,11 @@ public final class UltraInstinct {
     private static final UUID TIRED_ID = UUID.fromString("0b6c8d2e-5a1f-4b7e-9c3d-2f8e1a6b7d05");
     private static final int EXHAUSTION_TICKS = 400;
 
+    /** «Без ограничения по времени» в поле ticks. */
+    private static final int UNLIMITED = Integer.MAX_VALUE;
+
     private static final class State {
+        /** Сколько тиков осталось; {@link #UNLIMITED} — пока боец сам не выйдет. */
         int ticks;
         int exhausted;
         long autoReadyAt;
@@ -94,7 +99,8 @@ public final class UltraInstinct {
     public static boolean activate(ServerPlayer p, boolean auto) {
         if (!canActivate(p)) return false;
         State s = state(p);
-        s.ticks = MartialConfig.get(MartialConfig.UI_DURATION, 15) * 20;
+        int seconds = MartialConfig.get(MartialConfig.UI_DURATION, 0);
+        s.ticks = seconds <= 0 ? UNLIMITED : seconds * 20;
         s.dodges = 0;
 
         setModifier(p, Attributes.ATTACK_DAMAGE, DAMAGE_ID, 0.4, AttributeModifier.Operation.MULTIPLY_TOTAL);
@@ -126,9 +132,17 @@ public final class UltraInstinct {
             sp.playAnimationSynchronized(MartialMoves.AWAKEN, 0.0F);
         }
 
-        ModNetwork.syncUltraInstinct(p, s.ticks);
+        ModNetwork.syncUltraInstinct(p, s.ticks == UNLIMITED ? -1 : s.ticks);
         MartialAdvancements.award(p, "ultra_instinct");
         if (auto) MartialAdvancements.award(p, "unconscious_fighter");
+        return true;
+    }
+
+    /** Боец сам выходит из Ультра инстинкта (клавиша V). */
+    public static boolean deactivate(ServerPlayer p) {
+        if (!isActive(p)) return false;
+        forceEnd(p, MartialConfig.get(MartialConfig.UI_EXHAUSTION, true));
+        Techniques.actionBar(p, Component.translatable("msg.ba_martialarts.ui.leave").withStyle(ChatFormatting.GRAY));
         return true;
     }
 
@@ -211,11 +225,11 @@ public final class UltraInstinct {
         if (s.exhausted > 0 && --s.exhausted == 0) removeModifier(p, Attributes.MOVEMENT_SPEED, TIRED_ID);
         if (s.ticks <= 0) return;
 
-        s.ticks--;
+        if (s.ticks != UNLIMITED) s.ticks--;
         // серебристый остаточный образ бойца
         if (p.tickCount % 8 == 0) ModNetwork.fx(p, "afterimage");
         if (p.tickCount % 20 == 0) Techniques.sound(p, SoundEvents.WARDEN_HEARTBEAT, 0.5f, 1.4f);
-        if (s.ticks == 0) end(p, s, true);
+        if (s.ticks == 0) end(p, s, MartialConfig.get(MartialConfig.UI_EXHAUSTION, true));
     }
 
     /** Включение на грани поражения: тело продолжает драться без сознания. */
