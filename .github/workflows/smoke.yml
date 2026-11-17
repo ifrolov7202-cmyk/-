@@ -68,7 +68,8 @@ jobs:
                       print(name, v['version_number'], f['filename'])
                       return
               print('NOT FOUND', name); sys.exit(1)
-          get('epic-fight', lambda n: n.startswith('20.14.16'), 'Epic Fight')
+          if sys.argv[2] != 'true':
+              get('epic-fight', lambda n: n.startswith('20.14.16'), 'Epic Fight')
           get('7baP43pD', lambda n: n.startswith('20.14.16'), 'Battle Arts API')
           av = sys.argv[2] == 'true'
           if sys.argv[1] == 'true':
@@ -81,7 +82,8 @@ jobs:
           python3 dl.py "${{ github.event.inputs.extra }}" "${{ github.event.inputs.av }}" | tee ../out/mods.txt
           if [ "${{ github.event.inputs.av }}" = "true" ]; then
             # то, с чем собран EpicFight: Annoying Villagers (curse maven)
-            for c in annoying-villagers-1717848:9036954 smart-npc-1709932:8964218 aaa-particles-979809:8082320 \
+            # Epic Fight 20.14.17 — та версия, с которой собраны Annoying Villagers и его моды
+            for c in epic-fight-mod-405076:8049910 annoying-villagers-1717848:9036954 smart-npc-1709932:8964218 aaa-particles-979809:8082320 \
                      combat-evolution-1377795:9015624 weapons-of-miracles-epicfight-918614:7517612 \
                      epicfight-nightfall-1307848:8366962 epic-fight-invincible-1184379:7679941 epic-fight-avalon-1268823:7619938 \
                      epicfight-awaken-1423319:8506984 epicfight-clash-blade-1408812:7973024; do
