@@ -325,13 +325,17 @@ public final class SelfTest {
                 castAnims.clear();
                 patch.setStamina(patch.getMaxStamina());
             }
+            if (t == 0) comboTrace.clear();
+            traceTarget(t);
             if (casts < moves && patch.getEntityState().canBasicAttack()) {
                 SkillContainer basic = patch.getSkill(SkillSlots.BASIC_ATTACK);
                 if (basic.requestCasting(patch, buf())) {
                     casts++;
                     castAnims.add(name(currentAnimation()));
+                    comboTrace.add("t" + t + " cast " + name(currentAnimation()) + " hits=" + hitAnims.size());
                 }
             }
+            if (t == ticks - 1 && !hitAnims.containsAll(castAnims)) info(kind + ": combo trace " + comboTrace);
             if (t == ticks - 1) {
                 check(kind + ": " + moves + " basic attacks", casts == moves, "casts=" + casts);
                 check(kind + ": combo has " + moves + " different strikes", new LinkedHashSet<>(castAnims).size() == moves, "anims=" + castAnims);
@@ -809,6 +813,32 @@ public final class SelfTest {
         target.setYHeadRot(180.0F);
         target.yBodyRot = 180.0F;
         target.setDeltaMovement(Vec3.ZERO);
+    }
+
+    private final List<String> comboTrace = new ArrayList<>();
+    private String lastTargetState = "";
+
+    /** Что происходит с целью во время связки: её анимация Epic Fight, состояние, неуязвимость. */
+    private void traceTarget(int t) {
+        if (target == null) return;
+        String anim = "-", state = "-";
+        try {
+            yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch<?> tp =
+                    EpicFightCapabilities.getEntityPatch(target, yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch.class);
+            if (tp != null) {
+                anim = name(tp.getServerAnimator().animationPlayer.getRealAnimation());
+                state = "knockdown=" + tp.getEntityState().getState(yesman.epicfight.api.animation.types.EntityState.KNOCKDOWN) + " hurt=" + tp.getEntityState().getState(yesman.epicfight.api.animation.types.EntityState.HURT_LEVEL) + " stunShield=" + tp.getStunShield();
+            }
+        } catch (Throwable e) {
+            anim = "err " + e;
+        }
+        String now = anim + " " + state + " alive=" + target.isAlive() + " invTime=" + target.invulnerableTime
+                + " dist=" + String.format(java.util.Locale.ROOT, "%.2f", player.distanceTo(target));
+        String key = anim + state + target.isAlive();
+        if (!key.equals(lastTargetState)) {
+            lastTargetState = key;
+            comboTrace.add("t" + t + " target " + now);
+        }
     }
 
     private void resetHits() {

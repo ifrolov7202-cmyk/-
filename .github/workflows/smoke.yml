@@ -15,6 +15,9 @@ on:
       ef17:
         description: "With av: Epic Fight 20.14.17 instead of the player's Epic Fight, without Battle Arts"
         default: "false"
+      client:
+        description: "Also start a real game client (Xvfb, software OpenGL), join the server, look around and take screenshots"
+        default: "false"
       backport:
         description: "With av: EpicFight: Annoying Villagers backported to Epic Fight 20.14.16 (branch av-backport) instead of the player's file"
         default: "false"
@@ -40,7 +43,6 @@ jobs:
           echo "builds branch: $BUILT, this run: ${GITHUB_SHA::7}" | tee out/built_from.txt
           case "$BUILT" in *"${GITHUB_SHA::7}"*) ;; *) echo "builds branch is not from this commit"; exit 1;; esac
       - uses: actions/checkout@v4
-        if: github.event.inputs.selftest == 'true'
         with:
           path: src
       - name: Build self-test mod
@@ -158,6 +160,9 @@ jobs:
               done
               grep -o '\[SELFTEST\] DONE.*' logs/latest.log >> ../out/result.txt || echo "SELFTEST NOT FINISHED" >> ../out/result.txt
             fi
+            if [ "${{ github.event.inputs.client }}" = "true" ]; then
+              bash ../src/.github/client-test.sh ../out console || true
+            fi
             sleep 3
             echo "reload" > console
             sleep 15
@@ -174,6 +179,7 @@ jobs:
           grep -n "ba_martialarts\|bamartial\|SELFTEST\|ERROR\|Exception\|Caused by" ../out/debug.log 2>/dev/null | head -800 > ../out/summary.txt || true
           cat ../out/result.txt
           grep -q STARTED ../out/result.txt
+          if [ "${{ github.event.inputs.client }}" = "true" ]; then grep -q 'CLIENT OK' ../out/result.txt; fi
           if [ -f mods/ba_martialarts_selftest.jar ]; then grep -q 'DONE PASS' ../out/result.txt; fi
       - name: Publish logs to 'smoke' branch
         if: always()
