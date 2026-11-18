@@ -76,14 +76,16 @@ if [ $joined -eq 1 ]; then
   shot 6-after
 fi
 
+kicked=0; grep -q 'Tester lost connection' logs/latest.log 2>/dev/null && kicked=1
+grep 'Tester lost connection' logs/latest.log >> "$OUT/client-steps.txt" 2>/dev/null
 alive=0; kill -0 $PMC 2>/dev/null && alive=1
 crash=0; ls "$C"/crash-reports/*.txt >/dev/null 2>&1 && crash=1
 grep -q 'Game crashed\|---- Minecraft Crash Report ----' "$C/logs/latest.log" "$OUT/client.out" 2>/dev/null && crash=1
-echo "alive=$alive crash=$crash" | tee -a "$OUT/client-steps.txt"
+echo "alive=$alive crash=$crash kicked=$kicked" | tee -a "$OUT/client-steps.txt"
 
 cp "$C/logs/latest.log" "$OUT/client-latest.log" 2>/dev/null || true
 grep -n "ERROR\|Exception\|Caused by\|Mixin.*fail\|InjectionError" "$C/logs/debug.log" 2>/dev/null | head -400 > "$OUT/client-errors.txt" || true
 mkdir -p "$OUT/client-crash-reports"; cp "$C"/crash-reports/*.txt "$OUT/client-crash-reports/" 2>/dev/null || true
 
 kill $PMC 2>/dev/null; pkill -f -- '--username Tester' 2>/dev/null || true
-if [ $joined -eq 1 ] && [ $alive -eq 1 ] && [ $crash -eq 0 ]; then result "CLIENT OK"; else result "CLIENT FAILED joined=$joined alive=$alive crash=$crash"; fi
+if [ $joined -eq 1 ] && [ $alive -eq 1 ] && [ $crash -eq 0 ] && [ $kicked -eq 0 ]; then result "CLIENT OK"; else result "CLIENT FAILED joined=$joined alive=$alive crash=$crash kicked=$kicked"; fi
