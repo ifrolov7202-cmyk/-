@@ -1,0 +1,12 @@
+build.gradle: 'implementation fg.deobf("curse.maven:epic-fight-mod-405076:8049910")' -> 'implementation fg.deobf("maven.modrinth:epic-fight:20.14.16-mc1.20.1-f'
+build.gradle: 'maven {\n        url = uri("https://cursemaven.com")\n    }' -> 'maven {\n        url = uri("https://cursemaven.com")\n    }\n    maven {\n'
+build.gradle: 'destinationDirectory = file("C:/Users/Admin/Desktop/Minecraft/delivery' -> ''
+gradle.properties: 'mod_version=1.5.2' -> 'mod_version=1.5.2-ef20.14.16'
+gradle.properties: 'mod_description=Compatibility between Annoying Villagers and EpicFight' -> 'mod_description=Compatibility between Annoying Villagers and EpicFight'
+src/main/java/com/pla/epicfight_annoyingvillagers/mixin/ItemCapabilityProviderPresetMixin.java: 'method = {"get", "lambda$addDefaultItems$3"}' -> 'method = {"get", "lambda$addDefaultItems$10"}'
+src/main/java/com/pla/epicfight_annoyingvillagers/advancedmobpatch/AdvancedMobPatch.java: BOW/CROSSBOW -> RANGED, WeaponCapabilityPresets.X -> Ef16Presets.is(preset, x)
+src/main/java/com/pla/epicfight_annoyingvillagers/advancedmobpatch/AdvancedAvNpcPatch.java: BOW/CROSSBOW -> RANGED, WeaponCapabilityPresets.X -> Ef16Presets.is(preset, x)
+src/main/java/com/pla/epicfight_annoyingvillagers/mixin/annoyingvillagers/SpecialAttackOnKeyPressedEventMixin.java: BOW/CROSSBOW -> RANGED, WeaponCapabilityPresets.X -> Ef16Presets.is(preset, x)
+src/main/java/com/pla/epicfight_annoyingvillagers/mixin/annoyingvillagers/NullWeaponMixin.java: BOW/CROSSBOW -> RANGED, WeaponCapabilityPresets.X -> Ef16Presets.is(preset, x)
+src/main/java/com/pla/epicfight_annoyingvillagers/mixin/annoyingvillagers/HerobrineDragonEntityMixin.java: BOW/CROSSBOW -> RANGED, WeaponCapabilityPresets.X -> Ef16Presets.is(preset, x)
+added capabilities/Ef16Presets.java

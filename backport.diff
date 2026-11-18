@@ -1,0 +1,176 @@
+diff --git a/build.gradle b/build.gradle
+index 148e081..9f70b90 100644
+--- a/build.gradle
++++ b/build.gradle
+@@ -63,6 +63,10 @@ repositories {
+     maven {
+         url = uri("https://cursemaven.com")
+     }
++    maven {
++        url = uri("https://api.modrinth.com/maven")
++        content { includeGroup "maven.modrinth" }
++    }
+     flatDir { dir 'libs' }
+ }
+ 
+@@ -77,7 +81,7 @@ dependencies {
+     implementation fg.deobf("curse.maven:smart-npc-1709932:8964218")
+     compileOnly fg.deobf("curse.maven:aaa-particles-979809:8082320")
+ 
+-    implementation fg.deobf("curse.maven:epic-fight-mod-405076:8049910")
++    implementation fg.deobf("maven.modrinth:epic-fight:20.14.16-mc1.20.1-forge")
+     implementation fg.deobf("curse.maven:combat-evolution-1377795:9015624")
+     implementation fg.deobf("curse.maven:weapons-of-miracles-epicfight-918614:7517612")
+     implementation fg.deobf("curse.maven:epicfight-nightfall-1307848:8366962")
+@@ -106,7 +110,6 @@ tasks.named('processResources', ProcessResources).configure {
+     }
+ }
+ tasks.named('jar', Jar).configure {
+-    destinationDirectory = file("C:/Users/Admin/Desktop/Minecraft/delivery")
+     manifest {
+         attributes([
+                 'Specification-Title'     : mod_id,
+diff --git a/gradle.properties b/gradle.properties
+index fec0724..9ca4dc4 100644
+--- a/gradle.properties
++++ b/gradle.properties
+@@ -10,7 +10,7 @@ mapping_version=2023.06.26-1.20.1
+ mod_id=epicfight_annoyingvillagers
+ mod_name=Epic Fight Annoying Villagers
+ mod_license=Custom License
+-mod_version=1.5.2
++mod_version=1.5.2-ef20.14.16
+ mod_group_id=com.pla.annoyingvillagers
+ mod_authors=pla_is_me
+-mod_description=Compatibility between Annoying Villagers and EpicFight mod.
++mod_description=Compatibility between Annoying Villagers and EpicFight mod. Modified build: backported to Epic Fight 20.14.16 (not by the original author).
+diff --git a/src/main/java/com/pla/epicfight_annoyingvillagers/advancedmobpatch/AdvancedAvNpcPatch.java b/src/main/java/com/pla/epicfight_annoyingvillagers/advancedmobpatch/AdvancedAvNpcPatch.java
+index 9cb4d68..cf8f6e1 100644
+--- a/src/main/java/com/pla/epicfight_annoyingvillagers/advancedmobpatch/AdvancedAvNpcPatch.java
++++ b/src/main/java/com/pla/epicfight_annoyingvillagers/advancedmobpatch/AdvancedAvNpcPatch.java
+@@ -328,45 +328,45 @@ public class AdvancedAvNpcPatch<T extends PathfinderMob> extends AdvancedMobPatc
+     @Override
+     protected List<AdditionalAttackGroup> getAdditionalAttackGroups(CapabilityItem mainHandCap, CapabilityItem offHandCap, Style style) {
+         Function<Item, CapabilityItem.Builder> preset = WeaponCapabilityPresetTracking.getPreset(mainHandCap);
+-        if (preset == WeaponCapabilityPresets.SWORD) {
++        if (com.pla.epicfight_annoyingvillagers.capabilities.Ef16Presets.is(preset, "sword")) {
+             return style == CapabilityItem.Styles.TWO_HAND
+                     ? List.of(AdditionalAttackGroup.random(0.25F, Animations.DANCING_EDGE, StraightSwordAnimations.STRAIGHTSWORD_DUAL_DODGE_SLASH))
+                     : List.of(AdditionalAttackGroup.random(0.25F, Animations.SWEEPING_EDGE, EFNSwordAnimations.NF_SWORD_SKILL)
+             );
+         }
+-        if (preset == WeaponCapabilityPresets.AXE) {
++        if (com.pla.epicfight_annoyingvillagers.capabilities.Ef16Presets.is(preset, "axe")) {
+             return List.of(AdditionalAttackGroup.random(0.25F, Animations.THE_GUILLOTINE, EFNSwordAnimations.NF_SWORD_SKILL));
+         }
+-        if (preset == WeaponCapabilityPresets.TACHI) {
++        if (com.pla.epicfight_annoyingvillagers.capabilities.Ef16Presets.is(preset, "tachi")) {
+             return List.of(AdditionalAttackGroup.random(0.25F, Animations.RUSHING_TEMPO1,
+                     Animations.RUSHING_TEMPO2, Animations.RUSHING_TEMPO3, AnimsAVTachi.AV_TACHI_SPECIAL));
+         }
+-        if (preset == WeaponCapabilityPresets.SPEAR) {
++        if (com.pla.epicfight_annoyingvillagers.capabilities.Ef16Presets.is(preset, "spear")) {
+             return style == CapabilityItem.Styles.TWO_HAND
+                     ? List.of(AdditionalAttackGroup.random(0.25F, Animations.GRASPING_SPIRAL_FIRST,
+                     Animations.GRASPING_SPIRAL_SECOND, AnimsAVSpear.AV_SPEAR_SPECIAL))
+                     : List.of(AdditionalAttackGroup.random(0.25F, Animations.HEARTPIERCER, AnimsAVSpear.AV_SPEAR_SPECIAL)
+             );
+         }
+-        if (preset == WeaponCapabilityPresets.GREATSWORD) {
++        if (com.pla.epicfight_annoyingvillagers.capabilities.Ef16Presets.is(preset, "greatsword")) {
+             return List.of(AdditionalAttackGroup.random(0.25F, Animations.STEEL_WHIRLWIND, AnimsAVGreatsword.AV_GREATSWORD_SPECIAL));
+         }
+-        if (preset == WeaponCapabilityPresets.UCHIGATANA) {
++        if (com.pla.epicfight_annoyingvillagers.capabilities.Ef16Presets.is(preset, "uchigatana")) {
+             return List.of(AdditionalAttackGroup.random(0.25F, Animations.BATTOJUTSU, Animations.BATTOJUTSU_DASH));
+         }
+-        if (preset == WeaponCapabilityPresets.LONGSWORD) {
++        if (com.pla.epicfight_annoyingvillagers.capabilities.Ef16Presets.is(preset, "longsword")) {
+             return style == CapabilityItem.Styles.TWO_HAND
+                     ? List.of(AdditionalAttackGroup.random(0.25F, StraightSwordAnimations.STRAIGHTSWORD_DUAL_DODGE_PURSUIT))
+                     : List.of(AdditionalAttackGroup.random(0.25F, Animations.SHARP_STAB, StraightSwordAnimations.STRAIGHTSWORD_DODGE_SLASH1)
+             );
+         }
+-        if (preset == WeaponCapabilityPresets.DAGGER) {
++        if (com.pla.epicfight_annoyingvillagers.capabilities.Ef16Presets.is(preset, "dagger")) {
+             return style == CapabilityItem.Styles.TWO_HAND
+                     ? List.of(AdditionalAttackGroup.random(0.25F, Animations.BLADE_RUSH_COMBO1, Animations.BLADE_RUSH_COMBO2, Animations.BLADE_RUSH_COMBO3, EFNSwordAnimations.NF_SWORD_SKILL_SECOND))
+                     : List.of(AdditionalAttackGroup.random(0.25F, Animations.EVISCERATE_FIRST, Animations.EVISCERATE_SECOND, EFNSwordAnimations.NF_SWORD_SKILL_SECOND)
+             );
+         }
+-        if (preset == WeaponCapabilityPresets.FIST) {
++        if (com.pla.epicfight_annoyingvillagers.capabilities.Ef16Presets.is(preset, "fist")) {
+             return List.of(AdditionalAttackGroup.random(0.25F, Animations.RELENTLESS_COMBO, AnimsAVFist.WHIRLWIND_KICK,
+                     AnimsAVFist.FIST_LEFT, AnimsAVFist.FIST_UP, AnimsAVFist.FIST_DASH));
+         }
+diff --git a/src/main/java/com/pla/epicfight_annoyingvillagers/advancedmobpatch/AdvancedMobPatch.java b/src/main/java/com/pla/epicfight_annoyingvillagers/advancedmobpatch/AdvancedMobPatch.java
+index ad6d389..4dd59f2 100644
+--- a/src/main/java/com/pla/epicfight_annoyingvillagers/advancedmobpatch/AdvancedMobPatch.java
++++ b/src/main/java/com/pla/epicfight_annoyingvillagers/advancedmobpatch/AdvancedMobPatch.java
+@@ -252,8 +252,8 @@ public abstract class AdvancedMobPatch<T extends Mob> extends MobPatch<T> {
+                 && mainHandCap instanceof WeaponCapability
+                 && category != WeaponCategories.NOT_WEAPON
+                 && category != WeaponCategories.FIST
+-                && category != WeaponCategories.BOW
+-                && category != WeaponCategories.CROSSBOW
++                && category != WeaponCategories.RANGED
++                && category != WeaponCategories.RANGED
+                 && category != WeaponCategories.SHIELD;
+     }
+ 
+diff --git a/src/main/java/com/pla/epicfight_annoyingvillagers/mixin/ItemCapabilityProviderPresetMixin.java b/src/main/java/com/pla/epicfight_annoyingvillagers/mixin/ItemCapabilityProviderPresetMixin.java
+index 23e7dec..746ce4e 100644
+--- a/src/main/java/com/pla/epicfight_annoyingvillagers/mixin/ItemCapabilityProviderPresetMixin.java
++++ b/src/main/java/com/pla/epicfight_annoyingvillagers/mixin/ItemCapabilityProviderPresetMixin.java
+@@ -14,7 +14,7 @@ import java.util.function.Function;
+ @Mixin(value = ItemCapabilityProvider.class, remap = false)
+ public abstract class ItemCapabilityProviderPresetMixin {
+     @WrapOperation(
+-            method = {"get", "lambda$addDefaultItems$3"},
++            method = {"get", "lambda$addDefaultItems$10"},
+             at = @At(value = "INVOKE", target = "Ljava/util/function/Function;apply(Ljava/lang/Object;)Ljava/lang/Object;"),
+             require = 3
+     )
+diff --git a/src/main/java/com/pla/epicfight_annoyingvillagers/mixin/annoyingvillagers/HerobrineDragonEntityMixin.java b/src/main/java/com/pla/epicfight_annoyingvillagers/mixin/annoyingvillagers/HerobrineDragonEntityMixin.java
+index 0a9d696..910a3f2 100644
+--- a/src/main/java/com/pla/epicfight_annoyingvillagers/mixin/annoyingvillagers/HerobrineDragonEntityMixin.java
++++ b/src/main/java/com/pla/epicfight_annoyingvillagers/mixin/annoyingvillagers/HerobrineDragonEntityMixin.java
+@@ -24,8 +24,8 @@ public abstract class HerobrineDragonEntityMixin {
+         }
+ 
+         var cat = weaponCap.getWeaponCategory();
+-        cir.setReturnValue(cat == CapabilityItem.WeaponCategories.BOW
+-                || cat == CapabilityItem.WeaponCategories.CROSSBOW
++        cir.setReturnValue(cat == CapabilityItem.WeaponCategories.RANGED
++                || cat == CapabilityItem.WeaponCategories.RANGED
+                 || cat == CapabilityItem.WeaponCategories.NOT_WEAPON);
+         return;
+     }
+diff --git a/src/main/java/com/pla/epicfight_annoyingvillagers/mixin/annoyingvillagers/NullWeaponMixin.java b/src/main/java/com/pla/epicfight_annoyingvillagers/mixin/annoyingvillagers/NullWeaponMixin.java
+index a1f0b30..2af97b7 100644
+--- a/src/main/java/com/pla/epicfight_annoyingvillagers/mixin/annoyingvillagers/NullWeaponMixin.java
++++ b/src/main/java/com/pla/epicfight_annoyingvillagers/mixin/annoyingvillagers/NullWeaponMixin.java
+@@ -36,8 +36,8 @@ public abstract class NullWeaponMixin {
+         }
+ 
+         var cat = weaponCap.getWeaponCategory();
+-        cir.setReturnValue(cat == CapabilityItem.WeaponCategories.BOW
+-                || cat == CapabilityItem.WeaponCategories.CROSSBOW
++        cir.setReturnValue(cat == CapabilityItem.WeaponCategories.RANGED
++                || cat == CapabilityItem.WeaponCategories.RANGED
+                 || cat == CapabilityItem.WeaponCategories.NOT_WEAPON);
+         return;
+     }
+diff --git a/src/main/java/com/pla/epicfight_annoyingvillagers/mixin/annoyingvillagers/SpecialAttackOnKeyPressedEventMixin.java b/src/main/java/com/pla/epicfight_annoyingvillagers/mixin/annoyingvillagers/SpecialAttackOnKeyPressedEventMixin.java
+index b911f35..db317bb 100644
+--- a/src/main/java/com/pla/epicfight_annoyingvillagers/mixin/annoyingvillagers/SpecialAttackOnKeyPressedEventMixin.java
++++ b/src/main/java/com/pla/epicfight_annoyingvillagers/mixin/annoyingvillagers/SpecialAttackOnKeyPressedEventMixin.java
+@@ -642,7 +642,7 @@ public abstract class SpecialAttackOnKeyPressedEventMixin {
+                                 return;
+                             }
+ 
+-                            if ((mainHandCapability.getWeaponCategory() == WeaponCategories.FIST || mainHandCapability.getWeaponCategory() == WeaponCategories.NOT_WEAPON || mainHandCapability.getWeaponCategory() == WeaponCategories.BOW || mainHandCapability.getWeaponCategory() == WeaponCategories.CROSSBOW) && entity.level() instanceof ServerLevel) {
++                            if ((mainHandCapability.getWeaponCategory() == WeaponCategories.FIST || mainHandCapability.getWeaponCategory() == WeaponCategories.NOT_WEAPON || mainHandCapability.getWeaponCategory() == WeaponCategories.RANGED || mainHandCapability.getWeaponCategory() == WeaponCategories.RANGED) && entity.level() instanceof ServerLevel) {
+                                 if (entity.isSprinting()) {
+                                     if (entity.level() instanceof ServerLevel) {
+                                         livingEntityPatch.playAnimationSynchronized(AnimsAVFist.WHIRLWIND_KICK, 0.0F);
