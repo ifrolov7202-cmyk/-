@@ -190,4 +190,5 @@ jobs:
           git config user.email "github-actions@users.noreply.github.com"
           git add .
           git commit -qm "Smoke ${GITHUB_SHA::7}"
-          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" smoke
+          B=smoke; [ "${{ github.event.inputs.client }}" = "true" ] && B=smoke-client
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" "smoke:$B"
