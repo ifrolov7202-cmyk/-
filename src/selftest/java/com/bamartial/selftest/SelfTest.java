@@ -240,6 +240,8 @@ public final class SelfTest {
             }));
             steps.add(comboStep(kind));
             steps.add(new Step(kind + " rest", 20, t -> { }));
+            steps.add(groundHitStep(kind));
+            steps.add(new Step(kind + " rest", 20, t -> { }));
             steps.add(specialAttackStep(kind, true));
             steps.add(new Step(kind + " rest", 20, t -> { }));
             steps.add(specialAttackStep(kind, false));
@@ -310,6 +312,30 @@ public final class SelfTest {
         SkillContainer slot = patch.getSkill(BattleArtsSkillSlots.BATTLE_STYLE);
         slot.setSkill(MartialSkills.STYLES.get(kind));
         patch.toEpicFightMode(true);
+    }
+
+    // ---------------- удар по сбитой с ног цели ----------------
+    private Step groundHitStep(StyleKind kind) {
+        return new Step(kind + " ground hit", 40, t -> {
+            if (t == 0) {
+                placePlayer();
+                resetTarget();
+                resetHits();
+                patch.setStamina(patch.getMaxStamina());
+                yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch<?> tp =
+                        EpicFightCapabilities.getEntityPatch(target, yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch.class);
+                if (tp != null) tp.playAnimationInstantly(yesman.epicfight.gameasset.Animations.BIPED_KNOCKDOWN);
+            }
+            if (t == 4) {
+                yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch<?> tp =
+                        EpicFightCapabilities.getEntityPatch(target, yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch.class);
+                boolean down = tp != null && Boolean.TRUE.equals(tp.getEntityState().getState(yesman.epicfight.api.animation.types.EntityState.KNOCKDOWN));
+                check(kind + ": target is knocked down for the ground hit test", down, "anim=" + (tp == null ? null : name(tp.getServerAnimator().animationPlayer.getRealAnimation())));
+                SkillContainer basic = patch.getSkill(SkillSlots.BASIC_ATTACK);
+                basic.requestCasting(patch, buf());
+            }
+            if (t == 39) check(kind + ": combo strike hits a downed target", !hitAnims.isEmpty(), "hit=" + hitAnims + " blocked=" + blocked);
+        });
     }
 
     // ---------------- связка Epic Fight (миксин getAutoAttackMotion) ----------------

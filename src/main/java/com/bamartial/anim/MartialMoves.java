@@ -410,6 +410,7 @@ public final class MartialMoves {
             Clip c = pick(id, candidates);
             BasicAttackAnimation a = new BasicAttackAnimation(transition(c), acc, Armatures.BIPED, phases(c, MartialColliders.STRIKE, false));
             hits(a, h, h);
+            if (role == Role.COMBO || role == Role.FINISHER) groundHits(a);
             speed(a, c);
             a.setResourceLocation(c.namespace, c.path);
             return a;
@@ -477,6 +478,7 @@ public final class MartialMoves {
             Clip c = pick(id, candidates).withFixedSpeed(playSpeed);
             AttackAnimation a = new AttackAnimation(transition(c), acc, Armatures.BIPED, phases(c, MartialColliders.BARRAGE, rootHitbox));
             hits(a, RUSH, RUSH);
+            groundHits(a);
             speed(a, c);
             a.setResourceLocation(c.namespace, c.path);
             return a;
@@ -529,6 +531,18 @@ public final class MartialMoves {
     private static void hits(AttackAnimation a, Hit h, Hit last) {
         int n = a.phases.length;
         for (int i = 0; i < n; i++) apply(a, i, i == n - 1 ? last : h);
+    }
+
+    /**
+     * Удары связки и серии достают и лежачего: в Epic Fight сбитую с ног цель бьют только удары с меткой «добивание»
+     * (FINISHER), и тогда они её не сбивают снова. Без этого длинная связка обрывается, если цель упала посреди неё
+     * (например, от накопленного оглушения в EpicFight: Annoying Villagers).
+     */
+    private static void groundHits(AttackAnimation a) {
+        for (int i = 0; i < a.phases.length; i++) {
+            a.addProperty(AnimationProperty.AttackPhaseProperty.SOURCE_TAG,
+                    java.util.Set.of(yesman.epicfight.world.damagesource.EpicFightDamageTypeTags.FINISHER), i);
+        }
     }
 
     private static void apply(AttackAnimation a, int phase, Hit h) {
