@@ -1,0 +1,275 @@
+ok   test player has Epic Fight patch in battle mode
+ok   target spawned
+ok   BOXING: style equipped | style=ba_martialarts:boxer
+ok   BOXING: combat art slot filled | skill=ba_martialarts:crushing_uppercut
+ok   BOXING: flight only for Herobrine | mayfly=false
+ok   BOXING: 4 basic attacks | casts=4
+ok   BOXING: combo has 4 different strikes | anims=[ba_martialarts:boxing/jab, ba_martialarts:boxing/cross, ba_martialarts:boxing/hook, ba_martialarts:boxing/power_straight]
+ok   BOXING: basic attacks use the style combo | anims=[ba_martialarts:boxing/jab, ba_martialarts:boxing/cross, ba_martialarts:boxing/hook, ba_martialarts:boxing/power_straight]
+ok   BOXING: every combo move connects | hit=[ba_martialarts:boxing/jab, ba_martialarts:boxing/cross, ba_martialarts:boxing/hook, ba_martialarts:boxing/power_straight] cast=[ba_martialarts:boxing/jab, ba_martialarts:boxing/cross, ba_martialarts:boxing/hook, ba_martialarts:boxing/power_straight] other=0
+ok   BOXING: target is knocked down for the ground hit test | anim=epicfight:biped/combat/knockdown
+ok   BOXING: combo strike hits a downed target | hit=[ba_martialarts:boxing/jab] blocked=0
+ok   BOXING: dash attack plays the style move | anims=[ba_martialarts:boxing/dash] role=DASH
+ok   BOXING: dash attack connects | hits={DASH=1} other=0 anims=[ba_martialarts:boxing/dash]
+ok   BOXING: air attack plays the style move | anims=[ba_martialarts:boxing/air] role=AIR
+info BOXING: air attack hits from a standstill: 1 [ba_martialarts:boxing/air]
+ok   BOXING: rush starts on hold
+ok   BOXING: rush has moves
+ok   BOXING: rush keeps going while held
+ok   BOXING: rush strike count | strikes=10 expected=10
+ok   BOXING: rush strikes connect | hits=10 strikes=10 other=0 anims=[ba_martialarts:rush/boxing_left, ba_martialarts:rush/boxing_right]
+ok   BOXING: every rush move connects | hit=[ba_martialarts:rush/boxing_left, ba_martialarts:rush/boxing_right] moves=[ba_martialarts:rush/boxing_left, ba_martialarts:rush/boxing_right]
+ok   BOXING: rush stamina per strike | used=8.000002 strikes=10 cost=0.8
+ok   BOXING: release after 5+ strikes plays the finisher | anim=ba_martialarts:boxing/power_straight want=ba_martialarts:boxing/power_straight
+ok   BOXING: rush stops on release
+ok   BOXING: finisher hits | hits={FINISHER=1} anims=[ba_martialarts:boxing/power_straight]
+ok   BOXING: rush ends when stamina runs out | still rushing
+ok   BOXING: strikes until stamina is out | used=2.4 ended at 13
+ok   BOXING: no finisher when stamina ran out | hits={BARRAGE=3}
+ok   BOXING: combat art cast | skill=ba_martialarts:crushing_uppercut anim=ba_martialarts:art/crushing_uppercut
+ok   BOXING: combat art hits | hits={ART=1} other=0 anims=[ba_martialarts:art/crushing_uppercut]
+ok   KARATE: style equipped | style=ba_martialarts:karateka
+ok   KARATE: combat art slot filled | skill=ba_martialarts:kiai
+ok   KARATE: flight only for Herobrine | mayfly=false
+ok   KARATE: 4 basic attacks | casts=4
+ok   KARATE: combo has 4 different strikes | anims=[ba_martialarts:karate/oi_zuki, ba_martialarts:karate/kizami_zuki, ba_martialarts:karate/mae_geri, ba_martialarts:karate/gyaku_zuki]
+ok   KARATE: basic attacks use the style combo | anims=[ba_martialarts:karate/oi_zuki, ba_martialarts:karate/kizami_zuki, ba_martialarts:karate/mae_geri, ba_martialarts:karate/gyaku_zuki]
+ok   KARATE: every combo move connects | hit=[ba_martialarts:karate/oi_zuki, ba_martialarts:karate/kizami_zuki, ba_martialarts:karate/mae_geri, ba_martialarts:karate/gyaku_zuki] cast=[ba_martialarts:karate/oi_zuki, ba_martialarts:karate/kizami_zuki, ba_martialarts:karate/mae_geri, ba_martialarts:karate/gyaku_zuki] other=0
+ok   KARATE: target is knocked down for the ground hit test | anim=epicfight:biped/combat/knockdown
+ok   KARATE: combo strike hits a downed target | hit=[ba_martialarts:karate/oi_zuki] blocked=0
+ok   KARATE: dash attack plays the style move | anims=[ba_martialarts:karate/dash] role=DASH
+ok   KARATE: dash attack connects | hits={DASH=1} other=0 anims=[ba_martialarts:karate/dash]
+ok   KARATE: air attack plays the style move | anims=[ba_martialarts:karate/air] role=AIR
+info KARATE: air attack hits from a standstill: 1 [ba_martialarts:karate/air]
+ok   KARATE: rush starts on hold
+ok   KARATE: rush has moves
+ok   KARATE: rush keeps going while held
+ok   KARATE: rush strike count | strikes=10 expected=10
+ok   KARATE: rush strikes connect | hits=10 strikes=10 other=0 anims=[ba_martialarts:rush/karate_right, ba_martialarts:rush/karate_left]
+ok   KARATE: every rush move connects | hit=[ba_martialarts:rush/karate_right, ba_martialarts:rush/karate_left] moves=[ba_martialarts:rush/karate_right, ba_martialarts:rush/karate_left]
+ok   KARATE: rush stamina per strike | used=8.000002 strikes=10 cost=0.8
+ok   KARATE: release after 5+ strikes plays the finisher | anim=ba_martialarts:karate/gyaku_zuki want=ba_martialarts:karate/gyaku_zuki
+ok   KARATE: rush stops on release
+ok   KARATE: finisher hits | hits={FINISHER=1} anims=[ba_martialarts:karate/gyaku_zuki]
+ok   KARATE: rush ends when stamina runs out | still rushing
+ok   KARATE: strikes until stamina is out | used=2.4 ended at 13
+ok   KARATE: no finisher when stamina ran out | hits={BARRAGE=3}
+ok   KARATE: combat art cast | skill=ba_martialarts:kiai anim=ba_martialarts:art/kiai
+ok   KARATE: combat art hits | hits={ART=1} other=0 anims=[ba_martialarts:art/kiai]
+ok   MUAY_THAI: style equipped | style=ba_martialarts:nak_muay
+ok   MUAY_THAI: combat art slot filled | skill=ba_martialarts:flying_knee
+ok   MUAY_THAI: flight only for Herobrine | mayfly=false
+ok   MUAY_THAI: 4 basic attacks | casts=4
+ok   MUAY_THAI: combo has 4 different strikes | anims=[ba_martialarts:muay_thai/jab, ba_martialarts:muay_thai/cross, ba_martialarts:muay_thai/teep, ba_martialarts:muay_thai/roundhouse]
+ok   MUAY_THAI: basic attacks use the style combo | anims=[ba_martialarts:muay_thai/jab, ba_martialarts:muay_thai/cross, ba_martialarts:muay_thai/teep, ba_martialarts:muay_thai/roundhouse]
+ok   MUAY_THAI: every combo move connects | hit=[ba_martialarts:muay_thai/jab, ba_martialarts:muay_thai/cross, ba_martialarts:muay_thai/teep, ba_martialarts:muay_thai/roundhouse] cast=[ba_martialarts:muay_thai/jab, ba_martialarts:muay_thai/cross, ba_martialarts:muay_thai/teep, ba_martialarts:muay_thai/roundhouse] other=0
+ok   MUAY_THAI: target is knocked down for the ground hit test | anim=epicfight:biped/combat/knockdown
+ok   MUAY_THAI: combo strike hits a downed target | hit=[ba_martialarts:muay_thai/jab] blocked=0
+ok   MUAY_THAI: dash attack plays the style move | anims=[ba_martialarts:muay_thai/dash] role=DASH
+ok   MUAY_THAI: dash attack connects | hits={DASH=1} other=0 anims=[ba_martialarts:muay_thai/dash]
+ok   MUAY_THAI: air attack plays the style move | anims=[ba_martialarts:muay_thai/air] role=AIR
+info MUAY_THAI: air attack hits from a standstill: 1 [ba_martialarts:muay_thai/air]
+ok   MUAY_THAI: rush starts on hold
+ok   MUAY_THAI: rush has moves
+ok   MUAY_THAI: rush keeps going while held
+ok   MUAY_THAI: rush strike count | strikes=8 expected=8
+ok   MUAY_THAI: rush strikes connect | hits=8 strikes=8 other=0 anims=[ba_martialarts:rush/muay_thai_left, ba_martialarts:rush/muay_thai_right]
+ok   MUAY_THAI: every rush move connects | hit=[ba_martialarts:rush/muay_thai_left, ba_martialarts:rush/muay_thai_right] moves=[ba_martialarts:rush/muay_thai_left, ba_martialarts:rush/muay_thai_right]
+ok   MUAY_THAI: rush stamina per strike | used=6.4000015 strikes=8 cost=0.8
+ok   MUAY_THAI: release after 5+ strikes plays the finisher | anim=ba_martialarts:muay_thai/roundhouse want=ba_martialarts:muay_thai/roundhouse
+ok   MUAY_THAI: rush stops on release
+ok   MUAY_THAI: finisher hits | hits={FINISHER=1} anims=[ba_martialarts:muay_thai/roundhouse]
+ok   MUAY_THAI: rush ends when stamina runs out | still rushing
+ok   MUAY_THAI: strikes until stamina is out | used=2.4 ended at 16
+ok   MUAY_THAI: no finisher when stamina ran out | hits={BARRAGE=3}
+ok   MUAY_THAI: combat art cast | skill=ba_martialarts:flying_knee anim=ba_martialarts:art/flying_knee
+ok   MUAY_THAI: combat art hits | hits={ART=1} other=0 anims=[ba_martialarts:art/flying_knee]
+ok   KUNG_FU: style equipped | style=ba_martialarts:kung_fu_master
+ok   KUNG_FU: combat art slot filled | skill=ba_martialarts:chi_palm
+ok   KUNG_FU: flight only for Herobrine | mayfly=false
+ok   KUNG_FU: 4 basic attacks | casts=4
+ok   KUNG_FU: combo has 4 different strikes | anims=[ba_martialarts:kung_fu/palm_right, ba_martialarts:kung_fu/palm_left, ba_martialarts:kung_fu/crane_kick, ba_martialarts:kung_fu/twin_palms]
+ok   KUNG_FU: basic attacks use the style combo | anims=[ba_martialarts:kung_fu/palm_right, ba_martialarts:kung_fu/palm_left, ba_martialarts:kung_fu/crane_kick, ba_martialarts:kung_fu/twin_palms]
+ok   KUNG_FU: every combo move connects | hit=[ba_martialarts:kung_fu/palm_right, ba_martialarts:kung_fu/palm_left, ba_martialarts:kung_fu/crane_kick, ba_martialarts:kung_fu/twin_palms] cast=[ba_martialarts:kung_fu/palm_right, ba_martialarts:kung_fu/palm_left, ba_martialarts:kung_fu/crane_kick, ba_martialarts:kung_fu/twin_palms] other=0
+ok   KUNG_FU: target is knocked down for the ground hit test | anim=epicfight:biped/combat/knockdown
+ok   KUNG_FU: combo strike hits a downed target | hit=[ba_martialarts:kung_fu/palm_right] blocked=0
+ok   KUNG_FU: dash attack plays the style move | anims=[ba_martialarts:kung_fu/dash] role=DASH
+ok   KUNG_FU: dash attack connects | hits={DASH=1} other=0 anims=[ba_martialarts:kung_fu/dash]
+ok   KUNG_FU: air attack plays the style move | anims=[ba_martialarts:kung_fu/air] role=AIR
+info KUNG_FU: air attack hits from a standstill: 1 [ba_martialarts:kung_fu/air]
+ok   KUNG_FU: rush starts on hold
+ok   KUNG_FU: rush has moves
+ok   KUNG_FU: rush keeps going while held
+ok   KUNG_FU: rush strike count | strikes=14 expected=14
+ok   KUNG_FU: rush strikes connect | hits=13 strikes=14 other=0 anims=[ba_martialarts:rush/kung_fu_right, ba_martialarts:rush/kung_fu_left]
+ok   KUNG_FU: every rush move connects | hit=[ba_martialarts:rush/kung_fu_right, ba_martialarts:rush/kung_fu_left] moves=[ba_martialarts:rush/kung_fu_right, ba_martialarts:rush/kung_fu_left]
+ok   KUNG_FU: rush stamina per strike | used=11.200003 strikes=14 cost=0.8
+ok   KUNG_FU: release after 5+ strikes plays the finisher | anim=ba_martialarts:kung_fu/twin_palms want=ba_martialarts:kung_fu/twin_palms
+ok   KUNG_FU: rush stops on release
+ok   KUNG_FU: finisher hits | hits={FINISHER=1} anims=[ba_martialarts:kung_fu/twin_palms]
+ok   KUNG_FU: rush ends when stamina runs out | still rushing
+ok   KUNG_FU: strikes until stamina is out | used=2.4 ended at 10
+ok   KUNG_FU: no finisher when stamina ran out | hits={BARRAGE=3}
+ok   KUNG_FU: combat art cast | skill=ba_martialarts:chi_palm anim=ba_martialarts:art/chi_palm
+ok   KUNG_FU: combat art hits | hits={ART=1} other=0 anims=[ba_martialarts:art/chi_palm]
+ok   TAEKWONDO: style equipped | style=ba_martialarts:taekwondoin
+ok   TAEKWONDO: combat art slot filled | skill=ba_martialarts:tornado_kick
+ok   TAEKWONDO: flight only for Herobrine | mayfly=false
+ok   TAEKWONDO: 4 basic attacks | casts=4
+ok   TAEKWONDO: combo has 4 different strikes | anims=[ba_martialarts:taekwondo/ap_chagi, ba_martialarts:taekwondo/double_kick, ba_martialarts:taekwondo/dollyo_chagi, ba_martialarts:taekwondo/dwi_chagi]
+ok   TAEKWONDO: basic attacks use the style combo | anims=[ba_martialarts:taekwondo/ap_chagi, ba_martialarts:taekwondo/double_kick, ba_martialarts:taekwondo/dollyo_chagi, ba_martialarts:taekwondo/dwi_chagi]
+ok   TAEKWONDO: every combo move connects | hit=[ba_martialarts:taekwondo/ap_chagi, ba_martialarts:taekwondo/double_kick, ba_martialarts:taekwondo/dollyo_chagi, ba_martialarts:taekwondo/dwi_chagi] cast=[ba_martialarts:taekwondo/ap_chagi, ba_martialarts:taekwondo/double_kick, ba_martialarts:taekwondo/dollyo_chagi, ba_martialarts:taekwondo/dwi_chagi] other=0
+ok   TAEKWONDO: target is knocked down for the ground hit test | anim=epicfight:biped/combat/knockdown
+ok   TAEKWONDO: combo strike hits a downed target | hit=[ba_martialarts:taekwondo/ap_chagi] blocked=0
+ok   TAEKWONDO: dash attack plays the style move | anims=[ba_martialarts:taekwondo/dash] role=DASH
+ok   TAEKWONDO: dash attack connects | hits={DASH=1} other=0 anims=[ba_martialarts:taekwondo/dash]
+ok   TAEKWONDO: air attack plays the style move | anims=[ba_martialarts:taekwondo/naeryeo_chagi] role=AIR
+info TAEKWONDO: air attack hits from a standstill: 1 [ba_martialarts:taekwondo/naeryeo_chagi]
+ok   TAEKWONDO: rush starts on hold
+ok   TAEKWONDO: rush has moves
+ok   TAEKWONDO: rush keeps going while held
+ok   TAEKWONDO: rush strike count | strikes=7 expected=7
+ok   TAEKWONDO: rush strikes connect | hits=6 strikes=7 other=0 anims=[ba_martialarts:rush/taekwondo_kick_a, ba_martialarts:rush/taekwondo_kick_b]
+ok   TAEKWONDO: every rush move connects | hit=[ba_martialarts:rush/taekwondo_kick_a, ba_martialarts:rush/taekwondo_kick_b] moves=[ba_martialarts:rush/taekwondo_kick_a, ba_martialarts:rush/taekwondo_kick_b]
+ok   TAEKWONDO: rush stamina per strike | used=5.6000013 strikes=7 cost=0.8
+ok   TAEKWONDO: release after 5+ strikes plays the finisher | anim=ba_martialarts:taekwondo/dwi_chagi want=ba_martialarts:taekwondo/dwi_chagi
+ok   TAEKWONDO: rush stops on release
+ok   TAEKWONDO: finisher hits | hits={FINISHER=1} anims=[ba_martialarts:taekwondo/dwi_chagi]
+ok   TAEKWONDO: rush ends when stamina runs out | still rushing
+ok   TAEKWONDO: strikes until stamina is out | used=2.4 ended at 19
+ok   TAEKWONDO: no finisher when stamina ran out | hits={BARRAGE=3}
+ok   TAEKWONDO: combat art cast | skill=ba_martialarts:tornado_kick anim=ba_martialarts:art/tornado_kick
+ok   TAEKWONDO: combat art hits | hits={ART=2} other=0 anims=[ba_martialarts:art/tornado_kick]
+ok   JUDO: style equipped | style=ba_martialarts:judoka
+ok   JUDO: combat art slot filled | skill=ba_martialarts:ippon
+ok   JUDO: flight only for Herobrine | mayfly=false
+ok   JUDO: 4 basic attacks | casts=4
+ok   JUDO: combo has 4 different strikes | anims=[ba_martialarts:judo/push_right, ba_martialarts:judo/push_left, ba_martialarts:judo/grip_strike, ba_martialarts:judo/hip_check]
+ok   JUDO: basic attacks use the style combo | anims=[ba_martialarts:judo/push_right, ba_martialarts:judo/push_left, ba_martialarts:judo/grip_strike, ba_martialarts:judo/hip_check]
+ok   JUDO: every combo move connects | hit=[ba_martialarts:judo/push_right, ba_martialarts:judo/push_left, ba_martialarts:judo/grip_strike, ba_martialarts:judo/hip_check] cast=[ba_martialarts:judo/push_right, ba_martialarts:judo/push_left, ba_martialarts:judo/grip_strike, ba_martialarts:judo/hip_check] other=0
+ok   JUDO: target is knocked down for the ground hit test | anim=epicfight:biped/combat/knockdown
+ok   JUDO: combo strike hits a downed target | hit=[ba_martialarts:judo/push_right] blocked=0
+ok   JUDO: dash attack plays the style move | anims=[ba_martialarts:judo/tackle] role=DASH
+ok   JUDO: dash attack connects | hits={DASH=1} other=0 anims=[ba_martialarts:judo/tackle]
+ok   JUDO: air attack plays the style move | anims=[ba_martialarts:judo/air] role=AIR
+info JUDO: air attack hits from a standstill: 1 [ba_martialarts:judo/air]
+ok   JUDO: rush starts on hold
+ok   JUDO: rush has moves
+ok   JUDO: rush keeps going while held
+ok   JUDO: rush strike count | strikes=8 expected=8
+ok   JUDO: rush strikes connect | hits=8 strikes=8 other=0 anims=[ba_martialarts:rush/judo_right, ba_martialarts:rush/judo_left]
+ok   JUDO: every rush move connects | hit=[ba_martialarts:rush/judo_right, ba_martialarts:rush/judo_left] moves=[ba_martialarts:rush/judo_right, ba_martialarts:rush/judo_left]
+ok   JUDO: rush stamina per strike | used=6.4000015 strikes=8 cost=0.8
+ok   JUDO: release after 5+ strikes plays the finisher | anim=ba_martialarts:judo/hip_check want=ba_martialarts:judo/hip_check
+ok   JUDO: rush stops on release
+ok   JUDO: finisher hits | hits={FINISHER=1} anims=[ba_martialarts:judo/hip_check]
+info removed entity.minecraft.villager near the arena during JUDO stamina
+ok   JUDO: rush ends when stamina runs out | still rushing
+ok   JUDO: strikes until stamina is out | used=2.4 ended at 16
+ok   JUDO: no finisher when stamina ran out | hits={BARRAGE=3}
+ok   JUDO: combat art cast | skill=ba_martialarts:ippon anim=ba_martialarts:art/ippon
+ok   JUDO: combat art hits | hits={ART=1} other=0 anims=[ba_martialarts:art/ippon]
+ok   MASTER: style equipped | style=ba_martialarts:martial_arts_master
+ok   MASTER: combat art slot filled | skill=ba_martialarts:way_of_the_master
+ok   MASTER: book recipe loaded | recipe=Optional[net.minecraft.world.item.crafting.ShapelessRecipe@26c3c778]
+ok   MASTER: six style books craft the master book | matches=true out=1 skillbook skill=ba_martialarts:martial_arts_master
+ok   MASTER: five different books are not enough
+ok   MASTER: advancement granted | adv=SimpleAdvancement{id=ba_martialarts:martial/master, parent=ba_martialarts:martial/learn_style, display=net.minecraft.advancements.DisplayInfo@5a8cc7b4, rewards=AdvancementRewards{experience=0, loot=[], recipes=[], function=net.minecraft.commands.CommandFunction$CacheableFunction@3f5d0ff4}, criteria={done=net.minecraft.advancements.Criterion@4d372c49}, requirements=[[done]], sendsTelemetryEvent=false}
+ok   MASTER: flight only for Herobrine | mayfly=false
+ok   MASTER: 12 basic attacks | casts=12
+ok   MASTER: combo has 12 different strikes | anims=[ba_martialarts:boxing/jab, ba_martialarts:wing_chun/chain_punch, ba_martialarts:kickboxing/low_kick, ba_martialarts:karate/gyaku_zuki, ba_martialarts:muay_thai/sok, ba_martialarts:savate/chasse, ba_martialarts:krav_maga/palm_heel, ba_martialarts:kung_fu/twin_palms, ba_martialarts:taekwondo/dollyo_chagi, ba_martialarts:capoeira/armada, ba_martialarts:sambo/takedown, ba_martialarts:judo/o_goshi]
+ok   MASTER: basic attacks use the style combo | anims=[ba_martialarts:boxing/jab, ba_martialarts:wing_chun/chain_punch, ba_martialarts:kickboxing/low_kick, ba_martialarts:karate/gyaku_zuki, ba_martialarts:muay_thai/sok, ba_martialarts:savate/chasse, ba_martialarts:krav_maga/palm_heel, ba_martialarts:kung_fu/twin_palms, ba_martialarts:taekwondo/dollyo_chagi, ba_martialarts:capoeira/armada, ba_martialarts:sambo/takedown, ba_martialarts:judo/o_goshi]
+ok   MASTER: every combo move connects | hit=[ba_martialarts:boxing/jab, ba_martialarts:wing_chun/chain_punch, ba_martialarts:kickboxing/low_kick, ba_martialarts:karate/gyaku_zuki, ba_martialarts:muay_thai/sok, ba_martialarts:savate/chasse, ba_martialarts:krav_maga/palm_heel, ba_martialarts:kung_fu/twin_palms, ba_martialarts:taekwondo/dollyo_chagi, ba_martialarts:capoeira/armada, ba_martialarts:sambo/takedown, ba_martialarts:judo/o_goshi] cast=[ba_martialarts:boxing/jab, ba_martialarts:wing_chun/chain_punch, ba_martialarts:kickboxing/low_kick, ba_martialarts:karate/gyaku_zuki, ba_martialarts:muay_thai/sok, ba_martialarts:savate/chasse, ba_martialarts:krav_maga/palm_heel, ba_martialarts:kung_fu/twin_palms, ba_martialarts:taekwondo/dollyo_chagi, ba_martialarts:capoeira/armada, ba_martialarts:sambo/takedown, ba_martialarts:judo/o_goshi] other=0
+ok   MASTER: target is knocked down for the ground hit test | anim=epicfight:biped/combat/knockdown
+ok   MASTER: combo strike hits a downed target | hit=[ba_martialarts:boxing/jab] blocked=0
+ok   MASTER: dash attack plays the style move | anims=[ba_martialarts:sumo/tachiai] role=DASH
+ok   MASTER: dash attack connects | hits={DASH=1} other=0 anims=[ba_martialarts:sumo/tachiai]
+ok   MASTER: air attack plays the style move | anims=[ba_martialarts:ninjutsu/drop_strike] role=AIR
+info MASTER: air attack hits from a standstill: 1 [ba_martialarts:ninjutsu/drop_strike]
+ok   MASTER: rush starts on hold
+ok   MASTER: rush has moves
+ok   MASTER: rush keeps going while held
+ok   MASTER: rush strike count | strikes=10 expected=10
+ok   MASTER: rush strikes connect | hits=10 strikes=10 other=0 anims=[ba_martialarts:rush/boxing_left, ba_martialarts:rush/boxing_right, ba_martialarts:rush/kung_fu_right, ba_martialarts:rush/kung_fu_left, ba_martialarts:rush/taekwondo_kick_a, ba_martialarts:rush/karate_right, ba_martialarts:rush/karate_left, ba_martialarts:rush/taekwondo_kick_b]
+ok   MASTER: every rush move connects | hit=[ba_martialarts:rush/boxing_left, ba_martialarts:rush/boxing_right, ba_martialarts:rush/kung_fu_right, ba_martialarts:rush/kung_fu_left, ba_martialarts:rush/taekwondo_kick_a, ba_martialarts:rush/karate_right, ba_martialarts:rush/karate_left, ba_martialarts:rush/taekwondo_kick_b] moves=[ba_martialarts:rush/boxing_left, ba_martialarts:rush/boxing_right, ba_martialarts:rush/kung_fu_right, ba_martialarts:rush/kung_fu_left, ba_martialarts:rush/taekwondo_kick_a, ba_martialarts:rush/karate_right, ba_martialarts:rush/karate_left, ba_martialarts:rush/taekwondo_kick_b]
+ok   MASTER: rush stamina per strike | used=8.000002 strikes=10 cost=0.8
+ok   MASTER: release after 5+ strikes plays the finisher | anim=ba_martialarts:judo/o_goshi want=ba_martialarts:judo/o_goshi
+ok   MASTER: rush stops on release
+ok   MASTER: finisher hits | hits={FINISHER=1} anims=[ba_martialarts:judo/o_goshi]
+ok   MASTER: rush ends when stamina runs out | still rushing
+ok   MASTER: strikes until stamina is out | used=2.4 ended at 12
+ok   MASTER: no finisher when stamina ran out | hits={BARRAGE=3}
+ok   MASTER art (cycle 1): cast ba_martialarts:art/crushing_uppercut | cast=true anim=ba_martialarts:art/crushing_uppercut
+ok   MASTER art (cycle 1): ba_martialarts:art/crushing_uppercut hits | hits={ART=1} other=0 anims=[ba_martialarts:art/crushing_uppercut]
+ok   MASTER art (cycle 2): cast ba_martialarts:art/kiai | cast=true anim=ba_martialarts:art/kiai
+ok   MASTER art (cycle 2): ba_martialarts:art/kiai hits | hits={ART=1} other=0 anims=[ba_martialarts:art/kiai]
+ok   MASTER art (cycle 3): cast ba_martialarts:art/chi_palm | cast=true anim=ba_martialarts:art/chi_palm
+ok   MASTER art (cycle 3): ba_martialarts:art/chi_palm hits | hits={ART=1} other=0 anims=[ba_martialarts:art/chi_palm]
+ok   MASTER art (cycle 4): cast ba_martialarts:art/tornado_kick | cast=true anim=ba_martialarts:art/tornado_kick
+ok   MASTER art (cycle 4): ba_martialarts:art/tornado_kick hits | hits={ART=2} other=0 anims=[ba_martialarts:art/tornado_kick]
+ok   MASTER art (cycle 5): cast ba_martialarts:art/one_inch_punch | cast=true anim=ba_martialarts:art/one_inch_punch
+ok   MASTER art (cycle 5): ba_martialarts:art/one_inch_punch hits | hits={ART=1} other=0 anims=[ba_martialarts:art/one_inch_punch]
+ok   MASTER art (cycle 6): cast ba_martialarts:art/armlock | cast=true anim=ba_martialarts:art/armlock
+ok   MASTER art (cycle 6): ba_martialarts:art/armlock hits | hits={ART=1} other=0 anims=[ba_martialarts:art/armlock]
+ok   MASTER art (sprinting): cast ba_martialarts:art/flying_knee | cast=true anim=ba_martialarts:art/flying_knee
+ok   MASTER art (sprinting): ba_martialarts:art/flying_knee hits | hits={ART=1} other=0 anims=[ba_martialarts:art/flying_knee]
+ok   MASTER art (sneaking): cast ba_martialarts:art/ippon | cast=true anim=ba_martialarts:art/ippon
+ok   MASTER art (sneaking): ba_martialarts:art/ippon hits | hits={ART=1} other=0 anims=[ba_martialarts:art/ippon]
+ok   MASTER: aikido counter after a dodge connects | hits={FINISHER=1} anims=[ba_martialarts:aikido/kokyu_nage] want=ba_martialarts:aikido/kokyu_nage
+ok   HEROBRINE: style equipped | style=ba_martialarts:herobrine
+ok   HEROBRINE: combat art slot filled | skill=ba_martialarts:herobrine_power
+ok   HEROBRINE: book recipe loaded | recipe=Optional[net.minecraft.world.item.crafting.ShapelessRecipe@208f78cb]
+ok   HEROBRINE: shrine crafts the book | out=1 skillbook skill=ba_martialarts:herobrine
+ok   HEROBRINE: advancement granted | adv=SimpleAdvancement{id=ba_martialarts:martial/herobrine, parent=ba_martialarts:martial/learn_style, display=net.minecraft.advancements.DisplayInfo@53593696, rewards=AdvancementRewards{experience=0, loot=[], recipes=[], function=net.minecraft.commands.CommandFunction$CacheableFunction@3f5d0ff4}, criteria={done=net.minecraft.advancements.Criterion@2627483d}, requirements=[[done]], sendsTelemetryEvent=false}
+info EpicFight: Annoying Villagers not installed, Herobrine uses fallback moves: battle_arts:battle_style/unique/iron_lotus/fist/auto2
+ok   HEROBRINE: flight only for Herobrine | mayfly=true
+ok   HEROBRINE: 4 basic attacks | casts=4
+ok   HEROBRINE: combo has 4 different strikes | anims=[ba_martialarts:herobrine/left_strike, ba_martialarts:herobrine/rising_fist, ba_martialarts:herobrine/kick, ba_martialarts:herobrine/whirlwind_kick]
+ok   HEROBRINE: basic attacks use the style combo | anims=[ba_martialarts:herobrine/left_strike, ba_martialarts:herobrine/rising_fist, ba_martialarts:herobrine/kick, ba_martialarts:herobrine/whirlwind_kick]
+ok   HEROBRINE: every combo move connects | hit=[ba_martialarts:herobrine/left_strike, ba_martialarts:herobrine/rising_fist, ba_martialarts:herobrine/kick, ba_martialarts:herobrine/whirlwind_kick] cast=[ba_martialarts:herobrine/left_strike, ba_martialarts:herobrine/rising_fist, ba_martialarts:herobrine/kick, ba_martialarts:herobrine/whirlwind_kick] other=0
+ok   HEROBRINE: black fire sets the target ablaze
+ok   HEROBRINE: target is knocked down for the ground hit test | anim=epicfight:biped/combat/knockdown
+ok   HEROBRINE: combo strike hits a downed target | hit=[ba_martialarts:herobrine/left_strike] blocked=0
+ok   HEROBRINE: dash attack plays the style move | anims=[ba_martialarts:herobrine/dash] role=DASH
+ok   HEROBRINE: dash attack connects | hits={DASH=1} other=0 anims=[ba_martialarts:herobrine/dash]
+ok   HEROBRINE: air attack plays the style move | anims=[ba_martialarts:herobrine/air] role=AIR
+info HEROBRINE: air attack hits from a standstill: 1 [ba_martialarts:herobrine/air]
+ok   HEROBRINE: rush starts on hold
+ok   HEROBRINE: rush has moves
+ok   HEROBRINE: rush keeps going while held
+ok   HEROBRINE: rush strike count | strikes=10 expected=10
+ok   HEROBRINE: rush strikes connect | hits=10 strikes=10 other=0 anims=[ba_martialarts:rush/herobrine_left, ba_martialarts:rush/herobrine_right]
+ok   HEROBRINE: every rush move connects | hit=[ba_martialarts:rush/herobrine_left, ba_martialarts:rush/herobrine_right] moves=[ba_martialarts:rush/herobrine_left, ba_martialarts:rush/herobrine_right]
+ok   HEROBRINE: rush stamina per strike | used=8.000002 strikes=10 cost=0.8
+ok   HEROBRINE: release after 5+ strikes plays the finisher | anim=ba_martialarts:herobrine/whirlwind_kick want=ba_martialarts:herobrine/whirlwind_kick
+ok   HEROBRINE: rush stops on release
+ok   HEROBRINE: finisher hits | hits={FINISHER=1} anims=[ba_martialarts:herobrine/whirlwind_kick]
+ok   HEROBRINE: rush ends when stamina runs out | still rushing
+ok   HEROBRINE: strikes until stamina is out | used=2.4 ended at 13
+ok   HEROBRINE: no finisher when stamina ran out | hits={BARRAGE=3}
+ok   HEROBRINE portal: cast ba_martialarts:art/herobrine_portal | cast=true anim=ba_martialarts:art/herobrine_portal
+ok   HEROBRINE portal: steps behind the target | from=(0.5, -60.0, 0.5) now=(0.5, -60.0, 3.100000023841858) target=(0.5, -60.0, 1.9)
+ok   HEROBRINE portal: ba_martialarts:art/herobrine_portal hits | hits={ART=1} other=0 anims=[ba_martialarts:art/herobrine_portal]
+ok   HEROBRINE portal: black fire
+ok   HEROBRINE pillars: cast ba_martialarts:art/herobrine_pillars | cast=true anim=ba_martialarts:art/herobrine_pillars
+ok   HEROBRINE pillars: obsidian pillars rise | pillars=7
+ok   HEROBRINE pillars: ba_martialarts:art/herobrine_pillars hits | hits={ART=1} other=0 anims=[ba_martialarts:art/herobrine_pillars]
+ok   HEROBRINE pillars: black fire
+ok   HEROBRINE pillars: pillars are gone afterwards | pillars=0
+ok   HEROBRINE lightning: cast ba_martialarts:art/herobrine_lightning | cast=true anim=ba_martialarts:art/herobrine_lightning
+ok   HEROBRINE lightning: ba_martialarts:art/herobrine_lightning hits | hits={ART=1} other=0 anims=[ba_martialarts:art/herobrine_lightning]
+ok   HEROBRINE lightning: black fire
+ok   HEROBRINE: immune to fire, lava and lightning | fire=false lava=false bolt=false health=20.0
+ok   flight is taken away after leaving Herobrine | mayfly=false
+ok   flurry of blows cast | skill=ba_martialarts:flurry_of_blows anim=ba_martialarts:art/flurry_of_blows
+ok   flurry of blows hits | hits={FLURRY=8} other=0 anims=[ba_martialarts:art/flurry_of_blows]
+ok   ultra instinct cast | skill=ba_martialarts:ultra_instinct active=true
+ok   ultra instinct dodges attacks | dodges=7/9
+ok   ultra instinct counterattacks connect | hits={FINISHER=7} other=0 anims=[ba_martialarts:boxing/power_straight]
+ok   ultra instinct has no time limit (on after 17 s)
+ok   ultra instinct: the same key leaves it | cast=true active=false
+ok   ultra instinct: leaving costs no meter | meter=0.0
+ok   ultra instinct: needs a full meter to enter again | cast=false
+
+RESULT PASS checks=262 failures=0
+chosen animations: {boxing/cross=battle_arts:battle_style/unique/iron_lotus/fist/auto1, muay_thai/roundhouse=wom:biped/skill/kick_3, krav_maga/palm_heel=battle_arts:battle_style/novice/journeyman/auto1, art/flying_knee=battle_arts:battle_style/unique/iron_lotus/fist/dash_attack, kung_fu/air=battle_arts:battle_style/unique/iron_lotus/fist/axe_dive, rush/taekwondo_kick_a=wom:biped/skill/kick_1, rush/taekwondo_kick_b=wom:biped/skill/kick, herobrine/left_strike=battle_arts:battle_style/unique/iron_lotus/fist/auto2, boxing/jab=battle_arts:battle_style/unique/iron_lotus/fist/auto2, karate/mae_geri=wom:biped/skill/kick_1, karate/kizami_zuki=battle_arts:battle_style/unique/iron_lotus/fist/auto2, judo/o_goshi=battle_arts:battle_style/novice/journeyman/dash, sambo/takedown=wom:biped/skill/ravanger_charge, judo/grip_strike=battle_arts:battle_style/unique/iron_lotus/fist/auto1, ultra_instinct/awaken=wom:biped/skill/biped_avatar_of_might, taekwondo/dwi_chagi=wom:biped/skill/kick_3, aikido/kokyu_nage=epicfight:biped/skill/revelation_twohand, kung_fu/palm_right=battle_arts:battle_style/unique/iron_lotus/fist/auto1, kung_fu/twin_palms=epicfight:biped/skill/revelation_twohand, judo/air=battle_arts:battle_style/novice/journeyman/sledgehammer, art/kiai=wom:biped/skill/strong_punch, kung_fu/dash=battle_arts:battle_style/unique/iron_lotus/fist/dash_attack, boxing/dash=battle_arts:battle_style/unique/iron_lotus/fist/dash_attack, muay_thai/dash=battle_arts:battle_style/unique/iron_lotus/fist/dash_attack, muay_thai/jab=battle_arts:battle_style/unique/iron_lotus/fist/auto2, herobrine/dash=battle_arts:battle_style/unique/iron_lotus/fist/dash_attack, capoeira/armada=wom:biped/skill/kick_2, wing_chun/chain_punch=battle_arts:battle_style/unique/iron_lotus/fist/auto1, muay_thai/sok=battle_arts:battle_style/novice/journeyman/auto2, art/ippon=wom:biped/skill/ravanger_charge, art/chi_palm=epicfight:biped/skill/revelation_twohand, taekwondo/ap_chagi=wom:biped/skill/kick_1, rush/karate_right=battle_arts:battle_style/unique/iron_lotus/fist/auto1, rush/muay_thai_right=battle_arts:battle_style/novice/journeyman/auto1, boxing/hook=battle_arts:battle_style/novice/journeyman/auto2, savate/chasse=wom:biped/skill/kick, kung_fu/palm_left=battle_arts:battle_style/unique/iron_lotus/fist/auto2, art/herobrine_lightning=epicfight:biped/skill/revelation_twohand, muay_thai/cross=battle_arts:battle_style/novice/journeyman/auto1, taekwondo/dollyo_chagi=wom:biped/skill/kick, judo/tackle=wom:biped/skill/ravanger_charge, ultra_instinct/dodge_right=wom:biped/skill/shadow_step_right, rush/karate_left=battle_arts:battle_style/unique/iron_lotus/fist/auto2, judo/push_left=battle_arts:battle_style/novice/journeyman/auto2, rush/boxing_right=battle_arts:battle_style/unique/iron_lotus/fist/auto1, ninjutsu/drop_strike=battle_arts:battle_style/unique/iron_lotus/fist/axe_dive, judo/push_right=battle_arts:battle_style/novice/journeyman/auto1, rush/judo_left=battle_arts:battle_style/novice/journeyman/auto2, ultra_instinct/dodge_left=wom:biped/skill/shadow_step_left, kung_fu/crane_kick=battle_arts:battle_style/unique/iron_lotus/fist/auto3, art/one_inch_punch=wom:biped/skill/strong_punch, art/crushing_uppercut=battle_arts:battle_style/novice/journeyman/dash, karate/air=battle_arts:battle_style/unique/iron_lotus/fist/axe_dive, herobrine/kick=wom:biped/skill/kick_1, boxing/air=battle_arts:battle_style/novice/journeyman/sledgehammer, taekwondo/dash=battle_arts:battle_style/unique/iron_lotus/fist/dash_attack, herobrine/air=battle_arts:battle_style/unique/iron_lotus/fist/axe_dive, art/herobrine_portal=battle_arts:battle_style/novice/journeyman/dash, art/herobrine_pillars=epicfight:biped/skill/revelation_twohand, taekwondo/naeryeo_chagi=battle_arts:battle_style/unique/iron_lotus/fist/axe_dive, herobrine/rising_fist=battle_arts:battle_style/novice/journeyman/dash, boxing/power_straight=battle_arts:battle_style/novice/journeyman/auto1, muay_thai/air=battle_arts:battle_style/unique/iron_lotus/fist/axe_dive, art/flurry_of_blows=epicfight:biped/skill/relentless_combo, rush/judo_right=battle_arts:battle_style/novice/journeyman/auto1, ultra_instinct/dodge_back=wom:biped/skill/shadow_step_backward, karate/oi_zuki=battle_arts:battle_style/unique/iron_lotus/fist/auto1, karate/dash=battle_arts:battle_style/unique/iron_lotus/fist/dash_attack, sumo/tachiai=wom:biped/skill/ravanger_charge, rush/muay_thai_left=battle_arts:battle_style/unique/iron_lotus/fist/auto2, rush/kung_fu_left=battle_arts:battle_style/unique/iron_lotus/fist/auto2, art/armlock=battle_arts:battle_style/novice/journeyman/suppressing_blow, art/tornado_kick=epicfight:biped/skill/phantom_ascent_forward, herobrine/whirlwind_kick=wom:biped/skill/kick, karate/gyaku_zuki=battle_arts:battle_style/novice/journeyman/auto1, judo/hip_check=battle_arts:battle_style/novice/journeyman/dash, rush/kung_fu_right=battle_arts:battle_style/unique/iron_lotus/fist/auto1, kickboxing/low_kick=wom:biped/skill/kick_1, rush/herobrine_left=battle_arts:battle_style/unique/iron_lotus/fist/auto2, muay_thai/teep=wom:biped/skill/kick_2, taekwondo/double_kick=wom:biped/skill/kick_2, rush/boxing_left=battle_arts:battle_style/unique/iron_lotus/fist/auto2, rush/herobrine_right=battle_arts:battle_style/unique/iron_lotus/fist/auto1}

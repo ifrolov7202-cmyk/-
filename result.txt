@@ -1,0 +1,2 @@
+STARTED
+[SELFTEST] DONE PASS checks=262 failures=0

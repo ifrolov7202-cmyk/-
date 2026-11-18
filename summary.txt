@@ -1,0 +1,529 @@
+69:[18Nov2026 20:58:26.950] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Considering mod file candidate /home/runner/work/-/-/server/mods/ba_martialarts.jar
+70:[18Nov2026 20:58:26.986] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFileInfo/LOADING]: Found valid mod file ba_martialarts.jar with {ba_martialarts} mods - versions {1.0.0}
+71:[18Nov2026 20:58:26.987] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Considering mod file candidate /home/runner/work/-/-/server/mods/ba_martialarts_selftest.jar
+72:[18Nov2026 20:58:26.988] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFileInfo/LOADING]: Found valid mod file ba_martialarts_selftest.jar with {ba_martialarts_selftest} mods - versions {1.0.0}
+95:[18Nov2026 20:58:27.136] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.AbstractJarFileDependencyLocator/]: Failed to load resource META-INF/jarjar/metadata.json from ba_martialarts_selftest.jar, it does not contain dependency information.
+99:[18Nov2026 20:58:27.137] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.AbstractJarFileDependencyLocator/]: Failed to load resource META-INF/jarjar/metadata.json from ba_martialarts.jar, it does not contain dependency information.
+110:[18Nov2026 20:58:27.162] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Considering mod file candidate /home/runner/work/-/-/server/mods/ba_martialarts_selftest.jar
+111:[18Nov2026 20:58:27.162] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFileInfo/LOADING]: Found valid mod file ba_martialarts_selftest.jar with {ba_martialarts_selftest} mods - versions {1.0.0}
+112:[18Nov2026 20:58:27.162] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFile/LOADING]: Loading mod file /home/runner/work/-/-/server/mods/ba_martialarts_selftest.jar with languages [LanguageSpec[languageName=javafml, acceptedVersions=[47,)]]
+133:[18Nov2026 20:58:27.195] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Considering mod file candidate /home/runner/work/-/-/server/mods/ba_martialarts.jar
+134:[18Nov2026 20:58:27.195] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFileInfo/LOADING]: Found valid mod file ba_martialarts.jar with {ba_martialarts} mods - versions {1.0.0}
+135:[18Nov2026 20:58:27.196] [main/DEBUG] [net.minecraftforge.fml.loading.moddiscovery.ModFile/LOADING]: Loading mod file /home/runner/work/-/-/server/mods/ba_martialarts.jar with languages [LanguageSpec[languageName=javafml, acceptedVersions=[47,)]]
+234:[18Nov2026 20:58:28.342] [main/DEBUG] [mixin/]: Adding mixin platform agents for container SecureJarResource(ba_martialarts)
+235:[18Nov2026 20:58:28.342] [main/DEBUG] [mixin/]: Instancing new MixinPlatformAgentMinecraftForge for SecureJarResource(ba_martialarts)
+236:[18Nov2026 20:58:28.342] [main/DEBUG] [mixin/]: MixinPlatformAgentMinecraftForge rejected container SecureJarResource(ba_martialarts)
+237:[18Nov2026 20:58:28.342] [main/DEBUG] [mixin/]: Instancing new MixinPlatformAgentDefault for SecureJarResource(ba_martialarts)
+238:[18Nov2026 20:58:28.342] [main/DEBUG] [mixin/]: MixinPlatformAgentDefault accepted container SecureJarResource(ba_martialarts)
+239:[18Nov2026 20:58:28.343] [main/DEBUG] [mixin/]: Processing prepare() for PlatformAgent[MixinPlatformAgentDefault:SecureJarResource(ba_martialarts)]
+240:[18Nov2026 20:58:28.343] [main/DEBUG] [mixin/]: Registering mixin config: ba_martialarts.mixins.json
+241:[18Nov2026 20:58:28.344] [main/DEBUG] [mixin/]: Adding mixin platform agents for container SecureJarResource(ba_martialarts_selftest)
+242:[18Nov2026 20:58:28.344] [main/DEBUG] [mixin/]: Instancing new MixinPlatformAgentMinecraftForge for SecureJarResource(ba_martialarts_selftest)
+243:[18Nov2026 20:58:28.344] [main/DEBUG] [mixin/]: MixinPlatformAgentMinecraftForge rejected container SecureJarResource(ba_martialarts_selftest)
+244:[18Nov2026 20:58:28.344] [main/DEBUG] [mixin/]: Instancing new MixinPlatformAgentDefault for SecureJarResource(ba_martialarts_selftest)
+245:[18Nov2026 20:58:28.344] [main/DEBUG] [mixin/]: MixinPlatformAgentDefault accepted container SecureJarResource(ba_martialarts_selftest)
+246:[18Nov2026 20:58:28.344] [main/DEBUG] [mixin/]: Processing prepare() for PlatformAgent[MixinPlatformAgentDefault:SecureJarResource(ba_martialarts_selftest)]
+255:[18Nov2026 20:58:28.347] [main/DEBUG] [mixin/]: Processing inject() for PlatformAgent[MixinPlatformAgentDefault:SecureJarResource(ba_martialarts)]
+256:[18Nov2026 20:58:28.348] [main/DEBUG] [mixin/]: Processing inject() for PlatformAgent[MixinPlatformAgentDefault:SecureJarResource(ba_martialarts_selftest)]
+264:[18Nov2026 20:58:28.383] [main/DEBUG] [mixin/]: Selecting config ba_martialarts.mixins.json
+268:[18Nov2026 20:58:28.604] [main/DEBUG] [mixin/]: Preparing ba_martialarts.mixins.json (1)
+368:java.lang.UnsupportedOperationException: Reflective setAccessible(true) disabled
+399:java.lang.IllegalAccessException: class io.netty.util.internal.PlatformDependent0$7 (in module io.netty.common) cannot access class jdk.internal.misc.Unsafe (in module java.base) because module java.base does not export jdk.internal.misc to module io.netty.common
+400:	at jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[?:?]
+453:[18Nov2026 20:58:33.499] [main/DEBUG] [net.minecraftforge.fml.javafmlmod.FMLModContainer/LOADING]: Creating FMLModContainer instance for com.bamartial.BAMartial
+455:[18Nov2026 20:58:33.499] [main/DEBUG] [net.minecraftforge.fml.javafmlmod.FMLModContainer/LOADING]: Creating FMLModContainer instance for com.bamartial.selftest.SelfTest
+485:[18Nov2026 20:58:33.600] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+487:[18Nov2026 20:58:33.601] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+491:[18Nov2026 20:58:33.601] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+493:[18Nov2026 20:58:33.606] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+495:[18Nov2026 20:58:33.606] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+497:[18Nov2026 20:58:33.607] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+499:[18Nov2026 20:58:33.607] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+501:[18Nov2026 20:58:33.607] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+503:[18Nov2026 20:58:33.608] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+507:[18Nov2026 20:58:33.655] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.config.ConfigTracker/CONFIG]: Config file ba_martialarts-common.toml for ba_martialarts tracking
+508:[18Nov2026 20:58:33.655] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Attempting to inject @EventBusSubscriber classes into the eventbus for ba_martialarts
+509:[18Nov2026 20:58:33.655] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing com.bamartial.skills.UltraInstinct to FORGE
+520:[18Nov2026 20:58:33.671] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing com.bamartial.skills.Techniques to FORGE
+530:[18Nov2026 20:58:33.675] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing com.bamartial.skills.Herobrine to FORGE
+544:[18Nov2026 20:58:33.691] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing com.bamartial.anim.MartialMoves to MOD
+549:[18Nov2026 20:58:33.710] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Attempting to inject @EventBusSubscriber classes into the eventbus for ba_martialarts_selftest
+553:[18Nov2026 20:58:33.719] [modloading-worker-0/DEBUG] [net.minecraftforge.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing com.bamartial.LootEvents to FORGE
+570:[18Nov2026 20:58:33.765] [modloading-worker-0/DEBUG] [mixin/]: Mixing CapabilityItemMixin from ba_martialarts.mixins.json into yesman.epicfight.world.capabilities.item.CapabilityItem
+658:[18Nov2026 20:58:34.362] [main/DEBUG] [net.minecraftforge.fml.config.ConfigFileTypeHandler/CONFIG]: Built TOML config for /home/runner/work/-/-/server/config/ba_martialarts-common.toml
+659:[18Nov2026 20:58:34.362] [main/DEBUG] [net.minecraftforge.fml.config.ConfigFileTypeHandler/CONFIG]: Loaded TOML config file /home/runner/work/-/-/server/config/ba_martialarts-common.toml
+660:[18Nov2026 20:58:34.362] [main/DEBUG] [net.minecraftforge.fml.config.ConfigFileTypeHandler/CONFIG]: Watching TOML config file /home/runner/work/-/-/server/config/ba_martialarts-common.toml for changes
+661:[18Nov2026 20:58:34.362] [main/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file /home/runner/work/-/-/server/config/ba_martialarts-common.toml is not correct. Correcting
+701:[18Nov2026 20:58:34.368] [Thread-1/DEBUG] [net.minecraftforge.fml.config.ConfigFileTypeHandler/CONFIG]: Config file ba_martialarts-common.toml changed, sending notifies
+702:[18Nov2026 20:58:34.369] [Thread-1/DEBUG] [net.minecraftforge.fml.config.ConfigFileTypeHandler/CONFIG]: Config file ba_martialarts-common.toml changed, sending notifies
+789:[18Nov2026 20:58:35.404] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:flurry_of_blows
+790:[18Nov2026 20:58:35.404] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:ultra_instinct
+791:[18Nov2026 20:58:35.404] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:crushing_uppercut
+792:[18Nov2026 20:58:35.404] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:boxer
+793:[18Nov2026 20:58:35.404] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:kiai
+794:[18Nov2026 20:58:35.404] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:karateka
+795:[18Nov2026 20:58:35.404] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:flying_knee
+796:[18Nov2026 20:58:35.405] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:nak_muay
+797:[18Nov2026 20:58:35.405] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:chi_palm
+798:[18Nov2026 20:58:35.405] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:kung_fu_master
+799:[18Nov2026 20:58:35.405] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:tornado_kick
+800:[18Nov2026 20:58:35.405] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:taekwondoin
+801:[18Nov2026 20:58:35.405] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:ippon
+802:[18Nov2026 20:58:35.405] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:judoka
+803:[18Nov2026 20:58:35.405] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:way_of_the_master
+804:[18Nov2026 20:58:35.405] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:martial_arts_master
+805:[18Nov2026 20:58:35.405] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:herobrine_power
+806:[18Nov2026 20:58:35.405] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:herobrine
+815:[18Nov2026 20:58:35.495] [main/DEBUG] [net.minecraftforge.server.ServerLifecycleHooks/CORE]: Generating PackInfo named mod:ba_martialarts for mod file /home/runner/work/-/-/server/mods/ba_martialarts.jar
+816:[18Nov2026 20:58:35.495] [main/DEBUG] [net.minecraftforge.server.ServerLifecycleHooks/CORE]: Generating PackInfo named mod:ba_martialarts_selftest for mod file /home/runner/work/-/-/server/mods/ba_martialarts_selftest.jar
+942:[18Nov2026 20:58:36.146] [main/ERROR] [net.minecraft.server.dedicated.DedicatedServerProperties/]: No key layers in MapLike[{}]
+947:[18Nov2026 20:58:37.407] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] boxing/jab <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+948:[18Nov2026 20:58:37.432] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] karate/gyaku_zuki <- battle_arts:battle_style/novice/journeyman/auto1
+949:[18Nov2026 20:58:37.432] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] kung_fu/twin_palms <- epicfight:biped/skill/revelation_twohand
+950:[18Nov2026 20:58:37.433] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] taekwondo/dollyo_chagi <- wom:biped/skill/kick
+951:[18Nov2026 20:58:37.433] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] boxing/cross <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+952:[18Nov2026 20:58:37.433] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] boxing/hook <- battle_arts:battle_style/novice/journeyman/auto2
+953:[18Nov2026 20:58:37.433] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] boxing/power_straight <- battle_arts:battle_style/novice/journeyman/auto1
+954:[18Nov2026 20:58:37.433] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] boxing/dash <- battle_arts:battle_style/unique/iron_lotus/fist/dash_attack
+955:[18Nov2026 20:58:37.433] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] boxing/air <- battle_arts:battle_style/novice/journeyman/sledgehammer
+956:[18Nov2026 20:58:37.434] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/crushing_uppercut <- battle_arts:battle_style/novice/journeyman/dash
+957:[18Nov2026 20:58:37.434] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] karate/oi_zuki <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+958:[18Nov2026 20:58:37.434] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] karate/kizami_zuki <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+959:[18Nov2026 20:58:37.434] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] karate/mae_geri <- wom:biped/skill/kick_1
+960:[18Nov2026 20:58:37.434] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] karate/dash <- battle_arts:battle_style/unique/iron_lotus/fist/dash_attack
+961:[18Nov2026 20:58:37.434] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] karate/air <- battle_arts:battle_style/unique/iron_lotus/fist/axe_dive
+962:[18Nov2026 20:58:37.434] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/kiai <- wom:biped/skill/strong_punch
+963:[18Nov2026 20:58:37.435] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] muay_thai/jab <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+964:[18Nov2026 20:58:37.435] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] muay_thai/cross <- battle_arts:battle_style/novice/journeyman/auto1
+965:[18Nov2026 20:58:37.435] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] muay_thai/teep <- wom:biped/skill/kick_2
+966:[18Nov2026 20:58:37.435] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] muay_thai/roundhouse <- wom:biped/skill/kick_3
+967:[18Nov2026 20:58:37.435] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] muay_thai/dash <- battle_arts:battle_style/unique/iron_lotus/fist/dash_attack
+968:[18Nov2026 20:58:37.435] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] muay_thai/air <- battle_arts:battle_style/unique/iron_lotus/fist/axe_dive
+969:[18Nov2026 20:58:37.435] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/flying_knee <- battle_arts:battle_style/unique/iron_lotus/fist/dash_attack
+970:[18Nov2026 20:58:37.435] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] kung_fu/palm_right <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+971:[18Nov2026 20:58:37.435] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] kung_fu/palm_left <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+972:[18Nov2026 20:58:37.436] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] kung_fu/crane_kick <- battle_arts:battle_style/unique/iron_lotus/fist/auto3
+973:[18Nov2026 20:58:37.436] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] kung_fu/dash <- battle_arts:battle_style/unique/iron_lotus/fist/dash_attack
+974:[18Nov2026 20:58:37.436] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] kung_fu/air <- battle_arts:battle_style/unique/iron_lotus/fist/axe_dive
+975:[18Nov2026 20:58:37.436] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/chi_palm <- epicfight:biped/skill/revelation_twohand
+976:[18Nov2026 20:58:37.436] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] taekwondo/ap_chagi <- wom:biped/skill/kick_1
+977:[18Nov2026 20:58:37.436] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] taekwondo/double_kick <- wom:biped/skill/kick_2
+978:[18Nov2026 20:58:37.436] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] taekwondo/dwi_chagi <- wom:biped/skill/kick_3
+979:[18Nov2026 20:58:37.436] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] taekwondo/dash <- battle_arts:battle_style/unique/iron_lotus/fist/dash_attack
+980:[18Nov2026 20:58:37.436] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] taekwondo/naeryeo_chagi <- battle_arts:battle_style/unique/iron_lotus/fist/axe_dive
+981:[18Nov2026 20:58:37.437] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/tornado_kick <- epicfight:biped/skill/phantom_ascent_forward
+982:[18Nov2026 20:58:37.437] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] judo/push_right <- battle_arts:battle_style/novice/journeyman/auto1
+983:[18Nov2026 20:58:37.437] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] judo/push_left <- battle_arts:battle_style/novice/journeyman/auto2
+984:[18Nov2026 20:58:37.437] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] judo/grip_strike <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+985:[18Nov2026 20:58:37.437] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] judo/hip_check <- battle_arts:battle_style/novice/journeyman/dash
+986:[18Nov2026 20:58:37.437] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] judo/tackle <- wom:biped/skill/ravanger_charge
+987:[18Nov2026 20:58:37.437] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] judo/air <- battle_arts:battle_style/novice/journeyman/sledgehammer
+988:[18Nov2026 20:58:37.437] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/ippon <- wom:biped/skill/ravanger_charge
+989:[18Nov2026 20:58:37.437] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/boxing_left <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+990:[18Nov2026 20:58:37.437] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/boxing_right <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+991:[18Nov2026 20:58:37.438] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/karate_right <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+992:[18Nov2026 20:58:37.438] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/karate_left <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+993:[18Nov2026 20:58:37.438] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/muay_thai_left <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+994:[18Nov2026 20:58:37.438] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/muay_thai_right <- battle_arts:battle_style/novice/journeyman/auto1
+995:[18Nov2026 20:58:37.438] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/kung_fu_right <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+996:[18Nov2026 20:58:37.438] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/kung_fu_left <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+997:[18Nov2026 20:58:37.438] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/taekwondo_kick_a <- wom:biped/skill/kick_1
+998:[18Nov2026 20:58:37.438] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/taekwondo_kick_b <- wom:biped/skill/kick
+999:[18Nov2026 20:58:37.438] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/judo_right <- battle_arts:battle_style/novice/journeyman/auto1
+1000:[18Nov2026 20:58:37.438] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/judo_left <- battle_arts:battle_style/novice/journeyman/auto2
+1001:[18Nov2026 20:58:37.438] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] wing_chun/chain_punch <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+1002:[18Nov2026 20:58:37.439] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] kickboxing/low_kick <- wom:biped/skill/kick_1
+1003:[18Nov2026 20:58:37.439] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] muay_thai/sok <- battle_arts:battle_style/novice/journeyman/auto2
+1004:[18Nov2026 20:58:37.439] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] savate/chasse <- wom:biped/skill/kick
+1005:[18Nov2026 20:58:37.439] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] krav_maga/palm_heel <- battle_arts:battle_style/novice/journeyman/auto1
+1006:[18Nov2026 20:58:37.439] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] capoeira/armada <- wom:biped/skill/kick_2
+1007:[18Nov2026 20:58:37.439] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] sambo/takedown <- wom:biped/skill/ravanger_charge
+1008:[18Nov2026 20:58:37.439] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] judo/o_goshi <- battle_arts:battle_style/novice/journeyman/dash
+1009:[18Nov2026 20:58:37.439] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] sumo/tachiai <- wom:biped/skill/ravanger_charge
+1010:[18Nov2026 20:58:37.439] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] ninjutsu/drop_strike <- battle_arts:battle_style/unique/iron_lotus/fist/axe_dive
+1011:[18Nov2026 20:58:37.439] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] aikido/kokyu_nage <- epicfight:biped/skill/revelation_twohand
+1012:[18Nov2026 20:58:37.439] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/one_inch_punch <- wom:biped/skill/strong_punch
+1013:[18Nov2026 20:58:37.440] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/armlock <- battle_arts:battle_style/novice/journeyman/suppressing_blow
+1014:[18Nov2026 20:58:37.440] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] herobrine/left_strike <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+1015:[18Nov2026 20:58:37.440] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] herobrine/rising_fist <- battle_arts:battle_style/novice/journeyman/dash
+1016:[18Nov2026 20:58:37.440] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] herobrine/kick <- wom:biped/skill/kick_1
+1017:[18Nov2026 20:58:37.440] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] herobrine/whirlwind_kick <- wom:biped/skill/kick
+1018:[18Nov2026 20:58:37.440] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] herobrine/dash <- battle_arts:battle_style/unique/iron_lotus/fist/dash_attack
+1019:[18Nov2026 20:58:37.440] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] herobrine/air <- battle_arts:battle_style/unique/iron_lotus/fist/axe_dive
+1020:[18Nov2026 20:58:37.440] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/herobrine_left <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+1021:[18Nov2026 20:58:37.440] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/herobrine_right <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+1022:[18Nov2026 20:58:37.440] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/herobrine_portal <- battle_arts:battle_style/novice/journeyman/dash
+1023:[18Nov2026 20:58:37.440] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/herobrine_pillars <- epicfight:biped/skill/revelation_twohand
+1024:[18Nov2026 20:58:37.441] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/herobrine_lightning <- epicfight:biped/skill/revelation_twohand
+1025:[18Nov2026 20:58:37.441] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/flurry_of_blows <- epicfight:biped/skill/relentless_combo
+1026:[18Nov2026 20:58:37.441] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] ultra_instinct/dodge_left <- wom:biped/skill/shadow_step_left
+1027:[18Nov2026 20:58:37.443] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] ultra_instinct/dodge_right <- wom:biped/skill/shadow_step_right
+1028:[18Nov2026 20:58:37.443] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] ultra_instinct/dodge_back <- wom:biped/skill/shadow_step_backward
+1029:[18Nov2026 20:58:37.443] [main/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] ultra_instinct/awaken <- wom:biped/skill/biped_avatar_of_might
+1041:[18Nov2026 20:58:41.168] [main/WARN] [epicfight/]: Item Capability Exception: No item named epicacg:elucidator
+1089:[18Nov2026 20:58:41.175] [main/WARN] [epicfight/]: Item Capability Exception: No item named epicacg:dark_repulsor
+1118:[18Nov2026 20:58:41.179] [main/WARN] [epicfight/]: Item Capability Exception: No item named epicacg:lambent_light
+1312:[18Nov2026 20:58:45.370] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] server started, tests begin in 60 ticks
+1315:[18Nov2026 20:58:48.332] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] planned 156 steps
+1322:[18Nov2026 20:58:48.549] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] player at (0.5, -60.0, 0.5), target at (0.5, -60.0, 1.9)
+1323:[18Nov2026 20:58:49.329] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   test player has Epic Fight patch in battle mode
+1324:[18Nov2026 20:58:49.330] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   target spawned
+1326:[18Nov2026 20:58:49.828] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: style equipped | style=ba_martialarts:boxer
+1327:[18Nov2026 20:58:49.828] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: combat art slot filled | skill=ba_martialarts:crushing_uppercut
+1328:[18Nov2026 20:58:49.828] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: flight only for Herobrine | mayfly=false
+1329:[18Nov2026 20:58:56.826] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: 4 basic attacks | casts=4
+1330:[18Nov2026 20:58:56.827] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: combo has 4 different strikes | anims=[ba_martialarts:boxing/jab, ba_martialarts:boxing/cross, ba_martialarts:boxing/hook, ba_martialarts:boxing/power_straight]
+1331:[18Nov2026 20:58:56.827] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: basic attacks use the style combo | anims=[ba_martialarts:boxing/jab, ba_martialarts:boxing/cross, ba_martialarts:boxing/hook, ba_martialarts:boxing/power_straight]
+1332:[18Nov2026 20:58:56.827] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: every combo move connects | hit=[ba_martialarts:boxing/jab, ba_martialarts:boxing/cross, ba_martialarts:boxing/hook, ba_martialarts:boxing/power_straight] cast=[ba_martialarts:boxing/jab, ba_martialarts:boxing/cross, ba_martialarts:boxing/hook, ba_martialarts:boxing/power_straight] other=0
+1333:[18Nov2026 20:58:58.074] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: target is knocked down for the ground hit test | anim=epicfight:biped/combat/knockdown
+1334:[18Nov2026 20:58:59.826] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: combo strike hits a downed target | hit=[ba_martialarts:boxing/jab] blocked=0
+1335:[18Nov2026 20:59:04.325] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: dash attack plays the style move | anims=[ba_martialarts:boxing/dash] role=DASH
+1336:[18Nov2026 20:59:04.326] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: dash attack connects | hits={DASH=1} other=0 anims=[ba_martialarts:boxing/dash]
+1337:[18Nov2026 20:59:08.828] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: air attack plays the style move | anims=[ba_martialarts:boxing/air] role=AIR
+1338:[18Nov2026 20:59:08.828] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] info BOXING: air attack hits from a standstill: 1 [ba_martialarts:boxing/air]
+1339:[18Nov2026 20:59:09.875] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: rush starts on hold
+1340:[18Nov2026 20:59:11.874] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: rush has moves
+1341:[18Nov2026 20:59:11.874] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: rush keeps going while held
+1342:[18Nov2026 20:59:11.874] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: rush strike count | strikes=10 expected=10
+1343:[18Nov2026 20:59:11.876] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: rush strikes connect | hits=10 strikes=10 other=0 anims=[ba_martialarts:rush/boxing_left, ba_martialarts:rush/boxing_right]
+1344:[18Nov2026 20:59:11.876] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: every rush move connects | hit=[ba_martialarts:rush/boxing_left, ba_martialarts:rush/boxing_right] moves=[ba_martialarts:rush/boxing_left, ba_martialarts:rush/boxing_right]
+1345:[18Nov2026 20:59:11.876] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: rush stamina per strike | used=8.000002 strikes=10 cost=0.8
+1346:[18Nov2026 20:59:11.925] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: release after 5+ strikes plays the finisher | anim=ba_martialarts:boxing/power_straight want=ba_martialarts:boxing/power_straight
+1347:[18Nov2026 20:59:11.925] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: rush stops on release
+1348:[18Nov2026 20:59:14.124] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: finisher hits | hits={FINISHER=1} anims=[ba_martialarts:boxing/power_straight]
+1349:[18Nov2026 20:59:18.625] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: rush ends when stamina runs out | still rushing
+1350:[18Nov2026 20:59:18.625] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: strikes until stamina is out | used=2.4 ended at 13
+1351:[18Nov2026 20:59:18.626] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: no finisher when stamina ran out | hits={BARRAGE=3}
+1353:[18Nov2026 20:59:20.184] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: combat art cast | skill=ba_martialarts:crushing_uppercut anim=ba_martialarts:art/crushing_uppercut
+1354:[18Nov2026 20:59:24.124] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   BOXING: combat art hits | hits={ART=1} other=0 anims=[ba_martialarts:art/crushing_uppercut]
+1355:[18Nov2026 20:59:26.124] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: style equipped | style=ba_martialarts:karateka
+1356:[18Nov2026 20:59:26.124] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: combat art slot filled | skill=ba_martialarts:kiai
+1357:[18Nov2026 20:59:26.124] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: flight only for Herobrine | mayfly=false
+1358:[18Nov2026 20:59:33.124] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: 4 basic attacks | casts=4
+1359:[18Nov2026 20:59:33.124] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: combo has 4 different strikes | anims=[ba_martialarts:karate/oi_zuki, ba_martialarts:karate/kizami_zuki, ba_martialarts:karate/mae_geri, ba_martialarts:karate/gyaku_zuki]
+1360:[18Nov2026 20:59:33.124] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: basic attacks use the style combo | anims=[ba_martialarts:karate/oi_zuki, ba_martialarts:karate/kizami_zuki, ba_martialarts:karate/mae_geri, ba_martialarts:karate/gyaku_zuki]
+1361:[18Nov2026 20:59:33.125] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: every combo move connects | hit=[ba_martialarts:karate/oi_zuki, ba_martialarts:karate/kizami_zuki, ba_martialarts:karate/mae_geri, ba_martialarts:karate/gyaku_zuki] cast=[ba_martialarts:karate/oi_zuki, ba_martialarts:karate/kizami_zuki, ba_martialarts:karate/mae_geri, ba_martialarts:karate/gyaku_zuki] other=0
+1362:[18Nov2026 20:59:34.374] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: target is knocked down for the ground hit test | anim=epicfight:biped/combat/knockdown
+1363:[18Nov2026 20:59:36.125] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: combo strike hits a downed target | hit=[ba_martialarts:karate/oi_zuki] blocked=0
+1364:[18Nov2026 20:59:40.624] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: dash attack plays the style move | anims=[ba_martialarts:karate/dash] role=DASH
+1365:[18Nov2026 20:59:40.624] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: dash attack connects | hits={DASH=1} other=0 anims=[ba_martialarts:karate/dash]
+1366:[18Nov2026 20:59:45.124] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: air attack plays the style move | anims=[ba_martialarts:karate/air] role=AIR
+1367:[18Nov2026 20:59:45.124] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] info KARATE: air attack hits from a standstill: 1 [ba_martialarts:karate/air]
+1368:[18Nov2026 20:59:46.174] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: rush starts on hold
+1369:[18Nov2026 20:59:48.176] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: rush has moves
+1370:[18Nov2026 20:59:48.176] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: rush keeps going while held
+1371:[18Nov2026 20:59:48.176] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: rush strike count | strikes=10 expected=10
+1372:[18Nov2026 20:59:48.176] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: rush strikes connect | hits=10 strikes=10 other=0 anims=[ba_martialarts:rush/karate_right, ba_martialarts:rush/karate_left]
+1373:[18Nov2026 20:59:48.176] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: every rush move connects | hit=[ba_martialarts:rush/karate_right, ba_martialarts:rush/karate_left] moves=[ba_martialarts:rush/karate_right, ba_martialarts:rush/karate_left]
+1374:[18Nov2026 20:59:48.176] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: rush stamina per strike | used=8.000002 strikes=10 cost=0.8
+1375:[18Nov2026 20:59:48.222] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: release after 5+ strikes plays the finisher | anim=ba_martialarts:karate/gyaku_zuki want=ba_martialarts:karate/gyaku_zuki
+1376:[18Nov2026 20:59:48.222] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: rush stops on release
+1377:[18Nov2026 20:59:50.422] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: finisher hits | hits={FINISHER=1} anims=[ba_martialarts:karate/gyaku_zuki]
+1378:[18Nov2026 20:59:54.923] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: rush ends when stamina runs out | still rushing
+1379:[18Nov2026 20:59:54.923] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: strikes until stamina is out | used=2.4 ended at 13
+1380:[18Nov2026 20:59:54.923] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: no finisher when stamina ran out | hits={BARRAGE=3}
+1381:[18Nov2026 20:59:56.479] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: combat art cast | skill=ba_martialarts:kiai anim=ba_martialarts:art/kiai
+1382:[18Nov2026 21:00:00.422] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KARATE: combat art hits | hits={ART=1} other=0 anims=[ba_martialarts:art/kiai]
+1383:[18Nov2026 21:00:02.421] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: style equipped | style=ba_martialarts:nak_muay
+1384:[18Nov2026 21:00:02.422] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: combat art slot filled | skill=ba_martialarts:flying_knee
+1385:[18Nov2026 21:00:02.422] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: flight only for Herobrine | mayfly=false
+1386:[18Nov2026 21:00:09.421] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: 4 basic attacks | casts=4
+1387:[18Nov2026 21:00:09.422] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: combo has 4 different strikes | anims=[ba_martialarts:muay_thai/jab, ba_martialarts:muay_thai/cross, ba_martialarts:muay_thai/teep, ba_martialarts:muay_thai/roundhouse]
+1388:[18Nov2026 21:00:09.422] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: basic attacks use the style combo | anims=[ba_martialarts:muay_thai/jab, ba_martialarts:muay_thai/cross, ba_martialarts:muay_thai/teep, ba_martialarts:muay_thai/roundhouse]
+1389:[18Nov2026 21:00:09.422] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: every combo move connects | hit=[ba_martialarts:muay_thai/jab, ba_martialarts:muay_thai/cross, ba_martialarts:muay_thai/teep, ba_martialarts:muay_thai/roundhouse] cast=[ba_martialarts:muay_thai/jab, ba_martialarts:muay_thai/cross, ba_martialarts:muay_thai/teep, ba_martialarts:muay_thai/roundhouse] other=0
+1390:[18Nov2026 21:00:10.676] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: target is knocked down for the ground hit test | anim=epicfight:biped/combat/knockdown
+1391:[18Nov2026 21:00:12.421] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: combo strike hits a downed target | hit=[ba_martialarts:muay_thai/jab] blocked=0
+1392:[18Nov2026 21:00:16.921] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: dash attack plays the style move | anims=[ba_martialarts:muay_thai/dash] role=DASH
+1393:[18Nov2026 21:00:16.922] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: dash attack connects | hits={DASH=1} other=0 anims=[ba_martialarts:muay_thai/dash]
+1394:[18Nov2026 21:00:21.421] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: air attack plays the style move | anims=[ba_martialarts:muay_thai/air] role=AIR
+1395:[18Nov2026 21:00:21.422] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] info MUAY_THAI: air attack hits from a standstill: 1 [ba_martialarts:muay_thai/air]
+1396:[18Nov2026 21:00:22.475] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: rush starts on hold
+1397:[18Nov2026 21:00:24.476] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: rush has moves
+1398:[18Nov2026 21:00:24.476] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: rush keeps going while held
+1399:[18Nov2026 21:00:24.476] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: rush strike count | strikes=8 expected=8
+1400:[18Nov2026 21:00:24.476] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: rush strikes connect | hits=8 strikes=8 other=0 anims=[ba_martialarts:rush/muay_thai_left, ba_martialarts:rush/muay_thai_right]
+1401:[18Nov2026 21:00:24.476] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: every rush move connects | hit=[ba_martialarts:rush/muay_thai_left, ba_martialarts:rush/muay_thai_right] moves=[ba_martialarts:rush/muay_thai_left, ba_martialarts:rush/muay_thai_right]
+1402:[18Nov2026 21:00:24.476] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: rush stamina per strike | used=6.4000015 strikes=8 cost=0.8
+1403:[18Nov2026 21:00:24.522] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: release after 5+ strikes plays the finisher | anim=ba_martialarts:muay_thai/roundhouse want=ba_martialarts:muay_thai/roundhouse
+1404:[18Nov2026 21:00:24.522] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: rush stops on release
+1405:[18Nov2026 21:00:26.722] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: finisher hits | hits={FINISHER=1} anims=[ba_martialarts:muay_thai/roundhouse]
+1406:[18Nov2026 21:00:31.222] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: rush ends when stamina runs out | still rushing
+1407:[18Nov2026 21:00:31.222] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: strikes until stamina is out | used=2.4 ended at 16
+1408:[18Nov2026 21:00:31.222] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: no finisher when stamina ran out | hits={BARRAGE=3}
+1409:[18Nov2026 21:00:32.781] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: combat art cast | skill=ba_martialarts:flying_knee anim=ba_martialarts:art/flying_knee
+1410:[18Nov2026 21:00:36.724] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MUAY_THAI: combat art hits | hits={ART=1} other=0 anims=[ba_martialarts:art/flying_knee]
+1411:[18Nov2026 21:00:38.723] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: style equipped | style=ba_martialarts:kung_fu_master
+1412:[18Nov2026 21:00:38.723] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: combat art slot filled | skill=ba_martialarts:chi_palm
+1413:[18Nov2026 21:00:38.723] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: flight only for Herobrine | mayfly=false
+1414:[18Nov2026 21:00:45.723] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: 4 basic attacks | casts=4
+1415:[18Nov2026 21:00:45.723] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: combo has 4 different strikes | anims=[ba_martialarts:kung_fu/palm_right, ba_martialarts:kung_fu/palm_left, ba_martialarts:kung_fu/crane_kick, ba_martialarts:kung_fu/twin_palms]
+1416:[18Nov2026 21:00:45.723] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: basic attacks use the style combo | anims=[ba_martialarts:kung_fu/palm_right, ba_martialarts:kung_fu/palm_left, ba_martialarts:kung_fu/crane_kick, ba_martialarts:kung_fu/twin_palms]
+1417:[18Nov2026 21:00:45.724] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: every combo move connects | hit=[ba_martialarts:kung_fu/palm_right, ba_martialarts:kung_fu/palm_left, ba_martialarts:kung_fu/crane_kick, ba_martialarts:kung_fu/twin_palms] cast=[ba_martialarts:kung_fu/palm_right, ba_martialarts:kung_fu/palm_left, ba_martialarts:kung_fu/crane_kick, ba_martialarts:kung_fu/twin_palms] other=0
+1418:[18Nov2026 21:00:46.974] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: target is knocked down for the ground hit test | anim=epicfight:biped/combat/knockdown
+1419:[18Nov2026 21:00:48.721] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: combo strike hits a downed target | hit=[ba_martialarts:kung_fu/palm_right] blocked=0
+1420:[18Nov2026 21:00:53.221] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: dash attack plays the style move | anims=[ba_martialarts:kung_fu/dash] role=DASH
+1421:[18Nov2026 21:00:53.221] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: dash attack connects | hits={DASH=1} other=0 anims=[ba_martialarts:kung_fu/dash]
+1422:[18Nov2026 21:00:57.722] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: air attack plays the style move | anims=[ba_martialarts:kung_fu/air] role=AIR
+1423:[18Nov2026 21:00:57.722] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] info KUNG_FU: air attack hits from a standstill: 1 [ba_martialarts:kung_fu/air]
+1424:[18Nov2026 21:00:58.774] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: rush starts on hold
+1425:[18Nov2026 21:01:00.776] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: rush has moves
+1426:[18Nov2026 21:01:00.776] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: rush keeps going while held
+1427:[18Nov2026 21:01:00.776] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: rush strike count | strikes=14 expected=14
+1428:[18Nov2026 21:01:00.776] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: rush strikes connect | hits=13 strikes=14 other=0 anims=[ba_martialarts:rush/kung_fu_right, ba_martialarts:rush/kung_fu_left]
+1429:[18Nov2026 21:01:00.776] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: every rush move connects | hit=[ba_martialarts:rush/kung_fu_right, ba_martialarts:rush/kung_fu_left] moves=[ba_martialarts:rush/kung_fu_right, ba_martialarts:rush/kung_fu_left]
+1430:[18Nov2026 21:01:00.776] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: rush stamina per strike | used=11.200003 strikes=14 cost=0.8
+1431:[18Nov2026 21:01:00.822] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: release after 5+ strikes plays the finisher | anim=ba_martialarts:kung_fu/twin_palms want=ba_martialarts:kung_fu/twin_palms
+1432:[18Nov2026 21:01:00.822] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: rush stops on release
+1433:[18Nov2026 21:01:03.021] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: finisher hits | hits={FINISHER=1} anims=[ba_martialarts:kung_fu/twin_palms]
+1434:[18Nov2026 21:01:07.521] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: rush ends when stamina runs out | still rushing
+1435:[18Nov2026 21:01:07.521] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: strikes until stamina is out | used=2.4 ended at 10
+1436:[18Nov2026 21:01:07.521] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: no finisher when stamina ran out | hits={BARRAGE=3}
+1437:[18Nov2026 21:01:09.077] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: combat art cast | skill=ba_martialarts:chi_palm anim=ba_martialarts:art/chi_palm
+1438:[18Nov2026 21:01:13.021] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   KUNG_FU: combat art hits | hits={ART=1} other=0 anims=[ba_martialarts:art/chi_palm]
+1439:[18Nov2026 21:01:15.021] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: style equipped | style=ba_martialarts:taekwondoin
+1440:[18Nov2026 21:01:15.022] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: combat art slot filled | skill=ba_martialarts:tornado_kick
+1441:[18Nov2026 21:01:15.022] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: flight only for Herobrine | mayfly=false
+1442:[18Nov2026 21:01:22.022] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: 4 basic attacks | casts=4
+1443:[18Nov2026 21:01:22.022] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: combo has 4 different strikes | anims=[ba_martialarts:taekwondo/ap_chagi, ba_martialarts:taekwondo/double_kick, ba_martialarts:taekwondo/dollyo_chagi, ba_martialarts:taekwondo/dwi_chagi]
+1444:[18Nov2026 21:01:22.022] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: basic attacks use the style combo | anims=[ba_martialarts:taekwondo/ap_chagi, ba_martialarts:taekwondo/double_kick, ba_martialarts:taekwondo/dollyo_chagi, ba_martialarts:taekwondo/dwi_chagi]
+1445:[18Nov2026 21:01:22.022] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: every combo move connects | hit=[ba_martialarts:taekwondo/ap_chagi, ba_martialarts:taekwondo/double_kick, ba_martialarts:taekwondo/dollyo_chagi, ba_martialarts:taekwondo/dwi_chagi] cast=[ba_martialarts:taekwondo/ap_chagi, ba_martialarts:taekwondo/double_kick, ba_martialarts:taekwondo/dollyo_chagi, ba_martialarts:taekwondo/dwi_chagi] other=0
+1446:[18Nov2026 21:01:23.276] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: target is knocked down for the ground hit test | anim=epicfight:biped/combat/knockdown
+1447:[18Nov2026 21:01:25.021] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: combo strike hits a downed target | hit=[ba_martialarts:taekwondo/ap_chagi] blocked=0
+1448:[18Nov2026 21:01:29.521] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: dash attack plays the style move | anims=[ba_martialarts:taekwondo/dash] role=DASH
+1449:[18Nov2026 21:01:29.521] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: dash attack connects | hits={DASH=1} other=0 anims=[ba_martialarts:taekwondo/dash]
+1450:[18Nov2026 21:01:34.021] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: air attack plays the style move | anims=[ba_martialarts:taekwondo/naeryeo_chagi] role=AIR
+1451:[18Nov2026 21:01:34.021] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] info TAEKWONDO: air attack hits from a standstill: 1 [ba_martialarts:taekwondo/naeryeo_chagi]
+1452:[18Nov2026 21:01:35.075] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: rush starts on hold
+1453:[18Nov2026 21:01:37.075] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: rush has moves
+1454:[18Nov2026 21:01:37.075] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: rush keeps going while held
+1455:[18Nov2026 21:01:37.075] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: rush strike count | strikes=7 expected=7
+1456:[18Nov2026 21:01:37.075] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: rush strikes connect | hits=6 strikes=7 other=0 anims=[ba_martialarts:rush/taekwondo_kick_a, ba_martialarts:rush/taekwondo_kick_b]
+1457:[18Nov2026 21:01:37.075] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: every rush move connects | hit=[ba_martialarts:rush/taekwondo_kick_a, ba_martialarts:rush/taekwondo_kick_b] moves=[ba_martialarts:rush/taekwondo_kick_a, ba_martialarts:rush/taekwondo_kick_b]
+1458:[18Nov2026 21:01:37.075] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: rush stamina per strike | used=5.6000013 strikes=7 cost=0.8
+1459:[18Nov2026 21:01:37.121] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: release after 5+ strikes plays the finisher | anim=ba_martialarts:taekwondo/dwi_chagi want=ba_martialarts:taekwondo/dwi_chagi
+1460:[18Nov2026 21:01:37.121] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: rush stops on release
+1461:[18Nov2026 21:01:39.321] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: finisher hits | hits={FINISHER=1} anims=[ba_martialarts:taekwondo/dwi_chagi]
+1462:[18Nov2026 21:01:43.821] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: rush ends when stamina runs out | still rushing
+1463:[18Nov2026 21:01:43.822] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: strikes until stamina is out | used=2.4 ended at 19
+1464:[18Nov2026 21:01:43.822] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: no finisher when stamina ran out | hits={BARRAGE=3}
+1465:[18Nov2026 21:01:45.377] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: combat art cast | skill=ba_martialarts:tornado_kick anim=ba_martialarts:art/tornado_kick
+1466:[18Nov2026 21:01:49.323] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   TAEKWONDO: combat art hits | hits={ART=2} other=0 anims=[ba_martialarts:art/tornado_kick]
+1467:[18Nov2026 21:01:51.324] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: style equipped | style=ba_martialarts:judoka
+1468:[18Nov2026 21:01:51.324] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: combat art slot filled | skill=ba_martialarts:ippon
+1469:[18Nov2026 21:01:51.324] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: flight only for Herobrine | mayfly=false
+1470:[18Nov2026 21:01:58.323] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: 4 basic attacks | casts=4
+1471:[18Nov2026 21:01:58.323] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: combo has 4 different strikes | anims=[ba_martialarts:judo/push_right, ba_martialarts:judo/push_left, ba_martialarts:judo/grip_strike, ba_martialarts:judo/hip_check]
+1472:[18Nov2026 21:01:58.323] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: basic attacks use the style combo | anims=[ba_martialarts:judo/push_right, ba_martialarts:judo/push_left, ba_martialarts:judo/grip_strike, ba_martialarts:judo/hip_check]
+1473:[18Nov2026 21:01:58.323] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: every combo move connects | hit=[ba_martialarts:judo/push_right, ba_martialarts:judo/push_left, ba_martialarts:judo/grip_strike, ba_martialarts:judo/hip_check] cast=[ba_martialarts:judo/push_right, ba_martialarts:judo/push_left, ba_martialarts:judo/grip_strike, ba_martialarts:judo/hip_check] other=0
+1474:[18Nov2026 21:01:59.573] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: target is knocked down for the ground hit test | anim=epicfight:biped/combat/knockdown
+1475:[18Nov2026 21:02:01.323] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: combo strike hits a downed target | hit=[ba_martialarts:judo/push_right] blocked=0
+1476:[18Nov2026 21:02:05.824] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: dash attack plays the style move | anims=[ba_martialarts:judo/tackle] role=DASH
+1477:[18Nov2026 21:02:05.824] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: dash attack connects | hits={DASH=1} other=0 anims=[ba_martialarts:judo/tackle]
+1478:[18Nov2026 21:02:10.324] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: air attack plays the style move | anims=[ba_martialarts:judo/air] role=AIR
+1479:[18Nov2026 21:02:10.324] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] info JUDO: air attack hits from a standstill: 1 [ba_martialarts:judo/air]
+1480:[18Nov2026 21:02:11.374] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: rush starts on hold
+1481:[18Nov2026 21:02:13.374] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: rush has moves
+1482:[18Nov2026 21:02:13.374] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: rush keeps going while held
+1483:[18Nov2026 21:02:13.374] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: rush strike count | strikes=8 expected=8
+1484:[18Nov2026 21:02:13.374] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: rush strikes connect | hits=8 strikes=8 other=0 anims=[ba_martialarts:rush/judo_right, ba_martialarts:rush/judo_left]
+1485:[18Nov2026 21:02:13.374] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: every rush move connects | hit=[ba_martialarts:rush/judo_right, ba_martialarts:rush/judo_left] moves=[ba_martialarts:rush/judo_right, ba_martialarts:rush/judo_left]
+1486:[18Nov2026 21:02:13.374] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: rush stamina per strike | used=6.4000015 strikes=8 cost=0.8
+1487:[18Nov2026 21:02:13.425] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: release after 5+ strikes plays the finisher | anim=ba_martialarts:judo/hip_check want=ba_martialarts:judo/hip_check
+1488:[18Nov2026 21:02:13.425] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: rush stops on release
+1489:[18Nov2026 21:02:15.624] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: finisher hits | hits={FINISHER=1} anims=[ba_martialarts:judo/hip_check]
+1490:[18Nov2026 21:02:18.174] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] info removed entity.minecraft.villager near the arena during JUDO stamina
+1491:[18Nov2026 21:02:20.124] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: rush ends when stamina runs out | still rushing
+1492:[18Nov2026 21:02:20.124] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: strikes until stamina is out | used=2.4 ended at 16
+1493:[18Nov2026 21:02:20.124] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: no finisher when stamina ran out | hits={BARRAGE=3}
+1494:[18Nov2026 21:02:21.677] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: combat art cast | skill=ba_martialarts:ippon anim=ba_martialarts:art/ippon
+1495:[18Nov2026 21:02:25.623] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   JUDO: combat art hits | hits={ART=1} other=0 anims=[ba_martialarts:art/ippon]
+1497:[18Nov2026 21:02:27.624] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: style equipped | style=ba_martialarts:martial_arts_master
+1498:[18Nov2026 21:02:27.624] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: combat art slot filled | skill=ba_martialarts:way_of_the_master
+1499:[18Nov2026 21:02:27.624] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: book recipe loaded | recipe=Optional[net.minecraft.world.item.crafting.ShapelessRecipe@26c3c778]
+1500:[18Nov2026 21:02:27.629] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: six style books craft the master book | matches=true out=1 skillbook skill=ba_martialarts:martial_arts_master
+1501:[18Nov2026 21:02:27.629] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: five different books are not enough
+1502:[18Nov2026 21:02:27.632] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: advancement granted | adv=SimpleAdvancement{id=ba_martialarts:martial/master, parent=ba_martialarts:martial/learn_style, display=net.minecraft.advancements.DisplayInfo@5a8cc7b4, rewards=AdvancementRewards{experience=0, loot=[], recipes=[], function=net.minecraft.commands.CommandFunction$CacheableFunction@3f5d0ff4}, criteria={done=net.minecraft.advancements.Criterion@4d372c49}, requirements=[[done]], sendsTelemetryEvent=false}
+1503:[18Nov2026 21:02:27.632] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: flight only for Herobrine | mayfly=false
+1504:[18Nov2026 21:02:48.624] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: 12 basic attacks | casts=12
+1505:[18Nov2026 21:02:48.624] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: combo has 12 different strikes | anims=[ba_martialarts:boxing/jab, ba_martialarts:wing_chun/chain_punch, ba_martialarts:kickboxing/low_kick, ba_martialarts:karate/gyaku_zuki, ba_martialarts:muay_thai/sok, ba_martialarts:savate/chasse, ba_martialarts:krav_maga/palm_heel, ba_martialarts:kung_fu/twin_palms, ba_martialarts:taekwondo/dollyo_chagi, ba_martialarts:capoeira/armada, ba_martialarts:sambo/takedown, ba_martialarts:judo/o_goshi]
+1506:[18Nov2026 21:02:48.624] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: basic attacks use the style combo | anims=[ba_martialarts:boxing/jab, ba_martialarts:wing_chun/chain_punch, ba_martialarts:kickboxing/low_kick, ba_martialarts:karate/gyaku_zuki, ba_martialarts:muay_thai/sok, ba_martialarts:savate/chasse, ba_martialarts:krav_maga/palm_heel, ba_martialarts:kung_fu/twin_palms, ba_martialarts:taekwondo/dollyo_chagi, ba_martialarts:capoeira/armada, ba_martialarts:sambo/takedown, ba_martialarts:judo/o_goshi]
+1507:[18Nov2026 21:02:48.624] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: every combo move connects | hit=[ba_martialarts:boxing/jab, ba_martialarts:wing_chun/chain_punch, ba_martialarts:kickboxing/low_kick, ba_martialarts:karate/gyaku_zuki, ba_martialarts:muay_thai/sok, ba_martialarts:savate/chasse, ba_martialarts:krav_maga/palm_heel, ba_martialarts:kung_fu/twin_palms, ba_martialarts:taekwondo/dollyo_chagi, ba_martialarts:capoeira/armada, ba_martialarts:sambo/takedown, ba_martialarts:judo/o_goshi] cast=[ba_martialarts:boxing/jab, ba_martialarts:wing_chun/chain_punch, ba_martialarts:kickboxing/low_kick, ba_martialarts:karate/gyaku_zuki, ba_martialarts:muay_thai/sok, ba_martialarts:savate/chasse, ba_martialarts:krav_maga/palm_heel, ba_martialarts:kung_fu/twin_palms, ba_martialarts:taekwondo/dollyo_chagi, ba_martialarts:capoeira/armada, ba_martialarts:sambo/takedown, ba_martialarts:judo/o_goshi] other=0
+1508:[18Nov2026 21:02:49.873] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: target is knocked down for the ground hit test | anim=epicfight:biped/combat/knockdown
+1509:[18Nov2026 21:02:51.623] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: combo strike hits a downed target | hit=[ba_martialarts:boxing/jab] blocked=0
+1510:[18Nov2026 21:02:56.123] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: dash attack plays the style move | anims=[ba_martialarts:sumo/tachiai] role=DASH
+1511:[18Nov2026 21:02:56.124] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: dash attack connects | hits={DASH=1} other=0 anims=[ba_martialarts:sumo/tachiai]
+1512:[18Nov2026 21:03:00.623] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: air attack plays the style move | anims=[ba_martialarts:ninjutsu/drop_strike] role=AIR
+1513:[18Nov2026 21:03:00.623] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] info MASTER: air attack hits from a standstill: 1 [ba_martialarts:ninjutsu/drop_strike]
+1514:[18Nov2026 21:03:01.673] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: rush starts on hold
+1515:[18Nov2026 21:03:03.774] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: rush has moves
+1516:[18Nov2026 21:03:03.774] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: rush keeps going while held
+1517:[18Nov2026 21:03:03.774] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: rush strike count | strikes=10 expected=10
+1518:[18Nov2026 21:03:03.774] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: rush strikes connect | hits=10 strikes=10 other=0 anims=[ba_martialarts:rush/boxing_left, ba_martialarts:rush/boxing_right, ba_martialarts:rush/kung_fu_right, ba_martialarts:rush/kung_fu_left, ba_martialarts:rush/taekwondo_kick_a, ba_martialarts:rush/karate_right, ba_martialarts:rush/karate_left, ba_martialarts:rush/taekwondo_kick_b]
+1519:[18Nov2026 21:03:03.774] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: every rush move connects | hit=[ba_martialarts:rush/boxing_left, ba_martialarts:rush/boxing_right, ba_martialarts:rush/kung_fu_right, ba_martialarts:rush/kung_fu_left, ba_martialarts:rush/taekwondo_kick_a, ba_martialarts:rush/karate_right, ba_martialarts:rush/karate_left, ba_martialarts:rush/taekwondo_kick_b] moves=[ba_martialarts:rush/boxing_left, ba_martialarts:rush/boxing_right, ba_martialarts:rush/kung_fu_right, ba_martialarts:rush/kung_fu_left, ba_martialarts:rush/taekwondo_kick_a, ba_martialarts:rush/karate_right, ba_martialarts:rush/karate_left, ba_martialarts:rush/taekwondo_kick_b]
+1520:[18Nov2026 21:03:03.774] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: rush stamina per strike | used=8.000002 strikes=10 cost=0.8
+1521:[18Nov2026 21:03:03.823] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: release after 5+ strikes plays the finisher | anim=ba_martialarts:judo/o_goshi want=ba_martialarts:judo/o_goshi
+1522:[18Nov2026 21:03:03.824] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: rush stops on release
+1523:[18Nov2026 21:03:06.023] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: finisher hits | hits={FINISHER=1} anims=[ba_martialarts:judo/o_goshi]
+1524:[18Nov2026 21:03:10.523] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: rush ends when stamina runs out | still rushing
+1525:[18Nov2026 21:03:10.523] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: strikes until stamina is out | used=2.4 ended at 12
+1526:[18Nov2026 21:03:10.523] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: no finisher when stamina ran out | hits={BARRAGE=3}
+1527:[18Nov2026 21:03:12.075] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER art (cycle 1): cast ba_martialarts:art/crushing_uppercut | cast=true anim=ba_martialarts:art/crushing_uppercut
+1528:[18Nov2026 21:03:16.025] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER art (cycle 1): ba_martialarts:art/crushing_uppercut hits | hits={ART=1} other=0 anims=[ba_martialarts:art/crushing_uppercut]
+1529:[18Nov2026 21:03:17.572] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER art (cycle 2): cast ba_martialarts:art/kiai | cast=true anim=ba_martialarts:art/kiai
+1530:[18Nov2026 21:03:21.523] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER art (cycle 2): ba_martialarts:art/kiai hits | hits={ART=1} other=0 anims=[ba_martialarts:art/kiai]
+1531:[18Nov2026 21:03:23.071] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER art (cycle 3): cast ba_martialarts:art/chi_palm | cast=true anim=ba_martialarts:art/chi_palm
+1532:[18Nov2026 21:03:27.023] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER art (cycle 3): ba_martialarts:art/chi_palm hits | hits={ART=1} other=0 anims=[ba_martialarts:art/chi_palm]
+1533:[18Nov2026 21:03:28.571] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER art (cycle 4): cast ba_martialarts:art/tornado_kick | cast=true anim=ba_martialarts:art/tornado_kick
+1534:[18Nov2026 21:03:32.526] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER art (cycle 4): ba_martialarts:art/tornado_kick hits | hits={ART=2} other=0 anims=[ba_martialarts:art/tornado_kick]
+1535:[18Nov2026 21:03:34.074] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER art (cycle 5): cast ba_martialarts:art/one_inch_punch | cast=true anim=ba_martialarts:art/one_inch_punch
+1536:[18Nov2026 21:03:38.024] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER art (cycle 5): ba_martialarts:art/one_inch_punch hits | hits={ART=1} other=0 anims=[ba_martialarts:art/one_inch_punch]
+1537:[18Nov2026 21:03:39.581] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER art (cycle 6): cast ba_martialarts:art/armlock | cast=true anim=ba_martialarts:art/armlock
+1538:[18Nov2026 21:03:43.523] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER art (cycle 6): ba_martialarts:art/armlock hits | hits={ART=1} other=0 anims=[ba_martialarts:art/armlock]
+1539:[18Nov2026 21:03:45.072] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER art (sprinting): cast ba_martialarts:art/flying_knee | cast=true anim=ba_martialarts:art/flying_knee
+1542:[18Nov2026 21:03:49.023] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER art (sprinting): ba_martialarts:art/flying_knee hits | hits={ART=1} other=0 anims=[ba_martialarts:art/flying_knee]
+1543:[18Nov2026 21:03:50.572] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER art (sneaking): cast ba_martialarts:art/ippon | cast=true anim=ba_martialarts:art/ippon
+1544:[18Nov2026 21:03:54.523] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER art (sneaking): ba_martialarts:art/ippon hits | hits={ART=1} other=0 anims=[ba_martialarts:art/ippon]
+1545:[18Nov2026 21:03:58.524] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   MASTER: aikido counter after a dodge connects | hits={FINISHER=1} anims=[ba_martialarts:aikido/kokyu_nage] want=ba_martialarts:aikido/kokyu_nage
+1547:[18Nov2026 21:04:00.524] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: style equipped | style=ba_martialarts:herobrine
+1548:[18Nov2026 21:04:00.524] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: combat art slot filled | skill=ba_martialarts:herobrine_power
+1549:[18Nov2026 21:04:00.524] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: book recipe loaded | recipe=Optional[net.minecraft.world.item.crafting.ShapelessRecipe@208f78cb]
+1550:[18Nov2026 21:04:00.527] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: shrine crafts the book | out=1 skillbook skill=ba_martialarts:herobrine
+1551:[18Nov2026 21:04:00.527] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: advancement granted | adv=SimpleAdvancement{id=ba_martialarts:martial/herobrine, parent=ba_martialarts:martial/learn_style, display=net.minecraft.advancements.DisplayInfo@53593696, rewards=AdvancementRewards{experience=0, loot=[], recipes=[], function=net.minecraft.commands.CommandFunction$CacheableFunction@3f5d0ff4}, criteria={done=net.minecraft.advancements.Criterion@2627483d}, requirements=[[done]], sendsTelemetryEvent=false}
+1552:[18Nov2026 21:04:00.528] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] info EpicFight: Annoying Villagers not installed, Herobrine uses fallback moves: battle_arts:battle_style/unique/iron_lotus/fist/auto2
+1553:[18Nov2026 21:04:00.528] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: flight only for Herobrine | mayfly=true
+1554:[18Nov2026 21:04:07.524] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: 4 basic attacks | casts=4
+1555:[18Nov2026 21:04:07.524] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: combo has 4 different strikes | anims=[ba_martialarts:herobrine/left_strike, ba_martialarts:herobrine/rising_fist, ba_martialarts:herobrine/kick, ba_martialarts:herobrine/whirlwind_kick]
+1556:[18Nov2026 21:04:07.524] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: basic attacks use the style combo | anims=[ba_martialarts:herobrine/left_strike, ba_martialarts:herobrine/rising_fist, ba_martialarts:herobrine/kick, ba_martialarts:herobrine/whirlwind_kick]
+1557:[18Nov2026 21:04:07.524] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: every combo move connects | hit=[ba_martialarts:herobrine/left_strike, ba_martialarts:herobrine/rising_fist, ba_martialarts:herobrine/kick, ba_martialarts:herobrine/whirlwind_kick] cast=[ba_martialarts:herobrine/left_strike, ba_martialarts:herobrine/rising_fist, ba_martialarts:herobrine/kick, ba_martialarts:herobrine/whirlwind_kick] other=0
+1558:[18Nov2026 21:04:07.524] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: black fire sets the target ablaze
+1559:[18Nov2026 21:04:08.772] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: target is knocked down for the ground hit test | anim=epicfight:biped/combat/knockdown
+1560:[18Nov2026 21:04:10.524] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: combo strike hits a downed target | hit=[ba_martialarts:herobrine/left_strike] blocked=0
+1561:[18Nov2026 21:04:15.024] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: dash attack plays the style move | anims=[ba_martialarts:herobrine/dash] role=DASH
+1562:[18Nov2026 21:04:15.024] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: dash attack connects | hits={DASH=1} other=0 anims=[ba_martialarts:herobrine/dash]
+1563:[18Nov2026 21:04:19.524] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: air attack plays the style move | anims=[ba_martialarts:herobrine/air] role=AIR
+1564:[18Nov2026 21:04:19.524] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] info HEROBRINE: air attack hits from a standstill: 1 [ba_martialarts:herobrine/air]
+1565:[18Nov2026 21:04:20.572] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: rush starts on hold
+1566:[18Nov2026 21:04:22.572] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: rush has moves
+1567:[18Nov2026 21:04:22.572] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: rush keeps going while held
+1568:[18Nov2026 21:04:22.572] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: rush strike count | strikes=10 expected=10
+1569:[18Nov2026 21:04:22.572] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: rush strikes connect | hits=10 strikes=10 other=0 anims=[ba_martialarts:rush/herobrine_left, ba_martialarts:rush/herobrine_right]
+1570:[18Nov2026 21:04:22.572] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: every rush move connects | hit=[ba_martialarts:rush/herobrine_left, ba_martialarts:rush/herobrine_right] moves=[ba_martialarts:rush/herobrine_left, ba_martialarts:rush/herobrine_right]
+1571:[18Nov2026 21:04:22.572] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: rush stamina per strike | used=8.000002 strikes=10 cost=0.8
+1572:[18Nov2026 21:04:22.624] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: release after 5+ strikes plays the finisher | anim=ba_martialarts:herobrine/whirlwind_kick want=ba_martialarts:herobrine/whirlwind_kick
+1573:[18Nov2026 21:04:22.625] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: rush stops on release
+1574:[18Nov2026 21:04:24.823] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: finisher hits | hits={FINISHER=1} anims=[ba_martialarts:herobrine/whirlwind_kick]
+1575:[18Nov2026 21:04:29.327] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: rush ends when stamina runs out | still rushing
+1576:[18Nov2026 21:04:29.328] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: strikes until stamina is out | used=2.4 ended at 13
+1577:[18Nov2026 21:04:29.328] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: no finisher when stamina ran out | hits={BARRAGE=3}
+1578:[18Nov2026 21:04:30.880] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE portal: cast ba_martialarts:art/herobrine_portal | cast=true anim=ba_martialarts:art/herobrine_portal
+1579:[18Nov2026 21:04:30.880] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE portal: steps behind the target | from=(0.5, -60.0, 0.5) now=(0.5, -60.0, 3.100000023841858) target=(0.5, -60.0, 1.9)
+1580:[18Nov2026 21:04:34.828] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE portal: ba_martialarts:art/herobrine_portal hits | hits={ART=1} other=0 anims=[ba_martialarts:art/herobrine_portal]
+1581:[18Nov2026 21:04:34.828] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE portal: black fire
+1582:[18Nov2026 21:04:36.374] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE pillars: cast ba_martialarts:art/herobrine_pillars | cast=true anim=ba_martialarts:art/herobrine_pillars
+1583:[18Nov2026 21:04:36.772] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE pillars: obsidian pillars rise | pillars=7
+1584:[18Nov2026 21:04:40.326] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE pillars: ba_martialarts:art/herobrine_pillars hits | hits={ART=1} other=0 anims=[ba_martialarts:art/herobrine_pillars]
+1585:[18Nov2026 21:04:40.326] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE pillars: black fire
+1586:[18Nov2026 21:04:40.326] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE pillars: pillars are gone afterwards | pillars=0
+1587:[18Nov2026 21:04:41.873] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE lightning: cast ba_martialarts:art/herobrine_lightning | cast=true anim=ba_martialarts:art/herobrine_lightning
+1588:[18Nov2026 21:04:45.826] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE lightning: ba_martialarts:art/herobrine_lightning hits | hits={ART=1} other=0 anims=[ba_martialarts:art/herobrine_lightning]
+1589:[18Nov2026 21:04:45.826] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE lightning: black fire
+1590:[18Nov2026 21:04:47.376] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   HEROBRINE: immune to fire, lava and lightning | fire=false lava=false bolt=false health=20.0
+1591:[18Nov2026 21:04:49.624] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   flight is taken away after leaving Herobrine | mayfly=false
+1593:[18Nov2026 21:04:49.627] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   flurry of blows cast | skill=ba_martialarts:flurry_of_blows anim=ba_martialarts:art/flurry_of_blows
+1594:[18Nov2026 21:04:53.824] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   flurry of blows hits | hits={FLURRY=8} other=0 anims=[ba_martialarts:art/flurry_of_blows]
+1598:[18Nov2026 21:04:55.879] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   ultra instinct cast | skill=ba_martialarts:ultra_instinct active=true
+1599:[18Nov2026 21:05:07.323] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   ultra instinct dodges attacks | dodges=7/9
+1600:[18Nov2026 21:05:07.324] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   ultra instinct counterattacks connect | hits={FINISHER=7} other=0 anims=[ba_martialarts:boxing/power_straight]
+1601:[18Nov2026 21:05:13.323] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   ultra instinct has no time limit (on after 17 s)
+1602:[18Nov2026 21:05:13.375] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   ultra instinct: the same key leaves it | cast=true active=false
+1603:[18Nov2026 21:05:13.376] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   ultra instinct: leaving costs no meter | meter=0.0
+1604:[18Nov2026 21:05:14.374] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] ok   ultra instinct: needs a full meter to enter again | cast=false
+1605:[18Nov2026 21:05:15.376] [Server thread/INFO] [com.bamartial.selftest.SelfTest/]: [SELFTEST] DONE PASS checks=262 failures=0
+1611:[18Nov2026 21:05:20.479] [Server thread/DEBUG] [net.minecraftforge.server.ServerLifecycleHooks/CORE]: Generating PackInfo named mod:ba_martialarts for mod file /home/runner/work/-/-/server/mods/ba_martialarts.jar
+1612:[18Nov2026 21:05:20.479] [Server thread/DEBUG] [net.minecraftforge.server.ServerLifecycleHooks/CORE]: Generating PackInfo named mod:ba_martialarts_selftest for mod file /home/runner/work/-/-/server/mods/ba_martialarts_selftest.jar
+1616:[18Nov2026 21:05:20.843] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] boxing/jab <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+1617:[18Nov2026 21:05:20.846] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] karate/gyaku_zuki <- battle_arts:battle_style/novice/journeyman/auto1
+1618:[18Nov2026 21:05:20.846] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] kung_fu/twin_palms <- epicfight:biped/skill/revelation_twohand
+1619:[18Nov2026 21:05:20.846] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] taekwondo/dollyo_chagi <- wom:biped/skill/kick
+1620:[18Nov2026 21:05:20.846] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] boxing/cross <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+1621:[18Nov2026 21:05:20.846] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] boxing/hook <- battle_arts:battle_style/novice/journeyman/auto2
+1622:[18Nov2026 21:05:20.846] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] boxing/power_straight <- battle_arts:battle_style/novice/journeyman/auto1
+1623:[18Nov2026 21:05:20.847] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] boxing/dash <- battle_arts:battle_style/unique/iron_lotus/fist/dash_attack
+1624:[18Nov2026 21:05:20.847] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] boxing/air <- battle_arts:battle_style/novice/journeyman/sledgehammer
+1625:[18Nov2026 21:05:20.847] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/crushing_uppercut <- battle_arts:battle_style/novice/journeyman/dash
+1626:[18Nov2026 21:05:20.847] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] karate/oi_zuki <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+1627:[18Nov2026 21:05:20.847] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] karate/kizami_zuki <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+1628:[18Nov2026 21:05:20.847] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] karate/mae_geri <- wom:biped/skill/kick_1
+1629:[18Nov2026 21:05:20.847] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] karate/dash <- battle_arts:battle_style/unique/iron_lotus/fist/dash_attack
+1630:[18Nov2026 21:05:20.847] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] karate/air <- battle_arts:battle_style/unique/iron_lotus/fist/axe_dive
+1631:[18Nov2026 21:05:20.847] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/kiai <- wom:biped/skill/strong_punch
+1632:[18Nov2026 21:05:20.847] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] muay_thai/jab <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+1633:[18Nov2026 21:05:20.847] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] muay_thai/cross <- battle_arts:battle_style/novice/journeyman/auto1
+1634:[18Nov2026 21:05:20.848] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] muay_thai/teep <- wom:biped/skill/kick_2
+1635:[18Nov2026 21:05:20.848] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] muay_thai/roundhouse <- wom:biped/skill/kick_3
+1636:[18Nov2026 21:05:20.848] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] muay_thai/dash <- battle_arts:battle_style/unique/iron_lotus/fist/dash_attack
+1637:[18Nov2026 21:05:20.848] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] muay_thai/air <- battle_arts:battle_style/unique/iron_lotus/fist/axe_dive
+1638:[18Nov2026 21:05:20.848] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/flying_knee <- battle_arts:battle_style/unique/iron_lotus/fist/dash_attack
+1639:[18Nov2026 21:05:20.848] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] kung_fu/palm_right <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+1640:[18Nov2026 21:05:20.848] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] kung_fu/palm_left <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+1641:[18Nov2026 21:05:20.848] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] kung_fu/crane_kick <- battle_arts:battle_style/unique/iron_lotus/fist/auto3
+1642:[18Nov2026 21:05:20.848] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] kung_fu/dash <- battle_arts:battle_style/unique/iron_lotus/fist/dash_attack
+1643:[18Nov2026 21:05:20.848] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] kung_fu/air <- battle_arts:battle_style/unique/iron_lotus/fist/axe_dive
+1644:[18Nov2026 21:05:20.848] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/chi_palm <- epicfight:biped/skill/revelation_twohand
+1645:[18Nov2026 21:05:20.848] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] taekwondo/ap_chagi <- wom:biped/skill/kick_1
+1646:[18Nov2026 21:05:20.848] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] taekwondo/double_kick <- wom:biped/skill/kick_2
+1647:[18Nov2026 21:05:20.849] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] taekwondo/dwi_chagi <- wom:biped/skill/kick_3
+1648:[18Nov2026 21:05:20.849] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] taekwondo/dash <- battle_arts:battle_style/unique/iron_lotus/fist/dash_attack
+1649:[18Nov2026 21:05:20.849] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] taekwondo/naeryeo_chagi <- battle_arts:battle_style/unique/iron_lotus/fist/axe_dive
+1650:[18Nov2026 21:05:20.849] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/tornado_kick <- epicfight:biped/skill/phantom_ascent_forward
+1651:[18Nov2026 21:05:20.849] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] judo/push_right <- battle_arts:battle_style/novice/journeyman/auto1
+1652:[18Nov2026 21:05:20.849] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] judo/push_left <- battle_arts:battle_style/novice/journeyman/auto2
+1653:[18Nov2026 21:05:20.849] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] judo/grip_strike <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+1654:[18Nov2026 21:05:20.849] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] judo/hip_check <- battle_arts:battle_style/novice/journeyman/dash
+1655:[18Nov2026 21:05:20.849] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] judo/tackle <- wom:biped/skill/ravanger_charge
+1656:[18Nov2026 21:05:20.849] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] judo/air <- battle_arts:battle_style/novice/journeyman/sledgehammer
+1657:[18Nov2026 21:05:20.849] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/ippon <- wom:biped/skill/ravanger_charge
+1658:[18Nov2026 21:05:20.849] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/boxing_left <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+1659:[18Nov2026 21:05:20.849] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/boxing_right <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+1660:[18Nov2026 21:05:20.850] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/karate_right <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+1661:[18Nov2026 21:05:20.850] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/karate_left <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+1662:[18Nov2026 21:05:20.850] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/muay_thai_left <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+1663:[18Nov2026 21:05:20.850] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/muay_thai_right <- battle_arts:battle_style/novice/journeyman/auto1
+1664:[18Nov2026 21:05:20.850] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/kung_fu_right <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+1665:[18Nov2026 21:05:20.850] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/kung_fu_left <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+1666:[18Nov2026 21:05:20.850] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/taekwondo_kick_a <- wom:biped/skill/kick_1
+1667:[18Nov2026 21:05:20.850] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/taekwondo_kick_b <- wom:biped/skill/kick
+1668:[18Nov2026 21:05:20.850] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/judo_right <- battle_arts:battle_style/novice/journeyman/auto1
+1669:[18Nov2026 21:05:20.850] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/judo_left <- battle_arts:battle_style/novice/journeyman/auto2
+1670:[18Nov2026 21:05:20.850] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] wing_chun/chain_punch <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+1671:[18Nov2026 21:05:20.850] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] kickboxing/low_kick <- wom:biped/skill/kick_1
+1672:[18Nov2026 21:05:20.850] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] muay_thai/sok <- battle_arts:battle_style/novice/journeyman/auto2
+1673:[18Nov2026 21:05:20.850] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] savate/chasse <- wom:biped/skill/kick
+1674:[18Nov2026 21:05:20.850] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] krav_maga/palm_heel <- battle_arts:battle_style/novice/journeyman/auto1
+1675:[18Nov2026 21:05:20.851] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] capoeira/armada <- wom:biped/skill/kick_2
+1676:[18Nov2026 21:05:20.851] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] sambo/takedown <- wom:biped/skill/ravanger_charge
+1677:[18Nov2026 21:05:20.851] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] judo/o_goshi <- battle_arts:battle_style/novice/journeyman/dash
+1678:[18Nov2026 21:05:20.851] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] sumo/tachiai <- wom:biped/skill/ravanger_charge
+1679:[18Nov2026 21:05:20.851] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] ninjutsu/drop_strike <- battle_arts:battle_style/unique/iron_lotus/fist/axe_dive
+1680:[18Nov2026 21:05:20.851] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] aikido/kokyu_nage <- epicfight:biped/skill/revelation_twohand
+1681:[18Nov2026 21:05:20.851] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/one_inch_punch <- wom:biped/skill/strong_punch
+1682:[18Nov2026 21:05:20.851] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/armlock <- battle_arts:battle_style/novice/journeyman/suppressing_blow
+1683:[18Nov2026 21:05:20.851] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] herobrine/left_strike <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+1684:[18Nov2026 21:05:20.851] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] herobrine/rising_fist <- battle_arts:battle_style/novice/journeyman/dash
+1685:[18Nov2026 21:05:20.851] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] herobrine/kick <- wom:biped/skill/kick_1
+1686:[18Nov2026 21:05:20.851] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] herobrine/whirlwind_kick <- wom:biped/skill/kick
+1687:[18Nov2026 21:05:20.851] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] herobrine/dash <- battle_arts:battle_style/unique/iron_lotus/fist/dash_attack
+1688:[18Nov2026 21:05:20.851] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] herobrine/air <- battle_arts:battle_style/unique/iron_lotus/fist/axe_dive
+1689:[18Nov2026 21:05:20.852] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/herobrine_left <- battle_arts:battle_style/unique/iron_lotus/fist/auto2
+1690:[18Nov2026 21:05:20.852] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] rush/herobrine_right <- battle_arts:battle_style/unique/iron_lotus/fist/auto1
+1691:[18Nov2026 21:05:20.852] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/herobrine_portal <- battle_arts:battle_style/novice/journeyman/dash
+1692:[18Nov2026 21:05:20.852] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/herobrine_pillars <- epicfight:biped/skill/revelation_twohand
+1693:[18Nov2026 21:05:20.852] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/herobrine_lightning <- epicfight:biped/skill/revelation_twohand
+1694:[18Nov2026 21:05:20.852] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] art/flurry_of_blows <- epicfight:biped/skill/relentless_combo
+1695:[18Nov2026 21:05:20.852] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] ultra_instinct/dodge_left <- wom:biped/skill/shadow_step_left
+1696:[18Nov2026 21:05:20.852] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] ultra_instinct/dodge_right <- wom:biped/skill/shadow_step_right
+1697:[18Nov2026 21:05:20.852] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] ultra_instinct/dodge_back <- wom:biped/skill/shadow_step_backward
+1698:[18Nov2026 21:05:20.852] [Server thread/DEBUG] [com.bamartial.anim.MartialMoves/]: [ba_martialarts] ultra_instinct/awaken <- wom:biped/skill/biped_avatar_of_might
+1710:[18Nov2026 21:05:23.936] [Server thread/WARN] [epicfight/]: Item Capability Exception: No item named epicacg:elucidator
+1758:[18Nov2026 21:05:23.938] [Server thread/WARN] [epicfight/]: Item Capability Exception: No item named epicacg:dark_repulsor
+1787:[18Nov2026 21:05:23.940] [Server thread/WARN] [epicfight/]: Item Capability Exception: No item named epicacg:lambent_light

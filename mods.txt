@@ -1,0 +1,4 @@
+Epic Fight 20.14.16-mc1.20.1-forge epic-fight-20.14.16-mc1.20.1-forge.jar
+Battle Arts API 20.14.16.5 BattleartsApi-20.14.16.5.jar
+Battle Arts 20.14.16.10 BattleArts-20.14.16.10.jar
+Weapons of Miracles 2.0.171-mc1.20.1-forge WeaponsOfMiracles-2.0.171-mc1.20.1-forge.jar

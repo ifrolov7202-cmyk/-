@@ -1,0 +1,564 @@
+2026-11-18 20:58:26,608 main WARN Advanced terminal features are not available in this environment
+[20:58:26] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeserver, --fml.forgeVersion, 47.4.28, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, nogui]
+[20:58:26] [main/INFO] [cp.mo.mo.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.21 by Eclipse Adoptium; OS Linux arch amd64 version 7.0.0-1019-azure
+[20:58:26] [main/WARN] [ne.mi.fm.lo.FMLConfig/CORE]: Configuration file /home/runner/work/-/-/server/config/fml.toml is not correct. Correcting
+[20:58:26] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowSkipGLVersions] was corrected from null to []
+[20:58:26] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowLogHelpMessage] was corrected from null to true
+[20:58:26] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowSquir] was corrected from null to false
+[20:58:26] [main/INFO] [ne.mi.fm.lo.FMLConfig/CORE]: Incorrect key [earlyWindowShowCPU] was corrected from null to false
+[20:58:26] [main/INFO] [ne.mi.fm.lo.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgeserver
+[20:58:26] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/home/runner/work/-/-/server/libraries/org/spongepowered/mixin/0.8.5/mixin-0.8.5.jar%2365!/ Service=ModLauncher Env=SERVER
+[20:58:27] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /home/runner/work/-/-/server/libraries/net/minecraftforge/fmlcore/1.20.1-47.4.28/fmlcore-1.20.1-47.4.28.jar is missing mods.toml file
+[20:58:27] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /home/runner/work/-/-/server/libraries/net/minecraftforge/javafmllanguage/1.20.1-47.4.28/javafmllanguage-1.20.1-47.4.28.jar is missing mods.toml file
+[20:58:27] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /home/runner/work/-/-/server/libraries/net/minecraftforge/lowcodelanguage/1.20.1-47.4.28/lowcodelanguage-1.20.1-47.4.28.jar is missing mods.toml file
+[20:58:27] [main/WARN] [ne.mi.fm.lo.mo.ModFileParser/LOADING]: Mod file /home/runner/work/-/-/server/libraries/net/minecraftforge/mclanguage/1.20.1-47.4.28/mclanguage-1.20.1-47.4.28.jar is missing mods.toml file
+[20:58:27] [main/INFO] [ne.mi.fm.lo.mo.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[20:58:28] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[20:58:28] [main/INFO] [cp.mo.mo.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeserver' with arguments [nogui]
+[20:58:28] [main/WARN] [mixin/]: Reference map 'battlearts_api.refmap.json' for battlearts_api.mixins.json could not be read. If this is a development environment you can ignore this message
+[20:58:30] [main/WARN] [mixin/]: @Final field f_31427_:[I in mixins.epicfight.json:common.MixinWitherBoss should be final
+[20:58:30] [main/WARN] [mixin/]: @Final field f_31428_:[I in mixins.epicfight.json:common.MixinWitherBoss should be final
+[20:58:32] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.LivingEntity from class yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch
+[20:58:32] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.LivingEntity from class yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch
+[20:58:32] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.LivingEntity from class yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch
+[20:58:32] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.LivingEntity from class yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch
+[20:58:33] [modloading-worker-0/INFO] [ne.mi.co.ForgeMod/FORGEMOD]: Forge mod loading, version 47.4.28, for MC 1.20.1 with MCP 20230612.114412
+[20:58:33] [modloading-worker-0/INFO] [ne.mi.co.MinecraftForge/FORGE]: MinecraftForge v47.4.28 Initialized
+[20:58:33] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+[20:58:33] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+[20:58:33] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+[20:58:33] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+[20:58:33] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+[20:58:33] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+[20:58:33] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+[20:58:33] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+[20:58:33] [modloading-worker-0/ERROR] [epicfight/]: battle_arts is already registered in style
+[20:58:33] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file /home/runner/work/-/-/server/config/wom-client.toml is not correct. Correcting
+[20:58:33] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ingame was corrected from null to its default, SimpleCommentedConfig:{}. 
+[20:58:33] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ingame.boosted_mob_over_distance was corrected from null to its default, true. 
+[20:58:33] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ingame.mob_drop_emerald_over_health was corrected from null to its default, true. 
+[20:58:33] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ingame.mob_more_xp_over_health was corrected from null to its default, true. 
+[20:58:33] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ingame.skeleton_melee was corrected from null to its default, true. 
+[20:58:33] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ingame.skeleton_mele_percentage was corrected from null to its default, 50. 
+[20:58:33] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file /home/runner/work/-/-/server/config/wom.toml is not correct. Correcting
+[20:58:33] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule was corrected from null to its default, SimpleCommentedConfig:{}. 
+[20:58:33] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.spawnStrongerMobs was corrected from null to its default, false. 
+[20:58:33] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.strongerMobsDropEmeralds was corrected from null to its default, false. 
+[20:58:33] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.strongerMobsMoreEXP was corrected from null to its default, false. 
+[20:58:33] [modloading-worker-0/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.skeletonMoreMelee was corrected from null to its default, 50. 
+[20:58:34] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.player.Player from class yesman.epicfight.world.capabilities.entitypatch.player.PlayerPatch
+[20:58:34] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.TamableAnimal from class reascer.wom.world.entity.mob.EnderHand
+[20:58:34] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.TamableAnimal from class reascer.wom.world.entity.mob.TargetingHelper
+[20:58:34] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.boss.wither.WitherBoss from class yesman.epicfight.world.capabilities.entitypatch.boss.WitherPatch
+[20:58:34] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.boss.wither.WitherBoss from class yesman.epicfight.world.capabilities.entitypatch.boss.WitherPatch
+[20:58:34] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.boss.wither.WitherBoss from class yesman.epicfight.world.capabilities.entitypatch.boss.WitherPatch
+[20:58:34] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.boss.wither.WitherBoss from class yesman.epicfight.world.capabilities.entitypatch.boss.WitherPatch
+[20:58:34] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.boss.wither.WitherBoss from class yesman.epicfight.world.capabilities.entitypatch.boss.WitherPatch
+[20:58:34] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.boss.wither.WitherBoss from class yesman.epicfight.world.capabilities.entitypatch.boss.WitherPatch
+[20:58:34] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.boss.wither.WitherBoss from class yesman.epicfight.world.capabilities.entitypatch.boss.WitherPatch
+[20:58:34] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.boss.wither.WitherBoss from class yesman.epicfight.world.capabilities.entitypatch.boss.WitherPatch
+[20:58:34] [main/WARN] [minecraft/SynchedEntityData]: defineId called for: class net.minecraft.world.entity.boss.wither.WitherBoss from class yesman.epicfight.world.capabilities.entitypatch.boss.WitherPatch
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file /home/runner/work/-/-/server/config/battlearts_api-common.toml is not correct. Correcting
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key allowSoundOverrides was corrected from null to its default, false. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key superMeterPositionX was corrected from null to its default, -200.0. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key superMeterPositionY was corrected from null to its default, 0.0. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key superMeterScaleY was corrected from null to its default, 1.0. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key superMeterScaleX was corrected from null to its default, 1.0. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file /home/runner/work/-/-/server/config/epicfight-common.toml is not correct. Correcting
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key loot was corrected from null to its default, SimpleCommentedConfig:{}. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key loot.skill_book_mob_drop_chance_modifier was corrected from null to its default, 0. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key loot.skill_book_chest_drop_chance_modifier was corrected from null to its default, 0. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule was corrected from null to its default, SimpleCommentedConfig:{}. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.globalStun was corrected from null to its default, true. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.keepSkills was corrected from null to its default, true. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.hasFallAnimation was corrected from null to its default, true. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.disapleEntityUI was corrected from null to its default, false. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.canSwitchPlayerMode was corrected from null to its default, true. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.stiffComboAttacks was corrected from null to its default, true. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.noMobsInBossfight was corrected from null to its default, true. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.initialMode was corrected from null to its default, 1. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.weightPenalty was corrected from null to its default, 100. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.epicDrop was corrected from null to its default, false. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.skillReplaceCooldown was corrected from null to its default, 6000. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.allow_vanilla_melee was corrected from null to its default, true. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file /home/runner/work/-/-/server/config/ba_martialarts-common.toml is not correct. Correcting
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key combat was corrected from null to its default, SimpleCommentedConfig:{}. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key combat.damageMultiplier was corrected from null to its default, 1.0. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key combat.autoAim was corrected from null to its default, true. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key combat.otherModAnimations was corrected from null to its default, true. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key combat.holdAttackRush was corrected from null to its default, true. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key combat.rushStaminaPerStrike was corrected from null to its default, 0.8. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key combat.showMoveNames was corrected from null to its default, true. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ultra_instinct was corrected from null to its default, SimpleCommentedConfig:{}. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ultra_instinct.durationSeconds was corrected from null to its default, 0. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ultra_instinct.exhaustion was corrected from null to its default, true. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ultra_instinct.dodgeChance was corrected from null to its default, 0.75. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ultra_instinct.autoTrigger was corrected from null to its default, true. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ultra_instinct.autoTriggerHealth was corrected from null to its default, 0.2. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ultra_instinct.autoTriggerCooldownSeconds was corrected from null to its default, 300. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key herobrine was corrected from null to its default, SimpleCommentedConfig:{}. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key herobrine.flight was corrected from null to its default, true. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key herobrine.flightStaminaPerSecond was corrected from null to its default, 0.5. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key herobrine.fireImmune was corrected from null to its default, true. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world was corrected from null to its default, SimpleCommentedConfig:{}. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world.booksInLoot was corrected from null to its default, true. 
+[20:58:34] [main/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key world.booksAtTrader was corrected from null to its default, true. 
+[20:58:34] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+[20:58:35] [main/INFO] [epicfight/]: Data keys [epicfight:combo_counter, epicfight:basic_attack_active] for epicfight:basic_attack
+[20:58:35] [main/INFO] [epicfight/]: Data keys [epicfight:penalty, epicfight:penalty_restore_counter] for epicfight:guard
+[20:58:35] [main/INFO] [epicfight/]: Data keys [epicfight:parry_motion_counter, epicfight:penalty, epicfight:penalty_restore_counter, epicfight:last_active] for epicfight:parrying
+[20:58:35] [main/INFO] [epicfight/]: Data keys [epicfight:penalty, epicfight:penalty_restore_counter] for epicfight:impact_guard
+[20:58:35] [main/INFO] [epicfight/]: Data keys [epicfight:stacks, epicfight:resisting_damage_type, epicfight:tick_record] for epicfight:adaptive_skin
+[20:58:35] [main/INFO] [epicfight/]: Data keys [epicfight:tick_record] for epicfight:adrenaline_fiend
+[20:58:35] [main/INFO] [epicfight/]: Data keys [epicfight:entity_id, epicfight:stacks] for epicfight:bonebreaker
+[20:58:35] [main/INFO] [epicfight/]: Data keys [epicfight:entity_id, epicfight:tick_record] for epicfight:vengeance
+[20:58:35] [main/INFO] [epicfight/]: Data keys [epicfight:slam_protect_next_fall, epicfight:fall_distance] for epicfight:meteor_slam
+[20:58:35] [main/INFO] [epicfight/]: Data keys [epicfight:stacks] for epicfight:revelation
+[20:58:35] [main/INFO] [epicfight/]: Data keys [epicfight:slam_protect_next_fall] for epicfight:demolition_leap
+[20:58:35] [main/INFO] [epicfight/]: Data keys [epicfight:slam_protect_next_fall, epicfight:jump_key_pressed_last_tick, epicfight:jump_count] for epicfight:phantom_ascent
+[20:58:35] [main/INFO] [epicfight/]: Data keys [epicfight:last_hit_count] for epicfight:grasping_spire
+[20:58:35] [main/INFO] [epicfight/]: Data keys [epicfight:sheath] for epicfight:battojutsu_passive
+[20:58:35] [main/INFO] [epicfight/]: Data keys [epicfight:sheath] for epicfight:battojutsu
+[20:58:35] [main/INFO] [epicfight/]: Data keys [epicfight:combo_counter] for epicfight:blade_rush
+[20:58:35] [main/INFO] [epicfight/]: Data keys [epicfight:thrown_trident_entity_id] for epicfight:everlasting_allegiance
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:target_id] for wom:ender_obscuris
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:timer, wom:dodge, wom:timer_refresh] for wom:dodge_master
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:registered_position, wom:active, wom:registered_health, wom:timer, wom:cooldown, wom:dodge, wom:timer_refresh] for wom:time_travel
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:cooldown] for wom:punishment_kick
+[20:58:35] [main/INFO] [epicfight/]: Data keys [epicfight:penalty, epicfight:penalty_restore_counter, wom:parrying, wom:consumprion_value, wom:holding_rmb, wom:last_active] for wom:counter_attack
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:vengence_duration, epicfight:penalty, epicfight:penalty_restore_counter, wom:timer, wom:consumprion_value, wom:holding_stance, wom:charge, wom:cooldown, wom:timer_refresh] for wom:vengeful_parry
+[20:58:35] [main/INFO] [epicfight/]: Data keys [epicfight:penalty, epicfight:penalty_restore_counter, wom:parrying, wom:holding_rmb, wom:charge, wom:cooldown] for wom:perfect_bulwark
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:cycle, wom:charge] for wom:soul_protection
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:cycle, wom:charge] for wom:shulker_cloak
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:active, epicfight:penalty, epicfight:penalty_restore_counter, wom:timer, wom:holding_rmb] for wom:buster_parade
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:active, wom:timer, wom:duree, wom:timer_refresh] for wom:pain_anticipation
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:active, wom:timer, wom:duree, wom:timer_refresh] for wom:latent_retribution
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:rate, wom:power] for wom:critical_knowledge
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:max_shield, wom:recovery_rate, wom:cooldown] for wom:heart_shield
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:melody_index, wom:saved_elapsed_time, wom:step] for wom:dancing_blade
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:active, wom:timer, wom:cycle, wom:duree, wom:stage, wom:timer_refresh] for wom:meditation
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:cooldown] for wom:dopamine
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:last_active] for wom:manipulator
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:timer, wom:rate, wom:power, wom:stack] for wom:lethal_focus
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:timer, wom:wall_running, wom:wall_glide, wom:jump_key_up, wom:angle, wom:timer_refresh] for wom:spider_techniques
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:diving, wom:water_dashing, wom:consumprion_value, wom:mermaid_movement, wom:jump_key_up, wom:crawling, wom:cooldown] for wom:aqua_maneuvre
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:active, wom:timer, wom:wall_running, wom:wall_glide, wom:consumprion_value, wom:verso, wom:stage, wom:buffing] for wom:natural_sprinter
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:timer] for wom:lunatic_vivacity
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:registered_health, wom:timer, wom:consumprion_value, wom:holding_rmb] for wom:voodoo_magic
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:target_id, wom:target_distance] for wom:back_and_forth
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:combo, wom:cooldown] for wom:shooting_style
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:active, wom:timer] for wom:proximity_exploiter
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:timer, wom:stack] for wom:all_eyes_on_you
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:timer, wom:stack] for wom:all_eyes_on_me
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:timer, wom:cooldown] for wom:avatar_of_might
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:active, wom:attacks, wom:stack] for wom:agony_plunge
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:active, wom:timer, wom:charged_attack, wom:charging, wom:saved_charge, wom:holding_rmb, wom:movespeed, wom:charging_time, wom:charged, wom:timer_refresh] for wom:torment_passive
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:active, wom:timer, wom:timer_refresh] for wom:true_berserk
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:stack] for wom:herrscher_passive
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:redemptioon, wom:timer, wom:verso, wom:expiation, wom:buffing, wom:strenght, wom:buffed, wom:timer_refresh] for wom:plunder_perdition
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:sheath] for wom:satsujin_passive
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:timer, wom:charging, wom:timedslash, wom:frequency, wom:saved_charge, wom:holding_stance, wom:holding_rmb, wom:damage, wom:cooldown, wom:active, wom:attacks, wom:charge, wom:stack, wom:second_draw, wom:timer_refresh] for wom:sakura_state
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:zoom_cooldown, wom:combo, wom:shoot, wom:holding_rmb, wom:cooldown, wom:using_item, wom:zoom, wom:reload_cooldown, wom:nofalldamage] for wom:ender_blast
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:zoom_cooldown, wom:combo, wom:shoot, wom:holding_rmb, wom:cooldown, wom:using_item, wom:zoom, wom:reload_cooldown, wom:nofalldamage, wom:side] for wom:ender_fusion
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:combo, wom:gesetz_sprengkopf, wom:parrying, wom:guard_point_result, wom:holding_stance, wom:holding_rmb, wom:cooldown, wom:charging_time, wom:charged, wom:guard_point] for wom:regierung
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:crescent, wom:timer, wom:echo, wom:lunar_eclipse_stack, wom:timer_refresh] for wom:lunar_eclipse
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:idle, wom:verso] for wom:lunar_echo_passive
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:blackhole_vec, wom:zoom_cooldown, wom:darkness_target_reaped, wom:active, wom:blackhole_timer, wom:darkness_target, wom:witherccatharsis, wom:darkness_activate_portal, wom:zoom, wom:timer_refresh, wom:darkness_target_vec, wom:ascending, wom:timer, wom:serius_focus_cooldown, wom:blackhole, wom:serius_focus, wom:shoot, wom:darkness_portal_vec, wom:holding_rmb, wom:darkness_target_hited, wom:darkness_portal_timer, wom:darkness_portal_angle, wom:blackhole_active, wom:witheraftereffect, wom:shoot_cooldown] for wom:demonic_ascension
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:blink, wom:idle, wom:catharsis, wom:lapse, wom:withercurse, wom:basic_attack, wom:particle] for wom:demon_mark_passive
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:timer, wom:stored_heat_level, wom:charging, wom:holding_rmb, wom:heat_level, wom:solar_crematorio, wom:solar_infernio, wom:solar_obscuridad, wom:heating_speed, wom:cycle, wom:solar_obscuridad_ta_timer, wom:charge, wom:timed_attack, wom:timer_refresh, wom:particle] for wom:solar_arcano
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:timer, wom:stored_heat_level, wom:charging, wom:heat_level, wom:solar_crematorio, wom:solar_infernio, wom:solar_obscuridad, wom:heating_speed, wom:cycle, wom:solar_obscuridad_ta_timer, wom:charge, wom:timed_attack, wom:timer_refresh, wom:particle] for wom:solar_passive
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:serius_focus_cooldown, wom:serius_focus] for wom:rechargement
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:bullet_overloaded, wom:super_reload, wom:active, wom:shell_number, wom:cycle, wom:bullet_loaded, wom:bullet_loaded_old, wom:shell_anim, wom:charge, wom:shell_delay, wom:charged] for wom:napoleon_passive
+[20:58:35] [main/INFO] [epicfight/]: Data keys [wom:timer, wom:stack] for wom:unbreakable
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battle_arts:prev_anim, battle_arts:arrogance_stack] for battle_arts:arrogance
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battle_arts:distorted] for battle_arts:voice_of_distortion
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battle_arts:instinct_window, battle_arts:instinct_gauge] for battle_arts:draconic_instinct
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for battle_arts:iron_lotus
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battle_arts:pull_level, battle_arts:charging, battle_arts:pulling, battle_arts:heavy_draw] for battle_arts:power_draw
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for battle_arts:squire
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for battle_arts:recruit
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for battle_arts:journeyman
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for battle_arts:tranquility_unleash
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for battle_arts:mug
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for battle_arts:sky_striker
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for battle_arts:power_geyser
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for battle_arts:thief
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for battle_arts:lancer
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battle_arts:batto_sheath, battlearts_api:meter_fill] for battle_arts:ronin
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battle_arts:counter_window, battlearts_api:meter_fill] for battle_arts:duelist
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for battle_arts:mercenary
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:flurry_of_blows
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:ultra_instinct
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:crushing_uppercut
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:boxer
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:kiai
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:karateka
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:flying_knee
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:nak_muay
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:chi_palm
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:kung_fu_master
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:tornado_kick
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:taekwondoin
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:ippon
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:judoka
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:way_of_the_master
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:martial_arts_master
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:herobrine_power
+[20:58:35] [main/INFO] [epicfight/]: Data keys [battlearts_api:meter_fill] for ba_martialarts:herobrine
+[20:58:35] [main/INFO] [mojang/YggdrasilAuthenticationService]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[20:58:35] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/home/runner/work/-/-/server/libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar%23113!/assets/.mcassetsroot' uses unexpected schema
+[20:58:35] [main/WARN] [minecraft/VanillaPackResourcesBuilder]: Assets URL 'union:/home/runner/work/-/-/server/libraries/net/minecraft/server/1.20.1-20230612.114412/server-1.20.1-20230612.114412-srg.jar%23113!/data/.mcassetsroot' uses unexpected schema
+[20:58:35] [Forge Version Check/INFO] [ne.mi.fm.VersionChecker/]: [forge] Found status: UP_TO_DATE Current: 47.4.28 Target: null
+[20:58:36] [main/ERROR] [minecraft/DedicatedServerProperties]: No key layers in MapLike[{}]
+[20:58:37] [main/INFO] [minecraft/RecipeManager]: Loaded 7 recipes
+[20:58:37] [main/INFO] [minecraft/AdvancementList]: Loaded 1281 advancements
+[20:58:41] [main/WARN] [epicfight/]: Skill battlearts_api:mana_charge doesn't exist in the registry.
+[20:58:41] [main/WARN] [epicfight/]: Skill battlearts_api:traveler doesn't exist in the registry.
+[20:58:41] [main/INFO] [epicfight/]: Registering Conditionals
+[20:58:41] [main/INFO] [epicfight/]: Registering Movesets
+[20:58:41] [main/WARN] [epicfight/]: Item Capability Exception: No item named epicacg:elucidator
+[20:58:41] [main/WARN] [epicfight/]: Item Capability Exception: No item named epicacg:dark_repulsor
+[20:58:41] [main/WARN] [epicfight/]: Item Capability Exception: No item named epicacg:lambent_light
+[20:58:41] [Server thread/INFO] [minecraft/DedicatedServer]: Starting minecraft server version 1.20.1
+[20:58:41] [Server thread/INFO] [minecraft/DedicatedServer]: Loading properties
+[20:58:41] [Server thread/INFO] [minecraft/DedicatedServer]: Default game type: SURVIVAL
+[20:58:41] [Server thread/INFO] [minecraft/MinecraftServer]: Generating keypair
+[20:58:41] [Server thread/INFO] [minecraft/DedicatedServer]: Starting Minecraft server on *:25565
+[20:58:41] [Server thread/INFO] [minecraft/ServerConnectionListener]: Using epoll channel type
+[20:58:41] [Server thread/WARN] [minecraft/DedicatedServer]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[20:58:41] [Server thread/WARN] [minecraft/DedicatedServer]: The server will make no attempt to authenticate usernames. Beware.
+[20:58:41] [Server thread/WARN] [minecraft/DedicatedServer]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[20:58:41] [Server thread/WARN] [minecraft/DedicatedServer]: To change this, set "online-mode" to "true" in the server.properties file.
+[20:58:41] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file ./world/serverconfig/epicfight-server.toml is not correct. Correcting
+[20:58:41] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key allow_custom_animations was corrected from null to its default, false. 
+[20:58:41] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file ./world/serverconfig/forge-server.toml is not correct. Correcting
+[20:58:41] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server was corrected from null to its default, SimpleCommentedConfig:{}. 
+[20:58:41] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.removeErroringBlockEntities was corrected from null to its default, false. 
+[20:58:41] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.removeErroringEntities was corrected from null to its default, false. 
+[20:58:41] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.fullBoundingBoxLadders was corrected from null to its default, false. 
+[20:58:41] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.zombieBaseSummonChance was corrected from null to its default, 0.1. 
+[20:58:41] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.zombieBabyChance was corrected from null to its default, 0.05. 
+[20:58:41] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.permissionHandler was corrected from null to its default, forge:default_handler. 
+[20:58:41] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.advertiseDedicatedServerToLan was corrected from null to its default, true. 
+[20:58:41] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key server.useItemWithDurationZero was corrected from null to its default, false. 
+[20:58:41] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Configuration file ./world/serverconfig/battle_arts-server.toml is not correct. Correcting
+[20:58:41] [Server thread/WARN] [ne.mi.co.ForgeConfigSpec/CORE]: Incorrect key ultra_instinct was corrected from null to its default, false. 
+[20:58:41] [Server thread/INFO] [minecraft/DedicatedServer]: Preparing level "world"
+[20:58:42] [Server thread/INFO] [minecraft/MinecraftServer]: Preparing start region for dimension minecraft:overworld
+[20:58:43] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[20:58:43] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 0%
+[20:58:43] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 10%
+[20:58:44] [Worker-Main-1/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 28%
+[20:58:44] [Worker-Main-3/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 46%
+[20:58:45] [Worker-Main-2/INFO] [minecraft/LoggerChunkProgressListener]: Preparing spawn area: 95%
+[20:58:45] [Server thread/INFO] [minecraft/LoggerChunkProgressListener]: Time elapsed: 2524 ms
+[20:58:45] [Server thread/INFO] [minecraft/DedicatedServer]: Done (3.607s)! For help, type "help"
+[20:58:45] [Server thread/INFO] [ne.mi.se.pe.PermissionAPI/]: Successfully initialized permission handler forge:default_handler
+[20:58:45] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] server started, tests begin in 60 ticks
+[20:58:48] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] planned 156 steps
+[20:58:48] [Server thread/INFO] [minecraft/PlayerList]: ba_selftest[embedded] logged in with entity id 75 at (-2.5, -60.0, -6.5)
+[20:58:48] [Server thread/INFO] [minecraft/MinecraftServer]: ba_selftest joined the game
+[20:58:48] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] player at (0.5, -60.0, 0.5), target at (0.5, -60.0, 1.9)
+[20:58:49] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   test player has Epic Fight patch in battle mode
+[20:58:49] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   target spawned
+[20:58:49] [Server thread/INFO] [minecraft/MinecraftServer]: ba_selftest has made the advancement [First Belt]
+[20:58:49] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: style equipped | style=ba_martialarts:boxer
+[20:58:49] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: combat art slot filled | skill=ba_martialarts:crushing_uppercut
+[20:58:49] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: flight only for Herobrine | mayfly=false
+[20:58:56] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: 4 basic attacks | casts=4
+[20:58:56] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: combo has 4 different strikes | anims=[ba_martialarts:boxing/jab, ba_martialarts:boxing/cross, ba_martialarts:boxing/hook, ba_martialarts:boxing/power_straight]
+[20:58:56] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: basic attacks use the style combo | anims=[ba_martialarts:boxing/jab, ba_martialarts:boxing/cross, ba_martialarts:boxing/hook, ba_martialarts:boxing/power_straight]
+[20:58:56] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: every combo move connects | hit=[ba_martialarts:boxing/jab, ba_martialarts:boxing/cross, ba_martialarts:boxing/hook, ba_martialarts:boxing/power_straight] cast=[ba_martialarts:boxing/jab, ba_martialarts:boxing/cross, ba_martialarts:boxing/hook, ba_martialarts:boxing/power_straight] other=0
+[20:58:58] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: target is knocked down for the ground hit test | anim=epicfight:biped/combat/knockdown
+[20:58:59] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: combo strike hits a downed target | hit=[ba_martialarts:boxing/jab] blocked=0
+[20:59:04] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: dash attack plays the style move | anims=[ba_martialarts:boxing/dash] role=DASH
+[20:59:04] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: dash attack connects | hits={DASH=1} other=0 anims=[ba_martialarts:boxing/dash]
+[20:59:08] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: air attack plays the style move | anims=[ba_martialarts:boxing/air] role=AIR
+[20:59:08] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] info BOXING: air attack hits from a standstill: 1 [ba_martialarts:boxing/air]
+[20:59:09] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: rush starts on hold
+[20:59:11] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: rush has moves
+[20:59:11] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: rush keeps going while held
+[20:59:11] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: rush strike count | strikes=10 expected=10
+[20:59:11] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: rush strikes connect | hits=10 strikes=10 other=0 anims=[ba_martialarts:rush/boxing_left, ba_martialarts:rush/boxing_right]
+[20:59:11] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: every rush move connects | hit=[ba_martialarts:rush/boxing_left, ba_martialarts:rush/boxing_right] moves=[ba_martialarts:rush/boxing_left, ba_martialarts:rush/boxing_right]
+[20:59:11] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: rush stamina per strike | used=8.000002 strikes=10 cost=0.8
+[20:59:11] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: release after 5+ strikes plays the finisher | anim=ba_martialarts:boxing/power_straight want=ba_martialarts:boxing/power_straight
+[20:59:11] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: rush stops on release
+[20:59:14] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: finisher hits | hits={FINISHER=1} anims=[ba_martialarts:boxing/power_straight]
+[20:59:18] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: rush ends when stamina runs out | still rushing
+[20:59:18] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: strikes until stamina is out | used=2.4 ended at 13
+[20:59:18] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: no finisher when stamina ran out | hits={BARRAGE=3}
+[20:59:20] [Server thread/INFO] [minecraft/MinecraftServer]: ba_selftest has made the advancement [Secret Technique]
+[20:59:20] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: combat art cast | skill=ba_martialarts:crushing_uppercut anim=ba_martialarts:art/crushing_uppercut
+[20:59:24] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   BOXING: combat art hits | hits={ART=1} other=0 anims=[ba_martialarts:art/crushing_uppercut]
+[20:59:26] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: style equipped | style=ba_martialarts:karateka
+[20:59:26] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: combat art slot filled | skill=ba_martialarts:kiai
+[20:59:26] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: flight only for Herobrine | mayfly=false
+[20:59:33] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: 4 basic attacks | casts=4
+[20:59:33] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: combo has 4 different strikes | anims=[ba_martialarts:karate/oi_zuki, ba_martialarts:karate/kizami_zuki, ba_martialarts:karate/mae_geri, ba_martialarts:karate/gyaku_zuki]
+[20:59:33] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: basic attacks use the style combo | anims=[ba_martialarts:karate/oi_zuki, ba_martialarts:karate/kizami_zuki, ba_martialarts:karate/mae_geri, ba_martialarts:karate/gyaku_zuki]
+[20:59:33] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: every combo move connects | hit=[ba_martialarts:karate/oi_zuki, ba_martialarts:karate/kizami_zuki, ba_martialarts:karate/mae_geri, ba_martialarts:karate/gyaku_zuki] cast=[ba_martialarts:karate/oi_zuki, ba_martialarts:karate/kizami_zuki, ba_martialarts:karate/mae_geri, ba_martialarts:karate/gyaku_zuki] other=0
+[20:59:34] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: target is knocked down for the ground hit test | anim=epicfight:biped/combat/knockdown
+[20:59:36] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: combo strike hits a downed target | hit=[ba_martialarts:karate/oi_zuki] blocked=0
+[20:59:40] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: dash attack plays the style move | anims=[ba_martialarts:karate/dash] role=DASH
+[20:59:40] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: dash attack connects | hits={DASH=1} other=0 anims=[ba_martialarts:karate/dash]
+[20:59:45] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: air attack plays the style move | anims=[ba_martialarts:karate/air] role=AIR
+[20:59:45] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] info KARATE: air attack hits from a standstill: 1 [ba_martialarts:karate/air]
+[20:59:46] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: rush starts on hold
+[20:59:48] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: rush has moves
+[20:59:48] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: rush keeps going while held
+[20:59:48] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: rush strike count | strikes=10 expected=10
+[20:59:48] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: rush strikes connect | hits=10 strikes=10 other=0 anims=[ba_martialarts:rush/karate_right, ba_martialarts:rush/karate_left]
+[20:59:48] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: every rush move connects | hit=[ba_martialarts:rush/karate_right, ba_martialarts:rush/karate_left] moves=[ba_martialarts:rush/karate_right, ba_martialarts:rush/karate_left]
+[20:59:48] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: rush stamina per strike | used=8.000002 strikes=10 cost=0.8
+[20:59:48] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: release after 5+ strikes plays the finisher | anim=ba_martialarts:karate/gyaku_zuki want=ba_martialarts:karate/gyaku_zuki
+[20:59:48] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: rush stops on release
+[20:59:50] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: finisher hits | hits={FINISHER=1} anims=[ba_martialarts:karate/gyaku_zuki]
+[20:59:54] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: rush ends when stamina runs out | still rushing
+[20:59:54] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: strikes until stamina is out | used=2.4 ended at 13
+[20:59:54] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: no finisher when stamina ran out | hits={BARRAGE=3}
+[20:59:56] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: combat art cast | skill=ba_martialarts:kiai anim=ba_martialarts:art/kiai
+[21:00:00] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KARATE: combat art hits | hits={ART=1} other=0 anims=[ba_martialarts:art/kiai]
+[21:00:02] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: style equipped | style=ba_martialarts:nak_muay
+[21:00:02] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: combat art slot filled | skill=ba_martialarts:flying_knee
+[21:00:02] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: flight only for Herobrine | mayfly=false
+[21:00:09] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: 4 basic attacks | casts=4
+[21:00:09] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: combo has 4 different strikes | anims=[ba_martialarts:muay_thai/jab, ba_martialarts:muay_thai/cross, ba_martialarts:muay_thai/teep, ba_martialarts:muay_thai/roundhouse]
+[21:00:09] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: basic attacks use the style combo | anims=[ba_martialarts:muay_thai/jab, ba_martialarts:muay_thai/cross, ba_martialarts:muay_thai/teep, ba_martialarts:muay_thai/roundhouse]
+[21:00:09] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: every combo move connects | hit=[ba_martialarts:muay_thai/jab, ba_martialarts:muay_thai/cross, ba_martialarts:muay_thai/teep, ba_martialarts:muay_thai/roundhouse] cast=[ba_martialarts:muay_thai/jab, ba_martialarts:muay_thai/cross, ba_martialarts:muay_thai/teep, ba_martialarts:muay_thai/roundhouse] other=0
+[21:00:10] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: target is knocked down for the ground hit test | anim=epicfight:biped/combat/knockdown
+[21:00:12] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: combo strike hits a downed target | hit=[ba_martialarts:muay_thai/jab] blocked=0
+[21:00:16] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: dash attack plays the style move | anims=[ba_martialarts:muay_thai/dash] role=DASH
+[21:00:16] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: dash attack connects | hits={DASH=1} other=0 anims=[ba_martialarts:muay_thai/dash]
+[21:00:21] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: air attack plays the style move | anims=[ba_martialarts:muay_thai/air] role=AIR
+[21:00:21] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] info MUAY_THAI: air attack hits from a standstill: 1 [ba_martialarts:muay_thai/air]
+[21:00:22] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: rush starts on hold
+[21:00:24] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: rush has moves
+[21:00:24] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: rush keeps going while held
+[21:00:24] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: rush strike count | strikes=8 expected=8
+[21:00:24] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: rush strikes connect | hits=8 strikes=8 other=0 anims=[ba_martialarts:rush/muay_thai_left, ba_martialarts:rush/muay_thai_right]
+[21:00:24] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: every rush move connects | hit=[ba_martialarts:rush/muay_thai_left, ba_martialarts:rush/muay_thai_right] moves=[ba_martialarts:rush/muay_thai_left, ba_martialarts:rush/muay_thai_right]
+[21:00:24] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: rush stamina per strike | used=6.4000015 strikes=8 cost=0.8
+[21:00:24] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: release after 5+ strikes plays the finisher | anim=ba_martialarts:muay_thai/roundhouse want=ba_martialarts:muay_thai/roundhouse
+[21:00:24] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: rush stops on release
+[21:00:26] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: finisher hits | hits={FINISHER=1} anims=[ba_martialarts:muay_thai/roundhouse]
+[21:00:31] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: rush ends when stamina runs out | still rushing
+[21:00:31] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: strikes until stamina is out | used=2.4 ended at 16
+[21:00:31] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: no finisher when stamina ran out | hits={BARRAGE=3}
+[21:00:32] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: combat art cast | skill=ba_martialarts:flying_knee anim=ba_martialarts:art/flying_knee
+[21:00:36] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MUAY_THAI: combat art hits | hits={ART=1} other=0 anims=[ba_martialarts:art/flying_knee]
+[21:00:38] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: style equipped | style=ba_martialarts:kung_fu_master
+[21:00:38] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: combat art slot filled | skill=ba_martialarts:chi_palm
+[21:00:38] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: flight only for Herobrine | mayfly=false
+[21:00:45] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: 4 basic attacks | casts=4
+[21:00:45] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: combo has 4 different strikes | anims=[ba_martialarts:kung_fu/palm_right, ba_martialarts:kung_fu/palm_left, ba_martialarts:kung_fu/crane_kick, ba_martialarts:kung_fu/twin_palms]
+[21:00:45] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: basic attacks use the style combo | anims=[ba_martialarts:kung_fu/palm_right, ba_martialarts:kung_fu/palm_left, ba_martialarts:kung_fu/crane_kick, ba_martialarts:kung_fu/twin_palms]
+[21:00:45] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: every combo move connects | hit=[ba_martialarts:kung_fu/palm_right, ba_martialarts:kung_fu/palm_left, ba_martialarts:kung_fu/crane_kick, ba_martialarts:kung_fu/twin_palms] cast=[ba_martialarts:kung_fu/palm_right, ba_martialarts:kung_fu/palm_left, ba_martialarts:kung_fu/crane_kick, ba_martialarts:kung_fu/twin_palms] other=0
+[21:00:46] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: target is knocked down for the ground hit test | anim=epicfight:biped/combat/knockdown
+[21:00:48] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: combo strike hits a downed target | hit=[ba_martialarts:kung_fu/palm_right] blocked=0
+[21:00:53] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: dash attack plays the style move | anims=[ba_martialarts:kung_fu/dash] role=DASH
+[21:00:53] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: dash attack connects | hits={DASH=1} other=0 anims=[ba_martialarts:kung_fu/dash]
+[21:00:57] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: air attack plays the style move | anims=[ba_martialarts:kung_fu/air] role=AIR
+[21:00:57] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] info KUNG_FU: air attack hits from a standstill: 1 [ba_martialarts:kung_fu/air]
+[21:00:58] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: rush starts on hold
+[21:01:00] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: rush has moves
+[21:01:00] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: rush keeps going while held
+[21:01:00] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: rush strike count | strikes=14 expected=14
+[21:01:00] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: rush strikes connect | hits=13 strikes=14 other=0 anims=[ba_martialarts:rush/kung_fu_right, ba_martialarts:rush/kung_fu_left]
+[21:01:00] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: every rush move connects | hit=[ba_martialarts:rush/kung_fu_right, ba_martialarts:rush/kung_fu_left] moves=[ba_martialarts:rush/kung_fu_right, ba_martialarts:rush/kung_fu_left]
+[21:01:00] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: rush stamina per strike | used=11.200003 strikes=14 cost=0.8
+[21:01:00] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: release after 5+ strikes plays the finisher | anim=ba_martialarts:kung_fu/twin_palms want=ba_martialarts:kung_fu/twin_palms
+[21:01:00] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: rush stops on release
+[21:01:03] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: finisher hits | hits={FINISHER=1} anims=[ba_martialarts:kung_fu/twin_palms]
+[21:01:07] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: rush ends when stamina runs out | still rushing
+[21:01:07] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: strikes until stamina is out | used=2.4 ended at 10
+[21:01:07] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: no finisher when stamina ran out | hits={BARRAGE=3}
+[21:01:09] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: combat art cast | skill=ba_martialarts:chi_palm anim=ba_martialarts:art/chi_palm
+[21:01:13] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   KUNG_FU: combat art hits | hits={ART=1} other=0 anims=[ba_martialarts:art/chi_palm]
+[21:01:15] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: style equipped | style=ba_martialarts:taekwondoin
+[21:01:15] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: combat art slot filled | skill=ba_martialarts:tornado_kick
+[21:01:15] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: flight only for Herobrine | mayfly=false
+[21:01:22] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: 4 basic attacks | casts=4
+[21:01:22] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: combo has 4 different strikes | anims=[ba_martialarts:taekwondo/ap_chagi, ba_martialarts:taekwondo/double_kick, ba_martialarts:taekwondo/dollyo_chagi, ba_martialarts:taekwondo/dwi_chagi]
+[21:01:22] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: basic attacks use the style combo | anims=[ba_martialarts:taekwondo/ap_chagi, ba_martialarts:taekwondo/double_kick, ba_martialarts:taekwondo/dollyo_chagi, ba_martialarts:taekwondo/dwi_chagi]
+[21:01:22] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: every combo move connects | hit=[ba_martialarts:taekwondo/ap_chagi, ba_martialarts:taekwondo/double_kick, ba_martialarts:taekwondo/dollyo_chagi, ba_martialarts:taekwondo/dwi_chagi] cast=[ba_martialarts:taekwondo/ap_chagi, ba_martialarts:taekwondo/double_kick, ba_martialarts:taekwondo/dollyo_chagi, ba_martialarts:taekwondo/dwi_chagi] other=0
+[21:01:23] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: target is knocked down for the ground hit test | anim=epicfight:biped/combat/knockdown
+[21:01:25] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: combo strike hits a downed target | hit=[ba_martialarts:taekwondo/ap_chagi] blocked=0
+[21:01:29] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: dash attack plays the style move | anims=[ba_martialarts:taekwondo/dash] role=DASH
+[21:01:29] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: dash attack connects | hits={DASH=1} other=0 anims=[ba_martialarts:taekwondo/dash]
+[21:01:34] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: air attack plays the style move | anims=[ba_martialarts:taekwondo/naeryeo_chagi] role=AIR
+[21:01:34] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] info TAEKWONDO: air attack hits from a standstill: 1 [ba_martialarts:taekwondo/naeryeo_chagi]
+[21:01:35] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: rush starts on hold
+[21:01:37] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: rush has moves
+[21:01:37] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: rush keeps going while held
+[21:01:37] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: rush strike count | strikes=7 expected=7
+[21:01:37] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: rush strikes connect | hits=6 strikes=7 other=0 anims=[ba_martialarts:rush/taekwondo_kick_a, ba_martialarts:rush/taekwondo_kick_b]
+[21:01:37] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: every rush move connects | hit=[ba_martialarts:rush/taekwondo_kick_a, ba_martialarts:rush/taekwondo_kick_b] moves=[ba_martialarts:rush/taekwondo_kick_a, ba_martialarts:rush/taekwondo_kick_b]
+[21:01:37] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: rush stamina per strike | used=5.6000013 strikes=7 cost=0.8
+[21:01:37] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: release after 5+ strikes plays the finisher | anim=ba_martialarts:taekwondo/dwi_chagi want=ba_martialarts:taekwondo/dwi_chagi
+[21:01:37] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: rush stops on release
+[21:01:39] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: finisher hits | hits={FINISHER=1} anims=[ba_martialarts:taekwondo/dwi_chagi]
+[21:01:43] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: rush ends when stamina runs out | still rushing
+[21:01:43] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: strikes until stamina is out | used=2.4 ended at 19
+[21:01:43] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: no finisher when stamina ran out | hits={BARRAGE=3}
+[21:01:45] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: combat art cast | skill=ba_martialarts:tornado_kick anim=ba_martialarts:art/tornado_kick
+[21:01:49] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   TAEKWONDO: combat art hits | hits={ART=2} other=0 anims=[ba_martialarts:art/tornado_kick]
+[21:01:51] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: style equipped | style=ba_martialarts:judoka
+[21:01:51] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: combat art slot filled | skill=ba_martialarts:ippon
+[21:01:51] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: flight only for Herobrine | mayfly=false
+[21:01:58] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: 4 basic attacks | casts=4
+[21:01:58] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: combo has 4 different strikes | anims=[ba_martialarts:judo/push_right, ba_martialarts:judo/push_left, ba_martialarts:judo/grip_strike, ba_martialarts:judo/hip_check]
+[21:01:58] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: basic attacks use the style combo | anims=[ba_martialarts:judo/push_right, ba_martialarts:judo/push_left, ba_martialarts:judo/grip_strike, ba_martialarts:judo/hip_check]
+[21:01:58] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: every combo move connects | hit=[ba_martialarts:judo/push_right, ba_martialarts:judo/push_left, ba_martialarts:judo/grip_strike, ba_martialarts:judo/hip_check] cast=[ba_martialarts:judo/push_right, ba_martialarts:judo/push_left, ba_martialarts:judo/grip_strike, ba_martialarts:judo/hip_check] other=0
+[21:01:59] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: target is knocked down for the ground hit test | anim=epicfight:biped/combat/knockdown
+[21:02:01] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: combo strike hits a downed target | hit=[ba_martialarts:judo/push_right] blocked=0
+[21:02:05] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: dash attack plays the style move | anims=[ba_martialarts:judo/tackle] role=DASH
+[21:02:05] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: dash attack connects | hits={DASH=1} other=0 anims=[ba_martialarts:judo/tackle]
+[21:02:10] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: air attack plays the style move | anims=[ba_martialarts:judo/air] role=AIR
+[21:02:10] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] info JUDO: air attack hits from a standstill: 1 [ba_martialarts:judo/air]
+[21:02:11] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: rush starts on hold
+[21:02:13] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: rush has moves
+[21:02:13] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: rush keeps going while held
+[21:02:13] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: rush strike count | strikes=8 expected=8
+[21:02:13] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: rush strikes connect | hits=8 strikes=8 other=0 anims=[ba_martialarts:rush/judo_right, ba_martialarts:rush/judo_left]
+[21:02:13] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: every rush move connects | hit=[ba_martialarts:rush/judo_right, ba_martialarts:rush/judo_left] moves=[ba_martialarts:rush/judo_right, ba_martialarts:rush/judo_left]
+[21:02:13] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: rush stamina per strike | used=6.4000015 strikes=8 cost=0.8
+[21:02:13] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: release after 5+ strikes plays the finisher | anim=ba_martialarts:judo/hip_check want=ba_martialarts:judo/hip_check
+[21:02:13] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: rush stops on release
+[21:02:15] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: finisher hits | hits={FINISHER=1} anims=[ba_martialarts:judo/hip_check]
+[21:02:18] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] info removed entity.minecraft.villager near the arena during JUDO stamina
+[21:02:20] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: rush ends when stamina runs out | still rushing
+[21:02:20] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: strikes until stamina is out | used=2.4 ended at 16
+[21:02:20] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: no finisher when stamina ran out | hits={BARRAGE=3}
+[21:02:21] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: combat art cast | skill=ba_martialarts:ippon anim=ba_martialarts:art/ippon
+[21:02:25] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   JUDO: combat art hits | hits={ART=1} other=0 anims=[ba_martialarts:art/ippon]
+[21:02:27] [Server thread/INFO] [minecraft/MinecraftServer]: ba_selftest has completed the challenge [Martial Arts Master]
+[21:02:27] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: style equipped | style=ba_martialarts:martial_arts_master
+[21:02:27] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: combat art slot filled | skill=ba_martialarts:way_of_the_master
+[21:02:27] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: book recipe loaded | recipe=Optional[net.minecraft.world.item.crafting.ShapelessRecipe@26c3c778]
+[21:02:27] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: six style books craft the master book | matches=true out=1 skillbook skill=ba_martialarts:martial_arts_master
+[21:02:27] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: five different books are not enough
+[21:02:27] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: advancement granted | adv=SimpleAdvancement{id=ba_martialarts:martial/master, parent=ba_martialarts:martial/learn_style, display=net.minecraft.advancements.DisplayInfo@5a8cc7b4, rewards=AdvancementRewards{experience=0, loot=[], recipes=[], function=net.minecraft.commands.CommandFunction$CacheableFunction@3f5d0ff4}, criteria={done=net.minecraft.advancements.Criterion@4d372c49}, requirements=[[done]], sendsTelemetryEvent=false}
+[21:02:27] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: flight only for Herobrine | mayfly=false
+[21:02:48] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: 12 basic attacks | casts=12
+[21:02:48] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: combo has 12 different strikes | anims=[ba_martialarts:boxing/jab, ba_martialarts:wing_chun/chain_punch, ba_martialarts:kickboxing/low_kick, ba_martialarts:karate/gyaku_zuki, ba_martialarts:muay_thai/sok, ba_martialarts:savate/chasse, ba_martialarts:krav_maga/palm_heel, ba_martialarts:kung_fu/twin_palms, ba_martialarts:taekwondo/dollyo_chagi, ba_martialarts:capoeira/armada, ba_martialarts:sambo/takedown, ba_martialarts:judo/o_goshi]
+[21:02:48] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: basic attacks use the style combo | anims=[ba_martialarts:boxing/jab, ba_martialarts:wing_chun/chain_punch, ba_martialarts:kickboxing/low_kick, ba_martialarts:karate/gyaku_zuki, ba_martialarts:muay_thai/sok, ba_martialarts:savate/chasse, ba_martialarts:krav_maga/palm_heel, ba_martialarts:kung_fu/twin_palms, ba_martialarts:taekwondo/dollyo_chagi, ba_martialarts:capoeira/armada, ba_martialarts:sambo/takedown, ba_martialarts:judo/o_goshi]
+[21:02:48] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: every combo move connects | hit=[ba_martialarts:boxing/jab, ba_martialarts:wing_chun/chain_punch, ba_martialarts:kickboxing/low_kick, ba_martialarts:karate/gyaku_zuki, ba_martialarts:muay_thai/sok, ba_martialarts:savate/chasse, ba_martialarts:krav_maga/palm_heel, ba_martialarts:kung_fu/twin_palms, ba_martialarts:taekwondo/dollyo_chagi, ba_martialarts:capoeira/armada, ba_martialarts:sambo/takedown, ba_martialarts:judo/o_goshi] cast=[ba_martialarts:boxing/jab, ba_martialarts:wing_chun/chain_punch, ba_martialarts:kickboxing/low_kick, ba_martialarts:karate/gyaku_zuki, ba_martialarts:muay_thai/sok, ba_martialarts:savate/chasse, ba_martialarts:krav_maga/palm_heel, ba_martialarts:kung_fu/twin_palms, ba_martialarts:taekwondo/dollyo_chagi, ba_martialarts:capoeira/armada, ba_martialarts:sambo/takedown, ba_martialarts:judo/o_goshi] other=0
+[21:02:49] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: target is knocked down for the ground hit test | anim=epicfight:biped/combat/knockdown
+[21:02:51] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: combo strike hits a downed target | hit=[ba_martialarts:boxing/jab] blocked=0
+[21:02:56] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: dash attack plays the style move | anims=[ba_martialarts:sumo/tachiai] role=DASH
+[21:02:56] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: dash attack connects | hits={DASH=1} other=0 anims=[ba_martialarts:sumo/tachiai]
+[21:03:00] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: air attack plays the style move | anims=[ba_martialarts:ninjutsu/drop_strike] role=AIR
+[21:03:00] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] info MASTER: air attack hits from a standstill: 1 [ba_martialarts:ninjutsu/drop_strike]
+[21:03:01] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: rush starts on hold
+[21:03:03] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: rush has moves
+[21:03:03] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: rush keeps going while held
+[21:03:03] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: rush strike count | strikes=10 expected=10
+[21:03:03] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: rush strikes connect | hits=10 strikes=10 other=0 anims=[ba_martialarts:rush/boxing_left, ba_martialarts:rush/boxing_right, ba_martialarts:rush/kung_fu_right, ba_martialarts:rush/kung_fu_left, ba_martialarts:rush/taekwondo_kick_a, ba_martialarts:rush/karate_right, ba_martialarts:rush/karate_left, ba_martialarts:rush/taekwondo_kick_b]
+[21:03:03] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: every rush move connects | hit=[ba_martialarts:rush/boxing_left, ba_martialarts:rush/boxing_right, ba_martialarts:rush/kung_fu_right, ba_martialarts:rush/kung_fu_left, ba_martialarts:rush/taekwondo_kick_a, ba_martialarts:rush/karate_right, ba_martialarts:rush/karate_left, ba_martialarts:rush/taekwondo_kick_b] moves=[ba_martialarts:rush/boxing_left, ba_martialarts:rush/boxing_right, ba_martialarts:rush/kung_fu_right, ba_martialarts:rush/kung_fu_left, ba_martialarts:rush/taekwondo_kick_a, ba_martialarts:rush/karate_right, ba_martialarts:rush/karate_left, ba_martialarts:rush/taekwondo_kick_b]
+[21:03:03] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: rush stamina per strike | used=8.000002 strikes=10 cost=0.8
+[21:03:03] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: release after 5+ strikes plays the finisher | anim=ba_martialarts:judo/o_goshi want=ba_martialarts:judo/o_goshi
+[21:03:03] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: rush stops on release
+[21:03:06] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: finisher hits | hits={FINISHER=1} anims=[ba_martialarts:judo/o_goshi]
+[21:03:10] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: rush ends when stamina runs out | still rushing
+[21:03:10] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: strikes until stamina is out | used=2.4 ended at 12
+[21:03:10] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: no finisher when stamina ran out | hits={BARRAGE=3}
+[21:03:12] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER art (cycle 1): cast ba_martialarts:art/crushing_uppercut | cast=true anim=ba_martialarts:art/crushing_uppercut
+[21:03:16] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER art (cycle 1): ba_martialarts:art/crushing_uppercut hits | hits={ART=1} other=0 anims=[ba_martialarts:art/crushing_uppercut]
+[21:03:17] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER art (cycle 2): cast ba_martialarts:art/kiai | cast=true anim=ba_martialarts:art/kiai
+[21:03:21] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER art (cycle 2): ba_martialarts:art/kiai hits | hits={ART=1} other=0 anims=[ba_martialarts:art/kiai]
+[21:03:23] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER art (cycle 3): cast ba_martialarts:art/chi_palm | cast=true anim=ba_martialarts:art/chi_palm
+[21:03:27] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER art (cycle 3): ba_martialarts:art/chi_palm hits | hits={ART=1} other=0 anims=[ba_martialarts:art/chi_palm]
+[21:03:28] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER art (cycle 4): cast ba_martialarts:art/tornado_kick | cast=true anim=ba_martialarts:art/tornado_kick
+[21:03:32] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER art (cycle 4): ba_martialarts:art/tornado_kick hits | hits={ART=2} other=0 anims=[ba_martialarts:art/tornado_kick]
+[21:03:34] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER art (cycle 5): cast ba_martialarts:art/one_inch_punch | cast=true anim=ba_martialarts:art/one_inch_punch
+[21:03:38] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER art (cycle 5): ba_martialarts:art/one_inch_punch hits | hits={ART=1} other=0 anims=[ba_martialarts:art/one_inch_punch]
+[21:03:39] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER art (cycle 6): cast ba_martialarts:art/armlock | cast=true anim=ba_martialarts:art/armlock
+[21:03:43] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER art (cycle 6): ba_martialarts:art/armlock hits | hits={ART=1} other=0 anims=[ba_martialarts:art/armlock]
+[21:03:45] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER art (sprinting): cast ba_martialarts:art/flying_knee | cast=true anim=ba_martialarts:art/flying_knee
+[21:03:49] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER art (sprinting): ba_martialarts:art/flying_knee hits | hits={ART=1} other=0 anims=[ba_martialarts:art/flying_knee]
+[21:03:50] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER art (sneaking): cast ba_martialarts:art/ippon | cast=true anim=ba_martialarts:art/ippon
+[21:03:54] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER art (sneaking): ba_martialarts:art/ippon hits | hits={ART=1} other=0 anims=[ba_martialarts:art/ippon]
+[21:03:58] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   MASTER: aikido counter after a dodge connects | hits={FINISHER=1} anims=[ba_martialarts:aikido/kokyu_nage] want=ba_martialarts:aikido/kokyu_nage
+[21:04:00] [Server thread/INFO] [minecraft/MinecraftServer]: ba_selftest has completed the challenge [He Is Here]
+[21:04:00] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: style equipped | style=ba_martialarts:herobrine
+[21:04:00] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: combat art slot filled | skill=ba_martialarts:herobrine_power
+[21:04:00] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: book recipe loaded | recipe=Optional[net.minecraft.world.item.crafting.ShapelessRecipe@208f78cb]
+[21:04:00] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: shrine crafts the book | out=1 skillbook skill=ba_martialarts:herobrine
+[21:04:00] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: advancement granted | adv=SimpleAdvancement{id=ba_martialarts:martial/herobrine, parent=ba_martialarts:martial/learn_style, display=net.minecraft.advancements.DisplayInfo@53593696, rewards=AdvancementRewards{experience=0, loot=[], recipes=[], function=net.minecraft.commands.CommandFunction$CacheableFunction@3f5d0ff4}, criteria={done=net.minecraft.advancements.Criterion@2627483d}, requirements=[[done]], sendsTelemetryEvent=false}
+[21:04:00] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] info EpicFight: Annoying Villagers not installed, Herobrine uses fallback moves: battle_arts:battle_style/unique/iron_lotus/fist/auto2
+[21:04:00] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: flight only for Herobrine | mayfly=true
+[21:04:07] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: 4 basic attacks | casts=4
+[21:04:07] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: combo has 4 different strikes | anims=[ba_martialarts:herobrine/left_strike, ba_martialarts:herobrine/rising_fist, ba_martialarts:herobrine/kick, ba_martialarts:herobrine/whirlwind_kick]
+[21:04:07] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: basic attacks use the style combo | anims=[ba_martialarts:herobrine/left_strike, ba_martialarts:herobrine/rising_fist, ba_martialarts:herobrine/kick, ba_martialarts:herobrine/whirlwind_kick]
+[21:04:07] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: every combo move connects | hit=[ba_martialarts:herobrine/left_strike, ba_martialarts:herobrine/rising_fist, ba_martialarts:herobrine/kick, ba_martialarts:herobrine/whirlwind_kick] cast=[ba_martialarts:herobrine/left_strike, ba_martialarts:herobrine/rising_fist, ba_martialarts:herobrine/kick, ba_martialarts:herobrine/whirlwind_kick] other=0
+[21:04:07] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: black fire sets the target ablaze
+[21:04:08] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: target is knocked down for the ground hit test | anim=epicfight:biped/combat/knockdown
+[21:04:10] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: combo strike hits a downed target | hit=[ba_martialarts:herobrine/left_strike] blocked=0
+[21:04:15] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: dash attack plays the style move | anims=[ba_martialarts:herobrine/dash] role=DASH
+[21:04:15] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: dash attack connects | hits={DASH=1} other=0 anims=[ba_martialarts:herobrine/dash]
+[21:04:19] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: air attack plays the style move | anims=[ba_martialarts:herobrine/air] role=AIR
+[21:04:19] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] info HEROBRINE: air attack hits from a standstill: 1 [ba_martialarts:herobrine/air]
+[21:04:20] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: rush starts on hold
+[21:04:22] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: rush has moves
+[21:04:22] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: rush keeps going while held
+[21:04:22] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: rush strike count | strikes=10 expected=10
+[21:04:22] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: rush strikes connect | hits=10 strikes=10 other=0 anims=[ba_martialarts:rush/herobrine_left, ba_martialarts:rush/herobrine_right]
+[21:04:22] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: every rush move connects | hit=[ba_martialarts:rush/herobrine_left, ba_martialarts:rush/herobrine_right] moves=[ba_martialarts:rush/herobrine_left, ba_martialarts:rush/herobrine_right]
+[21:04:22] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: rush stamina per strike | used=8.000002 strikes=10 cost=0.8
+[21:04:22] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: release after 5+ strikes plays the finisher | anim=ba_martialarts:herobrine/whirlwind_kick want=ba_martialarts:herobrine/whirlwind_kick
+[21:04:22] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: rush stops on release
+[21:04:24] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: finisher hits | hits={FINISHER=1} anims=[ba_martialarts:herobrine/whirlwind_kick]
+[21:04:29] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: rush ends when stamina runs out | still rushing
+[21:04:29] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: strikes until stamina is out | used=2.4 ended at 13
+[21:04:29] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: no finisher when stamina ran out | hits={BARRAGE=3}
+[21:04:30] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE portal: cast ba_martialarts:art/herobrine_portal | cast=true anim=ba_martialarts:art/herobrine_portal
+[21:04:30] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE portal: steps behind the target | from=(0.5, -60.0, 0.5) now=(0.5, -60.0, 3.100000023841858) target=(0.5, -60.0, 1.9)
+[21:04:34] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE portal: ba_martialarts:art/herobrine_portal hits | hits={ART=1} other=0 anims=[ba_martialarts:art/herobrine_portal]
+[21:04:34] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE portal: black fire
+[21:04:36] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE pillars: cast ba_martialarts:art/herobrine_pillars | cast=true anim=ba_martialarts:art/herobrine_pillars
+[21:04:36] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE pillars: obsidian pillars rise | pillars=7
+[21:04:40] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE pillars: ba_martialarts:art/herobrine_pillars hits | hits={ART=1} other=0 anims=[ba_martialarts:art/herobrine_pillars]
+[21:04:40] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE pillars: black fire
+[21:04:40] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE pillars: pillars are gone afterwards | pillars=0
+[21:04:41] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE lightning: cast ba_martialarts:art/herobrine_lightning | cast=true anim=ba_martialarts:art/herobrine_lightning
+[21:04:45] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE lightning: ba_martialarts:art/herobrine_lightning hits | hits={ART=1} other=0 anims=[ba_martialarts:art/herobrine_lightning]
+[21:04:45] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE lightning: black fire
+[21:04:47] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   HEROBRINE: immune to fire, lava and lightning | fire=false lava=false bolt=false health=20.0
+[21:04:49] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   flight is taken away after leaving Herobrine | mayfly=false
+[21:04:49] [Server thread/INFO] [minecraft/MinecraftServer]: ba_selftest has made the advancement [Hundred Fists]
+[21:04:49] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   flurry of blows cast | skill=ba_martialarts:flurry_of_blows anim=ba_martialarts:art/flurry_of_blows
+[21:04:53] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   flurry of blows hits | hits={FLURRY=8} other=0 anims=[ba_martialarts:art/flurry_of_blows]
+[21:04:55] [Server thread/INFO] [minecraft/MinecraftServer]: ba_selftest has reached the goal [Ultra Instinct]
+[21:04:55] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   ultra instinct cast | skill=ba_martialarts:ultra_instinct active=true
+[21:05:07] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   ultra instinct dodges attacks | dodges=7/9
+[21:05:07] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   ultra instinct counterattacks connect | hits={FINISHER=7} other=0 anims=[ba_martialarts:boxing/power_straight]
+[21:05:13] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   ultra instinct has no time limit (on after 17 s)
+[21:05:13] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   ultra instinct: the same key leaves it | cast=true active=false
+[21:05:13] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   ultra instinct: leaving costs no meter | meter=0.0
+[21:05:14] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] ok   ultra instinct: needs a full meter to enter again | cast=false
+[21:05:15] [Server thread/INFO] [co.ba.se.SelfTest/]: [SELFTEST] DONE PASS checks=262 failures=0
+[21:05:20] [Server thread/INFO] [minecraft/MinecraftServer]: Reloading!
+[21:05:20] [Server thread/INFO] [minecraft/RecipeManager]: Loaded 7 recipes
+[21:05:20] [Server thread/INFO] [minecraft/AdvancementList]: Loaded 1281 advancements
+[21:05:23] [Server thread/WARN] [epicfight/]: Skill battlearts_api:mana_charge doesn't exist in the registry.
+[21:05:23] [Server thread/WARN] [epicfight/]: Skill battlearts_api:traveler doesn't exist in the registry.
+[21:05:23] [Server thread/INFO] [epicfight/]: Registering Conditionals
+[21:05:23] [Server thread/INFO] [epicfight/]: Registering Movesets
+[21:05:23] [Server thread/WARN] [epicfight/]: Item Capability Exception: No item named epicacg:elucidator
+[21:05:23] [Server thread/WARN] [epicfight/]: Item Capability Exception: No item named epicacg:dark_repulsor
+[21:05:23] [Server thread/WARN] [epicfight/]: Item Capability Exception: No item named epicacg:lambent_light
+[21:05:24] [Server thread/WARN] [minecraft/MinecraftServer]: Can't keep up! Is the server overloaded? Running 3744ms or 74 ticks behind
+[21:05:35] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping the server
+[21:05:35] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+[21:05:35] [Server thread/INFO] [minecraft/MinecraftServer]: Saving players
+[21:05:35] [Server thread/INFO] [minecraft/ServerGamePacketListenerImpl]: ba_selftest lost connection: Server closed
+[21:05:35] [Server thread/INFO] [minecraft/MinecraftServer]: ba_selftest left the game
+[21:05:35] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
+[21:05:36] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:overworld
+[21:05:38] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_end
+[21:05:38] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[world]'/minecraft:the_nether
+[21:05:38] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[21:05:38] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[21:05:38] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[21:05:38] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved

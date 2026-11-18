@@ -1,0 +1,50 @@
+
+[combat]
+	#Множитель урона приёмов стилей / Damage multiplier for style moves
+	#Range: 0.1 ~ 10.0
+	damageMultiplier = 1.0
+	#Боевые искусства и контрудары сами доворачивают бойца к ближайшему врагу впереди / Arts and counters turn you towards the nearest enemy in front
+	autoAim = true
+	#Брать анимации ударов из Weapons of Miracles и Epic Fight - Nightfall, если они установлены (нужен перезапуск) / Use Weapons of Miracles and Nightfall animations when installed (restart required)
+	otherModAnimations = true
+	#Зажатая атака голой рукой — серия быстрых ударов, пока кнопка зажата и есть выносливость / Holding attack bare-handed performs a rush of strikes while stamina lasts
+	holdAttackRush = true
+	#Выносливость Epic Fight за один удар серии / Epic Fight stamina per rush strike
+	#Range: 0.0 ~ 10.0
+	rushStaminaPerStrike = 0.8
+	#Мастер боевых искусств: показывать над панелью школу и название каждого попавшего удара / Martial Arts Master: show the school and name of every strike that lands
+	showMoveNames = true
+
+[ultra_instinct]
+	#Длительность Ультра инстинкта, секунд; 0 — без ограничения, выход той же клавишей (V) / Ultra Instinct duration, seconds; 0 — no limit, leave with the same key (V)
+	#Range: 0 ~ 3600
+	durationSeconds = 0
+	#После выхода из Ультра инстинкта — истощение (пустая выносливость, бойец медленнее) / Exhaustion after leaving Ultra Instinct
+	exhaustion = true
+	#Шанс автоуклонения от атаки / Auto-dodge chance
+	#Range: 0.0 ~ 1.0
+	dodgeChance = 0.75
+	#Включается сам на грани поражения при полной шкале / Triggers by itself near death with a full meter
+	autoTrigger = true
+	#Порог здоровья для авто-включения (доля от максимума) / Health threshold for auto trigger
+	#Range: 0.05 ~ 0.9
+	autoTriggerHealth = 0.2
+	#Перезарядка авто-включения, секунд / Auto trigger cooldown, seconds
+	#Range: 0 ~ 3600
+	autoTriggerCooldownSeconds = 300
+
+[herobrine]
+	#Херобрин летает (двойной прыжок, как в творческом режиме) / Herobrine can fly (double jump, as in creative)
+	flight = true
+	#Расход выносливости Epic Fight в полёте, в секунду / Epic Fight stamina spent per second of flight
+	#Range: 0.0 ~ 10.0
+	flightStaminaPerSecond = 0.5
+	#Херобрин не горит и не получает урона от огня и молний / Herobrine is immune to fire and lightning
+	fireImmune = true
+
+[world]
+	#Книги стилей в сундуках / Style books in chests
+	booksInLoot = true
+	#Книги стилей у странствующего торговца / Style books at the wandering trader
+	booksAtTrader = true
+
