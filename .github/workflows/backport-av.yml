@@ -1,0 +1,48 @@
+name: Backport Annoying Villagers to Epic Fight 20.14.16
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: ours
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Get source and patch
+        run: |
+          mkdir -p out
+          git clone -q https://github.com/PlaIsMe/EpicFight_AnnoyingVillagers.git efav
+          git -C efav checkout -q 5aea1e4
+          python3 ours/backport/efav/patch.py efav | tee out/patch.txt
+          git -C efav diff > out/backport.diff
+      - name: Build
+        run: |
+          cd efav
+          chmod +x gradlew
+          set -o pipefail
+          ./gradlew build --no-daemon --stacktrace 2>&1 | tee ../out/build.log || echo BUILD FAILED >> ../out/build.log
+          ls -la build/libs || true
+          cp build/libs/EpicFight-AnnoyingVillagers-1.20.1-1.5.2-ef20.14.16.jar ../out/ 2>/dev/null || true
+          grep -E "error:|warning: Unable|\.java:[0-9]+: error" ../out/build.log | head -100 > ../out/errors.txt || true
+      - name: Publish
+        if: always()
+        run: |
+          cd out
+          cp ../efav/BACKPORT_CHANGES.md . 2>/dev/null || true
+          cp ../efav/LICENSE.md . 2>/dev/null || true
+          git init -q -b av-backport
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add .
+          git commit -qm "Annoying Villagers backport ${GITHUB_SHA::7}"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" av-backport
