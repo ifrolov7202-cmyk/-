@@ -26,9 +26,9 @@ sub('build.gradle', """    maven {
     }""", """    maven {
         url = uri("https://cursemaven.com")
     }
-    exclusiveContent {
-        forRepository { maven { url = uri("https://api.modrinth.com/maven") } }
-        filter { includeGroup "maven.modrinth" }
+    maven {
+        url = uri("https://api.modrinth.com/maven")
+        content { includeGroup "maven.modrinth" }
     }""")
 sub('build.gradle', '    destinationDirectory = file("C:/Users/Admin/Desktop/Minecraft/delivery")\n', '')
 sub('gradle.properties', 'mod_version=1.5.2', 'mod_version=1.5.2-ef20.14.16')
