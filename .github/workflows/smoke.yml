@@ -15,6 +15,9 @@ on:
       ef17:
         description: "With av: Epic Fight 20.14.17 instead of the player's Epic Fight, without Battle Arts"
         default: "false"
+      backport:
+        description: "With av: EpicFight: Annoying Villagers backported to Epic Fight 20.14.16 (branch av-backport) instead of the player's file"
+        default: "false"
 
 permissions:
   contents: write
@@ -81,6 +84,10 @@ jobs:
                   if sys.argv[3] == 'true' and (name.startswith('epic-fight-20') or name.startswith('BattleArts-')):
                       print('skip (ef17)', name)
                       continue
+                  if sys.argv[4] == 'true' and name.startswith('EpicFight-AnnoyingVillagers'):
+                      urllib.request.urlretrieve('https://raw.githubusercontent.com/ifrolov7202-cmyk/-/av-backport/EpicFight-AnnoyingVillagers-1.20.1-1.5.2-ef20.14.16.jar', 'mods/EpicFight-AnnoyingVillagers-backport.jar')
+                      print('backport', name, '-> av-backport branch')
+                      continue
                   try:
                       with urllib.request.urlopen(f"https://api.modrinth.com/v2/version_file/{sha}?algorithm=sha1") as r:
                           v = json.load(r)
@@ -97,7 +104,7 @@ jobs:
               get('Dd6vT4jF', lambda n: n.startswith('20.14.16.10'), 'Battle Arts')
               get('weapons-of-miracles', lambda n: n.startswith('2.0.171'), 'Weapons of Miracles')
           EOF
-          python3 dl.py "${{ github.event.inputs.extra }}" "${{ github.event.inputs.av }}" "${{ github.event.inputs.ef17 }}" | tee ../out/mods.txt
+          python3 dl.py "${{ github.event.inputs.extra }}" "${{ github.event.inputs.av }}" "${{ github.event.inputs.ef17 }}" "${{ github.event.inputs.backport }}" | tee ../out/mods.txt
           if [ "${{ github.event.inputs.ef17 }}" = "true" ]; then
             curl -fsSL -o mods/epic-fight-20.14.17.jar "https://cursemaven.com/curse/maven/epic-fight-mod-405076/8049910/epic-fight-mod-405076-8049910.jar"
             echo "curse epic-fight-mod-405076:8049910 (Epic Fight 20.14.17)" | tee -a ../out/mods.txt
