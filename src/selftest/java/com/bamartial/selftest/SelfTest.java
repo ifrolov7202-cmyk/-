@@ -136,6 +136,44 @@ public final class SelfTest {
         log("server started, tests begin in " + startDelay + " ticks");
     }
 
+    /** Для проверки клиентом: пишет в лог каждый пакет от клиента больше 30 000 байт (канал и размер). */
+    @SubscribeEvent
+    public void onLogin(net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent event) {
+        if (!(event.getEntity() instanceof ServerPlayer sp) || sp.connection == null) return;
+        try {
+            io.netty.channel.Channel ch = null;
+            for (java.lang.reflect.Field f : Connection.class.getDeclaredFields()) {
+                if (io.netty.channel.Channel.class.isAssignableFrom(f.getType())) {
+                    f.setAccessible(true);
+                    ch = (io.netty.channel.Channel) f.get(sp.connection.connection);
+                }
+            }
+            if (ch == null || ch.pipeline().get("decoder") == null) return;
+            final String who = sp.getGameProfile().getName();
+            ch.pipeline().addBefore("decoder", "ba_netdiag", new io.netty.channel.ChannelInboundHandlerAdapter() {
+                @Override
+                public void channelRead(io.netty.channel.ChannelHandlerContext ctx, Object msg) throws Exception {
+                    if (msg instanceof io.netty.buffer.ByteBuf buf && buf.readableBytes() > 30000) {
+                        io.netty.buffer.ByteBuf d = buf.duplicate();
+                        net.minecraft.network.FriendlyByteBuf fb = new net.minecraft.network.FriendlyByteBuf(d);
+                        int id = fb.readVarInt();
+                        String channel = "?";
+                        try {
+                            channel = fb.readUtf(32767);
+                        } catch (Throwable ignored) {
+                        }
+                        log("NETDIAG big packet from " + who + ": id=0x" + Integer.toHexString(id) + " channel=" + channel
+                                + " payload=" + d.readableBytes() + " bytes");
+                    }
+                    super.channelRead(ctx, msg);
+                }
+            });
+            log("NETDIAG watching " + who);
+        } catch (Throwable e) {
+            log("NETDIAG not installed: " + e);
+        }
+    }
+
     @SubscribeEvent
     public void onServerTick(TickEvent.ServerTickEvent event) {
         if (event.phase != TickEvent.Phase.END || !started || finished) return;
