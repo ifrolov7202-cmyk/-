@@ -1,0 +1,18 @@
+NOT ON MODRINTH AnnoyingVillagers-1.20.1-1.0.7.jar HTTP Error 404: Not Found
+modrinth BattleArts-20.14.16.10.jar -> BattleArts-20.14.16.10.jar
+modrinth BattleartsApi-20.14.16.5.jar -> BattleartsApi-20.14.16.5.jar
+NOT ON MODRINTH CombatEvolution-2.3.6-Forge-1.20.1.jar HTTP Error 404: Not Found
+NOT ON MODRINTH EpicFight Nightfall-3.4.2-all.jar HTTP Error 404: Not Found
+backport EpicFight-AnnoyingVillagers-1.20.1-1.5.2.jar -> av-backport branch
+modrinth WeaponsOfMiracles-2.0.171-mc1.20.1-forge.jar -> WeaponsOfMiracles-2.0.171-mc1.20.1-forge.jar
+modrinth aaa_particles-forge-1.20.1-2.2.3.jar -> aaa_particles-forge-1.20.1-2.2.3.jar
+modrinth epic-fight-20.14.16-mc1.20.1-forge.jar -> epic-fight-20.14.16-mc1.20.1-forge.jar
+modrinth epic-fight-invincible-lib-20.14.8.2-mc1.20.1-forge.jar -> epic-fight-invincible-lib-20.14.8.2-mc1.20.1-forge.jar
+NOT ON MODRINTH epic_fight_avalon-20.12.6.5.jar HTTP Error 404: Not Found
+NOT ON MODRINTH epicfight_awaken-1.2.8-forge-1.20.1.jar HTTP Error 404: Not Found
+Battle Arts API 20.14.16.5 BattleartsApi-20.14.16.5.jar
+curse annoying-villagers-1717848:9036954 (instead of AnnoyingVillagers-1.20.1-1.0.7.jar)
+curse combat-evolution-1377795:9015624 (instead of CombatEvolution-2.3.6-Forge-1.20.1.jar)
+curse epicfight-nightfall-1307848:8366962 (instead of EpicFight Nightfall-3.4.2-all.jar)
+curse epic-fight-avalon-1268823:7619938 (instead of epic_fight_avalon-20.12.6.5.jar)
+curse epicfight-awaken-1423319:8506984 (instead of epicfight_awaken-1.2.8-forge-1.20.1.jar)

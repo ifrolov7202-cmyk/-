@@ -1,0 +1,2 @@
+joined=1 after ~75 s
+alive=1 crash=0 kicked=0

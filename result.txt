@@ -1,0 +1,3 @@
+STARTED
+[SELFTEST] DONE PASS checks=264 failures=0
+CLIENT OK

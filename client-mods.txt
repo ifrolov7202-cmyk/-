@@ -1,0 +1,13 @@
+BattleArts-20.14.16.10.jar
+BattleartsApi-20.14.16.5.jar
+EpicFight-AnnoyingVillagers-backport.jar
+WeaponsOfMiracles-2.0.171-mc1.20.1-forge.jar
+aaa_particles-forge-1.20.1-2.2.3.jar
+annoying-villagers-1717848.jar
+ba_martialarts.jar
+combat-evolution-1377795.jar
+epic-fight-20.14.16-mc1.20.1-forge.jar
+epic-fight-avalon-1268823.jar
+epic-fight-invincible-lib-20.14.8.2-mc1.20.1-forge.jar
+epicfight-awaken-1423319.jar
+epicfight-nightfall-1307848.jar
